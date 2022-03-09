@@ -13,6 +13,10 @@
 		166BEEC327D6E5DF00072115 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 166BEEB127D6E5DE00072115 /* ContentView.swift */; };
 		166BEEC427D6E5DF00072115 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 166BEEB227D6E5DF00072115 /* Assets.xcassets */; };
 		166BEEC527D6E5DF00072115 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 166BEEB227D6E5DF00072115 /* Assets.xcassets */; };
+		166BEECF27D9331F00072115 /* CoinModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 166BEECE27D9331F00072115 /* CoinModel.swift */; };
+		166BEED027D9331F00072115 /* CoinModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 166BEECE27D9331F00072115 /* CoinModel.swift */; };
+		166BEED527D93A6600072115 /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 166BEED427D93A6600072115 /* DashboardView.swift */; };
+		166BEED627D93A6600072115 /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 166BEED427D93A6600072115 /* DashboardView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +26,8 @@
 		166BEEB727D6E5DF00072115 /* MyEasyCryptoManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyEasyCryptoManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		166BEEBD27D6E5DF00072115 /* MyEasyCryptoManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyEasyCryptoManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		166BEEBF27D6E5DF00072115 /* macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = macOS.entitlements; sourceTree = "<group>"; };
+		166BEECE27D9331F00072115 /* CoinModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinModel.swift; sourceTree = "<group>"; };
+		166BEED427D93A6600072115 /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +60,9 @@
 		166BEEAF27D6E5DE00072115 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				166BEED327D93A0400072115 /* ViewModel */,
+				166BEED227D939F700072115 /* Model */,
+				166BEED127D939EA00072115 /* View */,
 				166BEEB027D6E5DE00072115 /* MyEasyCryptoManagerApp.swift */,
 				166BEEB127D6E5DE00072115 /* ContentView.swift */,
 				166BEEB227D6E5DF00072115 /* Assets.xcassets */,
@@ -76,6 +85,29 @@
 				166BEEBF27D6E5DF00072115 /* macOS.entitlements */,
 			);
 			path = macOS;
+			sourceTree = "<group>";
+		};
+		166BEED127D939EA00072115 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				166BEED427D93A6600072115 /* DashboardView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		166BEED227D939F700072115 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				166BEECE27D9331F00072115 /* CoinModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		166BEED327D93A0400072115 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -177,6 +209,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				166BEEC227D6E5DF00072115 /* ContentView.swift in Sources */,
+				166BEED527D93A6600072115 /* DashboardView.swift in Sources */,
+				166BEECF27D9331F00072115 /* CoinModel.swift in Sources */,
 				166BEEC027D6E5DF00072115 /* MyEasyCryptoManagerApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -186,6 +220,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				166BEEC327D6E5DF00072115 /* ContentView.swift in Sources */,
+				166BEED627D93A6600072115 /* DashboardView.swift in Sources */,
+				166BEED027D9331F00072115 /* CoinModel.swift in Sources */,
 				166BEEC127D6E5DF00072115 /* MyEasyCryptoManagerApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

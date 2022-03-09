@@ -11,7 +11,8 @@ import SwiftUI
 struct MyEasyCryptoManagerApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            DashboardView()
+                .preferredColorScheme(.dark)
         }
     }
 }
