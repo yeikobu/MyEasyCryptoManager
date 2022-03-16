@@ -12,7 +12,7 @@ let tabs = ["gearshape.fill", "chart.bar.xaxis", "house.fill", "magnifyingglass"
 struct DashboardView: View {
     
     @State var backToLogin = false
-    @State var selectedTab = 1
+    @State var selectedTab = "chart.bar.xaxis"
     
     var body: some View {
         
@@ -49,7 +49,7 @@ struct TabButtonview: View {
 
 struct CustomTabView: View {
     
-    @State var selectedTab: String = "house"
+    @State var selectedTab: String = "chart.bar.xaxis"
     @State var edge: CGFloat = 0.0
     
     var body: some View {
@@ -64,7 +64,7 @@ struct CustomTabView: View {
                 Text("Settings")
                     .tag("gearshape.fill")
                 
-                Text("Market")
+                CoinsListView()
                     .tag("chart.bar.xaxis")
                 
                 Text("Portfolio")
