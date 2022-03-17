@@ -8,37 +8,40 @@
 import Foundation
 
 
-struct CoinsModel: Decodable, Hashable {
-    var coins: [Coin]
-}
+//struct CoinsModel: Decodable, Hashable {
+//    var coinInfo: [Coin]
+//
+//    enum CodingKeys: String, CodingKey {
+//        case coinInfo
+//    }
+//}
 
-struct Coin: Decodable, Hashable {
-    var id: String
-    var symbol: String
-    var name: String
-    var image: String
-    var currentPrice: Float
-    var marketCap: Float
-    var marketCapRank: Int
+struct CoinsModel: Decodable, Hashable {
+    var id: String?
+    var symbol: String?
+    var name: String?
+    var image: String?
+    var currentPrice: Double?
+    var marketCap: Int?
+    var marketCapRank: Int?
     var fullyDilutedValuation: Int?
-    var fully_diluted_valuation: Float
-    var high24H: Float
-    var low24H: Float
-    var priceChange24H: Float
-    var priceChangePercentage24H: Float
-    var marketCapChange24H: Float
-    var marketCapChangePercentage24H: Float
-    var circulatingSupply: Float
-    var totalSupply: Float?
-    var maxSupply: Float
-    var ath: Float
-    var athChangePercentage: Float
-    var athDate: String
-    var atl: Float
-    var atlChangePercentage: Float
-    var atlDate: String
-    var roi: Roi
-    var lastUpdated: String
+    var fully_diluted_valuation: Double?
+    var high24H: Double?
+    var low24H: Double?
+    var priceChange24H: Double?
+    var priceChangePercentage24H: Double?
+    var marketCapChange24H: Double?
+    var marketCapChangePercentage24H: Double?
+    var circulatingSupply: Double?
+    var totalSupply: Double?
+    var maxSupply: Double?
+    var ath: Double?
+    var athChangePercentage: Double?
+    var athDate: String?
+    var atl: Double?
+    var atlChangePercentage: Double?
+    var atlDate: String?
+    var lastUpdated: String?
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -65,15 +68,21 @@ struct Coin: Decodable, Hashable {
         case atl
         case atlChangePercentage = "atl_change_percentage"
         case atlDate = "atl_date"
-        case roi
         case lastUpdated = "last_updated"
     }
 }
 
 
 
-struct Roi: Decodable, Hashable {
-    var times: Float
-    var currency: String
-    var percentage: Float
-}
+//struct Roi: Codable, Hashable {
+//    var times: Double
+//    var currency: Currency
+//    var percentage: Double
+//}
+//
+//
+//enum Currency {
+//    case btc
+//    case eth
+//    case usd
+//}

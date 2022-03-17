@@ -6,8 +6,12 @@
 //
 
 import SwiftUI
+import Kingfisher
 
 struct CoinsListView: View {
+    
+    @ObservedObject var coinViewModel: CoinInfoViewModel = CoinInfoViewModel()
+    
     var body: some View {
         ZStack {
             Color("Background")
@@ -19,6 +23,11 @@ struct CoinsListView: View {
 }
 
 struct CoinsMarketListView: View {
+    
+    @ObservedObject var coinViewModel: CoinInfoViewModel = CoinInfoViewModel()
+    @Namespace var animation
+    let gridForm = [GridItem(.flexible())]
+    
     var body: some View {
         VStack {
             ScrollView(.horizontal, showsIndicators: false) {
@@ -86,14 +95,20 @@ struct CoinsMarketListView: View {
             Divider()
                 .background(.gray)
             
-            ScrollView {
-                CoinsDataListView(name: "Bitcoin", marketCapRank: 1, symbol: "BTC", priceChangePercentage: 4.65, currentPrice: 41349, marketCap: 770991461396)
-                CoinsDataListView(name: "Ethereum", marketCapRank: 2, symbol: "ETH", priceChangePercentage: -5.65, currentPrice: 2775.11, marketCap: 333204590005)
-                CoinsDataListView(name: "Thether", marketCapRank: 3, symbol: "USDT", priceChangePercentage: 0, currentPrice: 1.0, marketCap: 80082861271)
+            ZStack {
+                ScrollView(showsIndicators: false) {
+                    LazyVGrid(columns: gridForm) {
+                        ForEach(coinViewModel.coinModel, id: \.self) { coin in
+                            CoinsDataListView(name: coin.name ?? "", marketCapRank: coin.marketCapRank ?? 0, symbol: coin.symbol ?? "", priceChangePercentage: coin.priceChangePercentage24H ?? 0, currentPrice: coin.currentPrice ?? 0, marketCap: coin.marketCap ?? 0, imgURL: coin.image ?? "")
+                        }
+                    }
+                }
+                .cornerRadius(10)
+                .padding(.top, 0)
+                .padding(.horizontal, 10)
+                .ignoresSafeArea()
             }
-            .cornerRadius(10)
-            .padding(.top, 0)
-            .padding(.horizontal, 10)
+            
         }
     }
 }
@@ -106,14 +121,16 @@ struct CoinsDataListView: View {
     @State var priceChangePercentage: Double
     @State var currentPrice: Double
     @State var marketCap: Int
+    @State var imgURL: String
     
     var body: some View {
         VStack(alignment: .leading) {
             HStack {
-                Image(systemName: "dollarsign.circle.fill")
-                    .frame(width: 50, height: 50)
-                    .font(.system(size: 40))
-                    .foregroundColor(.yellow)
+                KFImage(URL(string: imgURL))
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 40, height: 40)
+                    .cornerRadius(50)
                 
                 VStack(alignment: .leading) {
                     Text(name)
@@ -122,12 +139,12 @@ struct CoinsDataListView: View {
 
                     HStack {
                         Text("\(marketCapRank)")
-                            .font(.system(size: 12, weight: .bold, design: .rounded))
-                            .frame(width: 14, height: 14)
+                            .font(.system(size: 9, weight: .bold, design: .rounded))
+                            .frame(width: 20, height: 16)
                             .background(Color("RankColor"))
                             .cornerRadius(2)
                         
-                        Text(symbol)
+                        Text(symbol.uppercased())
                             .font(.system(size: 12, weight: .regular, design: .rounded))
                     }
                     .padding(.top, 0)
@@ -181,6 +198,7 @@ struct CoinsDataListView: View {
                     Text("$\(String(format: "%.2f", currentPrice))")
                         .foregroundColor(.white)
                         .font(.system(size: 14, weight: .bold, design: .rounded))
+                        .padding(.bottom, 2)
                     
                     HStack {
                         
@@ -196,7 +214,7 @@ struct CoinsDataListView: View {
                 }
                 .frame(maxWidth: .infinity, alignment: .trailing)
             }
-            .frame(maxWidth: .infinity, alignment: .leading)
+            .frame(maxWidth: .infinity, minHeight: 50,alignment: .leading)
             .padding(.horizontal, 10)
         }
         .padding(.vertical, 5)
