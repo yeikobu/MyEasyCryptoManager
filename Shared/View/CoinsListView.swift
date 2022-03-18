@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CoreHaptics
 import Kingfisher
 import RefreshableScrollView
 
@@ -99,7 +100,7 @@ struct CoinsMarketListView: View {
                 RefreshableScrollView(showsIndicators: false) {
                     LazyVGrid(columns: gridForm) {
                         ForEach(coinViewModel.coinModel, id: \.self) { coin in
-                            CoinsDataListView(name: coin.name ?? "", marketCapRank: coin.marketCapRank ?? 0, symbol: coin.symbol ?? "", priceChangePercentage: coin.priceChangePercentage24H ?? 0, currentPrice: coin.currentPrice ?? 0, marketCap: coin.marketCap ?? 0, imgURL: coin.image ?? "", totalVolume: coin.totalVolume ?? 0, high24H: coin.high24H ?? 0, low24H: coin.low24H ?? 0, maxSupply: coin.maxSupply ?? 0, totalSupply: coin.totalSupply ?? 0, circulatingSupply: coin.circulatingSupply ?? 0, ath: coin.ath ?? 0, atl: coin.atl ?? 0)
+                            CoinsDataListView(name: coin.name ?? "", marketCapRank: coin.marketCapRank ?? 0, symbol: coin.symbol ?? "", priceChangePercentage: coin.priceChangePercentage24H ?? 0, currentPrice: coin.currentPrice ?? 0, marketCap: coin.marketCap ?? 0, imgURL: coin.image ?? "", totalVolume: coin.totalVolume ?? 0, high24H: coin.high24H ?? 0, low24H: coin.low24H ?? 0, maxSupply: coin.maxSupply ?? 0, totalSupply: coin.totalSupply ?? 0, circulatingSupply: coin.circulatingSupply ?? 0, ath: coin.ath ?? 0, atl: coin.atl ?? 0, isTouched: false, isListVisible: false)
                         }
                     }
                    
@@ -135,9 +136,10 @@ struct CoinsDataListView: View {
     @State var circulatingSupply: Double
     @State var ath: Double
     @State var atl: Double
-    @State var isTouched: Bool = false
-    @State var isListVisible: Bool = false
+    @State var isTouched: Bool
+    @State var isListVisible: Bool
     @Namespace var animation
+    @State var engine: CHHapticEngine?
     
     var frame: CGFloat {
         isTouched ? 600 : 55
@@ -247,14 +249,14 @@ struct CoinsDataListView: View {
                             }
                             .frame(maxWidth: .infinity, alignment: .trailing)
                             
-                            Button {
-                                //
-                            } label: {
-                                Image(systemName: "star")
-                                    .foregroundColor(.yellow)
-                                    .font(.system(size: 0))
-                            }
-                            .matchedGeometryEffect(id: "favorite", in: animation)
+//                            Button {
+//                                //
+//                            } label: {
+//                                Image(systemName: "star")
+//                                    .foregroundColor(.yellow)
+//                                    .font(.system(size: 1))
+//                            }
+//                            .matchedGeometryEffect(id: "favorite", in: animation)
                         }
                         .frame(maxWidth: .infinity, minHeight: 50,alignment: .leading)
                         .padding(.horizontal, 10)
@@ -315,6 +317,7 @@ struct CoinsDataListView: View {
                             
                             Button {
                                 //
+                                complexSuccess()
                             } label: {
                                 Image(systemName: "star")
                                     .foregroundColor(.yellow)
@@ -322,7 +325,7 @@ struct CoinsDataListView: View {
                             }
                             .matchedGeometryEffect(id: "favorite", in: animation)
                             .padding(.leading, 5)
-
+                            .offset(x: isListVisible ? 0 : 100, y: 0)
                         }
                         .frame(maxWidth: .infinity, minHeight: 50,alignment: .leading)
                         .padding(.horizontal, 10)
@@ -394,12 +397,12 @@ struct CoinsDataListView: View {
                             
                             HStack {
                                 Text("Market Cap")
-                                    .offset(x: isListVisible ? 0 : -100, y: 0)
+                                    .offset(x: isListVisible ? 0 : -200, y: 0)
                                     .foregroundColor(.gray)
                                     .font(.system(size: 9))
                                 Spacer()
                                 Text("$\(marketCap)")
-                                    .offset(x: isListVisible ? 0 : 100, y: 0)
+                                    .offset(x: isListVisible ? 0 : 200, y: 0)
                                     .foregroundColor(.white)
                                     .font(.system(size: 9))
                             }
@@ -410,12 +413,12 @@ struct CoinsDataListView: View {
                             
                             HStack {
                                 Text("Total volume")
-                                    .offset(x: isListVisible ? 0 : -300, y: 0)
+                                    .offset(x: isListVisible ? 0 : -500, y: 0)
                                     .foregroundColor(.gray)
                                     .font(.system(size: 9))
                                 Spacer()
                                 Text("$\(Int(totalVolume))")
-                                    .offset(x: isListVisible ? 0 : 300, y: 0)
+                                    .offset(x: isListVisible ? 0 : 500, y: 0)
                                     .foregroundColor(.white)
                                     .font(.system(size: 9))
                             }
@@ -427,12 +430,12 @@ struct CoinsDataListView: View {
                             VStack {
                                 HStack {
                                     Text("24H High")
-                                        .offset(x: isListVisible ? 0 : -500, y: 0)
+                                        .offset(x: isListVisible ? 0 : -800, y: 0)
                                         .foregroundColor(.gray)
                                         .font(.system(size: 9))
                                     Spacer()
                                     Text("$\(high24H)")
-                                        .offset(x: isListVisible ? 0 : 500, y: 0)
+                                        .offset(x: isListVisible ? 0 : 800, y: 0)
                                         .foregroundColor(.white)
                                         .font(.system(size: 9))
                                 }
@@ -443,12 +446,12 @@ struct CoinsDataListView: View {
                                 
                                 HStack {
                                     Text("24H Low")
-                                        .offset(x: isListVisible ? 0 : -700, y: 0)
+                                        .offset(x: isListVisible ? 0 : -1100, y: 0)
                                         .foregroundColor(.gray)
                                         .font(.system(size: 9))
                                     Spacer()
                                     Text("$\(low24H)")
-                                        .offset(x: isListVisible ? 0 : 700, y: 0)
+                                        .offset(x: isListVisible ? 0 : 1100, y: 0)
                                         .foregroundColor(.white)
                                         .font(.system(size: 9))
                                 }
@@ -462,12 +465,12 @@ struct CoinsDataListView: View {
                             VStack {
                                 HStack {
                                     Text("Max. Supply")
-                                        .offset(x: isListVisible ? 0 : -900, y: 0)
+                                        .offset(x: isListVisible ? 0 : -1400, y: 0)
                                         .foregroundColor(.gray)
                                         .font(.system(size: 9))
                                     Spacer()
                                     Text("\(Int(maxSupply))")
-                                        .offset(x: isListVisible ? 0 : 900, y: 0)
+                                        .offset(x: isListVisible ? 0 : 1400, y: 0)
                                         .foregroundColor(.white)
                                         .font(.system(size: 9))
                                 }
@@ -478,12 +481,12 @@ struct CoinsDataListView: View {
                                 
                                 HStack {
                                     Text("Total Supply")
-                                        .offset(x: isListVisible ? 0 : -1100, y: 0)
+                                        .offset(x: isListVisible ? 0 : -1700, y: 0)
                                         .foregroundColor(.gray)
                                         .font(.system(size: 9))
                                     Spacer()
                                     Text("\(Int(totalSupply))")
-                                        .offset(x: isListVisible ? 0 : 1100, y: 0)
+                                        .offset(x: isListVisible ? 0 : 1700, y: 0)
                                         .foregroundColor(.white)
                                         .font(.system(size: 9))
                                 }
@@ -494,12 +497,12 @@ struct CoinsDataListView: View {
                                 
                                 HStack {
                                     Text("Circulating Supply")
-                                        .offset(x: isListVisible ? 0 : -1300, y: 0)
+                                        .offset(x: isListVisible ? 0 : -2000, y: 0)
                                         .foregroundColor(.gray)
                                         .font(.system(size: 9))
                                     Spacer()
                                     Text("\(Int(circulatingSupply))")
-                                        .offset(x: isListVisible ? 0 : 1300, y: 0)
+                                        .offset(x: isListVisible ? 0 : 2000, y: 0)
                                         .foregroundColor(.white)
                                         .font(.system(size: 9))
                                 }
@@ -512,12 +515,12 @@ struct CoinsDataListView: View {
                             VStack {
                                 HStack {
                                     Text("All time high")
-                                        .offset(x: isListVisible ? 0 : -1500, y: 0)
+                                        .offset(x: isListVisible ? 0 : -2300, y: 0)
                                         .foregroundColor(.white)
                                         .font(.system(size: 9))
                                     Spacer()
                                     Text("$\(ath)")
-                                        .offset(x: isListVisible ? 0 : 1500, y: 0)
+                                        .offset(x: isListVisible ? 0 : 2300, y: 0)
                                         .foregroundColor(.white)
                                         .font(.system(size: 9))
                                 }
@@ -528,12 +531,12 @@ struct CoinsDataListView: View {
                                 
                                 HStack {
                                     Text("All time low")
-                                        .offset(x: isListVisible ? 0 : -1700, y: 0)
+                                        .offset(x: isListVisible ? 0 : -2600, y: 0)
                                         .foregroundColor(.gray)
                                         .font(.system(size: 9))
                                     Spacer()
                                     Text("$\(atl)")
-                                        .offset(x: isListVisible ? 0 : 1700, y: 0)
+                                        .offset(x: isListVisible ? 0 : 2600, y: 0)
                                         .foregroundColor(.white)
                                         .font(.system(size: 9))
                                 }
@@ -556,19 +559,66 @@ struct CoinsDataListView: View {
                 
             }
             .onTapGesture {
-                withAnimation(.spring(response: 0.8, dampingFraction: 0.75)) {
+                withAnimation(.spring(response: 0.6, dampingFraction: 0.75)) {
                     isTouched.toggle()
                 }
-                withAnimation(.spring(response: 0.7, dampingFraction: 1)) {
+                withAnimation(.spring(response: 0.6, dampingFraction: 1)) {
                     isListVisible.toggle()
                 }
             }
             
         }
-//        .padding(.vertical, 5)
-//        .background(Color("Card"))
-//        .cornerRadius(10)
+        .onAppear {
+            prepareHaptics()
+        }
+    }
+    
+    func addedToPortfolio() {
+        let generator = UINotificationFeedbackGenerator()
+        generator.notificationOccurred(.error)
+    }
+    
+    func prepareHaptics() {
+        guard CHHapticEngine.capabilitiesForHardware().supportsHaptics else { return } //If divice not support haptics
         
+        do {
+            engine = try CHHapticEngine()
+            try engine?.start()
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
+    
+    func complexSuccess() {
+        guard CHHapticEngine.capabilitiesForHardware().supportsHaptics else { return }
+        
+        var events = [CHHapticEvent]()
+//        let intensity = CHHapticEventParameter(parameterID: .hapticIntensity, value: Float(4))
+//        let sharpness = CHHapticEventParameter(parameterID: .hapticSharpness, value: Float(5))
+//        let event = CHHapticEvent(eventType: .hapticTransient, parameters: [intensity, sharpness], relativeTime: 0)
+//        events.append(event)
+        
+        for i in stride(from: 0, to: 1, by: 0.09) {
+            let intensity = CHHapticEventParameter(parameterID: .hapticIntensity, value: Float(i))
+            let sharpness = CHHapticEventParameter(parameterID: .hapticSharpness, value: Float(i))
+            let event = CHHapticEvent(eventType: .hapticTransient, parameters: [intensity, sharpness], relativeTime: 0)
+            events.append(event)
+        }
+        
+        for i in stride(from: 0.45, to: 0.5, by: 0.15) {
+            let intensity = CHHapticEventParameter(parameterID: .hapticIntensity, value: Float(1 - i))
+            let sharpness = CHHapticEventParameter(parameterID: .hapticSharpness, value: Float(1 - i))
+            let event = CHHapticEvent(eventType: .hapticTransient, parameters: [intensity, sharpness], relativeTime: 0.1)
+            events.append(event)
+        }
+        
+        do {
+            let pattern = try CHHapticPattern(events: events, parameters: [])
+            let player = try engine?.makePlayer(with: pattern)
+            try player?.start(atTime: 0)
+        } catch {
+            print(error.localizedDescription)
+        }
     }
 }
 
