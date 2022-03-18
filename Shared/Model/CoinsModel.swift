@@ -16,7 +16,7 @@ struct CoinsModel: Decodable, Hashable {
     var marketCap: Int?
     var marketCapRank: Int?
     var fullyDilutedValuation: Int?
-    var fully_diluted_valuation: Double?
+    var totalVolume: Double?
     var high24H: Double?
     var low24H: Double?
     var priceChange24H: Double?
@@ -43,7 +43,7 @@ struct CoinsModel: Decodable, Hashable {
         case marketCap = "market_cap"
         case marketCapRank = "market_cap_rank"
         case fullyDilutedValuation = "fully_diluted_valuation"
-        case fully_diluted_valuation = "total_volume"
+        case totalVolume = "total_volume"
         case high24H = "high_24h"
         case low24H = "low_24h"
         case priceChange24H = "price_change_24h"
