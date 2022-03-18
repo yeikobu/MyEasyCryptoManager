@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		163A398A27E4039000F8D6F5 /* RefreshableScrollView in Frameworks */ = {isa = PBXBuildFile; productRef = 163A398927E4039000F8D6F5 /* RefreshableScrollView */; };
 		166BEEC027D6E5DF00072115 /* MyEasyCryptoManagerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 166BEEB027D6E5DE00072115 /* MyEasyCryptoManagerApp.swift */; };
 		166BEEC127D6E5DF00072115 /* MyEasyCryptoManagerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 166BEEB027D6E5DE00072115 /* MyEasyCryptoManagerApp.swift */; };
 		166BEEC227D6E5DF00072115 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 166BEEB127D6E5DE00072115 /* ContentView.swift */; };
@@ -42,6 +43,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				163A398A27E4039000F8D6F5 /* RefreshableScrollView in Frameworks */,
 				166BEEDF27E39F8E00072115 /* Kingfisher in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -138,6 +140,7 @@
 			name = "MyEasyCryptoManager (iOS)";
 			packageProductDependencies = (
 				166BEEDE27E39F8E00072115 /* Kingfisher */,
+				163A398927E4039000F8D6F5 /* RefreshableScrollView */,
 			);
 			productName = "MyEasyCryptoManager (iOS)";
 			productReference = 166BEEB727D6E5DF00072115 /* MyEasyCryptoManager.app */;
@@ -168,7 +171,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1320;
-				LastUpgradeCheck = 1320;
+				LastUpgradeCheck = 1330;
 				TargetAttributes = {
 					166BEEB627D6E5DF00072115 = {
 						CreatedOnToolsVersion = 13.2.1;
@@ -189,6 +192,7 @@
 			mainGroup = 166BEEAA27D6E5DD00072115;
 			packageReferences = (
 				166BEEDD27E39F8E00072115 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				163A398827E4039000F8D6F5 /* XCRemoteSwiftPackageReference "RefreshableScrollView" */,
 			);
 			productRefGroup = 166BEEB827D6E5DF00072115 /* Products */;
 			projectDirPath = "";
@@ -427,6 +431,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = macOS/macOS.entitlements;
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -455,6 +460,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = macOS/macOS.entitlements;
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -510,6 +516,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		163A398827E4039000F8D6F5 /* XCRemoteSwiftPackageReference "RefreshableScrollView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/elegantchaos/RefreshableScrollView.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 		166BEEDD27E39F8E00072115 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/onevcat/Kingfisher";
@@ -521,6 +535,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		163A398927E4039000F8D6F5 /* RefreshableScrollView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 163A398827E4039000F8D6F5 /* XCRemoteSwiftPackageReference "RefreshableScrollView" */;
+			productName = RefreshableScrollView;
+		};
 		166BEEDE27E39F8E00072115 /* Kingfisher */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 166BEEDD27E39F8E00072115 /* XCRemoteSwiftPackageReference "Kingfisher" */;

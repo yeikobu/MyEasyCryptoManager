@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Kingfisher
+import RefreshableScrollView
 
 struct CoinsListView: View {
     
@@ -96,7 +97,7 @@ struct CoinsMarketListView: View {
                 .background(.gray)
             
             ZStack {
-                ScrollView(showsIndicators: false) {
+                RefreshableScrollView(showsIndicators: false) {
                     LazyVGrid(columns: gridForm) {
                         ForEach(coinViewModel.coinModel, id: \.self) { coin in
                             CoinsDataListView(name: coin.name ?? "", marketCapRank: coin.marketCapRank ?? 0, symbol: coin.symbol ?? "", priceChangePercentage: coin.priceChangePercentage24H ?? 0, currentPrice: coin.currentPrice ?? 0, marketCap: coin.marketCap ?? 0, imgURL: coin.image ?? "")
@@ -104,11 +105,13 @@ struct CoinsMarketListView: View {
                     }
                 }
                 .cornerRadius(10)
-                .padding(.top, 0)
                 .padding(.horizontal, 10)
                 .ignoresSafeArea()
+                .refreshable {
+                    try? await Task.sleep(nanoseconds: 1000000000)
+                    coinViewModel.updateInfo()
+                }
             }
-            
         }
     }
 }

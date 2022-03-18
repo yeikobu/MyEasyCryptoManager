@@ -7,15 +7,6 @@
 
 import Foundation
 
-
-//struct CoinsModel: Decodable, Hashable {
-//    var coinInfo: [Coin]
-//
-//    enum CodingKeys: String, CodingKey {
-//        case coinInfo
-//    }
-//}
-
 struct CoinsModel: Decodable, Hashable {
     var id: String?
     var symbol: String?
@@ -71,18 +62,3 @@ struct CoinsModel: Decodable, Hashable {
         case lastUpdated = "last_updated"
     }
 }
-
-
-
-//struct Roi: Codable, Hashable {
-//    var times: Double
-//    var currency: Currency
-//    var percentage: Double
-//}
-//
-//
-//enum Currency {
-//    case btc
-//    case eth
-//    case usd
-//}
