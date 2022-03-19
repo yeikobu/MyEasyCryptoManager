@@ -12,8 +12,6 @@ import RefreshableScrollView
 
 struct CoinsListView: View {
     
-    @ObservedObject var coinViewModel: CoinInfoViewModel = CoinInfoViewModel()
-    
     var body: some View {
         ZStack {
             Color("Background")
@@ -27,19 +25,34 @@ struct CoinsListView: View {
 struct CoinsMarketListView: View {
     
     @ObservedObject var coinViewModel: CoinInfoViewModel = CoinInfoViewModel()
+    @ObservedObject var globalMarketViewModel: GlobalMarketViewModel = GlobalMarketViewModel()
     let gridForm = [GridItem(.flexible())]
     @State var engine: CHHapticEngine?
+    @State var mcapChangePercentage: Double = 0
+    @State var totalMarketCap: Double = 0
+    @State var totalVolume: Double = 0
+    @State var activeCryptos: Int = 0
     
     var body: some View {
-        VStack {
+        VStack(alignment: .leading) {
+            
+            HStack {
+                Text("Market Information")
+                    .foregroundColor(.white)
+                    .font(.system(size: 22, weight: .black, design: .rounded))
+            }
+            .padding(.horizontal, 10)
+            .padding(.top, 20)
+            .padding(.bottom, 5)
+                
+            
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack {
-                    
                     //Global market cap stack
                     VStack(alignment: .leading) {
-                        Text("Global market cap")
+                        Text("Global Market Cap")
                             .foregroundColor(.white)
-                            .font(.system(size: 15, weight: .bold, design: .rounded))
+                            .font(.system(size: 12, weight: .bold, design: .rounded))
                             .padding(.vertical, -5)
                         
                         Divider()
@@ -48,20 +61,39 @@ struct CoinsMarketListView: View {
                             .padding(.horizontal, -10)
                         
                         HStack {
-                            Text("$1.893.060.035.101")
+                            Text("$\(Int(totalMarketCap))")
                                 .foregroundColor(.white)
-                                .font(.system(size: 12, weight: .bold, design: .rounded))
+                                .font(.system(size: 10, weight: .bold, design: .rounded))
                             
-                            Image(systemName: "arrowtriangle.up.fill")
-                                .foregroundColor(.green)
-                                .font(.system(size: 10))
-                                .padding(.trailing, -6)
-                            
-                            Text("2.8%")
-                                .foregroundColor(.green)
-                                .font(.system(size: 12))
+                            if mcapChangePercentage > 0 {
+                                Image(systemName: "arrowtriangle.up.fill")
+                                    .foregroundColor(.green)
+                                    .font(.system(size: 8))
+                                    .padding(.trailing, -6)
+                                
+                                Text("\(String(format: "%.2f", mcapChangePercentage))%")
+                                    .foregroundColor(.green)
+                                    .font(.system(size: 10))
+                            } else if mcapChangePercentage < 0 {
+                                Image(systemName: "arrowtriangle.down.fill")
+                                    .foregroundColor(.red)
+                                    .font(.system(size: 8))
+                                    .padding(.trailing, -6)
+                                
+                                Text("\(String(format: "%.2f", mcapChangePercentage))%")
+                                    .foregroundColor(.red)
+                                    .font(.system(size: 10))
+                            } else {
+                                Image(systemName: "arrowtriangle.right.fill")
+                                    .foregroundColor(.gray)
+                                    .font(.system(size: 8))
+                                    .padding(.trailing, -6)
+                                
+                                Text("\(String(format: "%.2f", mcapChangePercentage))%")
+                                    .foregroundColor(.gray)
+                                    .font(.system(size: 10))
+                            }
                         }
-                        
                     }
                     .padding()
                     .background(Color("Card"))
@@ -71,7 +103,7 @@ struct CoinsMarketListView: View {
                     VStack(alignment: .leading) {
                         Text("24 Hours Volume")
                             .foregroundColor(.white)
-                            .font(.system(size: 15, weight: .bold, design: .rounded))
+                            .font(.system(size: 12, weight: .bold, design: .rounded))
                             .padding(.vertical, -5)
                         
                         Divider()
@@ -80,11 +112,32 @@ struct CoinsMarketListView: View {
                             .padding(.horizontal, -10)
                         
                         HStack {
-                            Text("$106.953.991,010")
+                            Text("$\(Int(totalVolume))")
                                 .foregroundColor(.white)
-                                .font(.system(size: 12, weight: .bold, design: .rounded))
+                                .font(.system(size: 10, weight: .bold, design: .rounded))
                         }
                         
+                    }
+                    .padding()
+                    .background(Color("Card"))
+                    .cornerRadius(10)
+                    
+                    VStack(alignment: .leading) {
+                        Text("Active Cryptocurrencys")
+                            .foregroundColor(.white)
+                            .font(.system(size: 12, weight: .bold, design: .rounded))
+                            .padding(.vertical, -5)
+                        
+                        Divider()
+                            .background(.gray)
+                            .frame(maxWidth: .infinity)
+                            .padding(.horizontal, -10)
+                        
+                        HStack {
+                            Text("\(Int(activeCryptos))")
+                                .foregroundColor(.white)
+                                .font(.system(size: 10, weight: .bold, design: .rounded))
+                        }
                     }
                     .padding()
                     .background(Color("Card"))
@@ -102,6 +155,28 @@ struct CoinsMarketListView: View {
                     LazyVGrid(columns: gridForm) {
                         ForEach(coinViewModel.coinModel, id: \.self) { coin in
                             CoinsDataListView(name: coin.name ?? "", marketCapRank: coin.marketCapRank ?? 0, symbol: coin.symbol ?? "", priceChangePercentage: coin.priceChangePercentage24H ?? 0, currentPrice: coin.currentPrice ?? 0, marketCap: coin.marketCap ?? 0, imgURL: coin.image ?? "", totalVolume: coin.totalVolume ?? 0, high24H: coin.high24H ?? 0, low24H: coin.low24H ?? 0, maxSupply: coin.maxSupply ?? 0, totalSupply: coin.totalSupply ?? 0, circulatingSupply: coin.circulatingSupply ?? 0, ath: coin.ath ?? 0, atl: coin.atl ?? 0, isTouched: false, isListVisible: false)
+                                .task {
+                                    mcapChangePercentage = globalMarketViewModel.globalMarketModel?.data?.marketCapChangePercentage24HUsd ?? 0
+                                    //Total market cap
+                                    if let totalMarketCap = globalMarketViewModel.globalMarketModel?.data?.totalMarketCap {
+                                        for (asset, total) in totalMarketCap {
+                                            if asset == "usd" {
+                                                self.totalMarketCap = total
+                                            }
+                                        }
+                                    }
+                                    
+                                    //Volume 24 horas
+                                    if let totalVolume24H = globalMarketViewModel.globalMarketModel?.data?.totalVolume {
+                                        for (asset, total) in totalVolume24H {
+                                            if asset == "usd" {
+                                                self.totalVolume = total
+                                            }
+                                        }
+                                    }
+                                    
+                                    activeCryptos = globalMarketViewModel.globalMarketModel?.data?.activeCryptocurrencies ?? 0
+                                }
                         }
                     }
                 }
@@ -109,9 +184,20 @@ struct CoinsMarketListView: View {
                 .padding(.horizontal, 10)
                 .ignoresSafeArea()
                 .refreshable {
+                    coinViewModel.updateInfo()
+                    mcapChangePercentage = globalMarketViewModel.globalMarketModel?.data?.marketCapChangePercentage24HUsd ?? 0
+                    
+                    //Volume 24 horas
+                    if let totalVolume24H = globalMarketViewModel.globalMarketModel?.data?.totalVolume {
+                        for (asset, total) in totalVolume24H {
+                            if asset == "usd" {
+                                totalVolume = total
+                            }
+                        }
+                    }
+                    
                     complexSuccess()
                     try? await Task.sleep(nanoseconds: 1000000000)
-                    coinViewModel.updateInfo()
                 }
                 
                 
@@ -144,13 +230,6 @@ struct CoinsMarketListView: View {
             let event = CHHapticEvent(eventType: .hapticTransient, parameters: [intensity, sharpness], relativeTime: 0)
             events.append(event)
         }
-        
-//        for i in stride(from: 0.4, to: 0.5, by: 0.15) {
-//            let intensity = CHHapticEventParameter(parameterID: .hapticIntensity, value: Float(i))
-//            let sharpness = CHHapticEventParameter(parameterID: .hapticSharpness, value: Float(i))
-//            let event = CHHapticEvent(eventType: .hapticTransient, parameters: [intensity, sharpness], relativeTime: 0.25)
-//            events.append(event)
-//        }
         
         do {
             let pattern = try CHHapticPattern(events: events, parameters: [])
@@ -201,8 +280,7 @@ struct CoinsDataListView: View {
                                     .aspectRatio(contentMode: .fit)
                                     .matchedGeometryEffect(id: "icon", in: animation)
                                     .frame(width: 40, height: 40)
-    //                                .cornerRadius(50)
-                                
+
                                 VStack(alignment: .leading) {
                                     Text(name)
                                         .foregroundColor(.white)
@@ -218,7 +296,7 @@ struct CoinsDataListView: View {
                                             .padding(5)
                                             .background(Color("RankColor"))
                                             .cornerRadius(2)
-                                        
+
                                         Text(symbol.uppercased())
                                             .matchedGeometryEffect(id: "symbol", in: animation)
                                             .foregroundColor(.white)
@@ -228,40 +306,40 @@ struct CoinsDataListView: View {
                                 }
                             }
                             .frame(width: 125, alignment: .leading)
-                            
+
                             VStack(alignment: .trailing) {
                                 if priceChangePercentage > 0 {
                                     HStack {
                                         Image(systemName: "arrowtriangle.up.fill")
                                             .foregroundColor(.green)
                                             .font(.system(size: 14))
-                                        
+
                                         Text("\(String(format: "%.2f", priceChangePercentage))%")
                                             .foregroundColor(.green)
                                             .font(.system(size: 14, weight: .bold, design: .rounded))
                                             .frame(alignment: .leading)
                                     }
                                 }
-                                
+
                                 if priceChangePercentage < 0 {
                                     HStack {
                                         Image(systemName: "arrowtriangle.down.fill")
                                             .foregroundColor(.red)
                                             .font(.system(size: 14))
-                                        
+
                                         Text("\(String(format: "%.2f", priceChangePercentage))%")
                                             .foregroundColor(.red)
                                             .font(.system(size: 14, weight: .bold, design: .rounded))
                                             .frame(alignment: .leading)
                                     }
                                 }
-                                
+
                                 if priceChangePercentage == 0 {
                                     HStack {
                                         Image(systemName: "arrowtriangle.right.fill")
                                             .foregroundColor(.gray)
                                             .font(.system(size: 14))
-                                        
+
                                         Text("\(String(format: "%.2f", priceChangePercentage))%")
                                             .foregroundColor(.gray)
                                             .font(.system(size: 14, weight: .bold, design: .rounded))
@@ -270,19 +348,19 @@ struct CoinsDataListView: View {
                                 }
                             }
                             .matchedGeometryEffect(id: "priceChangePercentage", in: animation)
-                            
+
                             VStack(alignment: .trailing) {
                                 Text("$\(String(format: "%.2f", currentPrice))")
                                     .matchedGeometryEffect(id: "currentPrice", in: animation)
                                     .foregroundColor(.white)
                                     .font(.system(size: 14, weight: .bold, design: .rounded))
                                     .padding(.bottom, 2)
-                                
+
                                 HStack {
                                     Text("M.Cap")
                                         .foregroundColor(.gray)
                                         .font(.system(size: 8, weight: .regular, design: .rounded))
-                                    
+
                                     Text("$\(marketCap)")
                                         .foregroundColor(.white)
                                         .font(.system(size: 8, weight: .regular, design: .rounded))
@@ -291,19 +369,10 @@ struct CoinsDataListView: View {
                                 .matchedGeometryEffect(id: "mcap", in: animation)
                             }
                             .frame(maxWidth: .infinity, alignment: .trailing)
-                            
-//                            Button {
-//                                //
-//                            } label: {
-//                                Image(systemName: "star")
-//                                    .foregroundColor(.yellow)
-//                                    .font(.system(size: 1))
-//                            }
-//                            .matchedGeometryEffect(id: "favorite", in: animation)
                         }
                         .frame(maxWidth: .infinity, minHeight: 50,alignment: .leading)
                         .padding(.horizontal, 10)
-                        
+
                         VStack {
                             Text("Asset information")
                                 .matchedGeometryEffect(id: "information", in: animation)
@@ -325,9 +394,7 @@ struct CoinsDataListView: View {
                     )
                 } else {
                     VStack(alignment: .leading) {
-                        
                         HStack {
-                            
                             KFImage(URL(string: imgURL))
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)

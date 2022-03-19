@@ -19,7 +19,6 @@ final class CoinInfoViewModel: ObservableObject {
             do {
                 if let jsonData = data {
                     let decodeData = try JSONDecoder().decode([CoinsModel].self, from: jsonData)
-                    print(decodeData)
                     DispatchQueue.main.async {
                         self.coinModel = decodeData
                     }
@@ -39,7 +38,6 @@ final class CoinInfoViewModel: ObservableObject {
                 if let jsonData = data {
                     let decodeData = try JSONDecoder().decode([CoinsModel].self, from: jsonData)
                     print("Aqui van los datos!....................................")
-                    print(decodeData)
                     DispatchQueue.main.async {
                         self.coinModel = decodeData
                     }
