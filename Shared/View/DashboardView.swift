@@ -37,7 +37,7 @@ struct TabButtonview: View {
         } label: {
             VStack(spacing: 2) {
                 Image(systemName: imageName)
-                    .foregroundColor(selectedTab == imageName ? Color("TabButtonsColor") : Color(.gray))
+                    .foregroundColor(selectedTab == imageName ? Color.yellow : Color.gray)
                     .font(.system(size: 24, weight: .bold))
             }
             .padding(13)

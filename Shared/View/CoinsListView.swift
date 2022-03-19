@@ -456,8 +456,10 @@ struct CoinsDataListView: View {
                                 .matchedGeometryEffect(id: "favorite", in: animation)
                                 .padding(.leading, 5)
                                 .scaleEffect(addButtonAnimate ? addButtonScale : 1)
+                                .offset(x: isListVisible ? 0 : 200, y: 0)
                             }
                             .frame(width: 40)
+                            
                             
                         }
                         .frame(maxWidth: .infinity, minHeight: 50,alignment: .leading)
