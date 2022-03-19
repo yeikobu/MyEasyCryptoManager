@@ -32,8 +32,7 @@ struct CoinsMarketListView: View {
     @State var totalMarketCap: Double = 0
     @State var totalVolume: Double = 0
     @State var activeCryptos: Int = 0
-    @State var marketCapPercentageAssetNames: [String] = []
-    @State var marketCapPercentageAssetPercentage: [Double] = []
+    @State var isTouched: Bool = false
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -156,7 +155,7 @@ struct CoinsMarketListView: View {
                 RefreshableScrollView(showsIndicators: false) {
                     LazyVGrid(columns: gridForm) {
                         ForEach(coinViewModel.coinModel, id: \.self) { coin in
-                            CoinsDataListView(name: coin.name ?? "", marketCapRank: coin.marketCapRank ?? 0, symbol: coin.symbol ?? "", priceChangePercentage: coin.priceChangePercentage24H ?? 0, currentPrice: coin.currentPrice ?? 0, marketCap: coin.marketCap ?? 0, imgURL: coin.image ?? "", totalVolume: coin.totalVolume ?? 0, high24H: coin.high24H ?? 0, low24H: coin.low24H ?? 0, maxSupply: coin.maxSupply ?? 0, totalSupply: coin.totalSupply ?? 0, circulatingSupply: coin.circulatingSupply ?? 0, ath: coin.ath ?? 0, atl: coin.atl ?? 0, isTouched: false, isListVisible: false)
+                            CoinsDataListView(name: coin.name ?? "", marketCapRank: coin.marketCapRank ?? 0, symbol: coin.symbol ?? "", priceChangePercentage: coin.priceChangePercentage24H ?? 0, currentPrice: coin.currentPrice ?? 0, marketCap: coin.marketCap ?? 0, imgURL: coin.image ?? "", totalVolume: coin.totalVolume ?? 0, high24H: coin.high24H ?? 0, low24H: coin.low24H ?? 0, maxSupply: coin.maxSupply ?? 0, totalSupply: coin.totalSupply ?? 0, circulatingSupply: coin.circulatingSupply ?? 0, ath: coin.ath ?? 0, atl: coin.atl ?? 0, isTouched: false, isListVisible: false, isAddedToPorfolio: false)
                                 .task {
                                     getGlobalData()
                                 }
@@ -261,11 +260,15 @@ struct CoinsDataListView: View {
     @State var atl: Double
     @State var isTouched: Bool
     @State var isListVisible: Bool
+    @State var isAddedToPorfolio: Bool
+    @State var addButtonAnimate: Bool = false
     @Namespace var animation
     @State var engine: CHHapticEngine?
     
-    var frame: CGFloat {
-        isTouched ? 600 : 55
+    
+    let buttonAnimationDuration:  Double = 0.15
+    var addButtonScale: CGFloat {
+        isTouched ? 1.5 : 0.8
     }
     
     var body: some View {
@@ -426,17 +429,36 @@ struct CoinsDataListView: View {
                             Spacer()
                             Spacer()
                             
-                            Button {
-                                //
-                                complexSuccess()
-                            } label: {
-                                Image(systemName: "star")
-                                    .foregroundColor(.yellow)
-                                    .font(.system(size: 16))
+                            VStack(alignment: .center) {
+                                Button {
+                                    complexSuccess()
+                                    addButtonAnimate = true
+                                    
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + buttonAnimationDuration) {
+                                        withAnimation(.spring(response: buttonAnimationDuration, dampingFraction: 1)) {
+                                            addButtonAnimate = false
+                                            isAddedToPorfolio.toggle()
+                                        }
+                                    }
+                                } label: {
+                                    VStack {
+                                        Image(systemName: isAddedToPorfolio ? "plus.app.fill" : "plus.app")
+                                            .resizable()
+                                            .aspectRatio(contentMode: .fit)
+                                            .frame(width: 20)
+                                            .foregroundColor(isAddedToPorfolio ? .yellow : .gray)
+                                        
+                                        Text(isAddedToPorfolio ? "Added!" : "Add")
+                                            .foregroundColor(isAddedToPorfolio ? .yellow : .gray)
+                                            .font(.system(size: 8))
+                                    }
+                                }
+                                .matchedGeometryEffect(id: "favorite", in: animation)
+                                .padding(.leading, 5)
+                                .scaleEffect(addButtonAnimate ? addButtonScale : 1)
                             }
-                            .matchedGeometryEffect(id: "favorite", in: animation)
-                            .padding(.leading, 5)
-                            .offset(x: isListVisible ? 0 : 100, y: 0)
+                            .frame(width: 40)
+                            
                         }
                         .frame(maxWidth: .infinity, minHeight: 50,alignment: .leading)
                         .padding(.horizontal, 10)
