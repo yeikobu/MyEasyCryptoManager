@@ -32,6 +32,8 @@ struct CoinsMarketListView: View {
     @State var totalMarketCap: Double = 0
     @State var totalVolume: Double = 0
     @State var activeCryptos: Int = 0
+    @State var marketCapPercentageAssetNames: [String] = []
+    @State var marketCapPercentageAssetPercentage: [Double] = []
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -156,26 +158,7 @@ struct CoinsMarketListView: View {
                         ForEach(coinViewModel.coinModel, id: \.self) { coin in
                             CoinsDataListView(name: coin.name ?? "", marketCapRank: coin.marketCapRank ?? 0, symbol: coin.symbol ?? "", priceChangePercentage: coin.priceChangePercentage24H ?? 0, currentPrice: coin.currentPrice ?? 0, marketCap: coin.marketCap ?? 0, imgURL: coin.image ?? "", totalVolume: coin.totalVolume ?? 0, high24H: coin.high24H ?? 0, low24H: coin.low24H ?? 0, maxSupply: coin.maxSupply ?? 0, totalSupply: coin.totalSupply ?? 0, circulatingSupply: coin.circulatingSupply ?? 0, ath: coin.ath ?? 0, atl: coin.atl ?? 0, isTouched: false, isListVisible: false)
                                 .task {
-                                    mcapChangePercentage = globalMarketViewModel.globalMarketModel?.data?.marketCapChangePercentage24HUsd ?? 0
-                                    //Total market cap
-                                    if let totalMarketCap = globalMarketViewModel.globalMarketModel?.data?.totalMarketCap {
-                                        for (asset, total) in totalMarketCap {
-                                            if asset == "usd" {
-                                                self.totalMarketCap = total
-                                            }
-                                        }
-                                    }
-                                    
-                                    //Volume 24 horas
-                                    if let totalVolume24H = globalMarketViewModel.globalMarketModel?.data?.totalVolume {
-                                        for (asset, total) in totalVolume24H {
-                                            if asset == "usd" {
-                                                self.totalVolume = total
-                                            }
-                                        }
-                                    }
-                                    
-                                    activeCryptos = globalMarketViewModel.globalMarketModel?.data?.activeCryptocurrencies ?? 0
+                                    getGlobalData()
                                 }
                         }
                     }
@@ -185,22 +168,10 @@ struct CoinsMarketListView: View {
                 .ignoresSafeArea()
                 .refreshable {
                     coinViewModel.updateInfo()
-                    mcapChangePercentage = globalMarketViewModel.globalMarketModel?.data?.marketCapChangePercentage24HUsd ?? 0
-                    
-                    //Volume 24 horas
-                    if let totalVolume24H = globalMarketViewModel.globalMarketModel?.data?.totalVolume {
-                        for (asset, total) in totalVolume24H {
-                            if asset == "usd" {
-                                totalVolume = total
-                            }
-                        }
-                    }
-                    
+                    getGlobalData()
                     complexSuccess()
                     try? await Task.sleep(nanoseconds: 1000000000)
                 }
-                
-                
             }
         }
         .onAppear {
@@ -208,8 +179,38 @@ struct CoinsMarketListView: View {
         }
     }
     
+    func getGlobalData() {
+        //Market cap change percentage 24h
+        if let marketCapChangePercentage = globalMarketViewModel.globalMarketModel?.data?.marketCapChangePercentage24HUsd {
+            mcapChangePercentage = marketCapChangePercentage
+        }
+        
+        //Total market cap
+        if let totalMarketCap = globalMarketViewModel.globalMarketModel?.data?.totalMarketCap {
+            for (asset, total) in totalMarketCap {
+                if asset == "usd" {
+                    self.totalMarketCap = total
+                }
+            }
+        }
+        
+        //Volume 24 horas
+        if let totalVolume24H = globalMarketViewModel.globalMarketModel?.data?.totalVolume {
+            for (asset, total) in totalVolume24H {
+                if asset == "usd" {
+                    self.totalVolume = total
+                }
+            }
+        }
+        
+        //Total active cryptocurrencys
+        if let activeCryptocurrencys = globalMarketViewModel.globalMarketModel?.data?.activeCryptocurrencies {
+            activeCryptos = activeCryptocurrencys
+        }
+    }
+    
     func prepareHaptics() {
-        guard CHHapticEngine.capabilitiesForHardware().supportsHaptics else { return } //If divice not support haptics
+        guard CHHapticEngine.capabilitiesForHardware().supportsHaptics else { return } //If divice dosen't support haptics
         
         do {
             engine = try CHHapticEngine()

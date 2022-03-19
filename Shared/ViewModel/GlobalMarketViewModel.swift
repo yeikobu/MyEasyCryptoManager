@@ -18,8 +18,6 @@ final class GlobalMarketViewModel: ObservableObject {
             do {
                 if let jsonData = data {
                     let decodeData = try JSONDecoder().decode(GlobalMarketModel.self, from: jsonData)
-                    print("Global market data")
-                    print(decodeData)
                     DispatchQueue.main.async {
                         self.globalMarketModel = decodeData
                     }
@@ -30,5 +28,4 @@ final class GlobalMarketViewModel: ObservableObject {
             }
         }.resume()
     }
-    
 }
