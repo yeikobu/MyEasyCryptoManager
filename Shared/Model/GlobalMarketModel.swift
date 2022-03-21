@@ -8,7 +8,7 @@
 import Foundation
 
 struct GlobalMarketModel: Decodable, Hashable {
-    var data: DataClass?
+    let data: DataClass?
     
     enum CodingKeys: String, CodingKey {
         case data
@@ -16,14 +16,14 @@ struct GlobalMarketModel: Decodable, Hashable {
 }
 
 struct DataClass: Decodable, Hashable {
-    var activeCryptocurrencies: Int?
-    var upcomingIcos: Int?
-    var ongoingIcos: Int?
-    var endedIcos: Int?
-    var markets: Int?
-    var totalMarketCap, totalVolume, marketCapPercentage: [String: Double]?
-    var marketCapChangePercentage24HUsd: Double?
-    var updatedAt: Int?
+    let activeCryptocurrencies: Int?
+    let upcomingIcos: Int?
+    let ongoingIcos: Int?
+    let endedIcos: Int?
+    let markets: Int?
+    let totalMarketCap, totalVolume, marketCapPercentage: [String: Double]?
+    let marketCapChangePercentage24HUsd: Double?
+    let updatedAt: Int?
     
     enum CodingKeys: String, CodingKey {
         case activeCryptocurrencies = "active_cryptocurrencies"

@@ -8,31 +8,32 @@
 import Foundation
 
 struct CoinsModel: Decodable, Hashable {
-    var id: String?
-    var symbol: String?
-    var name: String?
-    var image: String?
-    var currentPrice: Double?
-    var marketCap: Int?
-    var marketCapRank: Int?
-    var fullyDilutedValuation: Int?
-    var totalVolume: Double?
-    var high24H: Double?
-    var low24H: Double?
-    var priceChange24H: Double?
-    var priceChangePercentage24H: Double?
-    var marketCapChange24H: Double?
-    var marketCapChangePercentage24H: Double?
-    var circulatingSupply: Double?
-    var totalSupply: Double?
-    var maxSupply: Double?
-    var ath: Double?
-    var athChangePercentage: Double?
-    var athDate: String?
-    var atl: Double?
-    var atlChangePercentage: Double?
-    var atlDate: String?
-    var lastUpdated: String?
+    let id: String?
+    let symbol: String?
+    let name: String?
+    let image: String?
+    let currentPrice: Double?
+    let marketCap: Int?
+    let marketCapRank: Int?
+    let fullyDilutedValuation: Int?
+    let totalVolume: Double?
+    let high24H: Double?
+    let low24H: Double?
+    let priceChange24H: Double?
+    let priceChangePercentage24H: Double?
+    let marketCapChange24H: Double?
+    let marketCapChangePercentage24H: Double?
+    let circulatingSupply: Double?
+    let totalSupply: Double?
+    let maxSupply: Double?
+    let ath: Double?
+    let athChangePercentage: Double?
+    let athDate: String?
+    let atl: Double?
+    let atlChangePercentage: Double?
+    let atlDate: String?
+    let lastUpdated: String?
+    let sparkLine7D: SparkLine7D?
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -60,5 +61,14 @@ struct CoinsModel: Decodable, Hashable {
         case atlChangePercentage = "atl_change_percentage"
         case atlDate = "atl_date"
         case lastUpdated = "last_updated"
+        case sparkLine7D = "sparkline_in_7d"
+    }
+}
+
+struct SparkLine7D: Decodable, Hashable {
+    let price: [Double]?
+    
+    enum CodingKeys: String, CodingKey {
+        case price 
     }
 }

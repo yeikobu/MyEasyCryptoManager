@@ -12,6 +12,7 @@
 		163A398F27E561A900F8D6F5 /* CompleteAssetInfoCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 163A398E27E561A900F8D6F5 /* CompleteAssetInfoCardView.swift */; };
 		163A399127E56AEB00F8D6F5 /* GlobalMarketModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 163A399027E56AEB00F8D6F5 /* GlobalMarketModel.swift */; };
 		163A399327E56BCE00F8D6F5 /* GlobalMarketViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 163A399227E56BCE00F8D6F5 /* GlobalMarketViewModel.swift */; };
+		163A399527E9074100F8D6F5 /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 163A399427E9074100F8D6F5 /* ChartView.swift */; };
 		166BEEC027D6E5DF00072115 /* MyEasyCryptoManagerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 166BEEB027D6E5DE00072115 /* MyEasyCryptoManagerApp.swift */; };
 		166BEEC127D6E5DF00072115 /* MyEasyCryptoManagerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 166BEEB027D6E5DE00072115 /* MyEasyCryptoManagerApp.swift */; };
 		166BEEC227D6E5DF00072115 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 166BEEB127D6E5DE00072115 /* ContentView.swift */; };
@@ -34,6 +35,7 @@
 		163A398E27E561A900F8D6F5 /* CompleteAssetInfoCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteAssetInfoCardView.swift; sourceTree = "<group>"; };
 		163A399027E56AEB00F8D6F5 /* GlobalMarketModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalMarketModel.swift; sourceTree = "<group>"; };
 		163A399227E56BCE00F8D6F5 /* GlobalMarketViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalMarketViewModel.swift; sourceTree = "<group>"; };
+		163A399427E9074100F8D6F5 /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
 		166BEEB027D6E5DE00072115 /* MyEasyCryptoManagerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyEasyCryptoManagerApp.swift; sourceTree = "<group>"; };
 		166BEEB127D6E5DE00072115 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		166BEEB227D6E5DF00072115 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -71,6 +73,7 @@
 			children = (
 				163A398C27E543E200F8D6F5 /* BasicAssetInfoCardView.swift */,
 				163A398E27E561A900F8D6F5 /* CompleteAssetInfoCardView.swift */,
+				163A399427E9074100F8D6F5 /* ChartView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -255,6 +258,7 @@
 				166BEECF27D9331F00072115 /* CoinsModel.swift in Sources */,
 				163A398F27E561A900F8D6F5 /* CompleteAssetInfoCardView.swift in Sources */,
 				166BEEC027D6E5DF00072115 /* MyEasyCryptoManagerApp.swift in Sources */,
+				163A399527E9074100F8D6F5 /* ChartView.swift in Sources */,
 				163A398D27E543E200F8D6F5 /* BasicAssetInfoCardView.swift in Sources */,
 				163A399127E56AEB00F8D6F5 /* GlobalMarketModel.swift in Sources */,
 				166BEED827E279E100072115 /* CoinsListView.swift in Sources */,
