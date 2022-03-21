@@ -40,11 +40,10 @@ struct CoinsMarketListView: View {
             HStack {
                 Text("Market Information")
                     .foregroundColor(.white)
-                    .font(.system(size: 22, weight: .black, design: .rounded))
+                    .font(.system(size: 28, weight: .black, design: .rounded))
             }
             .padding(.horizontal, 10)
-            .padding(.top, 20)
-            .padding(.bottom, 5)
+            .padding(.vertical, 5)
                 
             
             ScrollView(.horizontal, showsIndicators: false) {
@@ -155,7 +154,7 @@ struct CoinsMarketListView: View {
                 RefreshableScrollView(showsIndicators: false) {
                     LazyVGrid(columns: gridForm) {
                         ForEach(coinViewModel.coinModel, id: \.self) { coin in
-                            CoinsDataListView(name: coin.name ?? "", marketCapRank: coin.marketCapRank ?? 0, symbol: coin.symbol ?? "", priceChangePercentage: coin.priceChangePercentage24H ?? 0, currentPrice: coin.currentPrice ?? 0, marketCap: coin.marketCap ?? 0, imgURL: coin.image ?? "", totalVolume: coin.totalVolume ?? 0, high24H: coin.high24H ?? 0, low24H: coin.low24H ?? 0, maxSupply: coin.maxSupply ?? 0, totalSupply: coin.totalSupply ?? 0, circulatingSupply: coin.circulatingSupply ?? 0, ath: coin.ath ?? 0, atl: coin.atl ?? 0, isTouched: false, isListVisible: false, isAddedToPorfolio: false)
+                            CoinsDataListView(name: coin.name ?? "", marketCapRank: coin.marketCapRank ?? 0, symbol: coin.symbol ?? "", priceChangePercentage: coin.priceChangePercentage24H ?? 0, currentPrice: coin.currentPrice ?? 0, marketCap: coin.marketCap ?? 0, imgURL: coin.image ?? "", totalVolume: coin.totalVolume ?? 0, high24H: coin.high24H ?? 0, low24H: coin.low24H ?? 0, maxSupply: coin.maxSupply ?? 0, totalSupply: coin.totalSupply ?? 0, circulatingSupply: coin.circulatingSupply ?? 0, ath: coin.ath ?? 0, atl: coin.atl ?? 0, isTouched: false, isListVisible: false, isAddedToPorfolio: false, coin: coin)
                                 .task {
                                     getGlobalData()
                                 }
@@ -264,7 +263,7 @@ struct CoinsDataListView: View {
     @State var addButtonAnimate: Bool = false
     @Namespace var animation
     @State var engine: CHHapticEngine?
-    
+    @State var coin: CoinsModel
     
     let buttonAnimationDuration:  Double = 0.15
     var addButtonScale: CGFloat {
@@ -354,7 +353,7 @@ struct CoinsDataListView: View {
                             .matchedGeometryEffect(id: "priceChangePercentage", in: animation)
 
                             VStack(alignment: .trailing) {
-                                Text("$\(String(format: "%.2f", currentPrice))")
+                                Text("$\(currentPrice.formatted())")
                                     .matchedGeometryEffect(id: "currentPrice", in: animation)
                                     .foregroundColor(.white)
                                     .font(.system(size: 14, weight: .bold, design: .rounded))
@@ -381,7 +380,7 @@ struct CoinsDataListView: View {
                             Text("Asset information")
                                 .matchedGeometryEffect(id: "information", in: animation)
                                 .foregroundColor(.white)
-                                .font(.system(size: 1))
+                                .font(.system(size: 1, weight: .bold))
                                 .opacity(0)
                                 .frame(maxWidth: .infinity, alignment: .leading)
                         }
@@ -468,7 +467,7 @@ struct CoinsDataListView: View {
                         VStack(alignment: .trailing) {
                             HStack {
                                 Spacer()
-                                Text("$\(currentPrice)")
+                                Text("$\(currentPrice.formatted())")
                                     .matchedGeometryEffect(id: "currentPrice", in: animation)
                                     .foregroundColor(.white)
                                     .font(.system(size: 14, weight: .bold, design: .rounded))
@@ -519,10 +518,13 @@ struct CoinsDataListView: View {
                             }
                         }
                         
-                        Spacer()
+                        ChartView(coin: coin)
+                            .padding(.top, 20)
+                            .padding(.bottom, 10)
+                            .matchedGeometryEffect(id: "chart", in: animation)
+                        
                         
                         VStack {
-                            
                             Text("Asset information")
                                 .offset(x: isListVisible ? 0 : 100, y: isListVisible ? 0 : -100)
                                 .foregroundColor(.white)
