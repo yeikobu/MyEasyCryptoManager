@@ -37,7 +37,7 @@ struct TabButtonview: View {
         } label: {
             VStack(spacing: 2) {
                 Image(systemName: imageName)
-                    .foregroundColor(selectedTab == imageName ? Color("TabButtonsColor") : Color(.gray))
+                    .foregroundColor(selectedTab == imageName ? Color.yellow : Color.gray)
                     .font(.system(size: 24, weight: .bold))
             }
             .padding(13)
@@ -85,12 +85,13 @@ struct CustomTabView: View {
                 }
             }
             .padding(.horizontal, 40)
-            .padding(.vertical, 3)
+            .padding(.vertical, 2)
             .background(Color("TabBarColor"))
             .clipShape(Capsule())
             .shadow(color: .black.opacity(0.70), radius: 5, x: 5, y: 5)
             .shadow(color: .black.opacity(0.70), radius: 5, x: -5, y: -5)
             .padding(.horizontal, 10)
+            .padding(.bottom, -13)
             
         }
         .ignoresSafeArea(.keyboard, edges: .bottom)
