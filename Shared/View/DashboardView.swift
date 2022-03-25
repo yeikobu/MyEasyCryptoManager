@@ -84,14 +84,14 @@ struct CustomTabView: View {
                     }
                 }
             }
-            .padding(.horizontal, 40)
+            .padding(.horizontal, 20)
             .padding(.vertical, 2)
             .background(Color("TabBarColor"))
             .clipShape(Capsule())
             .shadow(color: .black.opacity(0.70), radius: 5, x: 5, y: 5)
             .shadow(color: .black.opacity(0.70), radius: 5, x: -5, y: -5)
-            .padding(.horizontal, 10)
-            .padding(.bottom, -13)
+            .padding(.horizontal, 20)
+            .padding(.bottom, 1)
             
         }
         .ignoresSafeArea(.keyboard, edges: .bottom)
