@@ -42,7 +42,7 @@ struct BasicAssetInfoCardView: View {
                         .aspectRatio(contentMode: .fit)
                         .matchedGeometryEffect(id: "icon", in: animation)
                         .frame(width: 40, height: 40)
-                    
+
                     VStack(alignment: .leading) {
                         Text(name)
                             .foregroundColor(.white)
@@ -58,7 +58,7 @@ struct BasicAssetInfoCardView: View {
                                 .padding(5)
                                 .background(Color("RankColor"))
                                 .cornerRadius(2)
-                            
+
                             Text(symbol.uppercased())
                                 .matchedGeometryEffect(id: "symbol", in: animation)
                                 .foregroundColor(.white)
@@ -68,40 +68,40 @@ struct BasicAssetInfoCardView: View {
                     }
                 }
                 .frame(width: 125, alignment: .leading)
-                
+
                 VStack(alignment: .trailing) {
                     if priceChangePercentage > 0 {
                         HStack {
                             Image(systemName: "arrowtriangle.up.fill")
                                 .foregroundColor(.green)
                                 .font(.system(size: 14))
-                            
+
                             Text("\(String(format: "%.2f", priceChangePercentage))%")
                                 .foregroundColor(.green)
                                 .font(.system(size: 14, weight: .bold, design: .rounded))
                                 .frame(alignment: .leading)
                         }
                     }
-                    
+
                     if priceChangePercentage < 0 {
                         HStack {
                             Image(systemName: "arrowtriangle.down.fill")
                                 .foregroundColor(.red)
                                 .font(.system(size: 14))
-                            
+
                             Text("\(String(format: "%.2f", priceChangePercentage))%")
                                 .foregroundColor(.red)
                                 .font(.system(size: 14, weight: .bold, design: .rounded))
                                 .frame(alignment: .leading)
                         }
                     }
-                    
+
                     if priceChangePercentage == 0 {
                         HStack {
                             Image(systemName: "arrowtriangle.right.fill")
                                 .foregroundColor(.gray)
                                 .font(.system(size: 14))
-                            
+
                             Text("\(String(format: "%.2f", priceChangePercentage))%")
                                 .foregroundColor(.gray)
                                 .font(.system(size: 14, weight: .bold, design: .rounded))
@@ -110,19 +110,19 @@ struct BasicAssetInfoCardView: View {
                     }
                 }
                 .matchedGeometryEffect(id: "priceChangePercentage", in: animation)
-                
+
                 VStack(alignment: .trailing) {
-                    Text("$\(String(format: "%.2f", currentPrice))")
+                    Text("$\(currentPrice.formatted())")
                         .matchedGeometryEffect(id: "currentPrice", in: animation)
                         .foregroundColor(.white)
                         .font(.system(size: 14, weight: .bold, design: .rounded))
                         .padding(.bottom, 2)
-                    
+
                     HStack {
                         Text("M.Cap")
                             .foregroundColor(.gray)
                             .font(.system(size: 8, weight: .regular, design: .rounded))
-                        
+
                         Text("$\(marketCap)")
                             .foregroundColor(.white)
                             .font(.system(size: 8, weight: .regular, design: .rounded))
@@ -134,12 +134,12 @@ struct BasicAssetInfoCardView: View {
             }
             .frame(maxWidth: .infinity, minHeight: 50,alignment: .leading)
             .padding(.horizontal, 10)
-            
+
             VStack {
                 Text("Asset information")
                     .matchedGeometryEffect(id: "information", in: animation)
                     .foregroundColor(.white)
-                    .font(.system(size: 1))
+                    .font(.system(size: 1, weight: .bold))
                     .opacity(0)
                     .frame(maxWidth: .infinity, alignment: .leading)
             }

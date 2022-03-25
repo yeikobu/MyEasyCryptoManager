@@ -275,423 +275,307 @@ struct CoinsDataListView: View {
             ZStack {
                 
                 if !isTouched {
-                    VStack(alignment: .leading) {
-                        HStack {
+                    BasicAssetInfoCardView(name: $name, marketCapRank: $marketCapRank, symbol: $symbol, priceChangePercentage: $priceChangePercentage, currentPrice: $currentPrice, marketCap: $marketCap, imgURL: $imgURL, totalVolume: $totalVolume, high24H: $high24H, low24H: $low24H, maxSupply: $maxSupply, totalSupply: $totalSupply, circulatingSupply: $circulatingSupply, ath: $ath, atl: $atl, isTouched: $isTouched, isListVisible: $isListVisible, animation: animation)
+                } else {
+                    ZStack {
+                        VStack(alignment: .leading) {
                             HStack {
                                 KFImage(URL(string: imgURL))
                                     .resizable()
                                     .aspectRatio(contentMode: .fit)
                                     .matchedGeometryEffect(id: "icon", in: animation)
                                     .frame(width: 40, height: 40)
-
-                                VStack(alignment: .leading) {
-                                    Text(name)
-                                        .foregroundColor(.white)
-                                        .font(.system(size: 15, weight: .bold, design: .rounded))
-                                        .matchedGeometryEffect(id: "name", in: animation)
-                                        .padding(.bottom, -3)
-
-                                    HStack {
-                                        Text("\(marketCapRank)")
-                                            .matchedGeometryEffect(id: "rank", in: animation)
-                                            .foregroundColor(.white)
-                                            .font(.system(size: 9, weight: .bold, design: .rounded))
-                                            .padding(5)
-                                            .background(Color("RankColor"))
-                                            .cornerRadius(2)
-
-                                        Text(symbol.uppercased())
-                                            .matchedGeometryEffect(id: "symbol", in: animation)
-                                            .foregroundColor(.white)
-                                            .font(.system(size: 12, weight: .regular, design: .rounded))
-                                    }
-                                    .padding(.top, 0)
-                                }
-                            }
-                            .frame(width: 125, alignment: .leading)
-
-                            VStack(alignment: .trailing) {
-                                if priceChangePercentage > 0 {
-                                    HStack {
-                                        Image(systemName: "arrowtriangle.up.fill")
-                                            .foregroundColor(.green)
-                                            .font(.system(size: 14))
-
-                                        Text("\(String(format: "%.2f", priceChangePercentage))%")
-                                            .foregroundColor(.green)
-                                            .font(.system(size: 14, weight: .bold, design: .rounded))
-                                            .frame(alignment: .leading)
-                                    }
-                                }
-
-                                if priceChangePercentage < 0 {
-                                    HStack {
-                                        Image(systemName: "arrowtriangle.down.fill")
-                                            .foregroundColor(.red)
-                                            .font(.system(size: 14))
-
-                                        Text("\(String(format: "%.2f", priceChangePercentage))%")
-                                            .foregroundColor(.red)
-                                            .font(.system(size: 14, weight: .bold, design: .rounded))
-                                            .frame(alignment: .leading)
-                                    }
-                                }
-
-                                if priceChangePercentage == 0 {
-                                    HStack {
-                                        Image(systemName: "arrowtriangle.right.fill")
-                                            .foregroundColor(.gray)
-                                            .font(.system(size: 14))
-
-                                        Text("\(String(format: "%.2f", priceChangePercentage))%")
-                                            .foregroundColor(.gray)
-                                            .font(.system(size: 14, weight: .bold, design: .rounded))
-                                            .frame(alignment: .leading)
-                                    }
-                                }
-                            }
-                            .matchedGeometryEffect(id: "priceChangePercentage", in: animation)
-
-                            VStack(alignment: .trailing) {
-                                Text("$\(currentPrice.formatted())")
-                                    .matchedGeometryEffect(id: "currentPrice", in: animation)
-                                    .foregroundColor(.white)
-                                    .font(.system(size: 14, weight: .bold, design: .rounded))
-                                    .padding(.bottom, 2)
-
-                                HStack {
-                                    Text("M.Cap")
-                                        .foregroundColor(.gray)
-                                        .font(.system(size: 8, weight: .regular, design: .rounded))
-
-                                    Text("$\(marketCap)")
-                                        .foregroundColor(.white)
-                                        .font(.system(size: 8, weight: .regular, design: .rounded))
-                                        .padding(.leading, -5)
-                                }
-                                .matchedGeometryEffect(id: "mcap", in: animation)
-                            }
-                            .frame(maxWidth: .infinity, alignment: .trailing)
-                        }
-                        .frame(maxWidth: .infinity, minHeight: 50,alignment: .leading)
-                        .padding(.horizontal, 10)
-
-                        VStack {
-                            Text("Asset information")
-                                .matchedGeometryEffect(id: "information", in: animation)
-                                .foregroundColor(.white)
-                                .font(.system(size: 1, weight: .bold))
-                                .opacity(0)
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                        }
-                        .matchedGeometryEffect(id: "assetInformation", in: animation)
-                    }
-                    .padding(.vertical, 10)
-                    .background(
-                        Color("Card")
-                            .matchedGeometryEffect(id: "background", in: animation)
-                    )
-                    .mask(
-                        RoundedRectangle(cornerRadius: 10, style: .continuous)
-                            .matchedGeometryEffect(id: "mask", in: animation)
-                    )
-                } else {
-                    VStack(alignment: .leading) {
-                        HStack {
-                            KFImage(URL(string: imgURL))
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .matchedGeometryEffect(id: "icon", in: animation)
-                                .frame(width: 40, height: 40)
-                            
-                            Spacer()
-                            Spacer()
-                            
-                            Text("\(marketCapRank)")
-                                .matchedGeometryEffect(id: "rank", in: animation)
-                                .foregroundColor(.white)
-                                .font(.system(size: 9, weight: .bold, design: .rounded))
-                                .padding(5)
-                                .background(Color("RankColor"))
-                                .cornerRadius(2)
-                            
-                            Text(name)
-                                .foregroundColor(.white)
-                                .font(.system(size: 15, weight: .bold, design: .rounded))
-                                .matchedGeometryEffect(id: "name", in: animation)
                                 
-                            Text(symbol.uppercased())
-                                .matchedGeometryEffect(id: "symbol", in: animation)
-                                .foregroundColor(.white)
-                                .font(.system(size: 12, weight: .regular, design: .rounded))
-                            
-                            Spacer()
-                            Spacer()
-                            
-                            VStack(alignment: .center) {
-                                Button {
-                                    complexSuccess()
-                                    addButtonAnimate = true
+                                Spacer()
+                                Spacer()
+                                
+                                Text("\(marketCapRank)")
+                                    .matchedGeometryEffect(id: "rank", in: animation)
+                                    .foregroundColor(.white)
+                                    .font(.system(size: 9, weight: .bold, design: .rounded))
+                                    .padding(5)
+                                    .background(Color("RankColor"))
+                                    .cornerRadius(2)
+                                
+                                Text(name)
+                                    .foregroundColor(.white)
+                                    .font(.system(size: 15, weight: .bold, design: .rounded))
+                                    .matchedGeometryEffect(id: "name", in: animation)
                                     
-                                    DispatchQueue.main.asyncAfter(deadline: .now() + buttonAnimationDuration) {
-                                        withAnimation(.spring(response: buttonAnimationDuration, dampingFraction: 1)) {
-                                            addButtonAnimate = false
-                                            isAddedToPorfolio.toggle()
+                                Text(symbol.uppercased())
+                                    .matchedGeometryEffect(id: "symbol", in: animation)
+                                    .foregroundColor(.white)
+                                    .font(.system(size: 12, weight: .regular, design: .rounded))
+                                
+                                Spacer()
+                                Spacer()
+                                
+                                VStack(alignment: .center) {
+                                    Button {
+                                        complexSuccess()
+                                        addButtonAnimate = true
+                                        
+                                        DispatchQueue.main.asyncAfter(deadline: .now() + buttonAnimationDuration) {
+                                            withAnimation(.spring(response: buttonAnimationDuration, dampingFraction: 1)) {
+                                                addButtonAnimate = false
+                                                isAddedToPorfolio.toggle()
+                                            }
+                                        }
+                                    } label: {
+                                        VStack {
+                                            Image(systemName: isAddedToPorfolio ? "plus.app.fill" : "plus.app")
+                                                .resizable()
+                                                .aspectRatio(contentMode: .fit)
+                                                .frame(width: 20)
+                                                .foregroundColor(isAddedToPorfolio ? .yellow : .gray)
+                                            
+                                            Text(isAddedToPorfolio ? "Added!" : "Add")
+                                                .foregroundColor(isAddedToPorfolio ? .yellow : .gray)
+                                                .font(.system(size: 8))
                                         }
                                     }
-                                } label: {
-                                    VStack {
-                                        Image(systemName: isAddedToPorfolio ? "plus.app.fill" : "plus.app")
-                                            .resizable()
-                                            .aspectRatio(contentMode: .fit)
-                                            .frame(width: 20)
-                                            .foregroundColor(isAddedToPorfolio ? .yellow : .gray)
-                                        
-                                        Text(isAddedToPorfolio ? "Added!" : "Add")
-                                            .foregroundColor(isAddedToPorfolio ? .yellow : .gray)
-                                            .font(.system(size: 8))
-                                    }
+                                    .matchedGeometryEffect(id: "favorite", in: animation)
+                                    .padding(.leading, 5)
+                                    .scaleEffect(addButtonAnimate ? addButtonScale : 1)
+                                    .offset(x: isListVisible ? 0 : 200, y: 0)
                                 }
-                                .matchedGeometryEffect(id: "favorite", in: animation)
-                                .padding(.leading, 5)
-                                .scaleEffect(addButtonAnimate ? addButtonScale : 1)
-                                .offset(x: isListVisible ? 0 : 200, y: 0)
+                                .frame(width: 40)
+                                
+                                
                             }
-                            .frame(width: 40)
+                            .frame(maxWidth: .infinity, minHeight: 50,alignment: .leading)
+                            .padding(.horizontal, 10)
+                            
+                            VStack(alignment: .trailing) {
+                                HStack {
+                                    Spacer()
+                                    Text("$\(currentPrice.formatted())")
+                                        .matchedGeometryEffect(id: "currentPrice", in: animation)
+                                        .foregroundColor(.white)
+                                        .font(.system(size: 14, weight: .bold, design: .rounded))
+                                        .padding(.bottom, 2)
+                                    
+                                    VStack {
+                                        if priceChangePercentage > 0 {
+                                            HStack {
+                                                Image(systemName: "arrowtriangle.up.fill")
+                                                    .foregroundColor(.green)
+                                                    .font(.system(size: 14))
+                                                
+                                                Text("\(String(format: "%.2f", priceChangePercentage))%")
+                                                    .foregroundColor(.green)
+                                                    .font(.system(size: 14, weight: .bold, design: .rounded))
+                                                    .frame(alignment: .leading)
+                                            }
+                                        }
+                                        
+                                        if priceChangePercentage < 0 {
+                                            HStack {
+                                                Image(systemName: "arrowtriangle.down.fill")
+                                                    .foregroundColor(.red)
+                                                    .font(.system(size: 14))
+                                                
+                                                Text("\(String(format: "%.2f", priceChangePercentage))%")
+                                                    .foregroundColor(.red)
+                                                    .font(.system(size: 14, weight: .bold, design: .rounded))
+                                                    .frame(alignment: .leading)
+                                            }
+                                        }
+                                        
+                                        if priceChangePercentage == 0 {
+                                            HStack {
+                                                Image(systemName: "arrowtriangle.right.fill")
+                                                    .foregroundColor(.gray)
+                                                    .font(.system(size: 14))
+                                                
+                                                Text("\(String(format: "%.2f", priceChangePercentage))%")
+                                                    .foregroundColor(.gray)
+                                                    .font(.system(size: 14, weight: .bold, design: .rounded))
+                                                    .frame(alignment: .leading)
+                                            }
+                                        }
+                                    }
+                                    .matchedGeometryEffect(id: "priceChangePercentage", in: animation)
+                                    Spacer()
+                                }
+                            }
+                            
+                            ChartView(coin: coin)
+                                .padding(.top, 20)
+                                .padding(.bottom, 10)
+                                .matchedGeometryEffect(id: "chart", in: animation)
                             
                             
-                        }
-                        .frame(maxWidth: .infinity, minHeight: 50,alignment: .leading)
-                        .padding(.horizontal, 10)
-                        
-                        VStack(alignment: .trailing) {
-                            HStack {
-                                Spacer()
-                                Text("$\(currentPrice.formatted())")
-                                    .matchedGeometryEffect(id: "currentPrice", in: animation)
+                            VStack {
+                                Text("Asset information")
+                                    .offset(x: isListVisible ? 0 : 100, y: isListVisible ? 0 : -100)
                                     .foregroundColor(.white)
-                                    .font(.system(size: 14, weight: .bold, design: .rounded))
-                                    .padding(.bottom, 2)
+                                    .font(.system(size: 12, design: .rounded))
+                                    .padding(.top)
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                
+                                HStack {
+                                    Text("Market Cap")
+                                        .offset(x: isListVisible ? 0 : -200, y: 0)
+                                        .foregroundColor(.gray)
+                                        .font(.system(size: 9))
+                                    Spacer()
+                                    Text("$\(marketCap)")
+                                        .offset(x: isListVisible ? 0 : 200, y: 0)
+                                        .foregroundColor(.white)
+                                        .font(.system(size: 9))
+                                }
+                                .padding(.top, 1)
+                                
+                                Divider()
+                                    .background(.gray)
+                                
+                                HStack {
+                                    Text("Total volume")
+                                        .offset(x: isListVisible ? 0 : -500, y: 0)
+                                        .foregroundColor(.gray)
+                                        .font(.system(size: 9))
+                                    Spacer()
+                                    Text("$\(Int(totalVolume))")
+                                        .offset(x: isListVisible ? 0 : 500, y: 0)
+                                        .foregroundColor(.white)
+                                        .font(.system(size: 9))
+                                }
+                                .padding(.top, 1)
+                                
+                                Divider()
+                                    .background(.gray)
                                 
                                 VStack {
-                                    if priceChangePercentage > 0 {
-                                        HStack {
-                                            Image(systemName: "arrowtriangle.up.fill")
-                                                .foregroundColor(.green)
-                                                .font(.system(size: 14))
-                                            
-                                            Text("\(String(format: "%.2f", priceChangePercentage))%")
-                                                .foregroundColor(.green)
-                                                .font(.system(size: 14, weight: .bold, design: .rounded))
-                                                .frame(alignment: .leading)
-                                        }
+                                    HStack {
+                                        Text("24H High")
+                                            .offset(x: isListVisible ? 0 : -800, y: 0)
+                                            .foregroundColor(.gray)
+                                            .font(.system(size: 9))
+                                        Spacer()
+                                        Text("$\(high24H)")
+                                            .offset(x: isListVisible ? 0 : 800, y: 0)
+                                            .foregroundColor(.white)
+                                            .font(.system(size: 9))
                                     }
+                                    .padding(.top, 1)
                                     
-                                    if priceChangePercentage < 0 {
-                                        HStack {
-                                            Image(systemName: "arrowtriangle.down.fill")
-                                                .foregroundColor(.red)
-                                                .font(.system(size: 14))
-                                            
-                                            Text("\(String(format: "%.2f", priceChangePercentage))%")
-                                                .foregroundColor(.red)
-                                                .font(.system(size: 14, weight: .bold, design: .rounded))
-                                                .frame(alignment: .leading)
-                                        }
-                                    }
+                                    Divider()
+                                        .background(.gray)
                                     
-                                    if priceChangePercentage == 0 {
-                                        HStack {
-                                            Image(systemName: "arrowtriangle.right.fill")
-                                                .foregroundColor(.gray)
-                                                .font(.system(size: 14))
-                                            
-                                            Text("\(String(format: "%.2f", priceChangePercentage))%")
-                                                .foregroundColor(.gray)
-                                                .font(.system(size: 14, weight: .bold, design: .rounded))
-                                                .frame(alignment: .leading)
-                                        }
+                                    HStack {
+                                        Text("24H Low")
+                                            .offset(x: isListVisible ? 0 : -1100, y: 0)
+                                            .foregroundColor(.gray)
+                                            .font(.system(size: 9))
+                                        Spacer()
+                                        Text("$\(low24H)")
+                                            .offset(x: isListVisible ? 0 : 1100, y: 0)
+                                            .foregroundColor(.white)
+                                            .font(.system(size: 9))
                                     }
+                                    .padding(.top, 1)
+                                    
+                                    Divider()
+                                        .background(.gray)
+                                    
                                 }
-                                .matchedGeometryEffect(id: "priceChangePercentage", in: animation)
-                                Spacer()
+                                
+                                VStack {
+                                    HStack {
+                                        Text("Max. Supply")
+                                            .offset(x: isListVisible ? 0 : -1400, y: 0)
+                                            .foregroundColor(.gray)
+                                            .font(.system(size: 9))
+                                        Spacer()
+                                        Text("\(Int(maxSupply))")
+                                            .offset(x: isListVisible ? 0 : 1400, y: 0)
+                                            .foregroundColor(.white)
+                                            .font(.system(size: 9))
+                                    }
+                                    .padding(.top, 1)
+                                    
+                                    Divider()
+                                        .background(.gray)
+                                    
+                                    HStack {
+                                        Text("Total Supply")
+                                            .offset(x: isListVisible ? 0 : -1700, y: 0)
+                                            .foregroundColor(.gray)
+                                            .font(.system(size: 9))
+                                        Spacer()
+                                        Text("\(Int(totalSupply))")
+                                            .offset(x: isListVisible ? 0 : 1700, y: 0)
+                                            .foregroundColor(.white)
+                                            .font(.system(size: 9))
+                                    }
+                                    .padding(.top, 1)
+                                    
+                                    Divider()
+                                        .background(.gray)
+                                    
+                                    HStack {
+                                        Text("Circulating Supply")
+                                            .offset(x: isListVisible ? 0 : -2000, y: 0)
+                                            .foregroundColor(.gray)
+                                            .font(.system(size: 9))
+                                        Spacer()
+                                        Text("\(Int(circulatingSupply))")
+                                            .offset(x: isListVisible ? 0 : 2000, y: 0)
+                                            .foregroundColor(.white)
+                                            .font(.system(size: 9))
+                                    }
+                                    .padding(.top, 1)
+                                    
+                                    Divider()
+                                        .background(.gray)
+                                }
+                                
+                                VStack {
+                                    HStack {
+                                        Text("All time high")
+                                            .offset(x: isListVisible ? 0 : -2300, y: 0)
+                                            .foregroundColor(.white)
+                                            .font(.system(size: 9))
+                                        Spacer()
+                                        Text("$\(ath)")
+                                            .offset(x: isListVisible ? 0 : 2300, y: 0)
+                                            .foregroundColor(.white)
+                                            .font(.system(size: 9))
+                                    }
+                                    .padding(.top, 1)
+                                    
+                                    Divider()
+                                        .background(.gray)
+                                    
+                                    HStack {
+                                        Text("All time low")
+                                            .offset(x: isListVisible ? 0 : -2600, y: 0)
+                                            .foregroundColor(.gray)
+                                            .font(.system(size: 9))
+                                        Spacer()
+                                        Text("$\(atl)")
+                                            .offset(x: isListVisible ? 0 : 2600, y: 0)
+                                            .foregroundColor(.white)
+                                            .font(.system(size: 9))
+                                    }
+                                    .padding(.top, 1)
+                                }
                             }
+                            .offset(x: 0, y: isListVisible ? 0 : 10)
+                            .matchedGeometryEffect(id: "assetInformation", in: animation)
                         }
-                        
-                        ChartView(coin: coin)
-                            .padding(.top, 20)
-                            .padding(.bottom, 10)
-                            .matchedGeometryEffect(id: "chart", in: animation)
-                        
-                        
-                        VStack {
-                            Text("Asset information")
-                                .offset(x: isListVisible ? 0 : 100, y: isListVisible ? 0 : -100)
-                                .foregroundColor(.white)
-                                .font(.system(size: 12, design: .rounded))
-                                .padding(.top)
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                            
-                            HStack {
-                                Text("Market Cap")
-                                    .offset(x: isListVisible ? 0 : -200, y: 0)
-                                    .foregroundColor(.gray)
-                                    .font(.system(size: 9))
-                                Spacer()
-                                Text("$\(marketCap)")
-                                    .offset(x: isListVisible ? 0 : 200, y: 0)
-                                    .foregroundColor(.white)
-                                    .font(.system(size: 9))
-                            }
-                            .padding(.top, 1)
-                            
-                            Divider()
-                                .background(.gray)
-                            
-                            HStack {
-                                Text("Total volume")
-                                    .offset(x: isListVisible ? 0 : -500, y: 0)
-                                    .foregroundColor(.gray)
-                                    .font(.system(size: 9))
-                                Spacer()
-                                Text("$\(Int(totalVolume))")
-                                    .offset(x: isListVisible ? 0 : 500, y: 0)
-                                    .foregroundColor(.white)
-                                    .font(.system(size: 9))
-                            }
-                            .padding(.top, 1)
-                            
-                            Divider()
-                                .background(.gray)
-                            
-                            VStack {
-                                HStack {
-                                    Text("24H High")
-                                        .offset(x: isListVisible ? 0 : -800, y: 0)
-                                        .foregroundColor(.gray)
-                                        .font(.system(size: 9))
-                                    Spacer()
-                                    Text("$\(high24H)")
-                                        .offset(x: isListVisible ? 0 : 800, y: 0)
-                                        .foregroundColor(.white)
-                                        .font(.system(size: 9))
-                                }
-                                .padding(.top, 1)
-                                
-                                Divider()
-                                    .background(.gray)
-                                
-                                HStack {
-                                    Text("24H Low")
-                                        .offset(x: isListVisible ? 0 : -1100, y: 0)
-                                        .foregroundColor(.gray)
-                                        .font(.system(size: 9))
-                                    Spacer()
-                                    Text("$\(low24H)")
-                                        .offset(x: isListVisible ? 0 : 1100, y: 0)
-                                        .foregroundColor(.white)
-                                        .font(.system(size: 9))
-                                }
-                                .padding(.top, 1)
-                                
-                                Divider()
-                                    .background(.gray)
-                                
-                            }
-                            
-                            VStack {
-                                HStack {
-                                    Text("Max. Supply")
-                                        .offset(x: isListVisible ? 0 : -1400, y: 0)
-                                        .foregroundColor(.gray)
-                                        .font(.system(size: 9))
-                                    Spacer()
-                                    Text("\(Int(maxSupply))")
-                                        .offset(x: isListVisible ? 0 : 1400, y: 0)
-                                        .foregroundColor(.white)
-                                        .font(.system(size: 9))
-                                }
-                                .padding(.top, 1)
-                                
-                                Divider()
-                                    .background(.gray)
-                                
-                                HStack {
-                                    Text("Total Supply")
-                                        .offset(x: isListVisible ? 0 : -1700, y: 0)
-                                        .foregroundColor(.gray)
-                                        .font(.system(size: 9))
-                                    Spacer()
-                                    Text("\(Int(totalSupply))")
-                                        .offset(x: isListVisible ? 0 : 1700, y: 0)
-                                        .foregroundColor(.white)
-                                        .font(.system(size: 9))
-                                }
-                                .padding(.top, 1)
-                                
-                                Divider()
-                                    .background(.gray)
-                                
-                                HStack {
-                                    Text("Circulating Supply")
-                                        .offset(x: isListVisible ? 0 : -2000, y: 0)
-                                        .foregroundColor(.gray)
-                                        .font(.system(size: 9))
-                                    Spacer()
-                                    Text("\(Int(circulatingSupply))")
-                                        .offset(x: isListVisible ? 0 : 2000, y: 0)
-                                        .foregroundColor(.white)
-                                        .font(.system(size: 9))
-                                }
-                                .padding(.top, 1)
-                                
-                                Divider()
-                                    .background(.gray)
-                            }
-                            
-                            VStack {
-                                HStack {
-                                    Text("All time high")
-                                        .offset(x: isListVisible ? 0 : -2300, y: 0)
-                                        .foregroundColor(.white)
-                                        .font(.system(size: 9))
-                                    Spacer()
-                                    Text("$\(ath)")
-                                        .offset(x: isListVisible ? 0 : 2300, y: 0)
-                                        .foregroundColor(.white)
-                                        .font(.system(size: 9))
-                                }
-                                .padding(.top, 1)
-                                
-                                Divider()
-                                    .background(.gray)
-                                
-                                HStack {
-                                    Text("All time low")
-                                        .offset(x: isListVisible ? 0 : -2600, y: 0)
-                                        .foregroundColor(.gray)
-                                        .font(.system(size: 9))
-                                    Spacer()
-                                    Text("$\(atl)")
-                                        .offset(x: isListVisible ? 0 : 2600, y: 0)
-                                        .foregroundColor(.white)
-                                        .font(.system(size: 9))
-                                }
-                                .padding(.top, 1)
-                            }
-                        }
-                        .offset(x: 0, y: isListVisible ? 0 : 10)
-                        .matchedGeometryEffect(id: "assetInformation", in: animation)
+                        .padding(10)
+                        .background(
+                            Color("Card")
+                                .matchedGeometryEffect(id: "background", in: animation)
+                        )
+                        .mask(
+                            RoundedRectangle(cornerRadius: 10, style: .continuous)
+                                .matchedGeometryEffect(id: "mask", in: animation)
+                        )
                     }
-                    .padding(10)
-                    .background(
-                        Color("Card")
-                            .matchedGeometryEffect(id: "background", in: animation)
-                    )
-                    .mask(
-                        RoundedRectangle(cornerRadius: 10, style: .continuous)
-                            .matchedGeometryEffect(id: "mask", in: animation)
-                    )
+                    
                 }
                 
             }
