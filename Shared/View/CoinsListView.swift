@@ -14,10 +14,19 @@ struct CoinsListView: View {
     
     var body: some View {
         ZStack {
-            Color("Background")
-                .ignoresSafeArea()
+//            Color("Background")
+//                .ignoresSafeArea()
+            
+//            LinearGradient(gradient: Gradient(colors: [Color("Background"), Color("BackgroundGradient1"), Color("Background"), Color("BackgroundGradient1")]), startPoint: .topLeading, endPoint: .bottomTrailing)
+//                .ignoresSafeArea()
+            
+//            Image("Wallpaper")
+//                .resizable()
+//                .aspectRatio(contentMode: .fill)
+//                .ignoresSafeArea()
             
             CoinsMarketListView()
+                .preferredColorScheme(.dark)
         }
     }
 }
@@ -96,7 +105,12 @@ struct CoinsMarketListView: View {
                         }
                     }
                     .padding()
-                    .background(Color("Card"))
+                    .background(
+                        Rectangle()
+                            .fill(.ultraThinMaterial)
+                            .blur(radius: 0)
+                            .opacity(0.82)
+                    )
                     .cornerRadius(10)
                     
                     //24HRS Volume
@@ -119,7 +133,12 @@ struct CoinsMarketListView: View {
                         
                     }
                     .padding()
-                    .background(Color("Card"))
+                    .background(
+                        Rectangle()
+                            .fill(.ultraThinMaterial)
+                            .blur(radius: 0)
+                            .opacity(0.82)
+                    )
                     .cornerRadius(10)
                     
                     VStack(alignment: .leading) {
@@ -140,7 +159,12 @@ struct CoinsMarketListView: View {
                         }
                     }
                     .padding()
-                    .background(Color("Card"))
+                    .background(
+                        Rectangle()
+                            .fill(.ultraThinMaterial)
+                            .blur(radius: 0)
+                            .opacity(0.82)
+                    )
                     .cornerRadius(10)
                 }
             }
@@ -275,126 +299,7 @@ struct CoinsDataListView: View {
             ZStack {
                 
                 if !isTouched {
-                    VStack(alignment: .leading) {
-                        HStack {
-                            HStack {
-                                KFImage(URL(string: imgURL))
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .matchedGeometryEffect(id: "icon", in: animation)
-                                    .frame(width: 40, height: 40)
-
-                                VStack(alignment: .leading) {
-                                    Text(name)
-                                        .foregroundColor(.white)
-                                        .font(.system(size: 15, weight: .bold, design: .rounded))
-                                        .matchedGeometryEffect(id: "name", in: animation)
-                                        .padding(.bottom, -3)
-
-                                    HStack {
-                                        Text("\(marketCapRank)")
-                                            .matchedGeometryEffect(id: "rank", in: animation)
-                                            .foregroundColor(.white)
-                                            .font(.system(size: 9, weight: .bold, design: .rounded))
-                                            .padding(5)
-                                            .background(Color("RankColor"))
-                                            .cornerRadius(2)
-
-                                        Text(symbol.uppercased())
-                                            .matchedGeometryEffect(id: "symbol", in: animation)
-                                            .foregroundColor(.white)
-                                            .font(.system(size: 12, weight: .regular, design: .rounded))
-                                    }
-                                    .padding(.top, 0)
-                                }
-                            }
-                            .frame(width: 125, alignment: .leading)
-
-                            VStack(alignment: .trailing) {
-                                if priceChangePercentage > 0 {
-                                    HStack {
-                                        Image(systemName: "arrowtriangle.up.fill")
-                                            .foregroundColor(.green)
-                                            .font(.system(size: 14))
-
-                                        Text("\(String(format: "%.2f", priceChangePercentage))%")
-                                            .foregroundColor(.green)
-                                            .font(.system(size: 14, weight: .bold, design: .rounded))
-                                            .frame(alignment: .leading)
-                                    }
-                                }
-
-                                if priceChangePercentage < 0 {
-                                    HStack {
-                                        Image(systemName: "arrowtriangle.down.fill")
-                                            .foregroundColor(.red)
-                                            .font(.system(size: 14))
-
-                                        Text("\(String(format: "%.2f", priceChangePercentage))%")
-                                            .foregroundColor(.red)
-                                            .font(.system(size: 14, weight: .bold, design: .rounded))
-                                            .frame(alignment: .leading)
-                                    }
-                                }
-
-                                if priceChangePercentage == 0 {
-                                    HStack {
-                                        Image(systemName: "arrowtriangle.right.fill")
-                                            .foregroundColor(.gray)
-                                            .font(.system(size: 14))
-
-                                        Text("\(String(format: "%.2f", priceChangePercentage))%")
-                                            .foregroundColor(.gray)
-                                            .font(.system(size: 14, weight: .bold, design: .rounded))
-                                            .frame(alignment: .leading)
-                                    }
-                                }
-                            }
-                            .matchedGeometryEffect(id: "priceChangePercentage", in: animation)
-
-                            VStack(alignment: .trailing) {
-                                Text("$\(currentPrice.formatted())")
-                                    .matchedGeometryEffect(id: "currentPrice", in: animation)
-                                    .foregroundColor(.white)
-                                    .font(.system(size: 14, weight: .bold, design: .rounded))
-                                    .padding(.bottom, 2)
-
-                                HStack {
-                                    Text("M.Cap")
-                                        .foregroundColor(.gray)
-                                        .font(.system(size: 8, weight: .regular, design: .rounded))
-
-                                    Text("$\(marketCap)")
-                                        .foregroundColor(.white)
-                                        .font(.system(size: 8, weight: .regular, design: .rounded))
-                                        .padding(.leading, -5)
-                                }
-                                .matchedGeometryEffect(id: "mcap", in: animation)
-                            }
-                            .frame(maxWidth: .infinity, alignment: .trailing)
-                        }
-                        .frame(maxWidth: .infinity, minHeight: 50,alignment: .leading)
-                        .padding(.horizontal, 10)
-
-                        VStack {
-                            Text("Asset information")
-                                .matchedGeometryEffect(id: "information", in: animation)
-                                .foregroundColor(.white)
-                                .font(.system(size: 1, weight: .bold))
-                                .opacity(0)
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                        }
-                        .matchedGeometryEffect(id: "assetInformation", in: animation)
-                    }
-                    .padding(.vertical, 10)
-                    .background(
-                        Color("Card")
-                            .matchedGeometryEffect(id: "background", in: animation)
-                    )
-                    .mask(
-                        RoundedRectangle(cornerRadius: 10, style: .continuous)
-                            .matchedGeometryEffect(id: "mask", in: animation)
-                    )
+                    BasicAssetInfoCardView(name: $name, marketCapRank: $marketCapRank, symbol: $symbol, priceChangePercentage: $priceChangePercentage, currentPrice: $currentPrice, marketCap: $marketCap, imgURL: $imgURL, totalVolume: $totalVolume, high24H: $high24H, low24H: $low24H, maxSupply: $maxSupply, totalSupply: $totalSupply, circulatingSupply: $circulatingSupply, ath: $ath, atl: $atl, isTouched: $isTouched, isListVisible: $isListVisible, animation: animation)
                 } else {
                     VStack(alignment: .leading) {
                         HStack {
@@ -412,8 +317,6 @@ struct CoinsDataListView: View {
                                 .foregroundColor(.white)
                                 .font(.system(size: 9, weight: .bold, design: .rounded))
                                 .padding(5)
-                                .background(Color("RankColor"))
-                                .cornerRadius(2)
                             
                             Text(name)
                                 .foregroundColor(.white)
@@ -685,13 +588,17 @@ struct CoinsDataListView: View {
                     }
                     .padding(10)
                     .background(
-                        Color("Card")
+                        Rectangle()
+                            .fill(.ultraThinMaterial)
+                            .blur(radius: 0)
+                            .opacity(0.82)
                             .matchedGeometryEffect(id: "background", in: animation)
                     )
                     .mask(
                         RoundedRectangle(cornerRadius: 10, style: .continuous)
                             .matchedGeometryEffect(id: "mask", in: animation)
                     )
+                    
                 }
                 
             }

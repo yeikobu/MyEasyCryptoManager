@@ -17,8 +17,6 @@
 		163A399A27E917EB00F8D6F5 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 163A399927E917EB00F8D6F5 /* Date.swift */; };
 		166BEEC027D6E5DF00072115 /* MyEasyCryptoManagerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 166BEEB027D6E5DE00072115 /* MyEasyCryptoManagerApp.swift */; };
 		166BEEC127D6E5DF00072115 /* MyEasyCryptoManagerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 166BEEB027D6E5DE00072115 /* MyEasyCryptoManagerApp.swift */; };
-		166BEEC227D6E5DF00072115 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 166BEEB127D6E5DE00072115 /* ContentView.swift */; };
-		166BEEC327D6E5DF00072115 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 166BEEB127D6E5DE00072115 /* ContentView.swift */; };
 		166BEEC427D6E5DF00072115 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 166BEEB227D6E5DF00072115 /* Assets.xcassets */; };
 		166BEEC527D6E5DF00072115 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 166BEEB227D6E5DF00072115 /* Assets.xcassets */; };
 		166BEECF27D9331F00072115 /* CoinsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 166BEECE27D9331F00072115 /* CoinsModel.swift */; };
@@ -30,6 +28,14 @@
 		166BEEDB27E38B8600072115 /* CoinInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 166BEEDA27E38B8600072115 /* CoinInfoViewModel.swift */; };
 		166BEEDC27E38B8600072115 /* CoinInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 166BEEDA27E38B8600072115 /* CoinInfoViewModel.swift */; };
 		166BEEDF27E39F8E00072115 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 166BEEDE27E39F8E00072115 /* Kingfisher */; };
+		1671E70527EE8BD40090FD28 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 1671E70427EE8BD40090FD28 /* FirebaseAnalytics */; };
+		1671E70727EE8BD40090FD28 /* FirebaseAnalyticsSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = 1671E70627EE8BD40090FD28 /* FirebaseAnalyticsSwift-Beta */; };
+		1671E70927EE8BD40090FD28 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 1671E70827EE8BD40090FD28 /* FirebaseAuth */; };
+		1671E70B27EE8BD40090FD28 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 1671E70A27EE8BD40090FD28 /* FirebaseFirestore */; };
+		1671E70D27EE8BD40090FD28 /* FirebaseFirestoreSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = 1671E70C27EE8BD40090FD28 /* FirebaseFirestoreSwift-Beta */; };
+		1671E70F27EE8D360090FD28 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1671E70E27EE8D360090FD28 /* GoogleService-Info.plist */; };
+		1671E71027EE8D360090FD28 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1671E70E27EE8D360090FD28 /* GoogleService-Info.plist */; };
+		16D821D327EE500400528869 /* AddAssetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16D821D227EE500400528869 /* AddAssetView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,7 +47,6 @@
 		163A399727E90BCE00F8D6F5 /* PreviewProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewProvider.swift; sourceTree = "<group>"; };
 		163A399927E917EB00F8D6F5 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		166BEEB027D6E5DE00072115 /* MyEasyCryptoManagerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyEasyCryptoManagerApp.swift; sourceTree = "<group>"; };
-		166BEEB127D6E5DE00072115 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		166BEEB227D6E5DF00072115 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		166BEEB727D6E5DF00072115 /* MyEasyCryptoManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyEasyCryptoManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		166BEEBD27D6E5DF00072115 /* MyEasyCryptoManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyEasyCryptoManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -50,6 +55,8 @@
 		166BEED427D93A6600072115 /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
 		166BEED727E279E100072115 /* CoinsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinsListView.swift; sourceTree = "<group>"; };
 		166BEEDA27E38B8600072115 /* CoinInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinInfoViewModel.swift; sourceTree = "<group>"; };
+		1671E70E27EE8D360090FD28 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		16D821D227EE500400528869 /* AddAssetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAssetView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,7 +65,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				163A398A27E4039000F8D6F5 /* RefreshableScrollView in Frameworks */,
+				1671E70927EE8BD40090FD28 /* FirebaseAuth in Frameworks */,
+				1671E70D27EE8BD40090FD28 /* FirebaseFirestoreSwift-Beta in Frameworks */,
 				166BEEDF27E39F8E00072115 /* Kingfisher in Frameworks */,
+				1671E70727EE8BD40090FD28 /* FirebaseAnalyticsSwift-Beta in Frameworks */,
+				1671E70527EE8BD40090FD28 /* FirebaseAnalytics in Frameworks */,
+				1671E70B27EE8BD40090FD28 /* FirebaseFirestore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +90,7 @@
 				163A398C27E543E200F8D6F5 /* BasicAssetInfoCardView.swift */,
 				163A398E27E561A900F8D6F5 /* CompleteAssetInfoCardView.swift */,
 				163A399427E9074100F8D6F5 /* ChartView.swift */,
+				16D821D227EE500400528869 /* AddAssetView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -108,7 +121,7 @@
 				166BEED227D939F700072115 /* Model */,
 				166BEED127D939EA00072115 /* View */,
 				166BEEB027D6E5DE00072115 /* MyEasyCryptoManagerApp.swift */,
-				166BEEB127D6E5DE00072115 /* ContentView.swift */,
+				1671E70E27EE8D360090FD28 /* GoogleService-Info.plist */,
 				166BEEB227D6E5DF00072115 /* Assets.xcassets */,
 			);
 			path = Shared;
@@ -178,6 +191,11 @@
 			packageProductDependencies = (
 				166BEEDE27E39F8E00072115 /* Kingfisher */,
 				163A398927E4039000F8D6F5 /* RefreshableScrollView */,
+				1671E70427EE8BD40090FD28 /* FirebaseAnalytics */,
+				1671E70627EE8BD40090FD28 /* FirebaseAnalyticsSwift-Beta */,
+				1671E70827EE8BD40090FD28 /* FirebaseAuth */,
+				1671E70A27EE8BD40090FD28 /* FirebaseFirestore */,
+				1671E70C27EE8BD40090FD28 /* FirebaseFirestoreSwift-Beta */,
 			);
 			productName = "MyEasyCryptoManager (iOS)";
 			productReference = 166BEEB727D6E5DF00072115 /* MyEasyCryptoManager.app */;
@@ -230,6 +248,7 @@
 			packageReferences = (
 				166BEEDD27E39F8E00072115 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				163A398827E4039000F8D6F5 /* XCRemoteSwiftPackageReference "RefreshableScrollView" */,
+				1671E70327EE8BD40090FD28 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = 166BEEB827D6E5DF00072115 /* Products */;
 			projectDirPath = "";
@@ -247,6 +266,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				166BEEC427D6E5DF00072115 /* Assets.xcassets in Resources */,
+				1671E70F27EE8D360090FD28 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -255,6 +275,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				166BEEC527D6E5DF00072115 /* Assets.xcassets in Resources */,
+				1671E71027EE8D360090FD28 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -265,13 +286,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				166BEEC227D6E5DF00072115 /* ContentView.swift in Sources */,
 				163A399827E90BCE00F8D6F5 /* PreviewProvider.swift in Sources */,
 				166BEEDB27E38B8600072115 /* CoinInfoViewModel.swift in Sources */,
 				166BEED527D93A6600072115 /* DashboardView.swift in Sources */,
 				163A399327E56BCE00F8D6F5 /* GlobalMarketViewModel.swift in Sources */,
 				166BEECF27D9331F00072115 /* CoinsModel.swift in Sources */,
 				163A398F27E561A900F8D6F5 /* CompleteAssetInfoCardView.swift in Sources */,
+				16D821D327EE500400528869 /* AddAssetView.swift in Sources */,
 				166BEEC027D6E5DF00072115 /* MyEasyCryptoManagerApp.swift in Sources */,
 				163A399527E9074100F8D6F5 /* ChartView.swift in Sources */,
 				163A398D27E543E200F8D6F5 /* BasicAssetInfoCardView.swift in Sources */,
@@ -285,7 +306,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				166BEEC327D6E5DF00072115 /* ContentView.swift in Sources */,
 				166BEEDC27E38B8600072115 /* CoinInfoViewModel.swift in Sources */,
 				166BEED627D93A6600072115 /* DashboardView.swift in Sources */,
 				166BEED027D9331F00072115 /* CoinsModel.swift in Sources */,
@@ -576,6 +596,14 @@
 				kind = branch;
 			};
 		};
+		1671E70327EE8BD40090FD28 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -588,6 +616,31 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 166BEEDD27E39F8E00072115 /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
+		};
+		1671E70427EE8BD40090FD28 /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1671E70327EE8BD40090FD28 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		1671E70627EE8BD40090FD28 /* FirebaseAnalyticsSwift-Beta */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1671E70327EE8BD40090FD28 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = "FirebaseAnalyticsSwift-Beta";
+		};
+		1671E70827EE8BD40090FD28 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1671E70327EE8BD40090FD28 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		1671E70A27EE8BD40090FD28 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1671E70327EE8BD40090FD28 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		1671E70C27EE8BD40090FD28 /* FirebaseFirestoreSwift-Beta */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1671E70327EE8BD40090FD28 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = "FirebaseFirestoreSwift-Beta";
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

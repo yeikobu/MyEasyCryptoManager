@@ -56,9 +56,6 @@ struct CustomTabView: View {
         
         ZStack(alignment: Alignment(horizontal: .center, vertical: .bottom)) {
             
-            Color("Background")
-                .ignoresSafeArea()
-            
             TabView(selection: $selectedTab) {
                 
                 Text("Settings")
@@ -84,18 +81,28 @@ struct CustomTabView: View {
                     }
                 }
             }
-            .padding(.horizontal, 40)
+            .padding(.horizontal, 20)
             .padding(.vertical, 2)
-            .background(Color("TabBarColor"))
-            .clipShape(Capsule())
-            .shadow(color: .black.opacity(0.70), radius: 5, x: 5, y: 5)
-            .shadow(color: .black.opacity(0.70), radius: 5, x: -5, y: -5)
-            .padding(.horizontal, 10)
-            .padding(.bottom, -13)
+            .background(
+                RoundedRectangle(cornerRadius: 30, style: .continuous)
+                    .fill(.ultraThinMaterial)
+                    .blur(radius: 0)
+                    .opacity(0.95)
+            )
+            .shadow(color: .black.opacity(0.70), radius: 8, x: 5, y: 5)
+            .shadow(color: .black.opacity(0.70), radius: 8, x: -5, y: -5)
+            .padding(.horizontal, 20)
+            .padding(.bottom, 1)
             
         }
         .ignoresSafeArea(.keyboard, edges: .bottom)
-        .background(Color.white.opacity(0.20).ignoresSafeArea(.all, edges: .all))
+        .background(
+            Image("wallpaper2")
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+                .ignoresSafeArea()
+                .opacity(0.45)
+        )
         
     }
     
