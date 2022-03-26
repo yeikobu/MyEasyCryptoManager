@@ -56,9 +56,6 @@ struct CustomTabView: View {
         
         ZStack(alignment: Alignment(horizontal: .center, vertical: .bottom)) {
             
-//            LinearGradient(gradient: Gradient(colors: [Color("Background"), Color("BackgroundGradient1"), Color("Background"), Color("BackgroundGradient1")]), startPoint: .topLeading, endPoint: .bottomTrailing)
-//                .ignoresSafeArea()
-            
             TabView(selection: $selectedTab) {
                 
                 Text("Settings")
@@ -89,6 +86,8 @@ struct CustomTabView: View {
             .background(
                 RoundedRectangle(cornerRadius: 30, style: .continuous)
                     .fill(.ultraThinMaterial)
+                    .blur(radius: 0)
+                    .opacity(0.95)
             )
             .shadow(color: .black.opacity(0.70), radius: 8, x: 5, y: 5)
             .shadow(color: .black.opacity(0.70), radius: 8, x: -5, y: -5)
@@ -98,11 +97,11 @@ struct CustomTabView: View {
         }
         .ignoresSafeArea(.keyboard, edges: .bottom)
         .background(
-            Image("wallpaper4")
+            Image("wallpaper2")
                 .resizable()
                 .aspectRatio(contentMode: .fill)
                 .ignoresSafeArea()
-                .opacity(0.85)
+                .opacity(0.45)
         )
         
     }
