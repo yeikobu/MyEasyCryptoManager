@@ -33,6 +33,8 @@
 		1671E70927EE8BD40090FD28 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 1671E70827EE8BD40090FD28 /* FirebaseAuth */; };
 		1671E70B27EE8BD40090FD28 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 1671E70A27EE8BD40090FD28 /* FirebaseFirestore */; };
 		1671E70D27EE8BD40090FD28 /* FirebaseFirestoreSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = 1671E70C27EE8BD40090FD28 /* FirebaseFirestoreSwift-Beta */; };
+		1671E70F27EE8D360090FD28 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1671E70E27EE8D360090FD28 /* GoogleService-Info.plist */; };
+		1671E71027EE8D360090FD28 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1671E70E27EE8D360090FD28 /* GoogleService-Info.plist */; };
 		16D821D327EE500400528869 /* AddAssetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16D821D227EE500400528869 /* AddAssetView.swift */; };
 /* End PBXBuildFile section */
 
@@ -53,6 +55,7 @@
 		166BEED427D93A6600072115 /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
 		166BEED727E279E100072115 /* CoinsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinsListView.swift; sourceTree = "<group>"; };
 		166BEEDA27E38B8600072115 /* CoinInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinInfoViewModel.swift; sourceTree = "<group>"; };
+		1671E70E27EE8D360090FD28 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		16D821D227EE500400528869 /* AddAssetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAssetView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -118,6 +121,7 @@
 				166BEED227D939F700072115 /* Model */,
 				166BEED127D939EA00072115 /* View */,
 				166BEEB027D6E5DE00072115 /* MyEasyCryptoManagerApp.swift */,
+				1671E70E27EE8D360090FD28 /* GoogleService-Info.plist */,
 				166BEEB227D6E5DF00072115 /* Assets.xcassets */,
 			);
 			path = Shared;
@@ -262,6 +266,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				166BEEC427D6E5DF00072115 /* Assets.xcassets in Resources */,
+				1671E70F27EE8D360090FD28 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -270,6 +275,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				166BEEC527D6E5DF00072115 /* Assets.xcassets in Resources */,
+				1671E71027EE8D360090FD28 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
