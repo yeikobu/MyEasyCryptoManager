@@ -56,8 +56,8 @@ struct CustomTabView: View {
         
         ZStack(alignment: Alignment(horizontal: .center, vertical: .bottom)) {
             
-            Color("Background")
-                .ignoresSafeArea()
+//            LinearGradient(gradient: Gradient(colors: [Color("Background"), Color("BackgroundGradient1"), Color("Background"), Color("BackgroundGradient1")]), startPoint: .topLeading, endPoint: .bottomTrailing)
+//                .ignoresSafeArea()
             
             TabView(selection: $selectedTab) {
                 
@@ -86,16 +86,24 @@ struct CustomTabView: View {
             }
             .padding(.horizontal, 20)
             .padding(.vertical, 2)
-            .background(Color("TabBarColor"))
-            .clipShape(Capsule())
-            .shadow(color: .black.opacity(0.70), radius: 5, x: 5, y: 5)
-            .shadow(color: .black.opacity(0.70), radius: 5, x: -5, y: -5)
+            .background(
+                RoundedRectangle(cornerRadius: 30, style: .continuous)
+                    .fill(.ultraThinMaterial)
+            )
+            .shadow(color: .black.opacity(0.70), radius: 8, x: 5, y: 5)
+            .shadow(color: .black.opacity(0.70), radius: 8, x: -5, y: -5)
             .padding(.horizontal, 20)
             .padding(.bottom, 1)
             
         }
         .ignoresSafeArea(.keyboard, edges: .bottom)
-        .background(Color.white.opacity(0.20).ignoresSafeArea(.all, edges: .all))
+        .background(
+            Image("wallpaper4")
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+                .ignoresSafeArea()
+                .opacity(0.85)
+        )
         
     }
     
