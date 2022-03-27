@@ -150,7 +150,10 @@ struct BasicAssetInfoCardView: View {
                 .blur(radius: 0)
                 .opacity(0.9)
                 .matchedGeometryEffect(id: "background", in: animation)
+
         )
+        .matchedGeometryEffect(id: "background", in: animation)
+        
         .mask(
             RoundedRectangle(cornerRadius: 10, style: .continuous)
                 .matchedGeometryEffect(id: "mask", in: animation)
@@ -168,5 +171,6 @@ struct BasicAssetInfoCardView_Previews: PreviewProvider {
     
     static var previews: some View {
         BasicAssetInfoCardView(name: $name, marketCapRank: $marketCapRank, symbol: $name, priceChangePercentage: $priceChangePercentage, currentPrice: $priceChangePercentage, marketCap: $marketCapRank, imgURL: $name, totalVolume: $priceChangePercentage, high24H: $priceChangePercentage, low24H: $priceChangePercentage, maxSupply: $priceChangePercentage, totalSupply: $priceChangePercentage, circulatingSupply: $priceChangePercentage, ath: $priceChangePercentage, atl: $priceChangePercentage, isTouched: .constant(true), isListVisible: .constant(true), animation: animation)
+            .preferredColorScheme(.dark)
     }
 }
