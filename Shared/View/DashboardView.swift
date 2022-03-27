@@ -37,7 +37,7 @@ struct TabButtonview: View {
         } label: {
             VStack(spacing: 2) {
                 Image(systemName: imageName)
-                    .foregroundColor(selectedTab == imageName ? Color.yellow : Color.gray)
+                    .foregroundColor(selectedTab == imageName ? Color("Buttons") : Color.gray)
                     .font(.system(size: 24, weight: .bold))
             }
             .padding(13)
@@ -101,7 +101,7 @@ struct CustomTabView: View {
                 .resizable()
                 .aspectRatio(contentMode: .fill)
                 .ignoresSafeArea()
-                .opacity(0.4)
+                .opacity(0.35)
         )
         
     }

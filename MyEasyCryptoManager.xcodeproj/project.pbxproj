@@ -35,6 +35,12 @@
 		1671E70D27EE8BD40090FD28 /* FirebaseFirestoreSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = 1671E70C27EE8BD40090FD28 /* FirebaseFirestoreSwift-Beta */; };
 		1671E70F27EE8D360090FD28 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1671E70E27EE8D360090FD28 /* GoogleService-Info.plist */; };
 		1671E71027EE8D360090FD28 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1671E70E27EE8D360090FD28 /* GoogleService-Info.plist */; };
+		16C24BDC27EFF09400B70B24 /* SignInSignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C24BDB27EFF09400B70B24 /* SignInSignUp.swift */; };
+		16C24BDD27EFF09400B70B24 /* SignInSignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C24BDB27EFF09400B70B24 /* SignInSignUp.swift */; };
+		16C24BDF27F0BCBE00B70B24 /* SigninFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C24BDE27F0BCBE00B70B24 /* SigninFormView.swift */; };
+		16C24BE027F0BCBE00B70B24 /* SigninFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C24BDE27F0BCBE00B70B24 /* SigninFormView.swift */; };
+		16C24BE227F0BE4C00B70B24 /* SignupFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C24BE127F0BE4C00B70B24 /* SignupFormView.swift */; };
+		16C24BE327F0BE4C00B70B24 /* SignupFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C24BE127F0BE4C00B70B24 /* SignupFormView.swift */; };
 		16D821D327EE500400528869 /* AddAssetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16D821D227EE500400528869 /* AddAssetView.swift */; };
 /* End PBXBuildFile section */
 
@@ -56,6 +62,9 @@
 		166BEED727E279E100072115 /* CoinsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinsListView.swift; sourceTree = "<group>"; };
 		166BEEDA27E38B8600072115 /* CoinInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinInfoViewModel.swift; sourceTree = "<group>"; };
 		1671E70E27EE8D360090FD28 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		16C24BDB27EFF09400B70B24 /* SignInSignUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInSignUp.swift; sourceTree = "<group>"; };
+		16C24BDE27F0BCBE00B70B24 /* SigninFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SigninFormView.swift; sourceTree = "<group>"; };
+		16C24BE127F0BE4C00B70B24 /* SignupFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupFormView.swift; sourceTree = "<group>"; };
 		16D821D227EE500400528869 /* AddAssetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAssetView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -91,6 +100,8 @@
 				163A398E27E561A900F8D6F5 /* CompleteAssetInfoCardView.swift */,
 				163A399427E9074100F8D6F5 /* ChartView.swift */,
 				16D821D227EE500400528869 /* AddAssetView.swift */,
+				16C24BDE27F0BCBE00B70B24 /* SigninFormView.swift */,
+				16C24BE127F0BE4C00B70B24 /* SignupFormView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -116,11 +127,11 @@
 		166BEEAF27D6E5DE00072115 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				166BEEB027D6E5DE00072115 /* MyEasyCryptoManagerApp.swift */,
 				163A399627E90BB300F8D6F5 /* Extensions */,
 				166BEED327D93A0400072115 /* ViewModel */,
 				166BEED227D939F700072115 /* Model */,
 				166BEED127D939EA00072115 /* View */,
-				166BEEB027D6E5DE00072115 /* MyEasyCryptoManagerApp.swift */,
 				1671E70E27EE8D360090FD28 /* GoogleService-Info.plist */,
 				166BEEB227D6E5DF00072115 /* Assets.xcassets */,
 			);
@@ -147,9 +158,10 @@
 		166BEED127D939EA00072115 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				163A398B27E5439200F8D6F5 /* Components */,
 				166BEED427D93A6600072115 /* DashboardView.swift */,
 				166BEED727E279E100072115 /* CoinsListView.swift */,
+				16C24BDB27EFF09400B70B24 /* SignInSignUp.swift */,
+				163A398B27E5439200F8D6F5 /* Components */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -288,9 +300,12 @@
 			files = (
 				163A399827E90BCE00F8D6F5 /* PreviewProvider.swift in Sources */,
 				166BEEDB27E38B8600072115 /* CoinInfoViewModel.swift in Sources */,
+				16C24BDF27F0BCBE00B70B24 /* SigninFormView.swift in Sources */,
 				166BEED527D93A6600072115 /* DashboardView.swift in Sources */,
+				16C24BE227F0BE4C00B70B24 /* SignupFormView.swift in Sources */,
 				163A399327E56BCE00F8D6F5 /* GlobalMarketViewModel.swift in Sources */,
 				166BEECF27D9331F00072115 /* CoinsModel.swift in Sources */,
+				16C24BDC27EFF09400B70B24 /* SignInSignUp.swift in Sources */,
 				163A398F27E561A900F8D6F5 /* CompleteAssetInfoCardView.swift in Sources */,
 				16D821D327EE500400528869 /* AddAssetView.swift in Sources */,
 				166BEEC027D6E5DF00072115 /* MyEasyCryptoManagerApp.swift in Sources */,
@@ -306,9 +321,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				16C24BE027F0BCBE00B70B24 /* SigninFormView.swift in Sources */,
 				166BEEDC27E38B8600072115 /* CoinInfoViewModel.swift in Sources */,
 				166BEED627D93A6600072115 /* DashboardView.swift in Sources */,
 				166BEED027D9331F00072115 /* CoinsModel.swift in Sources */,
+				16C24BE327F0BE4C00B70B24 /* SignupFormView.swift in Sources */,
+				16C24BDD27EFF09400B70B24 /* SignInSignUp.swift in Sources */,
 				166BEEC127D6E5DF00072115 /* MyEasyCryptoManagerApp.swift in Sources */,
 				166BEED927E279E100072115 /* CoinsListView.swift in Sources */,
 			);
