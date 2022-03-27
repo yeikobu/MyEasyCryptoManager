@@ -21,7 +21,7 @@ struct DashboardView: View {
             .transition(.slide)
             .navigationBarHidden(true)
             .navigationBarBackButtonHidden(true)
-        
+            .preferredColorScheme(.dark)
     }
     
 }
@@ -37,7 +37,7 @@ struct TabButtonview: View {
         } label: {
             VStack(spacing: 2) {
                 Image(systemName: imageName)
-                    .foregroundColor(selectedTab == imageName ? Color("TabButtonsColor") : Color(.gray))
+                    .foregroundColor(selectedTab == imageName ? Color("Buttons") : Color.gray)
                     .font(.system(size: 24, weight: .bold))
             }
             .padding(13)
@@ -55,9 +55,6 @@ struct CustomTabView: View {
     var body: some View {
         
         ZStack(alignment: Alignment(horizontal: .center, vertical: .bottom)) {
-            
-            Color("Background")
-                .ignoresSafeArea()
             
             TabView(selection: $selectedTab) {
                 
@@ -84,17 +81,28 @@ struct CustomTabView: View {
                     }
                 }
             }
-            .padding(.horizontal, 40)
-            .padding(.vertical, 3)
-            .background(Color("TabBarColor"))
-            .clipShape(Capsule())
-            .shadow(color: .black.opacity(0.70), radius: 5, x: 5, y: 5)
-            .shadow(color: .black.opacity(0.70), radius: 5, x: -5, y: -5)
-            .padding(.horizontal, 10)
+            .padding(.horizontal, 20)
+            .padding(.vertical, 2)
+            .background(
+                RoundedRectangle(cornerRadius: 30, style: .continuous)
+                    .fill(.ultraThinMaterial)
+                    .blur(radius: 0)
+                    .opacity(0.85)
+            )
+            .shadow(color: .black.opacity(0.85), radius: 5, x: 5, y: 5)
+            .shadow(color: .black.opacity(0.85), radius: 5, x: -5, y: -5)
+            .padding(.horizontal, 20)
+            .padding(.bottom, 1)
             
         }
         .ignoresSafeArea(.keyboard, edges: .bottom)
-        .background(Color.white.opacity(0.20).ignoresSafeArea(.all, edges: .all))
+        .background(
+            Image("wallpaper2")
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+                .ignoresSafeArea()
+                .opacity(0.35)
+        )
         
     }
     
