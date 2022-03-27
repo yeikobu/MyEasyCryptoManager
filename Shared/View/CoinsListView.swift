@@ -413,6 +413,7 @@ struct CoinsDataListView: View {
                             }
                             
                             ChartView(coin: coin)
+                                .offset(x: isListVisible ? 0 : -100, y: isListVisible ? 0 : 0)
                                 .padding(.top, 20)
                                 .padding(.bottom, 10)
                                 .matchedGeometryEffect(id: "chart", in: animation)
@@ -595,7 +596,7 @@ struct CoinsDataListView: View {
                 
             }
             .onTapGesture {
-                withAnimation(.spring(response: 0.6, dampingFraction: 0.75)) {
+                withAnimation(.spring(response: 0.6, dampingFraction: 0.9)) {
                     isTouched.toggle()
                 }
                 withAnimation(.spring(response: 0.6, dampingFraction: 1)) {
