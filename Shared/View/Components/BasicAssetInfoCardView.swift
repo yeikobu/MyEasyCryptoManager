@@ -148,7 +148,9 @@ struct BasicAssetInfoCardView: View {
             RoundedRectangle(cornerRadius: 10, style: .continuous)
                 .fill(.ultraThinMaterial)
                 .blur(radius: 0)
-                .opacity(0.82)
+                .opacity(0.9)
+                .matchedGeometryEffect(id: "background", in: animation)
+
         )
         .matchedGeometryEffect(id: "background", in: animation)
         
@@ -156,6 +158,7 @@ struct BasicAssetInfoCardView: View {
             RoundedRectangle(cornerRadius: 10, style: .continuous)
                 .matchedGeometryEffect(id: "mask", in: animation)
         )
+        .preferredColorScheme(.dark)
     }
 }
 

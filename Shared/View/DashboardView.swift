@@ -21,7 +21,7 @@ struct DashboardView: View {
             .transition(.slide)
             .navigationBarHidden(true)
             .navigationBarBackButtonHidden(true)
-        
+            .preferredColorScheme(.dark)
     }
     
 }
@@ -87,10 +87,10 @@ struct CustomTabView: View {
                 RoundedRectangle(cornerRadius: 30, style: .continuous)
                     .fill(.ultraThinMaterial)
                     .blur(radius: 0)
-                    .opacity(0.95)
+                    .opacity(0.85)
             )
-            .shadow(color: .black.opacity(0.70), radius: 8, x: 5, y: 5)
-            .shadow(color: .black.opacity(0.70), radius: 8, x: -5, y: -5)
+            .shadow(color: .black.opacity(0.85), radius: 5, x: 5, y: 5)
+            .shadow(color: .black.opacity(0.85), radius: 5, x: -5, y: -5)
             .padding(.horizontal, 20)
             .padding(.bottom, 1)
             
@@ -101,7 +101,7 @@ struct CustomTabView: View {
                 .resizable()
                 .aspectRatio(contentMode: .fill)
                 .ignoresSafeArea()
-                .opacity(0.45)
+                .opacity(0.4)
         )
         
     }

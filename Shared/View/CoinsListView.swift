@@ -14,17 +14,6 @@ struct CoinsListView: View {
     
     var body: some View {
         ZStack {
-//            Color("Background")
-//                .ignoresSafeArea()
-            
-//            LinearGradient(gradient: Gradient(colors: [Color("Background"), Color("BackgroundGradient1"), Color("Background"), Color("BackgroundGradient1")]), startPoint: .topLeading, endPoint: .bottomTrailing)
-//                .ignoresSafeArea()
-            
-//            Image("Wallpaper")
-//                .resizable()
-//                .aspectRatio(contentMode: .fill)
-//                .ignoresSafeArea()
-            
             CoinsMarketListView()
                 .preferredColorScheme(.dark)
         }
@@ -106,10 +95,10 @@ struct CoinsMarketListView: View {
                     }
                     .padding()
                     .background(
-                        Rectangle()
+                        RoundedRectangle(cornerRadius: 10, style: .continuous)
                             .fill(.ultraThinMaterial)
                             .blur(radius: 0)
-                            .opacity(0.82)
+                            .opacity(0.9)
                     )
                     .cornerRadius(10)
                     
@@ -134,10 +123,10 @@ struct CoinsMarketListView: View {
                     }
                     .padding()
                     .background(
-                        Rectangle()
+                        RoundedRectangle(cornerRadius: 10, style: .continuous)
                             .fill(.ultraThinMaterial)
                             .blur(radius: 0)
-                            .opacity(0.82)
+                            .opacity(0.9)
                     )
                     .cornerRadius(10)
                     
@@ -160,11 +149,10 @@ struct CoinsMarketListView: View {
                     }
                     .padding()
                     .background(
-                        Rectangle()
+                        RoundedRectangle(cornerRadius: 10, style: .continuous)
                             .fill(.ultraThinMaterial)
                             .blur(radius: 0)
-                            .opacity(0.82)
-                    )
+                            .opacity(0.9)
                     .cornerRadius(10)
                 }
             }
@@ -373,8 +361,8 @@ struct CoinsDataListView: View {
                                 Text("$\(currentPrice.formatted())")
                                     .matchedGeometryEffect(id: "currentPrice", in: animation)
                                     .foregroundColor(.white)
-                                    .font(.system(size: 14, weight: .bold, design: .rounded))
-                                    .padding(.bottom, 2)
+                                    .font(.system(size: 9, weight: .bold, design: .rounded))
+                                    .padding(5)
                                 
                                 VStack {
                                     if priceChangePercentage > 0 {
@@ -583,9 +571,18 @@ struct CoinsDataListView: View {
                                 .padding(.top, 1)
                             }
                         }
-                        .offset(x: 0, y: isListVisible ? 0 : 10)
-                        .matchedGeometryEffect(id: "assetInformation", in: animation)
-                    }
+                        .padding(10)
+                        .background(
+                            RoundedRectangle(cornerRadius: 10, style: .continuous)
+                                .fill(.ultraThinMaterial)
+                                .blur(radius: 0)
+                                .opacity(0.9)
+                                .matchedGeometryEffect(id: "background", in: animation)
+                        )
+                        .mask(
+                            RoundedRectangle(cornerRadius: 10, style: .continuous)
+                                .matchedGeometryEffect(id: "mask", in: animation)
+                        )
                     .padding(10)
                     .background(
                         Rectangle()
