@@ -14,10 +14,9 @@ struct CoinsListView: View {
     
     var body: some View {
         ZStack {
-            Color("Background")
-                .ignoresSafeArea()
             
             CoinsMarketListView()
+                .preferredColorScheme(.dark)
         }
     }
 }
@@ -96,7 +95,12 @@ struct CoinsMarketListView: View {
                         }
                     }
                     .padding()
-                    .background(Color("Card"))
+                    .background(
+                        RoundedRectangle(cornerRadius: 10, style: .continuous)
+                            .fill(.ultraThinMaterial)
+                            .blur(radius: 0)
+                            .opacity(0.9)
+                    )
                     .cornerRadius(10)
                     
                     //24HRS Volume
@@ -119,7 +123,12 @@ struct CoinsMarketListView: View {
                         
                     }
                     .padding()
-                    .background(Color("Card"))
+                    .background(
+                        RoundedRectangle(cornerRadius: 10, style: .continuous)
+                            .fill(.ultraThinMaterial)
+                            .blur(radius: 0)
+                            .opacity(0.9)
+                    )
                     .cornerRadius(10)
                     
                     VStack(alignment: .leading) {
@@ -140,7 +149,12 @@ struct CoinsMarketListView: View {
                         }
                     }
                     .padding()
-                    .background(Color("Card"))
+                    .background(
+                        RoundedRectangle(cornerRadius: 10, style: .continuous)
+                            .fill(.ultraThinMaterial)
+                            .blur(radius: 0)
+                            .opacity(0.9)
+                    )
                     .cornerRadius(10)
                 }
             }
@@ -294,8 +308,6 @@ struct CoinsDataListView: View {
                                     .foregroundColor(.white)
                                     .font(.system(size: 9, weight: .bold, design: .rounded))
                                     .padding(5)
-                                    .background(Color("RankColor"))
-                                    .cornerRadius(2)
                                 
                                 Text(name)
                                     .foregroundColor(.white)
@@ -567,7 +579,10 @@ struct CoinsDataListView: View {
                         }
                         .padding(10)
                         .background(
-                            Color("Card")
+                            RoundedRectangle(cornerRadius: 10, style: .continuous)
+                                .fill(.ultraThinMaterial)
+                                .blur(radius: 0)
+                                .opacity(0.9)
                                 .matchedGeometryEffect(id: "background", in: animation)
                         )
                         .mask(

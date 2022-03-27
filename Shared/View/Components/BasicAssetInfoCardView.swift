@@ -56,8 +56,6 @@ struct BasicAssetInfoCardView: View {
                                 .foregroundColor(.white)
                                 .font(.system(size: 9, weight: .bold, design: .rounded))
                                 .padding(5)
-                                .background(Color("RankColor"))
-                                .cornerRadius(2)
 
                             Text(symbol.uppercased())
                                 .matchedGeometryEffect(id: "symbol", in: animation)
@@ -147,13 +145,17 @@ struct BasicAssetInfoCardView: View {
         }
         .padding(.vertical, 10)
         .background(
-            Color("Card")
+            RoundedRectangle(cornerRadius: 10, style: .continuous)
+                .fill(.ultraThinMaterial)
+                .blur(radius: 0)
+                .opacity(0.9)
                 .matchedGeometryEffect(id: "background", in: animation)
         )
         .mask(
             RoundedRectangle(cornerRadius: 10, style: .continuous)
                 .matchedGeometryEffect(id: "mask", in: animation)
         )
+        .preferredColorScheme(.dark)
     }
 }
 
