@@ -41,6 +41,12 @@
 		16C24BE027F0BCBE00B70B24 /* SigninFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C24BDE27F0BCBE00B70B24 /* SigninFormView.swift */; };
 		16C24BE227F0BE4C00B70B24 /* SignupFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C24BE127F0BE4C00B70B24 /* SignupFormView.swift */; };
 		16C24BE327F0BE4C00B70B24 /* SignupFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C24BE127F0BE4C00B70B24 /* SignupFormView.swift */; };
+		16C24BE727F1151C00B70B24 /* AuthenticationDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C24BE627F1151C00B70B24 /* AuthenticationDatasource.swift */; };
+		16C24BE927F1155F00B70B24 /* AuthenticationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C24BE827F1155F00B70B24 /* AuthenticationRepository.swift */; };
+		16C24BEB27F1158200B70B24 /* AuthenticationVIewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C24BEA27F1158200B70B24 /* AuthenticationVIewModel.swift */; };
+		16C24BED27F116A400B70B24 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C24BEC27F116A400B70B24 /* UserModel.swift */; };
+		16C24BEF27F1237900B70B24 /* FieldValidationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C24BEE27F1237900B70B24 /* FieldValidationViewModel.swift */; };
+		16C24BF127F1572800B70B24 /* ValidationFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C24BF027F1572800B70B24 /* ValidationFormView.swift */; };
 		16D821D327EE500400528869 /* AddAssetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16D821D227EE500400528869 /* AddAssetView.swift */; };
 /* End PBXBuildFile section */
 
@@ -65,6 +71,12 @@
 		16C24BDB27EFF09400B70B24 /* SignInSignUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInSignUp.swift; sourceTree = "<group>"; };
 		16C24BDE27F0BCBE00B70B24 /* SigninFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SigninFormView.swift; sourceTree = "<group>"; };
 		16C24BE127F0BE4C00B70B24 /* SignupFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupFormView.swift; sourceTree = "<group>"; };
+		16C24BE627F1151C00B70B24 /* AuthenticationDatasource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationDatasource.swift; sourceTree = "<group>"; };
+		16C24BE827F1155F00B70B24 /* AuthenticationRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationRepository.swift; sourceTree = "<group>"; };
+		16C24BEA27F1158200B70B24 /* AuthenticationVIewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationVIewModel.swift; sourceTree = "<group>"; };
+		16C24BEC27F116A400B70B24 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
+		16C24BEE27F1237900B70B24 /* FieldValidationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldValidationViewModel.swift; sourceTree = "<group>"; };
+		16C24BF027F1572800B70B24 /* ValidationFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationFormView.swift; sourceTree = "<group>"; };
 		16D821D227EE500400528869 /* AddAssetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAssetView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -102,6 +114,7 @@
 				16D821D227EE500400528869 /* AddAssetView.swift */,
 				16C24BDE27F0BCBE00B70B24 /* SigninFormView.swift */,
 				16C24BE127F0BE4C00B70B24 /* SignupFormView.swift */,
+				16C24BF027F1572800B70B24 /* ValidationFormView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -171,6 +184,7 @@
 			children = (
 				166BEECE27D9331F00072115 /* CoinsModel.swift */,
 				163A399027E56AEB00F8D6F5 /* GlobalMarketModel.swift */,
+				16C24BEC27F116A400B70B24 /* UserModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -178,10 +192,30 @@
 		166BEED327D93A0400072115 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				16C24BE527F1149900B70B24 /* Service */,
+				16C24BE427F1148300B70B24 /* API Service */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		16C24BE427F1148300B70B24 /* API Service */ = {
+			isa = PBXGroup;
+			children = (
 				166BEEDA27E38B8600072115 /* CoinInfoViewModel.swift */,
 				163A399227E56BCE00F8D6F5 /* GlobalMarketViewModel.swift */,
 			);
-			path = ViewModel;
+			path = "API Service";
+			sourceTree = "<group>";
+		};
+		16C24BE527F1149900B70B24 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				16C24BE627F1151C00B70B24 /* AuthenticationDatasource.swift */,
+				16C24BE827F1155F00B70B24 /* AuthenticationRepository.swift */,
+				16C24BEA27F1158200B70B24 /* AuthenticationVIewModel.swift */,
+				16C24BEE27F1237900B70B24 /* FieldValidationViewModel.swift */,
+			);
+			path = Service;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -301,18 +335,24 @@
 				163A399827E90BCE00F8D6F5 /* PreviewProvider.swift in Sources */,
 				166BEEDB27E38B8600072115 /* CoinInfoViewModel.swift in Sources */,
 				16C24BDF27F0BCBE00B70B24 /* SigninFormView.swift in Sources */,
+				16C24BE927F1155F00B70B24 /* AuthenticationRepository.swift in Sources */,
 				166BEED527D93A6600072115 /* DashboardView.swift in Sources */,
 				16C24BE227F0BE4C00B70B24 /* SignupFormView.swift in Sources */,
 				163A399327E56BCE00F8D6F5 /* GlobalMarketViewModel.swift in Sources */,
+				16C24BF127F1572800B70B24 /* ValidationFormView.swift in Sources */,
 				166BEECF27D9331F00072115 /* CoinsModel.swift in Sources */,
 				16C24BDC27EFF09400B70B24 /* SignInSignUp.swift in Sources */,
 				163A398F27E561A900F8D6F5 /* CompleteAssetInfoCardView.swift in Sources */,
 				16D821D327EE500400528869 /* AddAssetView.swift in Sources */,
 				166BEEC027D6E5DF00072115 /* MyEasyCryptoManagerApp.swift in Sources */,
+				16C24BEB27F1158200B70B24 /* AuthenticationVIewModel.swift in Sources */,
+				16C24BE727F1151C00B70B24 /* AuthenticationDatasource.swift in Sources */,
+				16C24BEF27F1237900B70B24 /* FieldValidationViewModel.swift in Sources */,
 				163A399527E9074100F8D6F5 /* ChartView.swift in Sources */,
 				163A398D27E543E200F8D6F5 /* BasicAssetInfoCardView.swift in Sources */,
 				163A399127E56AEB00F8D6F5 /* GlobalMarketModel.swift in Sources */,
 				163A399A27E917EB00F8D6F5 /* Date.swift in Sources */,
+				16C24BED27F116A400B70B24 /* UserModel.swift in Sources */,
 				166BEED827E279E100072115 /* CoinsListView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

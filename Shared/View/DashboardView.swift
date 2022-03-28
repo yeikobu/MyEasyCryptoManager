@@ -16,12 +16,29 @@ struct DashboardView: View {
     
     var body: some View {
         
-        CustomTabView()
-            .accentColor(.white)
-            .transition(.slide)
-            .navigationBarHidden(true)
-            .navigationBarBackButtonHidden(true)
-            .preferredColorScheme(.dark)
+        ZStack {
+            CustomTabView()
+                .accentColor(.white)
+                .transition(.slide)
+                .navigationBarHidden(true)
+                .navigationBarBackButtonHidden(true)
+                .preferredColorScheme(.dark)
+                .background(
+                    RoundedRectangle(cornerRadius: 1, style: .continuous)
+                        .fill(.ultraThinMaterial)
+                        .ignoresSafeArea()
+                        .blur(radius: 20)
+                        .opacity(1)
+                )
+        }
+        .background(
+            Image("wallpaper2")
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+                .ignoresSafeArea()
+                .opacity(0.6)
+        )
+       
     }
     
 }
@@ -96,13 +113,7 @@ struct CustomTabView: View {
             
         }
         .ignoresSafeArea(.keyboard, edges: .bottom)
-        .background(
-            Image("wallpaper2")
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-                .ignoresSafeArea()
-                .opacity(0.35)
-        )
+        
         
     }
     

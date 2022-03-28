@@ -9,19 +9,30 @@ import SwiftUI
 
 struct SignInSignUp: View {
     var body: some View {
-        VStack {
+        NavigationView {
             ZStack {
                 SignInSignUpHeadView()
+                    .background(
+                        RoundedRectangle(cornerRadius: 1, style: .continuous)
+                            .fill(.ultraThinMaterial)
+                            .ignoresSafeArea()
+                            .blur(radius: 1)
+                            .opacity(0.8)
+                    )
             }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(
+                Image("wallpaper2")
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .ignoresSafeArea()
+                    .opacity(0.5)
+            )
+            
         }
-        .background(
-            Image("wallpaper2")
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-                .ignoresSafeArea()
-                .opacity(0.35)
-        )
         .preferredColorScheme(.dark)
+        .navigationBarHidden(true)
+        .navigationBarBackButtonHidden(true)
     }
 }
 
@@ -65,12 +76,12 @@ struct SignInSignUpHeadView: View {
             
             ZStack {
                 if isSigninActive {
-                    SigninFormView(isSigninActive: $isSigninActive)
+                    SigninFormView(authenticationViewModel: AuthenticationViewModel(), isSigninActive: $isSigninActive)
                         .padding(.top, -200)
                 }
                 
                 if !isSigninActive {
-                    SignupFormView(isSigninActive: $isSigninActive)
+                    SignupFormView(authenticationViewModel: AuthenticationViewModel(), isSigninActive: $isSigninActive)
                         .padding(.top, -150)
                 }
             }

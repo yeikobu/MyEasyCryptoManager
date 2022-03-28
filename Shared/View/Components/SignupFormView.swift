@@ -9,6 +9,9 @@ import SwiftUI
 
 struct SignupFormView: View {
     
+    @ObservedObject var authenticationViewModel: AuthenticationViewModel
+    @ObservedObject var signupSigninValidation = SigninSignupValidation()
+    
     @State var email: String = ""
     @State var password: String = ""
     @State var confirmPassword: String = ""
@@ -17,6 +20,10 @@ struct SignupFormView: View {
     @State var isUserForgotPass: Bool = false
     @Binding var isSigninActive: Bool
     @Namespace var animation
+    
+    @State var areFieldsComplete: Bool = false
+    @State var areFieldsIncomplete: Bool = false
+    @State var msgError: String = "Este mensaje para probar"
     
     var body: some View {
         VStack {
@@ -38,14 +45,14 @@ struct SignupFormView: View {
                                 .padding(.leading)
                             
                             ZStack(alignment: .leading) {
-                                if email.isEmpty {
+                                if signupSigninValidation.email.isEmpty {
                                     Text(verbatim: "example@example.com")
                                         .foregroundColor(.gray)
                                         .font(.caption)
                                         .padding(.leading, 5)
                                 }
                                 
-                                TextField("", text: $email)
+                                TextField("", text: $signupSigninValidation.email)
                                     .foregroundColor(.white)
                                     .keyboardType(.emailAddress)
                                     .font(.body)
@@ -78,15 +85,15 @@ struct SignupFormView: View {
                                 .padding(.leading)
                             
                             ZStack(alignment: .leading) {
-                                if password.isEmpty {
-                                    Text("Must be content with at least 6 characters")
+                                if signupSigninValidation.password.isEmpty {
+                                    Text("At least 6 characters and 1 capital letter")
                                         .foregroundColor(.gray)
                                         .font(.caption)
                                         .padding(.leading, 5)
                                 }
                                 
                                 if isSecure {
-                                    SecureField("", text: $password)
+                                    SecureField("", text: $signupSigninValidation.password)
                                         .foregroundColor(.white)
                                         .font(.body)
                                         .padding(15)
@@ -94,7 +101,7 @@ struct SignupFormView: View {
                                         .disableAutocorrection(true)
                                         .autocapitalization(.none)
                                 } else {
-                                    TextField("", text: $password)
+                                    TextField("", text: $signupSigninValidation.password)
                                         .foregroundColor(.white)
                                         .keyboardType(.emailAddress)
                                         .font(.body)
@@ -143,7 +150,7 @@ struct SignupFormView: View {
                                 .padding(.leading)
                             
                             ZStack(alignment: .leading) {
-                                if confirmPassword.isEmpty {
+                                if signupSigninValidation.confirmPassword.isEmpty {
                                     Text("Confirm your password")
                                         .foregroundColor(.gray)
                                         .font(.caption)
@@ -151,7 +158,7 @@ struct SignupFormView: View {
                                 }
                                 
                                 if isConfirmPassSecure {
-                                    SecureField("", text: $confirmPassword)
+                                    SecureField("", text: $signupSigninValidation.confirmPassword)
                                         .foregroundColor(.white)
                                         .font(.body)
                                         .padding(15)
@@ -159,7 +166,7 @@ struct SignupFormView: View {
                                         .disableAutocorrection(true)
                                         .autocapitalization(.none)
                                 } else {
-                                    TextField("", text: $confirmPassword)
+                                    TextField("", text: $signupSigninValidation.confirmPassword)
                                         .foregroundColor(.white)
                                         .keyboardType(.emailAddress)
                                         .font(.body)
@@ -212,7 +219,7 @@ struct SignupFormView: View {
                 .shadow(color: .black.opacity(0.4), radius: 5, x: -3, y: -3)
                 
                 Button {
-                    //
+                    signup()
                 } label: {
                     Text("SIGN UP")
                         .foregroundColor(.white)
@@ -230,14 +237,38 @@ struct SignupFormView: View {
                 .matchedGeometryEffect(id: "signupbutton", in: animation)
                 .offset(x: isSigninActive ? 0 : 0, y: isSigninActive ? 1000 : 0)
                 .padding(.top, 320)
+                .alert(isPresented: $areFieldsIncomplete) {
+                    Alert(title: Text("ERROR"), message: Text(authenticationViewModel.errorMessage ?? "All fields must be completed correctly"), dismissButton: .default(Text("Okay")))
+                }
+            }
+            
+            NavigationLink(isActive: $areFieldsComplete) {
+                DashboardView()
+            } label: {
+                EmptyView()
             }
         }
+    }
+    
+    func signup() {
+        if signupSigninValidation.email.isEmpty || signupSigninValidation.password.isEmpty {
+            areFieldsComplete = false
+            areFieldsIncomplete = true
+        } else if !signupSigninValidation.arePasswordsMatch {
+            areFieldsComplete = false
+            areFieldsIncomplete = true
+        } else {
+            authenticationViewModel.createNewUser(email: signupSigninValidation.email, password: signupSigninValidation.password)
+            areFieldsIncomplete = false
+            areFieldsComplete = true
+        }
+
     }
 }
 
 struct SignupFormView_Previews: PreviewProvider {
     static var previews: some View {
-        SignupFormView(isSigninActive: .constant(false))
+        SignupFormView(authenticationViewModel: AuthenticationViewModel(), isSigninActive: .constant(false))
             .preferredColorScheme(.dark)
     }
 }
