@@ -21,7 +21,7 @@ struct SigninFormView: View {
     
     @State var showError: Bool = false
     @State var msgAlert: String = ""
-    @State var areSingInfieldsComplete: Bool = false
+    @Binding var areSingInfieldsComplete: Bool
     @State var isUserNotFound = false
     
     var body: some View {
@@ -194,15 +194,15 @@ struct SigninFormView: View {
                 }
             }
             
-            NavigationLink(isActive: $areSingInfieldsComplete) {
-                DashboardView()
-            } label: {
-                EmptyView()
-            }
+//            NavigationLink(isActive: $areSingInfieldsComplete) {
+//                DashboardView()
+//            } label: {
+//                EmptyView()
+//            }
         }
-        .onAppear {
-            autoSignin()
-        }
+//        .onAppear {
+//            autoSignin()
+//        }
     }
     
     func autoSignin() {
@@ -238,7 +238,7 @@ struct SigninFormView_Previews: PreviewProvider {
     @Namespace static var animation
     
     static var previews: some View {
-        SigninFormView(authenticationViewModel: AuthenticationViewModel(), isSigninActive: .constant(false))
+        SigninFormView(authenticationViewModel: AuthenticationViewModel(), isSigninActive: .constant(false), areSingInfieldsComplete: .constant(false))
             .preferredColorScheme(.dark)
     }
 }

@@ -7,11 +7,11 @@
 
 import SwiftUI
 
-struct SignInSignUp: View {
+struct SigninSignupView: View {
     var body: some View {
         NavigationView {
             ZStack {
-                SignInSignUpHeadView()
+                SignInSignUpButtonsView()
                     .background(
                         RoundedRectangle(cornerRadius: 1, style: .continuous)
                             .fill(.ultraThinMaterial)
@@ -36,9 +36,10 @@ struct SignInSignUp: View {
     }
 }
 
-struct SignInSignUpHeadView: View {
+struct SignInSignUpButtonsView: View {
     
     @State var isSigninActive: Bool = true
+    @State var areSingInfieldsComplete: Bool = false
     @Namespace var animation
     
     var body: some View {
@@ -76,7 +77,7 @@ struct SignInSignUpHeadView: View {
             
             ZStack {
                 if isSigninActive {
-                    SigninFormView(authenticationViewModel: AuthenticationViewModel(), isSigninActive: $isSigninActive)
+                    SigninFormView(authenticationViewModel: AuthenticationViewModel(), isSigninActive: $isSigninActive, areSingInfieldsComplete: $areSingInfieldsComplete)
                         .padding(.top, -200)
                 }
                 
@@ -86,14 +87,29 @@ struct SignInSignUpHeadView: View {
                 }
             }
             
+            NavigationLink(isActive: $areSingInfieldsComplete) {
+                DashboardView()
+            } label: {
+                EmptyView()
+            }
+            
+        }
+        .onAppear {
+            autoSignin()
         }
         
     }
+    
+    func autoSignin() {
+        if AuthenticationViewModel().user != nil {
+            self.areSingInfieldsComplete = true
+        }
+    }
 }
 
-struct SignInSignUp_Previews: PreviewProvider {
+struct SigninSignupView_Previews: PreviewProvider {
     static var previews: some View {
-        SignInSignUp()
+        SigninSignupView()
             .preferredColorScheme(.dark)
     }
 }

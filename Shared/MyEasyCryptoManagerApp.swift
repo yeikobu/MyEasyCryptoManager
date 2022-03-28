@@ -15,7 +15,7 @@ struct MyEasyCryptoManagerApp: App {
     
     var body: some Scene {
         WindowGroup {
-            SignInSignUp()
+            SigninSignupView()
                 .preferredColorScheme(.dark)
         }
     }

@@ -28,7 +28,7 @@ struct DashboardView: View {
                         .fill(.ultraThinMaterial)
                         .ignoresSafeArea()
                         .blur(radius: 20)
-                        .opacity(1)
+                        .opacity(0.8)
                 )
         }
         .background(
@@ -36,7 +36,7 @@ struct DashboardView: View {
                 .resizable()
                 .aspectRatio(contentMode: .fill)
                 .ignoresSafeArea()
-                .opacity(0.6)
+                .opacity(0.4)
         )
        
     }
@@ -75,7 +75,7 @@ struct CustomTabView: View {
             
             TabView(selection: $selectedTab) {
                 
-                Text("Settings")
+                SettingsView()
                     .tag("gearshape.fill")
                 
                 CoinsListView()
@@ -104,10 +104,10 @@ struct CustomTabView: View {
                 RoundedRectangle(cornerRadius: 30, style: .continuous)
                     .fill(.ultraThinMaterial)
                     .blur(radius: 0)
-                    .opacity(0.85)
+                    .opacity(0.95)
             )
-            .shadow(color: .black.opacity(0.85), radius: 5, x: 5, y: 5)
-            .shadow(color: .black.opacity(0.85), radius: 5, x: -5, y: -5)
+            .shadow(color: .black.opacity(0.5), radius: 5, x: 3, y: 3)
+            .shadow(color: .black.opacity(0.5), radius: 5, x: -3, y: -3)
             .padding(.horizontal, 20)
             .padding(.bottom, 1)
             
