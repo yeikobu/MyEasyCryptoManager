@@ -34,4 +34,8 @@ final class AuthenticationRepository {
     func logout() throws {
         try authenticationFirebaseDatasource.logout()
     }
+    
+    func checkIsUserExist(email: String, password: String, completionBlock: @escaping(Bool) -> Void) {
+        authenticationFirebaseDatasource.checkIsUserExist(email: email, password: password, completionBlock: completionBlock) 
+    }
 }

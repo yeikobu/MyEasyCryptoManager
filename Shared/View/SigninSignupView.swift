@@ -39,7 +39,6 @@ struct SigninSignupView: View {
 struct SignInSignUpButtonsView: View {
     
     @State var isSigninActive: Bool = true
-    @State var areSingInfieldsComplete: Bool = false
     @Namespace var animation
     
     var body: some View {
@@ -77,7 +76,7 @@ struct SignInSignUpButtonsView: View {
             
             ZStack {
                 if isSigninActive {
-                    SigninFormView(authenticationViewModel: AuthenticationViewModel(), isSigninActive: $isSigninActive, areSingInfieldsComplete: $areSingInfieldsComplete)
+                    SigninFormView(authenticationViewModel: AuthenticationViewModel(), isSigninActive: $isSigninActive)
                         .padding(.top, -200)
                 }
                 
@@ -87,22 +86,6 @@ struct SignInSignUpButtonsView: View {
                 }
             }
             
-            NavigationLink(isActive: $areSingInfieldsComplete) {
-                DashboardView()
-            } label: {
-                EmptyView()
-            }
-            
-        }
-        .onAppear {
-            autoSignin()
-        }
-        
-    }
-    
-    func autoSignin() {
-        if AuthenticationViewModel().user != nil {
-            self.areSingInfieldsComplete = true
         }
     }
 }

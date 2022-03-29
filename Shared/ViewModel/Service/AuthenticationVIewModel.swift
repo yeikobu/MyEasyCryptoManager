@@ -33,13 +33,14 @@ final class AuthenticationViewModel: ObservableObject {
         }
     }
     
-    func signin(email: String, password: String) {
+    func signin(email: String, password: String, completionBLock: @escaping(String) -> Void) {
         authenticationRepository.signin(email: email, password: password) { [weak self] result in
             switch result {
             case .success(let user):
                 self?.user = user
             case .failure(let error):
                 self?.errorMessage = error.localizedDescription
+                completionBLock(error.localizedDescription)
             }
         }
     }
@@ -62,5 +63,16 @@ final class AuthenticationViewModel: ObservableObject {
         } catch {
             print(error)
         }
+    }
+    
+    func checkIfUserExist(email: String, password: String, completionBlock: @escaping(Bool) -> Void)  {
+        authenticationRepository.checkIsUserExist(email: email, password: password) { isUserExist in
+            if isUserExist {
+                completionBlock(isUserExist)
+            } else {
+                completionBlock(isUserExist)
+            }
+        }
+        
     }
 }

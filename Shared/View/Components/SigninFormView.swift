@@ -21,8 +21,9 @@ struct SigninFormView: View {
     
     @State var showError: Bool = false
     @State var msgAlert: String = ""
-    @Binding var areSingInfieldsComplete: Bool
+    @State var areSingInfieldsComplete: Bool = false
     @State var isUserNotFound = false
+    
     
     var body: some View {
         VStack {
@@ -78,9 +79,9 @@ struct SigninFormView: View {
                         
                         //Password field
                         HStack {
-                            Image(systemName: "envelope")
+                            Image(systemName: "lock")
                                 .foregroundColor(.white)
-                                .font(.system(size: 18))
+                                .font(.system(size: 20))
                                 .padding(.leading)
                             
                             ZStack(alignment: .leading) {
@@ -140,11 +141,11 @@ struct SigninFormView: View {
                                 isUserForgotPass = true
                             } label: {
                                 Text("Forgot password?")
-                                    .foregroundColor(Color("Buttons"))
-                                    .opacity(1)
+                                    .foregroundColor(Color(.white))
+                                    .opacity(0.7)
                                     .font(.system(size: 12, weight: .regular, design: .rounded))
-                                    .shadow(color: .black.opacity(0.6), radius: 1, x: 1, y: 1)
-                                    .shadow(color: .black.opacity(0.6), radius: 1, x: -1, y: -1)
+                                    .shadow(color: .black.opacity(1), radius: 2, x: 1, y: 1)
+                                    .shadow(color: .black.opacity(1), radius: 2, x: -1, y: -1)
                             }
                         }
                         .matchedGeometryEffect(id: "forgotpass", in: animation)
@@ -193,16 +194,15 @@ struct SigninFormView: View {
                     Alert(title: Text("ERROR"), message: Text("\(msgAlert)"), dismissButton: .default(Text("Okay")))
                 }
             }
-            
-//            NavigationLink(isActive: $areSingInfieldsComplete) {
-//                DashboardView()
-//            } label: {
-//                EmptyView()
-//            }
+            NavigationLink(isActive: $areSingInfieldsComplete) {
+                DashboardView()
+            } label: {
+                EmptyView()
+            }
         }
-//        .onAppear {
-//            autoSignin()
-//        }
+        .onAppear {
+            autoSignin()
+        }
     }
     
     func autoSignin() {
@@ -213,21 +213,23 @@ struct SigninFormView: View {
     }
     
     func signin() {
-        if (signupSigninValidation.email.isEmpty || signupSigninValidation.password.isEmpty) {
+        if (signupSigninValidation.email.isEmpty || signupSigninValidation.password.isEmpty ) {
             self.areSingInfieldsComplete = false
             self.isUserNotFound = true
             self.showError = true
             self.msgAlert = "Fields can not be empty!"
-        } else if let error = authenticationViewModel.errorMessage {
-            if error.isEmpty {
-                areSingInfieldsComplete = true
-            } else {
+            
+        } else {
+            authenticationViewModel.checkIfUserExist(email: signupSigninValidation.email, password: signupSigninValidation.password) { exist in
+                self.areSingInfieldsComplete = exist
+            }
+        }
+        
+        authenticationViewModel.signin(email: signupSigninValidation.email, password: signupSigninValidation.password) { errorDescription in
+            if !errorDescription.isEmpty {
                 self.msgAlert = "Email or Password not found"
                 self.showError = true
             }
-        } else {
-            authenticationViewModel.signin(email: signupSigninValidation.email, password: signupSigninValidation.password)
-            self.areSingInfieldsComplete = true
         }
         
     }
@@ -238,7 +240,7 @@ struct SigninFormView_Previews: PreviewProvider {
     @Namespace static var animation
     
     static var previews: some View {
-        SigninFormView(authenticationViewModel: AuthenticationViewModel(), isSigninActive: .constant(false), areSingInfieldsComplete: .constant(false))
+        SigninFormView(authenticationViewModel: AuthenticationViewModel(), isSigninActive: .constant(false))
             .preferredColorScheme(.dark)
     }
 }

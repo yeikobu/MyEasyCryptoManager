@@ -38,8 +38,9 @@ final class AuthenticationFirebaseDatasource {
                 completionBlock(.failure(error))
                 return
             }
-            let email = authDataResult?.user.email ?? "No email"
-            completionBlock(.success(.init(email: email)))
+            if let email = authDataResult?.user.email {
+                completionBlock(.success(.init(email: email)))
+            }
         }
     }
     
@@ -55,6 +56,21 @@ final class AuthenticationFirebaseDatasource {
     
     func logout() throws {
         try Auth.auth().signOut()
+    }
+    
+    func checkIsUserExist(email: String, password: String, completionBlock: @escaping(Bool) -> Void) {
+        var isUserCreated: Bool = false
+        Auth.auth().signIn(withEmail: email, password: password) { authDataResult, error in
+            if let error = error {
+                print("Error login \(error.localizedDescription)")
+                isUserCreated = false
+                completionBlock(isUserCreated)
+            }
+            if let _ = authDataResult?.user.email {
+                isUserCreated = true
+                completionBlock(isUserCreated)
+            }
+        }
     }
 }
 
