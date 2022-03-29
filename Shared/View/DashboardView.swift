@@ -16,12 +16,29 @@ struct DashboardView: View {
     
     var body: some View {
         
-        CustomTabView()
-            .accentColor(.white)
-            .transition(.slide)
-            .navigationBarHidden(true)
-            .navigationBarBackButtonHidden(true)
-            .preferredColorScheme(.dark)
+        ZStack {
+            CustomTabView()
+                .accentColor(.white)
+                .transition(.slide)
+                .navigationBarHidden(true)
+                .navigationBarBackButtonHidden(true)
+                .preferredColorScheme(.dark)
+                .background(
+                    RoundedRectangle(cornerRadius: 1, style: .continuous)
+                        .fill(.ultraThinMaterial)
+                        .ignoresSafeArea()
+                        .blur(radius: 20)
+                        .opacity(0.8)
+                )
+        }
+        .background(
+            Image("wallpaper2")
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+                .ignoresSafeArea()
+                .opacity(0.4)
+        )
+       
     }
     
 }
@@ -58,7 +75,7 @@ struct CustomTabView: View {
             
             TabView(selection: $selectedTab) {
                 
-                Text("Settings")
+                SettingsView()
                     .tag("gearshape.fill")
                 
                 CoinsListView()
@@ -87,22 +104,16 @@ struct CustomTabView: View {
                 RoundedRectangle(cornerRadius: 30, style: .continuous)
                     .fill(.ultraThinMaterial)
                     .blur(radius: 0)
-                    .opacity(0.85)
+                    .opacity(0.95)
             )
-            .shadow(color: .black.opacity(0.85), radius: 5, x: 5, y: 5)
-            .shadow(color: .black.opacity(0.85), radius: 5, x: -5, y: -5)
+            .shadow(color: .black.opacity(0.5), radius: 5, x: 3, y: 3)
+            .shadow(color: .black.opacity(0.5), radius: 5, x: -3, y: -3)
             .padding(.horizontal, 20)
             .padding(.bottom, 1)
             
         }
         .ignoresSafeArea(.keyboard, edges: .bottom)
-        .background(
-            Image("wallpaper2")
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-                .ignoresSafeArea()
-                .opacity(0.35)
-        )
+        
         
     }
     

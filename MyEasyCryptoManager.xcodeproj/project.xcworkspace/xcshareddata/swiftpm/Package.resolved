@@ -91,6 +91,15 @@
       }
     },
     {
+      "identity" : "lottie-ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/LottieFiles/lottie-ios",
+      "state" : {
+        "branch" : "master",
+        "revision" : "81e851bd8cbe843d89cadcb6750737845d497d5c"
+      }
+    },
+    {
       "identity" : "nanopb",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/firebase/nanopb.git",

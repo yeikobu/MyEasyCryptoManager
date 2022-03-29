@@ -7,25 +7,36 @@
 
 import SwiftUI
 
-struct SignInSignUp: View {
+struct SigninSignupView: View {
     var body: some View {
-        VStack {
+        NavigationView {
             ZStack {
-                SignInSignUpHeadView()
+                SignInSignUpButtonsView()
+                    .background(
+                        RoundedRectangle(cornerRadius: 1, style: .continuous)
+                            .fill(.ultraThinMaterial)
+                            .ignoresSafeArea()
+                            .blur(radius: 1)
+                            .opacity(0.8)
+                    )
             }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(
+                Image("wallpaper2")
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .ignoresSafeArea()
+                    .opacity(0.5)
+            )
+            
         }
-        .background(
-            Image("wallpaper2")
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-                .ignoresSafeArea()
-                .opacity(0.35)
-        )
         .preferredColorScheme(.dark)
+        .navigationBarHidden(true)
+        .navigationBarBackButtonHidden(true)
     }
 }
 
-struct SignInSignUpHeadView: View {
+struct SignInSignUpButtonsView: View {
     
     @State var isSigninActive: Bool = true
     @Namespace var animation
@@ -65,24 +76,23 @@ struct SignInSignUpHeadView: View {
             
             ZStack {
                 if isSigninActive {
-                    SigninFormView(isSigninActive: $isSigninActive)
+                    SigninFormView(authenticationViewModel: AuthenticationViewModel(), isSigninActive: $isSigninActive)
                         .padding(.top, -200)
                 }
                 
                 if !isSigninActive {
-                    SignupFormView(isSigninActive: $isSigninActive)
+                    SignupFormView(authenticationViewModel: AuthenticationViewModel(), isSigninActive: $isSigninActive)
                         .padding(.top, -150)
                 }
             }
             
         }
-        
     }
 }
 
-struct SignInSignUp_Previews: PreviewProvider {
+struct SigninSignupView_Previews: PreviewProvider {
     static var previews: some View {
-        SignInSignUp()
+        SigninSignupView()
             .preferredColorScheme(.dark)
     }
 }
