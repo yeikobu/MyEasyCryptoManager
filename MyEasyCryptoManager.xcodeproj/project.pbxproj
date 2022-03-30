@@ -52,7 +52,13 @@
 		16C24BF827F22C8E00B70B24 /* SplashScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C24BF727F22C8E00B70B24 /* SplashScreenView.swift */; };
 		16C24BFB27F22F2A00B70B24 /* LottieImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C24BFA27F22F2A00B70B24 /* LottieImage.swift */; };
 		16C24BFD27F23CBA00B70B24 /* chartpurple.json in Resources */ = {isa = PBXBuildFile; fileRef = 16C24BFC27F23CBA00B70B24 /* chartpurple.json */; };
+		16C24C0827F3E97100B70B24 /* PortfolioVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C24C0727F3E97100B70B24 /* PortfolioVIew.swift */; };
+		16C24C0D27F3EE5100B70B24 /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = 16C24C0C27F3EE5100B70B24 /* SwiftUICharts */; };
 		16D821D327EE500400528869 /* AddAssetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16D821D227EE500400528869 /* AddAssetView.swift */; };
+		16F3110E27F4B5BC002A2844 /* CurrentBalanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F3110D27F4B5BC002A2844 /* CurrentBalanceView.swift */; };
+		16F3111027F4BB61002A2844 /* UserAssetsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F3110F27F4BB61002A2844 /* UserAssetsView.swift */; };
+		16F3111227F4BDA3002A2844 /* UserAssetCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F3111127F4BDA3002A2844 /* UserAssetCardView.swift */; };
+		16F3111627F4F9AD002A2844 /* Haptics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F3111527F4F9AD002A2844 /* Haptics.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -86,7 +92,12 @@
 		16C24BF727F22C8E00B70B24 /* SplashScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreenView.swift; sourceTree = "<group>"; };
 		16C24BFA27F22F2A00B70B24 /* LottieImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieImage.swift; sourceTree = "<group>"; };
 		16C24BFC27F23CBA00B70B24 /* chartpurple.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = chartpurple.json; sourceTree = "<group>"; };
+		16C24C0727F3E97100B70B24 /* PortfolioVIew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioVIew.swift; sourceTree = "<group>"; };
 		16D821D227EE500400528869 /* AddAssetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAssetView.swift; sourceTree = "<group>"; };
+		16F3110D27F4B5BC002A2844 /* CurrentBalanceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentBalanceView.swift; sourceTree = "<group>"; };
+		16F3110F27F4BB61002A2844 /* UserAssetsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAssetsView.swift; sourceTree = "<group>"; };
+		16F3111127F4BDA3002A2844 /* UserAssetCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAssetCardView.swift; sourceTree = "<group>"; };
+		16F3111527F4F9AD002A2844 /* Haptics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Haptics.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +105,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				16C24C0D27F3EE5100B70B24 /* SwiftUICharts in Frameworks */,
 				163A398A27E4039000F8D6F5 /* RefreshableScrollView in Frameworks */,
 				1671E70927EE8BD40090FD28 /* FirebaseAuth in Frameworks */,
 				1671E70D27EE8BD40090FD28 /* FirebaseFirestoreSwift-Beta in Frameworks */,
@@ -115,20 +127,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		163A398B27E5439200F8D6F5 /* Components */ = {
-			isa = PBXGroup;
-			children = (
-				163A398C27E543E200F8D6F5 /* BasicAssetInfoCardView.swift */,
-				163A398E27E561A900F8D6F5 /* CompleteAssetInfoCardView.swift */,
-				163A399427E9074100F8D6F5 /* ChartView.swift */,
-				16D821D227EE500400528869 /* AddAssetView.swift */,
-				16C24BDE27F0BCBE00B70B24 /* SigninFormView.swift */,
-				16C24BE127F0BE4C00B70B24 /* SignupFormView.swift */,
-				16C24BF027F1572800B70B24 /* ValidationFormView.swift */,
-			);
-			path = Components;
-			sourceTree = "<group>";
-		};
 		163A399627E90BB300F8D6F5 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -183,12 +181,11 @@
 		166BEED127D939EA00072115 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				166BEED427D93A6600072115 /* DashboardView.swift */,
-				166BEED727E279E100072115 /* CoinsListView.swift */,
-				16C24BDB27EFF09400B70B24 /* SigninSignupView.swift */,
-				163A398B27E5439200F8D6F5 /* Components */,
-				16C24BF227F20ABE00B70B24 /* SettingsView.swift */,
-				16C24BF727F22C8E00B70B24 /* SplashScreenView.swift */,
+				16C24C0027F3DD7600B70B24 /* Home */,
+				16C24C0427F3DE1800B70B24 /* SplashScreen */,
+				16C24C0327F3DDFF00B70B24 /* Settings */,
+				16C24C0227F3DDED00B70B24 /* Portfolio */,
+				16C24BFE27F3DD2000B70B24 /* SigninSignup */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -206,7 +203,7 @@
 		166BEED327D93A0400072115 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				16C24BE527F1149900B70B24 /* Service */,
+				16C24BE527F1149900B70B24 /* Authentication */,
 				16C24BE427F1148300B70B24 /* API Service */,
 			);
 			path = ViewModel;
@@ -221,7 +218,7 @@
 			path = "API Service";
 			sourceTree = "<group>";
 		};
-		16C24BE527F1149900B70B24 /* Service */ = {
+		16C24BE527F1149900B70B24 /* Authentication */ = {
 			isa = PBXGroup;
 			children = (
 				16C24BE627F1151C00B70B24 /* AuthenticationDatasource.swift */,
@@ -229,15 +226,99 @@
 				16C24BEA27F1158200B70B24 /* AuthenticationVIewModel.swift */,
 				16C24BEE27F1237900B70B24 /* FieldValidationViewModel.swift */,
 			);
-			path = Service;
+			path = Authentication;
 			sourceTree = "<group>";
 		};
 		16C24BF927F22F0B00B70B24 /* Tools */ = {
 			isa = PBXGroup;
 			children = (
 				16C24BFA27F22F2A00B70B24 /* LottieImage.swift */,
+				16F3111527F4F9AD002A2844 /* Haptics.swift */,
 			);
 			path = Tools;
+			sourceTree = "<group>";
+		};
+		16C24BFE27F3DD2000B70B24 /* SigninSignup */ = {
+			isa = PBXGroup;
+			children = (
+				16C24BDB27EFF09400B70B24 /* SigninSignupView.swift */,
+				16C24BFF27F3DD3800B70B24 /* Components */,
+			);
+			path = SigninSignup;
+			sourceTree = "<group>";
+		};
+		16C24BFF27F3DD3800B70B24 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				16C24BDE27F0BCBE00B70B24 /* SigninFormView.swift */,
+				16C24BE127F0BE4C00B70B24 /* SignupFormView.swift */,
+				16C24BF027F1572800B70B24 /* ValidationFormView.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		16C24C0027F3DD7600B70B24 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				166BEED427D93A6600072115 /* DashboardView.swift */,
+				16C24C0127F3DDBD00B70B24 /* Components */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		16C24C0127F3DDBD00B70B24 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				166BEED727E279E100072115 /* CoinsListView.swift */,
+				163A398C27E543E200F8D6F5 /* BasicAssetInfoCardView.swift */,
+				163A398E27E561A900F8D6F5 /* CompleteAssetInfoCardView.swift */,
+				163A399427E9074100F8D6F5 /* ChartView.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		16C24C0227F3DDED00B70B24 /* Portfolio */ = {
+			isa = PBXGroup;
+			children = (
+				16C24C0727F3E97100B70B24 /* PortfolioVIew.swift */,
+				16C24C0627F3DE4B00B70B24 /* Components */,
+			);
+			path = Portfolio;
+			sourceTree = "<group>";
+		};
+		16C24C0327F3DDFF00B70B24 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				16C24BF227F20ABE00B70B24 /* SettingsView.swift */,
+				16C24C0527F3DE2D00B70B24 /* Components */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		16C24C0427F3DE1800B70B24 /* SplashScreen */ = {
+			isa = PBXGroup;
+			children = (
+				16C24BF727F22C8E00B70B24 /* SplashScreenView.swift */,
+			);
+			path = SplashScreen;
+			sourceTree = "<group>";
+		};
+		16C24C0527F3DE2D00B70B24 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		16C24C0627F3DE4B00B70B24 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				16F3110D27F4B5BC002A2844 /* CurrentBalanceView.swift */,
+				16F3110F27F4BB61002A2844 /* UserAssetsView.swift */,
+				16F3111127F4BDA3002A2844 /* UserAssetCardView.swift */,
+				16D821D227EE500400528869 /* AddAssetView.swift */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -265,6 +346,7 @@
 				1671E70A27EE8BD40090FD28 /* FirebaseFirestore */,
 				1671E70C27EE8BD40090FD28 /* FirebaseFirestoreSwift-Beta */,
 				16C24BF527F22C6400B70B24 /* Lottie */,
+				16C24C0C27F3EE5100B70B24 /* SwiftUICharts */,
 			);
 			productName = "MyEasyCryptoManager (iOS)";
 			productReference = 166BEEB727D6E5DF00072115 /* MyEasyCryptoManager.app */;
@@ -319,6 +401,7 @@
 				163A398827E4039000F8D6F5 /* XCRemoteSwiftPackageReference "RefreshableScrollView" */,
 				1671E70327EE8BD40090FD28 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				16C24BF427F22C6300B70B24 /* XCRemoteSwiftPackageReference "lottie-ios" */,
+				16C24C0B27F3EE5000B70B24 /* XCRemoteSwiftPackageReference "ChartView" */,
 			);
 			productRefGroup = 166BEEB827D6E5DF00072115 /* Products */;
 			projectDirPath = "";
@@ -365,15 +448,20 @@
 				166BEED527D93A6600072115 /* DashboardView.swift in Sources */,
 				16C24BE227F0BE4C00B70B24 /* SignupFormView.swift in Sources */,
 				163A399327E56BCE00F8D6F5 /* GlobalMarketViewModel.swift in Sources */,
+				16F3111227F4BDA3002A2844 /* UserAssetCardView.swift in Sources */,
 				16C24BF127F1572800B70B24 /* ValidationFormView.swift in Sources */,
 				166BEECF27D9331F00072115 /* CoinsModel.swift in Sources */,
+				16F3110E27F4B5BC002A2844 /* CurrentBalanceView.swift in Sources */,
+				16F3111627F4F9AD002A2844 /* Haptics.swift in Sources */,
 				16C24BDC27EFF09400B70B24 /* SigninSignupView.swift in Sources */,
+				16F3111027F4BB61002A2844 /* UserAssetsView.swift in Sources */,
 				163A398F27E561A900F8D6F5 /* CompleteAssetInfoCardView.swift in Sources */,
 				16D821D327EE500400528869 /* AddAssetView.swift in Sources */,
 				166BEEC027D6E5DF00072115 /* MyEasyCryptoManagerApp.swift in Sources */,
 				16C24BEB27F1158200B70B24 /* AuthenticationVIewModel.swift in Sources */,
 				16C24BE727F1151C00B70B24 /* AuthenticationDatasource.swift in Sources */,
 				16C24BEF27F1237900B70B24 /* FieldValidationViewModel.swift in Sources */,
+				16C24C0827F3E97100B70B24 /* PortfolioVIew.swift in Sources */,
 				163A399527E9074100F8D6F5 /* ChartView.swift in Sources */,
 				163A398D27E543E200F8D6F5 /* BasicAssetInfoCardView.swift in Sources */,
 				163A399127E56AEB00F8D6F5 /* GlobalMarketModel.swift in Sources */,
@@ -698,6 +786,14 @@
 				kind = branch;
 			};
 		};
+		16C24C0B27F3EE5000B70B24 /* XCRemoteSwiftPackageReference "ChartView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/AppPear/ChartView";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -740,6 +836,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 16C24BF427F22C6300B70B24 /* XCRemoteSwiftPackageReference "lottie-ios" */;
 			productName = Lottie;
+		};
+		16C24C0C27F3EE5100B70B24 /* SwiftUICharts */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 16C24C0B27F3EE5000B70B24 /* XCRemoteSwiftPackageReference "ChartView" */;
+			productName = SwiftUICharts;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
