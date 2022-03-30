@@ -184,6 +184,9 @@ struct CoinsMarketListView: View {
                     complexSuccess()
                     try? await Task.sleep(nanoseconds: 1000000000)
                 }
+                .onAppear {
+                    coinViewModel.updateInfo()
+                }
             }
         }
         .onAppear {
