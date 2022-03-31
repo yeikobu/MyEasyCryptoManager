@@ -126,16 +126,19 @@ struct UserAssetCardView: View {
                 
                 VStack(alignment: .center) {
                     Button {
-                        withAnimation(.spring(response: 0.6, dampingFraction: 1)) {
-                            isTouched = true
-                            isAddedToPorfolio = true
+                        DispatchQueue.main.asyncAfter(deadline: .now() + buttonAnimationDuration) {
+                            withAnimation(.spring(response: 0.6, dampingFraction: 1)) {
+                                isTouched = true
+                            }
                         }
+                        
                         haptics.addFunctionVibration()
                         addButtonAnimate = true
                         
-                        DispatchQueue.main.asyncAfter(deadline: .now() + buttonAnimationDuration) {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                             withAnimation(.spring(response: buttonAnimationDuration, dampingFraction: 1)) {
                                 addButtonAnimate = false
+                                isAddedToPorfolio = true
                             }
                         }
                     } label: {

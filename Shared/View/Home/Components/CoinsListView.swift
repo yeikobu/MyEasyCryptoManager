@@ -291,7 +291,7 @@ struct CoinsDataListView: View {
                                 
                                 VStack(alignment: .center) {
                                     Button {
-//                                        complexSuccess()
+
                                         haptics.addFunctionVibration()
                                         addButtonAnimate = true
                                         

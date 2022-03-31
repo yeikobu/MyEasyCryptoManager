@@ -22,7 +22,7 @@ struct PortfolioVIew: View {
                     UserAssetsView(isAddedToPorfolio: $isAddedToPorfolio, isTouched: $isTouched)
                         .padding(.top)
                 }
-                .matchedGeometryEffect(id: "addasset", in: animation)
+                .matchedGeometryEffect(id: "add", in: animation)
                 .transition(.scale)
             } else {
                 VStack {

@@ -137,8 +137,10 @@ struct AddAssetView: View {
             }
             
             Button {
-                withAnimation(.spring(response: 0.4, dampingFraction: 1)) {
-                    isAddedToPorfolio = false
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.10) {
+                    withAnimation(.spring(response: 0.4, dampingFraction: 1)) {
+                        isAddedToPorfolio = false
+                    }
                 }
             } label: {
                 Text("Add")
