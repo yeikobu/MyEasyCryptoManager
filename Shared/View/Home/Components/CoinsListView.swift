@@ -25,6 +25,7 @@ struct CoinsMarketListView: View {
     
     @ObservedObject var coinViewModel: CoinInfoViewModel = CoinInfoViewModel()
     @ObservedObject var globalMarketViewModel: GlobalMarketViewModel = GlobalMarketViewModel()
+    @ObservedObject var haptics: Haptics = Haptics()
     let gridForm = [GridItem(.flexible())]
     @State var engine: CHHapticEngine?
     @State var mcapChangePercentage: Double = 0
@@ -181,13 +182,10 @@ struct CoinsMarketListView: View {
                 .refreshable {
                     coinViewModel.updateInfo()
                     getGlobalData()
-                    complexSuccess()
+                    haptics.scrollFunctionVibration()
                     try? await Task.sleep(nanoseconds: 1000000000)
                 }
             }
-        }
-        .onAppear {
-            prepareHaptics()
         }
     }
     
@@ -220,42 +218,11 @@ struct CoinsMarketListView: View {
             activeCryptos = activeCryptocurrencys
         }
     }
-    
-    func prepareHaptics() {
-        guard CHHapticEngine.capabilitiesForHardware().supportsHaptics else { return } //If divice dosen't support haptics
-        
-        do {
-            engine = try CHHapticEngine()
-            try engine?.start()
-        } catch {
-            print(error.localizedDescription)
-        }
-    }
-    
-    func complexSuccess() {
-        guard CHHapticEngine.capabilitiesForHardware().supportsHaptics else { return }
-        
-        var events = [CHHapticEvent]()
-        
-        for i in stride(from: 0, to: 0.5, by: 0.09) {
-            let intensity = CHHapticEventParameter(parameterID: .hapticIntensity, value: Float(i))
-            let sharpness = CHHapticEventParameter(parameterID: .hapticSharpness, value: Float(i))
-            let event = CHHapticEvent(eventType: .hapticTransient, parameters: [intensity, sharpness], relativeTime: 0)
-            events.append(event)
-        }
-        
-        do {
-            let pattern = try CHHapticPattern(events: events, parameters: [])
-            let player = try engine?.makePlayer(with: pattern)
-            try player?.start(atTime: 0)
-        } catch {
-            print(error.localizedDescription)
-        }
-    }
 }
 
 struct CoinsDataListView: View {
     
+    @ObservedObject var haptics: Haptics = Haptics()
     @State var name: String
     @State var marketCapRank: Int
     @State var symbol: String
@@ -324,7 +291,8 @@ struct CoinsDataListView: View {
                                 
                                 VStack(alignment: .center) {
                                     Button {
-                                        complexSuccess()
+
+                                        haptics.addFunctionVibration()
                                         addButtonAnimate = true
                                         
                                         DispatchQueue.main.asyncAfter(deadline: .now() + buttonAnimationDuration) {
@@ -605,54 +573,8 @@ struct CoinsDataListView: View {
             }
             
         }
-        .onAppear {
-            prepareHaptics()
-        }
     }
     
-    func addedToPortfolio() {
-        let generator = UINotificationFeedbackGenerator()
-        generator.notificationOccurred(.error)
-    }
-    
-    func prepareHaptics() {
-        guard CHHapticEngine.capabilitiesForHardware().supportsHaptics else { return } //If divice not support haptics
-        
-        do {
-            engine = try CHHapticEngine()
-            try engine?.start()
-        } catch {
-            print(error.localizedDescription)
-        }
-    }
-    
-    func complexSuccess() {
-        guard CHHapticEngine.capabilitiesForHardware().supportsHaptics else { return }
-        
-        var events = [CHHapticEvent]()
-        
-        for i in stride(from: 0, to: 0.5, by: 0.09) {
-            let intensity = CHHapticEventParameter(parameterID: .hapticIntensity, value: Float(i))
-            let sharpness = CHHapticEventParameter(parameterID: .hapticSharpness, value: Float(i))
-            let event = CHHapticEvent(eventType: .hapticTransient, parameters: [intensity, sharpness], relativeTime: 0)
-            events.append(event)
-        }
-        
-        for i in stride(from: 0.4, to: 0.5, by: 0.15) {
-            let intensity = CHHapticEventParameter(parameterID: .hapticIntensity, value: Float(1.2 - i))
-            let sharpness = CHHapticEventParameter(parameterID: .hapticSharpness, value: Float(1 - i))
-            let event = CHHapticEvent(eventType: .hapticTransient, parameters: [intensity, sharpness], relativeTime: 0.25)
-            events.append(event)
-        }
-        
-        do {
-            let pattern = try CHHapticPattern(events: events, parameters: [])
-            let player = try engine?.makePlayer(with: pattern)
-            try player?.start(atTime: 0)
-        } catch {
-            print(error.localizedDescription)
-        }
-    }
 }
 
 struct CoinsListView_Previews: PreviewProvider {

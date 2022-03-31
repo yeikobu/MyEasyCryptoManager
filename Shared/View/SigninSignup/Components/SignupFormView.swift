@@ -79,9 +79,9 @@ struct SignupFormView: View {
                         
                         //Password field
                         HStack {
-                            Image(systemName: "envelope")
+                            Image(systemName: "lock.slash")
                                 .foregroundColor(.white)
-                                .font(.system(size: 18))
+                                .font(.system(size: 20))
                                 .padding(.leading)
                             
                             ZStack(alignment: .leading) {
@@ -144,9 +144,9 @@ struct SignupFormView: View {
                         
                         //Password field
                         HStack {
-                            Image(systemName: "envelope")
+                            Image(systemName: "lock")
                                 .foregroundColor(.white)
-                                .font(.system(size: 18))
+                                .font(.system(size: 20))
                                 .padding(.leading)
                             
                             ZStack(alignment: .leading) {
