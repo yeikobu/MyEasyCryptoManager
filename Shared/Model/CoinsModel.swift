@@ -8,32 +8,32 @@
 import Foundation
 
 struct CoinsModel: Decodable, Hashable {
-    let id: String?
-    let symbol: String?
-    let name: String?
-    let image: String?
-    let currentPrice: Double?
-    let marketCap: Int?
-    let marketCapRank: Int?
-    let fullyDilutedValuation: Int?
-    let totalVolume: Double?
-    let high24H: Double?
-    let low24H: Double?
-    let priceChange24H: Double?
-    let priceChangePercentage24H: Double?
-    let marketCapChange24H: Double?
-    let marketCapChangePercentage24H: Double?
-    let circulatingSupply: Double?
-    let totalSupply: Double?
-    let maxSupply: Double?
-    let ath: Double?
-    let athChangePercentage: Double?
-    let athDate: String?
-    let atl: Double?
-    let atlChangePercentage: Double?
-    let atlDate: String?
-    let lastUpdated: String?
-    let sparkLine7D: SparkLine7D?
+    var id: String? = ""
+    var symbol: String? = ""
+    var name: String? = ""
+    var image: String? = ""
+    var currentPrice: Double? = 0
+    var marketCap: Int? = 0
+    var marketCapRank: Int? = 0
+    var fullyDilutedValuation: Int? = 0
+    var totalVolume: Double? = 0
+    var high24H: Double? = 0
+    var low24H: Double? = 0
+    var priceChange24H: Double? = 0
+    var priceChangePercentage24H: Double? = 0
+    var marketCapChange24H: Double? = 0
+    var marketCapChangePercentage24H: Double? = 0
+    var circulatingSupply: Double? = 0
+    var totalSupply: Double? = 0
+    var maxSupply: Double? = 0
+    var ath: Double? = 0
+    var athChangePercentage: Double? = 0
+    var athDate: String?  = ""
+    var atl: Double? = 0
+    var atlChangePercentage: Double? = 0
+    var atlDate: String? = ""
+    var lastUpdated: String? = ""
+    var sparkLine7D: SparkLine7D?
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -66,7 +66,7 @@ struct CoinsModel: Decodable, Hashable {
 }
 
 struct SparkLine7D: Decodable, Hashable {
-    let price: [Double]?
+    var price: [Double]? = []
     
     enum CodingKeys: String, CodingKey {
         case price 

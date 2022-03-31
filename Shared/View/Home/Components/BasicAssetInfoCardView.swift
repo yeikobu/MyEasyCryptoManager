@@ -155,6 +155,7 @@ struct BasicAssetInfoCardView: View {
             RoundedRectangle(cornerRadius: 10, style: .continuous)
                 .matchedGeometryEffect(id: "mask", in: animation)
         )
+        .padding(.horizontal, 10)
         .preferredColorScheme(.dark)
     }
 }
@@ -167,6 +168,6 @@ struct BasicAssetInfoCardView_Previews: PreviewProvider {
     @State static var priceChangePercentage = 2.0
     
     static var previews: some View {
-        BasicAssetInfoCardView(name: $name, marketCapRank: $marketCapRank, symbol: $name, priceChangePercentage: $priceChangePercentage, currentPrice: $priceChangePercentage, marketCap: $marketCapRank, imgURL: $name, totalVolume: $priceChangePercentage, high24H: $priceChangePercentage, low24H: $priceChangePercentage, maxSupply: $priceChangePercentage, totalSupply: $priceChangePercentage, circulatingSupply: $priceChangePercentage, ath: $priceChangePercentage, atl: $priceChangePercentage, isTouched: .constant(true), isListVisible: .constant(true), animation: animation)
+        BasicAssetInfoCardView(name: $name, marketCapRank: $marketCapRank, symbol: $name, priceChangePercentage: $priceChangePercentage, currentPrice: $priceChangePercentage, marketCap: $marketCapRank, imgURL: $name, totalVolume: $priceChangePercentage, high24H: $priceChangePercentage, low24H: $priceChangePercentage, maxSupply: $priceChangePercentage, totalSupply: $priceChangePercentage, circulatingSupply: $priceChangePercentage, ath: $priceChangePercentage, atl: $priceChangePercentage, isTouched: .constant(false), isListVisible: .constant(false), animation: animation)
     }
 }
