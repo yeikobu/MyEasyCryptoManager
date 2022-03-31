@@ -243,7 +243,6 @@ struct CoinsDataListView: View {
     @State var isAddedToPorfolio: Bool
     @State var addButtonAnimate: Bool = false
     @Namespace var animation
-    @State var engine: CHHapticEngine?
     @State var coin: CoinsModel
     
     let buttonAnimationDuration:  Double = 0.15

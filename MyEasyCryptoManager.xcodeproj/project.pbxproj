@@ -127,6 +127,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1603780027F64476006ADDA1 /* SigninSignupViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				16C24BE527F1149900B70B24 /* Authentication */,
+			);
+			path = SigninSignupViewModels;
+			sourceTree = "<group>";
+		};
+		1603780127F644B0006ADDA1 /* HomeViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				16C24BE427F1148300B70B24 /* API Service */,
+			);
+			path = HomeViewModels;
+			sourceTree = "<group>";
+		};
 		163A399627E90BB300F8D6F5 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -203,8 +219,8 @@
 		166BEED327D93A0400072115 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				16C24BE527F1149900B70B24 /* Authentication */,
-				16C24BE427F1148300B70B24 /* API Service */,
+				1603780127F644B0006ADDA1 /* HomeViewModels */,
+				1603780027F64476006ADDA1 /* SigninSignupViewModels */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
