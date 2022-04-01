@@ -155,7 +155,6 @@ struct BasicAssetInfoCardView: View {
             RoundedRectangle(cornerRadius: 10, style: .continuous)
                 .matchedGeometryEffect(id: "mask", in: animation)
         )
-        .padding(.horizontal, 10)
         .preferredColorScheme(.dark)
     }
 }

@@ -342,7 +342,6 @@ struct CompleteAssetInfoCardView: View {
                     .matchedGeometryEffect(id: "mask", in: animation)
             )
         }
-        .padding(.horizontal, 10)
     }
 }
 

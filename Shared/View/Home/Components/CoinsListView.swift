@@ -184,6 +184,8 @@ struct CoinsMarketListView: View {
                         haptics.scrollFunctionVibration()
                         try? await Task.sleep(nanoseconds: 1000000000)
                     }
+                    .cornerRadius(10)
+                    .padding(.horizontal, 10)
                 }
             }
         }
