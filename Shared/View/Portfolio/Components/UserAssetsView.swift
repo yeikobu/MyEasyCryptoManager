@@ -9,6 +9,8 @@ import SwiftUI
 
 struct UserAssetsView: View {
     
+    @ObservedObject var favouriteAssetViewModel: FavouriteAssetViewModel
+    let gridForm = [GridItem(.flexible())]
     @State var name: String = "Bitcoin"
     @State var marketCapRank: Int = 1
     @State var symbol: String = "btc"
@@ -34,18 +36,26 @@ struct UserAssetsView: View {
                 .padding(.bottom, -5)
             
             VStack {
-                UserAssetCardView(name: $name, marketCapRank: $marketCapRank, symbol: $symbol, priceChangePercentage: $priceChangePercentage, currentPrice: $currentPrice, marketCap: $marketCap, imgURL: $imgURL, animation: animation, addButtonAnimate: addButtonAnimate, isAddedToPorfolio: isAddedToPorfolio, isTouched: $isTouched)
+                LazyVGrid(columns: gridForm) {
+                    ForEach(favouriteAssetViewModel.favouriteCoins, id: \.self) { asset in
+                        UserAssetCardView(name: asset.id ?? "", symbol: asset.symbol ?? "", priceChangePercentage: 2, currentPrice: 45233, imgURL: asset.imgURL ?? "", purchaseQuantity: asset.purchaseQuantity ?? 0, animation: animation, addButtonAnimate: addButtonAnimate, isAddedToPorfolio: isAddedToPorfolio, isTouched: $isTouched)
+                    }
+                }
+               
                 
             }
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(.horizontal, 10)
+        .onAppear {
+            favouriteAssetViewModel.getAllAssets()
+        }
     }
 }
 
 struct UserAssetsView_Previews: PreviewProvider {
     static var previews: some View {
-        UserAssetsView(isAddedToPorfolio: .constant(false), isTouched: .constant(false))
+        UserAssetsView(favouriteAssetViewModel: FavouriteAssetViewModel(), isAddedToPorfolio: .constant(false), isTouched: .constant(false))
             .preferredColorScheme(.dark)
     }
 }
