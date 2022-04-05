@@ -12,13 +12,11 @@ import Kingfisher
 struct UserAssetCardView: View {
     
     @ObservedObject var haptics: Haptics = Haptics()
-    @Binding var name: String
-    @Binding var marketCapRank: Int
-    @Binding var symbol: String
-    @Binding var priceChangePercentage: Double
-    @Binding var currentPrice: Double
-    @Binding var marketCap: Int
-    @Binding var imgURL: String
+    @State var name: String
+    @State var symbol: String
+    @State var priceChangePercentage: Double
+    @State var currentPrice: Double
+    @State var imgURL: String
     var animation: Namespace.ID
     
     @State var addButtonAnimate: Bool = false
@@ -179,18 +177,18 @@ struct UserAssetCardView: View {
     }
 }
 
-struct UserAssetCardView_Previews: PreviewProvider {
-    
-    @Namespace static var animation
-    @State static var name = "Bitcoin"
-    @State static var img = "https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1547033579"
-    @State static var currentPrice = 47000.2
-    @State static var marketCapRank = 2
-    @State static var priceChangePercentage = 2.0
-    
-    static var previews: some View {
-        UserAssetCardView(name: $name, marketCapRank: $marketCapRank, symbol: $name, priceChangePercentage: $priceChangePercentage, currentPrice: $currentPrice, marketCap: $marketCapRank, imgURL: $img, animation: animation, addButtonAnimate: false, isAddedToPorfolio: false, isTouched: .constant(false))
-            .preferredColorScheme(.dark)
-    }
-}
+//struct UserAssetCardView_Previews: PreviewProvider {
+//
+//    @Namespace static var animation
+//    @State static var name = "Bitcoin"
+//    @State static var img = "https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1547033579"
+//    @State static var currentPrice = 47000.2
+//    @State static var marketCapRank = 2
+//    @State static var priceChangePercentage = 2.0
+//
+//    static var previews: some View {
+//        UserAssetCardView(name: $name, symbol: $name, priceChangePercentage: $priceChangePercentage, currentPrice: $currentPrice, imgURL: $img, animation: animation, addButtonAnimate: false, isAddedToPorfolio: false, isTouched: .constant(false))
+//            .preferredColorScheme(.dark)
+//    }
+//}
 

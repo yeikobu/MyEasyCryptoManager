@@ -8,6 +8,7 @@
 import SwiftUI
 import SwiftUICharts
 
+
 struct PortfolioVIew: View {
     
     @State var isTouched: Bool = false
@@ -40,10 +41,10 @@ struct PortfolioVIew: View {
                 if !isTouched && !isCardTouched {
                     ScrollView(showsIndicators: false) {
                         CurrentBalanceView()
-                        UserAssetsView(isAddedToPorfolio: $isAddedToPorfolio, isTouched: $isTouched)
+                        UserAssetsView(favouriteAssetViewModel: FavouriteAssetViewModel(), isAddedToPorfolio: $isAddedToPorfolio, isTouched: $isTouched)
                             .padding(.top)
                             .onTapGesture {
-                                self.isCardTouched = true
+//                                self.isCardTouched = true
                             }
                     }
                     .matchedGeometryEffect(id: "add", in: animation)

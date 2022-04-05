@@ -187,6 +187,7 @@ struct CoinsMarketListView: View {
                     .cornerRadius(10)
                     .padding(.horizontal, 10)
                 }
+                .ignoresSafeArea()
             }
         }
     }
