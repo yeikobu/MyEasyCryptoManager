@@ -17,6 +17,8 @@ struct UserAssetCardView: View {
     @State var priceChangePercentage: Double
     @State var currentPrice: Double
     @State var imgURL: String
+    @State var purchaseQuantity: Double
+    @State var quantityUSD: Double = 0
     var animation: Namespace.ID
     
     @State var addButtonAnimate: Bool = false
@@ -107,13 +109,13 @@ struct UserAssetCardView: View {
                 Spacer()
                 
                 VStack(alignment: .trailing) {
-                    Text("47,000.2")
+                    Text("\(quantityUSD.formatted())")
                         .matchedGeometryEffect(id: "holdingPrice", in: animation)
                         .foregroundColor(.white)
                         .font(.system(size: 14, weight: .bold, design: .rounded))
                         .padding(.bottom, -4)
                     
-                    Text("1")
+                    Text("\(purchaseQuantity.formatted())")
                         .matchedGeometryEffect(id: "holdingcoins", in: animation)
                         .foregroundColor(.white)
                         .font(.system(size: 14, weight: .bold, design: .rounded))
@@ -174,6 +176,12 @@ struct UserAssetCardView: View {
                 .matchedGeometryEffect(id: "mask", in: animation)
         )
         .preferredColorScheme(.dark)
+        .task {
+            quantityUSD = currentPrice * purchaseQuantity
+        }
+        .onAppear {
+            quantityUSD = currentPrice * purchaseQuantity
+        }
     }
 }
 

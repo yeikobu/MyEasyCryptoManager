@@ -11,6 +11,7 @@
 		1603780627FB5B53006ADDA1 /* FavouriteAssetsDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1603780527FB5B53006ADDA1 /* FavouriteAssetsDataSource.swift */; };
 		1603780827FB63E8006ADDA1 /* FavouriteAssetsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1603780727FB63E7006ADDA1 /* FavouriteAssetsRepository.swift */; };
 		1603780A27FB6503006ADDA1 /* FavouriteAssetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1603780927FB6503006ADDA1 /* FavouriteAssetViewModel.swift */; };
+		1603780F27FBDFD8006ADDA1 /* CoinModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1603780E27FBDFD8006ADDA1 /* CoinModel.swift */; };
 		163A398A27E4039000F8D6F5 /* RefreshableScrollView in Frameworks */ = {isa = PBXBuildFile; productRef = 163A398927E4039000F8D6F5 /* RefreshableScrollView */; };
 		163A398D27E543E200F8D6F5 /* BasicAssetInfoCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 163A398C27E543E200F8D6F5 /* BasicAssetInfoCardView.swift */; };
 		163A398F27E561A900F8D6F5 /* CompleteAssetInfoCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 163A398E27E561A900F8D6F5 /* CompleteAssetInfoCardView.swift */; };
@@ -70,6 +71,7 @@
 		1603780527FB5B53006ADDA1 /* FavouriteAssetsDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteAssetsDataSource.swift; sourceTree = "<group>"; };
 		1603780727FB63E7006ADDA1 /* FavouriteAssetsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteAssetsRepository.swift; sourceTree = "<group>"; };
 		1603780927FB6503006ADDA1 /* FavouriteAssetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteAssetViewModel.swift; sourceTree = "<group>"; };
+		1603780E27FBDFD8006ADDA1 /* CoinModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinModel.swift; sourceTree = "<group>"; };
 		163A398C27E543E200F8D6F5 /* BasicAssetInfoCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicAssetInfoCardView.swift; sourceTree = "<group>"; };
 		163A398E27E561A900F8D6F5 /* CompleteAssetInfoCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteAssetInfoCardView.swift; sourceTree = "<group>"; };
 		163A399027E56AEB00F8D6F5 /* GlobalMarketModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalMarketModel.swift; sourceTree = "<group>"; };
@@ -169,6 +171,20 @@
 			path = UserAssets;
 			sourceTree = "<group>";
 		};
+		1603780C27FBD9F2006ADDA1 /* Asset */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Asset;
+			sourceTree = "<group>";
+		};
+		1603780D27FBDFAA006ADDA1 /* AssetViewModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = AssetViewModels;
+			sourceTree = "<group>";
+		};
 		163A399627E90BB300F8D6F5 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -223,6 +239,7 @@
 		166BEED127D939EA00072115 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				1603780C27FBD9F2006ADDA1 /* Asset */,
 				16C24C0027F3DD7600B70B24 /* Home */,
 				16C24C0427F3DE1800B70B24 /* SplashScreen */,
 				16C24C0327F3DDFF00B70B24 /* Settings */,
@@ -239,6 +256,7 @@
 				163A399027E56AEB00F8D6F5 /* GlobalMarketModel.swift */,
 				16C24BEC27F116A400B70B24 /* UserModel.swift */,
 				1603780327FB5A02006ADDA1 /* FavouriteCoinModel.swift */,
+				1603780E27FBDFD8006ADDA1 /* CoinModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -246,6 +264,7 @@
 		166BEED327D93A0400072115 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				1603780D27FBDFAA006ADDA1 /* AssetViewModels */,
 				1603780227F91F33006ADDA1 /* PortfolioViewModels */,
 				1603780127F644B0006ADDA1 /* HomeViewModels */,
 				1603780027F64476006ADDA1 /* SigninSignupViewModels */,
@@ -504,6 +523,7 @@
 				16F3111027F4BB61002A2844 /* UserAssetsView.swift in Sources */,
 				163A398F27E561A900F8D6F5 /* CompleteAssetInfoCardView.swift in Sources */,
 				16D821D327EE500400528869 /* AddAssetView.swift in Sources */,
+				1603780F27FBDFD8006ADDA1 /* CoinModel.swift in Sources */,
 				166BEEC027D6E5DF00072115 /* MyEasyCryptoManagerApp.swift in Sources */,
 				16C24BEB27F1158200B70B24 /* AuthenticationVIewModel.swift in Sources */,
 				1603780427FB5A02006ADDA1 /* FavouriteCoinModel.swift in Sources */,

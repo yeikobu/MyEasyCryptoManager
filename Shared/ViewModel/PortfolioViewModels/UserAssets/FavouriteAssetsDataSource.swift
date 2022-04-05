@@ -39,4 +39,16 @@ final class FavouriteAssetsDataSource {
             completionBlock(.success(assets))
         }
     }
+    
+    func addFavouriteAsset(id: String, name: String, symbol: String, imgURL: String, purchasePrice: Double, purchaseQuantity: Double, completionBlock: @escaping (Result<FavouriteCoinModel, Error>) -> Void) {
+        let favouriteAsset = FavouriteCoinModel(id: id, name: name, symbol: symbol, imgURL: imgURL, purchasePrice: purchasePrice, purchaseQuantity: purchaseQuantity)
+        
+        do {
+            try database.collection(collection).document(uid).collection(subCollection).document(String(id)).setData(from: favouriteAsset)
+            
+            completionBlock(.success(favouriteAsset))
+        } catch {
+            completionBlock(.failure(error))
+        }
+    }
 }

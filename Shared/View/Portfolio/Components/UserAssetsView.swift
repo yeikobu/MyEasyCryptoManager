@@ -38,7 +38,7 @@ struct UserAssetsView: View {
             VStack {
                 LazyVGrid(columns: gridForm) {
                     ForEach(favouriteAssetViewModel.favouriteCoins, id: \.self) { asset in
-                        UserAssetCardView(name: asset.id ?? "", symbol: asset.symbol ?? "", priceChangePercentage: asset.priceChangePercentage ?? 0, currentPrice: asset.currentPrice ?? 0, imgURL: asset.imgURL ?? "", animation: animation, addButtonAnimate: addButtonAnimate, isAddedToPorfolio: isAddedToPorfolio, isTouched: $isTouched)
+                        UserAssetCardView(name: asset.id ?? "", symbol: asset.symbol ?? "", priceChangePercentage: 2, currentPrice: 45233, imgURL: asset.imgURL ?? "", purchaseQuantity: asset.purchaseQuantity ?? 0, animation: animation, addButtonAnimate: addButtonAnimate, isAddedToPorfolio: isAddedToPorfolio, isTouched: $isTouched)
                     }
                 }
                
