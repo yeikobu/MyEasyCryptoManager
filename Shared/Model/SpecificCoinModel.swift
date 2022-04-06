@@ -8,30 +8,31 @@
 import Foundation
 
 // MARK: - CoinModel
-struct SpecificCoinModel {
-    let id: String
-    let symbol, name: String
-    let assetPlatformID: NSNull
-    let blockTimeInMinutes: Int
-    let hashingAlgorithm: String
-    let categories: [String]
-    let publicNotice: NSNull
-    let additionalNotices: [Any?]
-    let localization, coinModelDescription: Tion
-    let links: Links
-    let image: AssetImage
-    let countryOrigin, genesisDate: String
-    let sentimentVotesUpPercentage, sentimentVotesDownPercentage: Double
-    let marketCapRank, coingeckoRank: Int
-    let coingeckoScore, developerScore, communityScore, liquidityScore: Double
-    let publicInterestScore: Int
-    let marketData: MarketData
-    let communityData: CommunityData
-    let developerData: DeveloperData
-    let publicInterestStats: PublicInterestStats
-    let statusUpdates: [Any?]
-    let lastUpdated: String
-    let tickers: [Ticker]
+struct SpecificCoinModel: Decodable {
+    let id: String?
+    let symbol, name: String?
+    let assetPlatformID: String?
+    let platforms: Platforms?
+    let blockTimeInMinutes: Int?
+    let hashingAlgorithm: String?
+    let categories: [String?]
+    let publicNotice: String?
+    let additionalNotices: [String?]
+    let localization, coinModelDescription: Tion?
+    let links: Links?
+    let image: AssetImage?
+    let countryOrigin, genesisDate: String?
+    let sentimentVotesUpPercentage, sentimentVotesDownPercentage: Double?
+    let marketCapRank, coingeckoRank: Int?
+    let coingeckoScore, developerScore, communityScore, liquidityScore: Double?
+    let publicInterestScore: Int?
+    let marketData: MarketData?
+    let communityData: CommunityData?
+    let developerData: DeveloperData?
+    let publicInterestStats: PublicInterestStats?
+    let statusUpdates: [String?]
+    let lastUpdated: String?
+    let tickers: [Ticker?]
     
     enum CodingKeys: String, CodingKey {
         case id, symbol, name
@@ -67,16 +68,16 @@ struct SpecificCoinModel {
 }
 
 // MARK: - Tion
-struct Tion {
-    let en, de, es, fr: String
-    let it, pl, ro, hu: String
-    let nl, pt, sv, vi: String
-    let tr, ru, ja, zh: String
-    let zhTw, ko, ar, th: String
-    let id, cs, da, el: String
-    let hi, no, sk, uk: String
-    let he, fi, bg, hr: String
-    let lt, sl: String
+struct Tion: Decodable {
+    let en, de, es, fr: String?
+    let it, pl, ro, hu: String?
+    let nl, pt, sv, vi: String?
+    let tr, ru, ja, zh: String?
+    let zhTw, ko, ar, th: String?
+    let id, cs, da, el: String?
+    let hi, no, sk, uk: String?
+    let he, fi, bg, hr: String?
+    let lt, sl: String?
     
     enum CodingKeys: String, CodingKey {
         case en, de, es, fr, it, pl, ro, hu, nl, pt, sv, vi, tr, ru, ja, zh
@@ -86,12 +87,12 @@ struct Tion {
 }
 
 // MARK: - CommunityData
-struct CommunityData {
-    let facebookLikes: NSNull
-    let twitterFollowers: Int
-    let redditAveragePosts48H, redditAverageComments48H: Double
-    let redditSubscribers, redditAccountsActive48H: Int
-    let telegramChannelUserCount: NSNull
+struct CommunityData: Decodable {
+    let facebookLikes: Int?
+    let twitterFollowers: Int?
+    let redditAveragePosts48H, redditAverageComments48H: Double?
+    let redditSubscribers, redditAccountsActive48H: Int?
+    let telegramChannelUserCount: Int?
     
     enum CodingKeys: String, CodingKey {
         case facebookLikes = "facebook_likes"
@@ -105,12 +106,12 @@ struct CommunityData {
 }
 
 // MARK: - DeveloperData
-struct DeveloperData {
-    let forks, stars, subscribers, totalIssues: Int
-    let closedIssues, pullRequestsMerged, pullRequestContributors: Int
-    let codeAdditionsDeletions4_Weeks: CodeAdditionsDeletions4_Weeks
-    let commitCount4_Weeks: Int
-    let last4_WeeksCommitActivitySeries: [Int]
+struct DeveloperData: Decodable {
+    let forks, stars, subscribers, totalIssues: Int?
+    let closedIssues, pullRequestsMerged, pullRequestContributors: Int?
+    let codeAdditionsDeletions4_Weeks: CodeAdditionsDeletions4_Weeks?
+    let commitCount4_Weeks: Int?
+    let last4_WeeksCommitActivitySeries: [Int?]
     
     enum CodingKeys: String, CodingKey {
         case forks, stars, subscribers
@@ -125,26 +126,26 @@ struct DeveloperData {
 }
 
 // MARK: - CodeAdditionsDeletions4_Weeks
-struct CodeAdditionsDeletions4_Weeks {
-    let additions, deletions: Int
+struct CodeAdditionsDeletions4_Weeks: Decodable {
+    let additions, deletions: Int?
 }
 
 // MARK: - Image
-struct AssetImage {
-    let thumb, small, large: String
+struct AssetImage: Decodable {
+    let thumb, small, large: String?
 }
 
 //// MARK: - Links
-struct Links {
-    let homepage: [String]
-    let blockchainSite, officialForumURL: [String]
-    let chatURL, announcementURL: [String]
-    let twitterScreenName: String
-    let facebookUsername: String
-    let bitcointalkThreadIdentifier: NSNull
-    let telegramChannelIdentifier: String
-    let subredditURL: String
-    let reposURL: ReposURL
+struct Links: Decodable {
+    let homepage: [String?]
+    let blockchainSite, officialForumURL: [String?]
+    let chatURL, announcementURL: [String?]
+    let twitterScreenName: String?
+    let facebookUsername: String?
+    let bitcointalkThreadIdentifier: Double?
+    let telegramChannelIdentifier: String?
+    let subredditURL: String?
+    let reposURL: ReposURL?
     
     enum CodingKeys: String, CodingKey {
         case homepage
@@ -162,30 +163,31 @@ struct Links {
 }
 
 // MARK: - ReposURL
-struct ReposURL {
-    let github: [String]
-    let bitbucket: [Any?]
+struct ReposURL: Decodable {
+    let github: [String?]
+    let bitbucket: [String?]
 }
 
 // MARK: - MarketData
-struct MarketData {
+struct MarketData: Decodable {
     let currentPrice: [String: Double]
-    let totalValueLocked, mcapToTvlRatio, fdvToTvlRatio, roi: NSNull
+    let totalValueLocked, mcapToTvlRatio, fdvToTvlRatio: Double?
+    let roi: Roi?
     let ath, athChangePercentage: [String: Double]
     let athDate: [String: String]
     let atl, atlChangePercentage: [String: Double]
     let atlDate: [String: String]
     let marketCap: [String: Double]
-    let marketCapRank: Int
+    let marketCapRank: Int?
     let fullyDilutedValuation, totalVolume, high24H, low24H: [String: Double]
-    let priceChange24H, priceChangePercentage24H, priceChangePercentage7D, priceChangePercentage14D: Double
-    let priceChangePercentage30D, priceChangePercentage60D, priceChangePercentage200D, priceChangePercentage1Y: Double
-    let marketCapChange24H, marketCapChangePercentage24H: Double
+    let priceChange24H, priceChangePercentage24H, priceChangePercentage7D, priceChangePercentage14D: Double?
+    let priceChangePercentage30D, priceChangePercentage60D, priceChangePercentage200D, priceChangePercentage1Y: Double?
+    let marketCapChange24H, marketCapChangePercentage24H: Double?
     let priceChange24HInCurrency, priceChangePercentage1HInCurrency, priceChangePercentage24HInCurrency, priceChangePercentage7DInCurrency: [String: Double]
     let priceChangePercentage14DInCurrency, priceChangePercentage30DInCurrency, priceChangePercentage60DInCurrency, priceChangePercentage200DInCurrency: [String: Double]
     let priceChangePercentage1YInCurrency, marketCapChange24HInCurrency, marketCapChangePercentage24HInCurrency: [String: Double]
-    let totalSupply, maxSupply, circulatingSupply: Int
-    let lastUpdated: String
+    let totalSupply, maxSupply, circulatingSupply: Double?
+    let lastUpdated: String?
     
     enum CodingKeys: String, CodingKey {
         case currentPrice = "current_price"
@@ -233,8 +235,8 @@ struct MarketData {
 }
 
 // MARK: - Platforms
-struct Platforms {
-    let empty: String
+struct Platforms: Decodable {
+    let empty: String?
     
     enum CodingKeys: String, CodingKey {
         case empty = ""
@@ -242,9 +244,9 @@ struct Platforms {
 }
 
 // MARK: - PublicInterestStats
-struct PublicInterestStats {
-    let alexaRank: Int
-    let bingMatches: NSNull
+struct PublicInterestStats: Decodable {
+    let alexaRank: Int?
+    let bingMatches: Int?
     
     enum CodingKeys: String, CodingKey {
         case alexaRank = "alexa_rank"
@@ -253,24 +255,24 @@ struct PublicInterestStats {
 }
 
 // MARK: - Ticker
-struct Ticker {
-    let base, target: String
-    let market: Market
-    let last, volume: Double
-    let convertedLast, convertedVolume: [String: Double]
-    let trustScore: String
-    let bidAskSpreadPercentage: Double
-    let timestamp, lastTradedAt, lastFetchAt: Date
-    let isAnomaly, isStale: Bool
+struct Ticker: Decodable {
+    let base, target: String?
+    let market: Market?
+    let last, volume: Double?
+//    let convertedLast, convertedVolume: [String?: Double?]
+    let trustScore: String?
+    let bidAskSpreadPercentage: Double?
+    let timestamp, lastTradedAt, lastFetchAt: String?
+    let isAnomaly, isStale: Bool?
     let tradeURL: String?
-    let tokenInfoURL: NSNull
-    let coinID: String
+    let tokenInfoURL: String?
+    let coinID: String?
     let targetCoinID: String?
     
     enum CodingKeys: String, CodingKey {
         case base, target, market, last, volume
-        case convertedLast = "converted_last"
-        case convertedVolume = "converted_volume"
+//        case convertedLast = "converted_last"
+//        case convertedVolume = "converted_volume"
         case trustScore = "trust_score"
         case bidAskSpreadPercentage = "bid_ask_spread_percentage"
         case timestamp
@@ -286,12 +288,24 @@ struct Ticker {
 }
 
 // MARK: - Market
-struct Market {
-    let name, identifier: String
-    let hasTradingIncentive: Bool
+struct Market: Decodable {
+    let name, identifier: String?
+    let hasTradingIncentive: Bool?
     
     enum CodingKeys: String, CodingKey {
         case name, identifier
         case hasTradingIncentive = "has_trading_incentive"
+    }
+}
+
+
+// MARK: - Roi
+struct Roi: Decodable {
+    let times: Double?
+    let currency: String?
+    let percentage: Double?
+    
+    enum CodingKeys: String, CodingKey {
+        case times, currency, percentage
     }
 }

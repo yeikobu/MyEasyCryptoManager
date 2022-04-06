@@ -17,13 +17,11 @@ final class FavouriteAssetViewModel: ObservableObject {
     }
     
     func getAllAssets() {
-        print("View model")
         favouriteAssetsRepository.getAllAssets { [weak self] result in
             switch result {
             case .success(let favouriteCoinModel):
                 self?.favouriteCoins = favouriteCoinModel
-                print(favouriteCoinModel)
-                print("View model")
+                
             case .failure(let error):
                 self?.messageError = error.localizedDescription
             }

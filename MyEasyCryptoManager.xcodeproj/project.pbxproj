@@ -59,6 +59,7 @@
 		16C24C0827F3E97100B70B24 /* PortfolioVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C24C0727F3E97100B70B24 /* PortfolioVIew.swift */; };
 		16C24C0D27F3EE5100B70B24 /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = 16C24C0C27F3EE5100B70B24 /* SwiftUICharts */; };
 		16CC89EA27FCF05B00E194A7 /* SpecificCoinModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16CC89E927FCF05B00E194A7 /* SpecificCoinModel.swift */; };
+		16CC89F327FD1ADF00E194A7 /* SpecificCoinViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16CC89F227FD1ADF00E194A7 /* SpecificCoinViewModel.swift */; };
 		16D821D327EE500400528869 /* AddAssetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16D821D227EE500400528869 /* AddAssetView.swift */; };
 		16F3110E27F4B5BC002A2844 /* CurrentBalanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F3110D27F4B5BC002A2844 /* CurrentBalanceView.swift */; };
 		16F3111027F4BB61002A2844 /* UserAssetsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F3110F27F4BB61002A2844 /* UserAssetsView.swift */; };
@@ -103,6 +104,7 @@
 		16C24BFC27F23CBA00B70B24 /* chartpurple.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = chartpurple.json; sourceTree = "<group>"; };
 		16C24C0727F3E97100B70B24 /* PortfolioVIew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioVIew.swift; sourceTree = "<group>"; };
 		16CC89E927FCF05B00E194A7 /* SpecificCoinModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecificCoinModel.swift; sourceTree = "<group>"; };
+		16CC89F227FD1ADF00E194A7 /* SpecificCoinViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecificCoinViewModel.swift; sourceTree = "<group>"; };
 		16D821D227EE500400528869 /* AddAssetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAssetView.swift; sourceTree = "<group>"; };
 		16F3110D27F4B5BC002A2844 /* CurrentBalanceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentBalanceView.swift; sourceTree = "<group>"; };
 		16F3110F27F4BB61002A2844 /* UserAssetsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAssetsView.swift; sourceTree = "<group>"; };
@@ -181,6 +183,7 @@
 		1603780D27FBDFAA006ADDA1 /* AssetViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				16CC89F127FD1A9D00E194A7 /* API Service */,
 			);
 			path = AssetViewModels;
 			sourceTree = "<group>";
@@ -384,6 +387,14 @@
 			path = Components;
 			sourceTree = "<group>";
 		};
+		16CC89F127FD1A9D00E194A7 /* API Service */ = {
+			isa = PBXGroup;
+			children = (
+				16CC89F227FD1ADF00E194A7 /* SpecificCoinViewModel.swift */,
+			);
+			path = "API Service";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -512,6 +523,7 @@
 				16C24BE227F0BE4C00B70B24 /* SignupFormView.swift in Sources */,
 				1603780A27FB6503006ADDA1 /* FavouriteAssetViewModel.swift in Sources */,
 				163A399327E56BCE00F8D6F5 /* GlobalMarketViewModel.swift in Sources */,
+				16CC89F327FD1ADF00E194A7 /* SpecificCoinViewModel.swift in Sources */,
 				16F3111227F4BDA3002A2844 /* UserAssetCardView.swift in Sources */,
 				16C24BF127F1572800B70B24 /* ValidationFormView.swift in Sources */,
 				166BEECF27D9331F00072115 /* CoinsModel.swift in Sources */,

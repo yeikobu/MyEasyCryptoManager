@@ -41,7 +41,7 @@ struct PortfolioVIew: View {
                 if !isTouched && !isCardTouched {
                     ScrollView(showsIndicators: false) {
                         CurrentBalanceView()
-                        UserAssetsView(favouriteAssetViewModel: FavouriteAssetViewModel(), isAddedToPorfolio: $isAddedToPorfolio, isTouched: $isTouched)
+                        UserAssetsView(specificCoinVM: SpecificCoinViewModel(selectedCoin: ""), favouriteAssetViewModel: FavouriteAssetViewModel(), isAddedToPorfolio: $isAddedToPorfolio, isTouched: $isTouched)
                             .padding(.top)
                             .onTapGesture {
 //                                self.isCardTouched = true

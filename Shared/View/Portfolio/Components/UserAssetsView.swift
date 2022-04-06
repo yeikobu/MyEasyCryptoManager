@@ -9,15 +9,9 @@ import SwiftUI
 
 struct UserAssetsView: View {
     
+    @ObservedObject var specificCoinVM: SpecificCoinViewModel
     @ObservedObject var favouriteAssetViewModel: FavouriteAssetViewModel
     let gridForm = [GridItem(.flexible())]
-    @State var name: String = "Bitcoin"
-    @State var marketCapRank: Int = 1
-    @State var symbol: String = "btc"
-    @State var priceChangePercentage: Double = 2.1
-    @State var currentPrice: Double = 47000.2
-    @State var marketCap: Int = 8000000000
-    @State var imgURL: String = "https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1547033579"
     @Binding var isAddedToPorfolio: Bool
     @State var addButtonAnimate: Bool = false
     @Namespace var animation
@@ -27,6 +21,7 @@ struct UserAssetsView: View {
     var addButtonScale: CGFloat {
         isTouched ? 1.5 : 0.8
     }
+    var currentPrice: Double = 0
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -38,11 +33,14 @@ struct UserAssetsView: View {
             VStack {
                 LazyVGrid(columns: gridForm) {
                     ForEach(favouriteAssetViewModel.favouriteCoins, id: \.self) { asset in
-                        UserAssetCardView(name: asset.id ?? "", symbol: asset.symbol ?? "", priceChangePercentage: 2, currentPrice: 45233, imgURL: asset.imgURL ?? "", purchaseQuantity: asset.purchaseQuantity ?? 0, animation: animation, addButtonAnimate: addButtonAnimate, isAddedToPorfolio: isAddedToPorfolio, isTouched: $isTouched)
+                        UserAssetCardView(name: asset.name ?? "", symbol: asset.symbol ?? "", priceChangePercentage: 2, currentPrice: 45233, imgURL: asset.imgURL ?? "", purchaseQuantity: asset.purchaseQuantity ?? 0, animation: animation, addButtonAnimate: addButtonAnimate, isAddedToPorfolio: isAddedToPorfolio, isTouched: $isTouched)
+                            .onAppear {
+                                if let selectedCoin = asset.name {
+                                    SpecificCoinViewModel(selectedCoin: selectedCoin)
+                                }
+                            }
                     }
                 }
-               
-                
             }
         }
         .frame(maxWidth: .infinity, alignment: .leading)
@@ -55,7 +53,7 @@ struct UserAssetsView: View {
 
 struct UserAssetsView_Previews: PreviewProvider {
     static var previews: some View {
-        UserAssetsView(favouriteAssetViewModel: FavouriteAssetViewModel(), isAddedToPorfolio: .constant(false), isTouched: .constant(false))
+        UserAssetsView(specificCoinVM: SpecificCoinViewModel(selectedCoin: ""), favouriteAssetViewModel: FavouriteAssetViewModel(), isAddedToPorfolio: .constant(false), isTouched: .constant(false))
             .preferredColorScheme(.dark)
     }
 }
