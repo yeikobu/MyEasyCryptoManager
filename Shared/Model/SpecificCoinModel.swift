@@ -8,7 +8,7 @@
 import Foundation
 
 // MARK: - CoinModel
-struct SpecificCoinModel: Decodable {
+struct SpecificCoinModel: Decodable, Hashable {
     let id: String?
     let symbol, name: String?
     let assetPlatformID: String?
@@ -68,7 +68,7 @@ struct SpecificCoinModel: Decodable {
 }
 
 // MARK: - Tion
-struct Tion: Decodable {
+struct Tion: Decodable, Hashable {
     let en, de, es, fr: String?
     let it, pl, ro, hu: String?
     let nl, pt, sv, vi: String?
@@ -87,7 +87,7 @@ struct Tion: Decodable {
 }
 
 // MARK: - CommunityData
-struct CommunityData: Decodable {
+struct CommunityData: Decodable, Hashable  {
     let facebookLikes: Int?
     let twitterFollowers: Int?
     let redditAveragePosts48H, redditAverageComments48H: Double?
@@ -106,7 +106,7 @@ struct CommunityData: Decodable {
 }
 
 // MARK: - DeveloperData
-struct DeveloperData: Decodable {
+struct DeveloperData: Decodable, Hashable  {
     let forks, stars, subscribers, totalIssues: Int?
     let closedIssues, pullRequestsMerged, pullRequestContributors: Int?
     let codeAdditionsDeletions4_Weeks: CodeAdditionsDeletions4_Weeks?
@@ -126,17 +126,17 @@ struct DeveloperData: Decodable {
 }
 
 // MARK: - CodeAdditionsDeletions4_Weeks
-struct CodeAdditionsDeletions4_Weeks: Decodable {
+struct CodeAdditionsDeletions4_Weeks: Decodable, Hashable  {
     let additions, deletions: Int?
 }
 
 // MARK: - Image
-struct AssetImage: Decodable {
+struct AssetImage: Decodable, Hashable  {
     let thumb, small, large: String?
 }
 
 //// MARK: - Links
-struct Links: Decodable {
+struct Links: Decodable, Hashable  {
     let homepage: [String?]
     let blockchainSite, officialForumURL: [String?]
     let chatURL, announcementURL: [String?]
@@ -163,13 +163,13 @@ struct Links: Decodable {
 }
 
 // MARK: - ReposURL
-struct ReposURL: Decodable {
+struct ReposURL: Decodable, Hashable  {
     let github: [String?]
     let bitbucket: [String?]
 }
 
 // MARK: - MarketData
-struct MarketData: Decodable {
+struct MarketData: Decodable, Hashable  {
     let currentPrice: [String: Double]
     let totalValueLocked, mcapToTvlRatio, fdvToTvlRatio: Double?
     let roi: Roi?
@@ -235,7 +235,7 @@ struct MarketData: Decodable {
 }
 
 // MARK: - Platforms
-struct Platforms: Decodable {
+struct Platforms: Decodable, Hashable  {
     let empty: String?
     
     enum CodingKeys: String, CodingKey {
@@ -244,7 +244,7 @@ struct Platforms: Decodable {
 }
 
 // MARK: - PublicInterestStats
-struct PublicInterestStats: Decodable {
+struct PublicInterestStats: Decodable, Hashable  {
     let alexaRank: Int?
     let bingMatches: Int?
     
@@ -255,7 +255,7 @@ struct PublicInterestStats: Decodable {
 }
 
 // MARK: - Ticker
-struct Ticker: Decodable {
+struct Ticker: Decodable, Hashable  {
     let base, target: String?
     let market: Market?
     let last, volume: Double?
@@ -288,7 +288,7 @@ struct Ticker: Decodable {
 }
 
 // MARK: - Market
-struct Market: Decodable {
+struct Market: Decodable, Hashable  {
     let name, identifier: String?
     let hasTradingIncentive: Bool?
     
@@ -300,7 +300,7 @@ struct Market: Decodable {
 
 
 // MARK: - Roi
-struct Roi: Decodable {
+struct Roi: Decodable, Hashable  {
     let times: Double?
     let currency: String?
     let percentage: Double?
