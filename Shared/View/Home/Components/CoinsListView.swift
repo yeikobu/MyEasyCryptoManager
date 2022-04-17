@@ -31,10 +31,10 @@ struct CoinsMarketListView: View {
     @State var totalMarketCap: Double = 0
     @State var totalVolume: Double = 0
     @State var activeCryptos: Int = 0
+    @State var isMoreInfoClicked: Bool = false
     
     var body: some View {
         ZStack {
-                
             VStack(alignment: .leading) {
                 
                 HStack {
@@ -260,7 +260,7 @@ struct CoinsDataListView: View {
                 if !isTouched {
                     BasicAssetInfoCardView(name: $name, marketCapRank: $marketCapRank, symbol: $symbol, priceChangePercentage: $priceChangePercentage, currentPrice: $currentPrice, marketCap: $marketCap, imgURL: $imgURL, totalVolume: $totalVolume, high24H: $high24H, low24H: $low24H, maxSupply: $maxSupply, totalSupply: $totalSupply, circulatingSupply: $circulatingSupply, ath: $ath, atl: $atl, isTouched: $isTouched, isListVisible: $isListVisible, animation: animation)
                 } else {
-                    CompleteAssetInfoCardView(name: self.name, marketCapRank: self.marketCapRank, symbol: self.symbol, priceChangePercentage: self.priceChangePercentage, currentPrice: self.currentPrice, marketCap: self.marketCap, imgURL: self.imgURL, totalVolume: self.totalVolume, high24H: self.high24H, low24H: self.low24H, maxSupply: self.maxSupply, totalSupply: self.totalSupply, circulatingSupply: self.circulatingSupply, ath: self.ath, atl: self.atl, isTouched: self.$isTouched, isListVisible: self.$isListVisible, animation: animation, coin: self.coin, isAddedToPorfolio: self.$isAddedToPorfolio)
+                    CompleteAssetInfoCardView(name: self.name, marketCapRank: self.marketCapRank, symbol: self.symbol, priceChangePercentage: self.priceChangePercentage, currentPrice: self.currentPrice, marketCap: self.marketCap, imgURL: self.imgURL, totalVolume: self.totalVolume, high24H: self.high24H, low24H: self.low24H, maxSupply: self.maxSupply, totalSupply: self.totalSupply, circulatingSupply: self.circulatingSupply, ath: self.ath, atl: self.atl, isTouched: self.$isTouched, isListVisible: self.$isListVisible, animation: animation, coin: self.coin, isMoreInfoClicked: false, isAddedToPorfolio: self.$isAddedToPorfolio)
                 }
                 
             }

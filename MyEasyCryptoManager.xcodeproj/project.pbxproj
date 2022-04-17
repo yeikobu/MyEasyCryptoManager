@@ -11,6 +11,7 @@
 		1603780627FB5B53006ADDA1 /* FavouriteAssetsDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1603780527FB5B53006ADDA1 /* FavouriteAssetsDataSource.swift */; };
 		1603780827FB63E8006ADDA1 /* FavouriteAssetsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1603780727FB63E7006ADDA1 /* FavouriteAssetsRepository.swift */; };
 		1603780A27FB6503006ADDA1 /* FavouriteAssetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1603780927FB6503006ADDA1 /* FavouriteAssetViewModel.swift */; };
+		161864E62808D8DD008F1CF4 /* SpecificAssetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 161864E52808D8DD008F1CF4 /* SpecificAssetView.swift */; };
 		163A398A27E4039000F8D6F5 /* RefreshableScrollView in Frameworks */ = {isa = PBXBuildFile; productRef = 163A398927E4039000F8D6F5 /* RefreshableScrollView */; };
 		163A398D27E543E200F8D6F5 /* BasicAssetInfoCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 163A398C27E543E200F8D6F5 /* BasicAssetInfoCardView.swift */; };
 		163A398F27E561A900F8D6F5 /* CompleteAssetInfoCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 163A398E27E561A900F8D6F5 /* CompleteAssetInfoCardView.swift */; };
@@ -74,6 +75,7 @@
 		1603780527FB5B53006ADDA1 /* FavouriteAssetsDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteAssetsDataSource.swift; sourceTree = "<group>"; };
 		1603780727FB63E7006ADDA1 /* FavouriteAssetsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteAssetsRepository.swift; sourceTree = "<group>"; };
 		1603780927FB6503006ADDA1 /* FavouriteAssetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteAssetViewModel.swift; sourceTree = "<group>"; };
+		161864E52808D8DD008F1CF4 /* SpecificAssetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecificAssetView.swift; sourceTree = "<group>"; };
 		163A398C27E543E200F8D6F5 /* BasicAssetInfoCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicAssetInfoCardView.swift; sourceTree = "<group>"; };
 		163A398E27E561A900F8D6F5 /* CompleteAssetInfoCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteAssetInfoCardView.swift; sourceTree = "<group>"; };
 		163A399027E56AEB00F8D6F5 /* GlobalMarketModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalMarketModel.swift; sourceTree = "<group>"; };
@@ -180,6 +182,7 @@
 		1603780C27FBD9F2006ADDA1 /* Asset */ = {
 			isa = PBXGroup;
 			children = (
+				161864E52808D8DD008F1CF4 /* SpecificAssetView.swift */,
 			);
 			path = Asset;
 			sourceTree = "<group>";
@@ -547,6 +550,7 @@
 				16C24BE727F1151C00B70B24 /* AuthenticationDatasource.swift in Sources */,
 				16C24BEF27F1237900B70B24 /* FieldValidationViewModel.swift in Sources */,
 				16C24C0827F3E97100B70B24 /* PortfolioVIew.swift in Sources */,
+				161864E62808D8DD008F1CF4 /* SpecificAssetView.swift in Sources */,
 				163A399527E9074100F8D6F5 /* ChartView.swift in Sources */,
 				163A398D27E543E200F8D6F5 /* BasicAssetInfoCardView.swift in Sources */,
 				163A399127E56AEB00F8D6F5 /* GlobalMarketModel.swift in Sources */,
