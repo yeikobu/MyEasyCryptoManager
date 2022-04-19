@@ -82,6 +82,7 @@ struct AssetView: View {
     
     @State var isRedMorePressed: Bool = false
     @Namespace var animation
+    let gridForm = [GridItem(.flexible())]
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -203,198 +204,204 @@ struct AssetView: View {
                 }
             }
             
-            ScrollView {
-                VStack {
-                    ChartView(coin: coin)
-                        .padding(.top, 20)
-                        .padding(.bottom, 10)
-                }
-                .padding(5)
-                
-                VStack(alignment: .leading) {
-                    Text("About \(self.name.capitalizingFirstLetter()): ")
-                        .font(.system(size: 12, design: .rounded))
+            RefreshableScrollView(showsIndicators: false) {
+                LazyVGrid(columns: gridForm) {
+                    VStack {
+                        ChartView(coin: coin)
+                            .padding(.top, 20)
+                            .padding(.bottom, 10)
+                    }
+                    .padding(5)
                     
-                    if !isRedMorePressed {
-                        Text("\(specificCoinViewModel.selectedCoinDescription ?? "")")
-                            .matchedGeometryEffect(id: "description", in: animation)
-                            .font(.system(size: 10, design: .rounded))
-                            .frame(maxHeight: 100)
-                        
-                        Text("Show more...")
-                            .matchedGeometryEffect(id: "showMoreLess", in: animation)
-                            .foregroundColor(.white)
+                    VStack(alignment: .leading) {
+                        Text("About \(self.name.capitalizingFirstLetter()): ")
                             .font(.system(size: 12, design: .rounded))
-                            .frame(maxWidth: .infinity, alignment: .trailing)
-                            .onTapGesture {
-                                withAnimation() {
-                                    self.isRedMorePressed = true
+                        
+                        if !isRedMorePressed {
+                            Text("\(specificCoinViewModel.selectedCoinDescription ?? "")")
+                                .matchedGeometryEffect(id: "description", in: animation)
+                                .font(.system(size: 10, design: .rounded))
+                                .frame(maxHeight: 100)
+                            
+                            Text("Show more...")
+                                .matchedGeometryEffect(id: "showMoreLess", in: animation)
+                                .foregroundColor(.white)
+                                .font(.system(size: 12, design: .rounded))
+                                .frame(maxWidth: .infinity, alignment: .trailing)
+                                .onTapGesture {
+                                    withAnimation() {
+                                        self.isRedMorePressed = true
+                                    }
                                 }
-                            }
-                    } else {
-                        Text("\(specificCoinViewModel.selectedCoinDescription ?? "")")
-                            .matchedGeometryEffect(id: "CompleteDescription", in: animation)
-                            .font(.system(size: 10, design: .rounded))
-                            .frame(maxHeight: .infinity)
-                        
-                        Text("Show less...")
-                            .matchedGeometryEffect(id: "showMoreLess", in: animation)
-                            .foregroundColor(.white)
-                            .font(.system(size: 12, design: .rounded))
-                            .frame(maxWidth: .infinity, alignment: .trailing)
-                            .onTapGesture {
-                                withAnimation() {
-                                    self.isRedMorePressed = false
+                        } else {
+                            Text("\(specificCoinViewModel.selectedCoinDescription ?? "")")
+                                .matchedGeometryEffect(id: "CompleteDescription", in: animation)
+                                .font(.system(size: 10, design: .rounded))
+                                .frame(maxHeight: .infinity)
+                            
+                            Text("Show less...")
+                                .matchedGeometryEffect(id: "showMoreLess", in: animation)
+                                .foregroundColor(.white)
+                                .font(.system(size: 12, design: .rounded))
+                                .frame(maxWidth: .infinity, alignment: .trailing)
+                                .onTapGesture {
+                                    withAnimation() {
+                                        self.isRedMorePressed = false
+                                    }
                                 }
+                        }
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.horizontal, 10)
+                    
+                    VStack {
+                        VStack {
+                            Text("Asset information")
+                                .foregroundColor(.white)
+                                .font(.system(size: 12, design: .rounded))
+                                .padding(.top)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                        }
+                        
+                        
+                        HStack {
+                            Text("Market Cap")
+                                .foregroundColor(.gray)
+                                .font(.system(size: 9))
+                            Spacer()
+                            Text("$\((specificCoinViewModel.selectedSpecificCoinModel?.marketData?.marketCap["usd"] ?? 0).formatted())")
+                                .foregroundColor(.white)
+                                .font(.system(size: 9))
+                        }
+                        .padding(.top, 1)
+                        
+                        Divider()
+                            .background(.gray)
+                        
+                        HStack {
+                            Text("Total volume")
+                                .foregroundColor(.gray)
+                                .font(.system(size: 9))
+                            Spacer()
+                            Text("$\(Int(specificCoinViewModel.selectedSpecificCoinModel?.marketData?.totalVolume["usd"] ?? 0))")
+                                .foregroundColor(.white)
+                                .font(.system(size: 9))
+                        }
+                        .padding(.top, 1)
+                        
+                        Divider()
+                            .background(.gray)
+                        
+                        VStack {
+                            HStack {
+                                Text("24H High Price")
+                                    .foregroundColor(.gray)
+                                    .font(.system(size: 9))
+                                Spacer()
+                                Text("$\((specificCoinViewModel.selectedSpecificCoinModel?.marketData?.high24H["usd"] ?? 0).formatted())")
+                                    .foregroundColor(.white)
+                                    .font(.system(size: 9))
                             }
+                            .padding(.top, 1)
+                            
+                            Divider()
+                                .background(.gray)
+                            
+                            HStack {
+                                Text("24H Low Price")
+                                    .foregroundColor(.gray)
+                                    .font(.system(size: 9))
+                                Spacer()
+                                Text("$\((specificCoinViewModel.selectedSpecificCoinModel?.marketData?.low24H["usd"] ?? 0).formatted())")
+                                    .foregroundColor(.white)
+                                    .font(.system(size: 9))
+                            }
+                            .padding(.top, 1)
+                            
+                            Divider()
+                                .background(.gray)
+                        }
+                        
+                        VStack {
+                            HStack {
+                                Text("Max. Supply")
+                                    .foregroundColor(.gray)
+                                    .font(.system(size: 9))
+                                Spacer()
+                                Text("\(Int(specificCoinViewModel.selectedSpecificCoinModel?.marketData?.maxSupply ?? 0))")
+                                    .foregroundColor(.white)
+                                    .font(.system(size: 9))
+                            }
+                            .padding(.top, 1)
+                            
+                            Divider()
+                                .background(.gray)
+                            
+                            HStack {
+                                Text("Total Supply")
+                                    .foregroundColor(.gray)
+                                    .font(.system(size: 9))
+                                Spacer()
+                                Text("\(Int(specificCoinViewModel.selectedSpecificCoinModel?.marketData?.totalSupply ?? 0))")
+                                    .foregroundColor(.white)
+                                    .font(.system(size: 9))
+                            }
+                            .padding(.top, 1)
+                            
+                            Divider()
+                                .background(.gray)
+                            
+                            HStack {
+                                Text("Circulating Supply")
+                                    .foregroundColor(.gray)
+                                    .font(.system(size: 9))
+                                Spacer()
+                                Text("\(Int(specificCoinViewModel.selectedSpecificCoinModel?.marketData?.circulatingSupply ?? 0))")
+                                    .foregroundColor(.white)
+                                    .font(.system(size: 9))
+                            }
+                            .padding(.top, 1)
+                            
+                            Divider()
+                                .background(.gray)
+                        }
+                        
+                        VStack {
+                            HStack {
+                                Text("All time high")
+                                    .foregroundColor(.white)
+                                    .font(.system(size: 9))
+                                Spacer()
+                                Text("$\((specificCoinViewModel.selectedSpecificCoinModel?.marketData?.ath["usd"] ?? 0).formatted())")
+                                    .foregroundColor(.white)
+                                    .font(.system(size: 9))
+                            }
+                            .padding(.top, 1)
+                            
+                            Divider()
+                                .background(.gray)
+                            
+                            HStack {
+                                Text("All time low")
+                                    .foregroundColor(.gray)
+                                    .font(.system(size: 9))
+                                Spacer()
+                                Text("$\((specificCoinViewModel.selectedSpecificCoinModel?.marketData?.atl["usd"] ?? 0).formatted())")
+                                    .foregroundColor(.white)
+                                    .font(.system(size: 9))
+                            }
+                            .padding(.top, 1)
+                        }
                     }
+                    .padding(.horizontal, 10)
                 }
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.horizontal, 10)
-                
-                VStack {
-                    VStack {
-                        Text("Asset information")
-                            .foregroundColor(.white)
-                            .font(.system(size: 12, design: .rounded))
-                            .padding(.top)
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                    }
-                    
-                    
-                    HStack {
-                        Text("Market Cap")
-                            .foregroundColor(.gray)
-                            .font(.system(size: 9))
-                        Spacer()
-                        Text("$\((specificCoinViewModel.selectedSpecificCoinModel?.marketData?.marketCap["usd"] ?? 0).formatted())")
-                            .foregroundColor(.white)
-                            .font(.system(size: 9))
-                    }
-                    .padding(.top, 1)
-                    
-                    Divider()
-                        .background(.gray)
-                    
-                    HStack {
-                        Text("Total volume")
-                            .foregroundColor(.gray)
-                            .font(.system(size: 9))
-                        Spacer()
-                        Text("$\(Int(specificCoinViewModel.selectedSpecificCoinModel?.marketData?.totalVolume["usd"] ?? 0))")
-                            .foregroundColor(.white)
-                            .font(.system(size: 9))
-                    }
-                    .padding(.top, 1)
-                    
-                    Divider()
-                        .background(.gray)
-                    
-                    VStack {
-                        HStack {
-                            Text("24H High Price")
-                                .foregroundColor(.gray)
-                                .font(.system(size: 9))
-                            Spacer()
-                            Text("$\((specificCoinViewModel.selectedSpecificCoinModel?.marketData?.high24H["usd"] ?? 0).formatted())")
-                                .foregroundColor(.white)
-                                .font(.system(size: 9))
-                        }
-                        .padding(.top, 1)
-                        
-                        Divider()
-                            .background(.gray)
-                        
-                        HStack {
-                            Text("24H Low Price")
-                                .foregroundColor(.gray)
-                                .font(.system(size: 9))
-                            Spacer()
-                            Text("$\((specificCoinViewModel.selectedSpecificCoinModel?.marketData?.low24H["usd"] ?? 0).formatted())")
-                                .foregroundColor(.white)
-                                .font(.system(size: 9))
-                        }
-                        .padding(.top, 1)
-                        
-                        Divider()
-                            .background(.gray)
-                    }
-                    
-                    VStack {
-                        HStack {
-                            Text("Max. Supply")
-                                .foregroundColor(.gray)
-                                .font(.system(size: 9))
-                            Spacer()
-                            Text("\(Int(specificCoinViewModel.selectedSpecificCoinModel?.marketData?.maxSupply ?? 0))")
-                                .foregroundColor(.white)
-                                .font(.system(size: 9))
-                        }
-                        .padding(.top, 1)
-                        
-                        Divider()
-                            .background(.gray)
-                        
-                        HStack {
-                            Text("Total Supply")
-                                .foregroundColor(.gray)
-                                .font(.system(size: 9))
-                            Spacer()
-                            Text("\(Int(specificCoinViewModel.selectedSpecificCoinModel?.marketData?.totalSupply ?? 0))")
-                                .foregroundColor(.white)
-                                .font(.system(size: 9))
-                        }
-                        .padding(.top, 1)
-                        
-                        Divider()
-                            .background(.gray)
-                        
-                        HStack {
-                            Text("Circulating Supply")
-                                .foregroundColor(.gray)
-                                .font(.system(size: 9))
-                            Spacer()
-                            Text("\(Int(specificCoinViewModel.selectedSpecificCoinModel?.marketData?.circulatingSupply ?? 0))")
-                                .foregroundColor(.white)
-                                .font(.system(size: 9))
-                        }
-                        .padding(.top, 1)
-                        
-                        Divider()
-                            .background(.gray)
-                    }
-                    
-                    VStack {
-                        HStack {
-                            Text("All time high")
-                                .foregroundColor(.white)
-                                .font(.system(size: 9))
-                            Spacer()
-                            Text("$\((specificCoinViewModel.selectedSpecificCoinModel?.marketData?.ath["usd"] ?? 0).formatted())")
-                                .foregroundColor(.white)
-                                .font(.system(size: 9))
-                        }
-                        .padding(.top, 1)
-                        
-                        Divider()
-                            .background(.gray)
-                        
-                        HStack {
-                            Text("All time low")
-                                .foregroundColor(.gray)
-                                .font(.system(size: 9))
-                            Spacer()
-                            Text("$\((specificCoinViewModel.selectedSpecificCoinModel?.marketData?.atl["usd"] ?? 0).formatted())")
-                                .foregroundColor(.white)
-                                .font(.system(size: 9))
-                        }
-                        .padding(.top, 1)
-                    }
-                }
-                .padding(.horizontal, 10)
+                .cornerRadius(15)
             }
-            .cornerRadius(15)
-            
+            .refreshable {
+                specificCoinViewModel.getSpecificCoin(selectedCoin: self.id)
+                haptics.scrollFunctionVibration()
+                try? await Task.sleep(nanoseconds: 1000000000)
+            }
         }
         .padding(.vertical, 10)
         .background(
