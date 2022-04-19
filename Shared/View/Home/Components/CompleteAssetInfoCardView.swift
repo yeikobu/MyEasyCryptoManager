@@ -366,11 +366,11 @@ struct CompleteAssetInfoCardView: View {
                     .matchedGeometryEffect(id: "mask", in: animation)
             )
             
-            NavigationLink(isActive: $isMoreInfoClicked) {
-                SpecificAssetView(name: $name, imgURL: $imgURL, marketCapRank: $marketCapRank, id: $id, coin: self.coin)
-            } label: {
-                EmptyView()
-            }
+//            NavigationLink(isActive: $isMoreInfoClicked) {
+//                SpecificAssetView(name: $name, imgURL: $imgURL, marketCapRank: $marketCapRank, id: $id, coin: self.coin)
+//            } label: {
+//                EmptyView()
+//            }
         }
     }
 }

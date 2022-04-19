@@ -174,6 +174,7 @@ struct CoinsMarketListView: View {
                                     .task {
                                         getGlobalData()
                                     }
+                                    .listRowInsets(EdgeInsets())
                             }
                         }
                     }
@@ -261,7 +262,8 @@ struct CoinsDataListView: View {
                 if !isTouched {
                     BasicAssetInfoCardView(name: $name, marketCapRank: $marketCapRank, symbol: $symbol, priceChangePercentage: $priceChangePercentage, currentPrice: $currentPrice, marketCap: $marketCap, imgURL: $imgURL, totalVolume: $totalVolume, high24H: $high24H, low24H: $low24H, maxSupply: $maxSupply, totalSupply: $totalSupply, circulatingSupply: $circulatingSupply, ath: $ath, atl: $atl, isTouched: $isTouched, isListVisible: $isListVisible, animation: animation)
                 } else {
-                    CompleteAssetInfoCardView(name: self.name, marketCapRank: self.marketCapRank, symbol: self.symbol, priceChangePercentage: self.priceChangePercentage, currentPrice: self.currentPrice, marketCap: self.marketCap, imgURL: self.imgURL, totalVolume: self.totalVolume, high24H: self.high24H, low24H: self.low24H, maxSupply: self.maxSupply, totalSupply: self.totalSupply, circulatingSupply: self.circulatingSupply, ath: self.ath, atl: self.atl, isTouched: self.$isTouched, isListVisible: self.$isListVisible, animation: animation, coin: self.coin, isMoreInfoClicked: false, isAddedToPorfolio: self.$isAddedToPorfolio, id: self.id)
+//                    CompleteAssetInfoCardView(name: self.name, marketCapRank: self.marketCapRank, symbol: self.symbol, priceChangePercentage: self.priceChangePercentage, currentPrice: self.currentPrice, marketCap: self.marketCap, imgURL: self.imgURL, totalVolume: self.totalVolume, high24H: self.high24H, low24H: self.low24H, maxSupply: self.maxSupply, totalSupply: self.totalSupply, circulatingSupply: self.circulatingSupply, ath: self.ath, atl: self.atl, isTouched: self.$isTouched, isListVisible: self.$isListVisible, animation: animation, coin: self.coin, isMoreInfoClicked: false, isAddedToPorfolio: self.$isAddedToPorfolio, id: self.id)
+                    SpecificAssetView(imgURL: self.imgURL, name: self.name, marketCapRank: self.marketCapRank, symbol: self.symbol, coin: coin, id: self.id, isMoreInfoClicked: false, isAddedToPorfolio: self.$isAddedToPorfolio, isTouched: self.$isTouched, isListVisible: self.$isListVisible, animation: animation)
                 }
                 
             }

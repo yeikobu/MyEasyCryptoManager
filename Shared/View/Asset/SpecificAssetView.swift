@@ -11,57 +11,6 @@ import RefreshableScrollView
 
 struct SpecificAssetView: View {
     
-    @Binding var name: String
-    @Binding var imgURL: String
-    @Binding var marketCapRank: Int
-    @Binding var id: String
-    @State var coin: CoinsModel
-    @State var isBackButtonPressed: Bool = false
-    
-    var body: some View {
-        NavigationView {
-            ZStack(alignment: .topLeading) {
-                
-                AssetView(imgURL: imgURL, name: name, marketCapRank: 1, symbol: "BTC", coin: self.coin, id: id, isTouched: .constant(false), isAddedToPorfolio: .constant(false), isListVisible: .constant(false))
-                    .padding(.top, 25)
-                
-                Button {
-                    
-                } label: {
-                    Image(systemName: "chevron.backward")
-                        .foregroundColor(.white)
-                        .font(.system(size: 22, weight: .bold, design: .rounded))
-                        .padding(.bottom, 10)
-                        .padding(.horizontal, 10)
-                }
-
-                NavigationLink(isActive: $isBackButtonPressed) {
-                    DashboardView()
-                } label: {
-                    EmptyView()
-                }
-
-            }
-            .padding(.top, 10)
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(
-                Image("wallpaper2")
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .ignoresSafeArea()
-                    .opacity(0.4)
-            )
-            .preferredColorScheme(.dark)
-            .navigationBarHidden(true)
-            .navigationBarBackButtonHidden(false)
-        }
-        .navigationBarHidden(true)
-        .navigationBarBackButtonHidden(true)
-    }
-}
-    
-struct AssetView: View {
-    
     @ObservedObject var haptics: Haptics = Haptics()
     @ObservedObject var specificCoinViewModel: SpecificCoinViewModel = SpecificCoinViewModel()
     @State var imgURL: String
@@ -71,9 +20,10 @@ struct AssetView: View {
     @State var coin: CoinsModel
     @State var id: String
     
-    @Binding var isTouched: Bool
-    @Binding var isAddedToPorfolio: Bool
     @State var addButtonAnimate: Bool = false
+    @State var isMoreInfoClicked: Bool
+    @Binding var isAddedToPorfolio: Bool
+    @Binding var isTouched: Bool
     @Binding var isListVisible: Bool
     var addButtonScale: CGFloat {
         isTouched ? 1.5 : 0.8
@@ -81,7 +31,7 @@ struct AssetView: View {
     let buttonAnimationDuration:  Double = 0.15
     
     @State var isRedMorePressed: Bool = false
-    @Namespace var animation
+    var animation: Namespace.ID
     let gridForm = [GridItem(.flexible())]
     
     var body: some View {
@@ -91,24 +41,28 @@ struct AssetView: View {
                 KFImage(URL(string: imgURL))
                     .resizable()
                     .aspectRatio(contentMode: .fit)
+                    .matchedGeometryEffect(id: "icon", in: animation)
                     .frame(width: 40, height: 40)
                 
                 Spacer()
                 Spacer()
                 
                 Text("\(marketCapRank)")
+                    .matchedGeometryEffect(id: "rank", in: animation)
                     .foregroundColor(.white)
-                    .font(.system(size: 15, weight: .bold, design: .rounded))
+                    .font(.system(size: 9, weight: .bold, design: .rounded))
                     .padding(5)
                     .padding(.top, 3)
                 
-                Text(name.capitalizingFirstLetter())
+                Text(name)
                     .foregroundColor(.white)
-                    .font(.system(size: 22, weight: .bold, design: .rounded))
+                    .font(.system(size: 15, weight: .bold, design: .rounded))
+                    .matchedGeometryEffect(id: "name", in: animation)
                     
                 Text(symbol.uppercased())
+                    .matchedGeometryEffect(id: "symbol", in: animation)
                     .foregroundColor(.white)
-                    .font(.system(size: 15, weight: .regular, design: .rounded))
+                    .font(.system(size: 12, weight: .regular, design: .rounded))
                     .padding(.top, 5)
                 
                 Spacer()
@@ -139,8 +93,10 @@ struct AssetView: View {
                                 .font(.system(size: 8))
                         }
                     }
+                    .matchedGeometryEffect(id: "favorite", in: animation)
                     .padding(.leading, 5)
                     .scaleEffect(addButtonAnimate ? addButtonScale : 1)
+                    .offset(x: isListVisible ? 0 : 200, y: 0)
                 }
                 .frame(width: 40)
                 
@@ -149,14 +105,15 @@ struct AssetView: View {
             .frame(maxWidth: .infinity, minHeight: 50,alignment: .leading)
             .padding(.horizontal, 10)
             
-            //Price and change price stack
+            //Price and change price vstack
             VStack {
                 HStack {
                     Spacer()
                     
                     Text("$\((specificCoinViewModel.selectedCoinCurrentPrice ?? 0).formatted())")
+                        .matchedGeometryEffect(id: "currentPrice", in: animation)
                         .foregroundColor(.white)
-                        .font(.system(size: 22, weight: .black, design: .rounded))
+                        .font(.system(size: 14, weight: .black, design: .rounded))
                         .padding(.bottom, 2)
                     
                     VStack {
@@ -199,209 +156,222 @@ struct AssetView: View {
                             }
                         }
                     }
-                    
+                    .matchedGeometryEffect(id: "priceChangePercentage", in: animation)
                     Spacer()
                 }
             }
             
-            RefreshableScrollView(showsIndicators: false) {
-                LazyVGrid(columns: gridForm) {
-                    VStack {
-                        ChartView(coin: coin)
-                            .padding(.top, 20)
-                            .padding(.bottom, 10)
-                    }
-                    .padding(5)
+            VStack {
+                ChartView(coin: coin)
+                    .offset(x: isListVisible ? 0 : -100, y: isListVisible ? 0 : 0)
+                    .padding(.top, 20)
+                    .padding(.bottom, 10)
+                    .matchedGeometryEffect(id: "chart", in: animation)
+            }
+            .padding(5)
+            
+            VStack(alignment: .leading) {
+                Text("About \(self.name.capitalizingFirstLetter()): ")
+                    .font(.system(size: 12, design: .rounded))
+                    .offset(x: isListVisible ? 0 : -100, y: 0)
+                
+                if !isRedMorePressed {
+                    Text("\(specificCoinViewModel.selectedCoinDescription ?? "")")
+                        .matchedGeometryEffect(id: "description", in: animation)
+                        .font(.system(size: 10, design: .rounded))
+                        .frame(maxHeight: 100)
+                        .offset(x: isListVisible ? 0 : -100, y: 0)
                     
-                    VStack(alignment: .leading) {
-                        Text("About \(self.name.capitalizingFirstLetter()): ")
-                            .font(.system(size: 12, design: .rounded))
-                        
-                        if !isRedMorePressed {
-                            Text("\(specificCoinViewModel.selectedCoinDescription ?? "")")
-                                .matchedGeometryEffect(id: "description", in: animation)
-                                .font(.system(size: 10, design: .rounded))
-                                .frame(maxHeight: 100)
-                            
-                            Text("Show more...")
-                                .matchedGeometryEffect(id: "showMoreLess", in: animation)
-                                .foregroundColor(.white)
-                                .font(.system(size: 12, design: .rounded))
-                                .frame(maxWidth: .infinity, alignment: .trailing)
-                                .onTapGesture {
-                                    withAnimation() {
-                                        self.isRedMorePressed = true
-                                    }
-                                }
-                        } else {
-                            Text("\(specificCoinViewModel.selectedCoinDescription ?? "")")
-                                .matchedGeometryEffect(id: "CompleteDescription", in: animation)
-                                .font(.system(size: 10, design: .rounded))
-                                .frame(maxHeight: .infinity)
-                            
-                            Text("Show less...")
-                                .matchedGeometryEffect(id: "showMoreLess", in: animation)
-                                .foregroundColor(.white)
-                                .font(.system(size: 12, design: .rounded))
-                                .frame(maxWidth: .infinity, alignment: .trailing)
-                                .onTapGesture {
-                                    withAnimation() {
-                                        self.isRedMorePressed = false
-                                    }
-                                }
+                    Text("Show more...")
+                        .matchedGeometryEffect(id: "showMoreLess", in: animation)
+                        .foregroundColor(.white)
+                        .font(.system(size: 12, design: .rounded))
+                        .frame(maxWidth: .infinity, alignment: .trailing)
+                        .onTapGesture {
+                            withAnimation() {
+                                self.isRedMorePressed = true
+                            }
                         }
-                    }
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.horizontal, 10)
+                        .offset(x: isListVisible ? 0 : 100, y: 0)
+                } else {
+                    Text("\(specificCoinViewModel.selectedCoinDescription ?? "")")
+                        .matchedGeometryEffect(id: "CompleteDescription", in: animation)
+                        .font(.system(size: 10, design: .rounded))
+                        .frame(maxHeight: .infinity)
                     
-                    VStack {
-                        VStack {
-                            Text("Asset information")
-                                .foregroundColor(.white)
-                                .font(.system(size: 12, design: .rounded))
-                                .padding(.top)
-                                .frame(maxWidth: .infinity, alignment: .leading)
+                    Text("Show less...")
+                        .matchedGeometryEffect(id: "showMoreLess", in: animation)
+                        .foregroundColor(.white)
+                        .font(.system(size: 12, design: .rounded))
+                        .frame(maxWidth: .infinity, alignment: .trailing)
+                        .onTapGesture {
+                            withAnimation() {
+                                self.isRedMorePressed = false
+                            }
                         }
-                        
-                        
-                        HStack {
-                            Text("Market Cap")
-                                .foregroundColor(.gray)
-                                .font(.system(size: 9))
-                            Spacer()
-                            Text("$\((specificCoinViewModel.selectedSpecificCoinModel?.marketData?.marketCap["usd"] ?? 0).formatted())")
-                                .foregroundColor(.white)
-                                .font(.system(size: 9))
-                        }
-                        .padding(.top, 1)
-                        
-                        Divider()
-                            .background(.gray)
-                        
-                        HStack {
-                            Text("Total volume")
-                                .foregroundColor(.gray)
-                                .font(.system(size: 9))
-                            Spacer()
-                            Text("$\(Int(specificCoinViewModel.selectedSpecificCoinModel?.marketData?.totalVolume["usd"] ?? 0))")
-                                .foregroundColor(.white)
-                                .font(.system(size: 9))
-                        }
-                        .padding(.top, 1)
-                        
-                        Divider()
-                            .background(.gray)
-                        
-                        VStack {
-                            HStack {
-                                Text("24H High Price")
-                                    .foregroundColor(.gray)
-                                    .font(.system(size: 9))
-                                Spacer()
-                                Text("$\((specificCoinViewModel.selectedSpecificCoinModel?.marketData?.high24H["usd"] ?? 0).formatted())")
-                                    .foregroundColor(.white)
-                                    .font(.system(size: 9))
-                            }
-                            .padding(.top, 1)
-                            
-                            Divider()
-                                .background(.gray)
-                            
-                            HStack {
-                                Text("24H Low Price")
-                                    .foregroundColor(.gray)
-                                    .font(.system(size: 9))
-                                Spacer()
-                                Text("$\((specificCoinViewModel.selectedSpecificCoinModel?.marketData?.low24H["usd"] ?? 0).formatted())")
-                                    .foregroundColor(.white)
-                                    .font(.system(size: 9))
-                            }
-                            .padding(.top, 1)
-                            
-                            Divider()
-                                .background(.gray)
-                        }
-                        
-                        VStack {
-                            HStack {
-                                Text("Max. Supply")
-                                    .foregroundColor(.gray)
-                                    .font(.system(size: 9))
-                                Spacer()
-                                Text("\(Int(specificCoinViewModel.selectedSpecificCoinModel?.marketData?.maxSupply ?? 0))")
-                                    .foregroundColor(.white)
-                                    .font(.system(size: 9))
-                            }
-                            .padding(.top, 1)
-                            
-                            Divider()
-                                .background(.gray)
-                            
-                            HStack {
-                                Text("Total Supply")
-                                    .foregroundColor(.gray)
-                                    .font(.system(size: 9))
-                                Spacer()
-                                Text("\(Int(specificCoinViewModel.selectedSpecificCoinModel?.marketData?.totalSupply ?? 0))")
-                                    .foregroundColor(.white)
-                                    .font(.system(size: 9))
-                            }
-                            .padding(.top, 1)
-                            
-                            Divider()
-                                .background(.gray)
-                            
-                            HStack {
-                                Text("Circulating Supply")
-                                    .foregroundColor(.gray)
-                                    .font(.system(size: 9))
-                                Spacer()
-                                Text("\(Int(specificCoinViewModel.selectedSpecificCoinModel?.marketData?.circulatingSupply ?? 0))")
-                                    .foregroundColor(.white)
-                                    .font(.system(size: 9))
-                            }
-                            .padding(.top, 1)
-                            
-                            Divider()
-                                .background(.gray)
-                        }
-                        
-                        VStack {
-                            HStack {
-                                Text("All time high")
-                                    .foregroundColor(.white)
-                                    .font(.system(size: 9))
-                                Spacer()
-                                Text("$\((specificCoinViewModel.selectedSpecificCoinModel?.marketData?.ath["usd"] ?? 0).formatted())")
-                                    .foregroundColor(.white)
-                                    .font(.system(size: 9))
-                            }
-                            .padding(.top, 1)
-                            
-                            Divider()
-                                .background(.gray)
-                            
-                            HStack {
-                                Text("All time low")
-                                    .foregroundColor(.gray)
-                                    .font(.system(size: 9))
-                                Spacer()
-                                Text("$\((specificCoinViewModel.selectedSpecificCoinModel?.marketData?.atl["usd"] ?? 0).formatted())")
-                                    .foregroundColor(.white)
-                                    .font(.system(size: 9))
-                            }
-                            .padding(.top, 1)
-                        }
-                    }
-                    .padding(.horizontal, 10)
                 }
-                .cornerRadius(15)
             }
-            .refreshable {
-                specificCoinViewModel.getSpecificCoin(selectedCoin: self.id)
-                haptics.scrollFunctionVibration()
-                try? await Task.sleep(nanoseconds: 1000000000)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(.horizontal, 10)
+            
+            VStack {
+                VStack {
+                    Text("Asset information")
+                        .offset(x: isListVisible ? 0 : -100, y: 0)
+                        .foregroundColor(.white)
+                        .font(.system(size: 12, design: .rounded))
+                        .padding(.top)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                }
+                
+                HStack {
+                    Text("Market Cap")
+                        .offset(x: isListVisible ? 0 : -200, y: 0)
+                        .foregroundColor(.gray)
+                        .font(.system(size: 9))
+                    Spacer()
+                    Text("$\((specificCoinViewModel.selectedSpecificCoinModel?.marketData?.marketCap["usd"] ?? 0).formatted())")
+                        .offset(x: isListVisible ? 0 : 200, y: 0)
+                        .foregroundColor(.white)
+                        .font(.system(size: 9))
+                }
+                .padding(.top, 1)
+                
+                Divider()
+                    .background(.gray)
+                
+                HStack {
+                    Text("Total volume")
+                        .offset(x: isListVisible ? 0 : -500, y: 0)
+                        .foregroundColor(.gray)
+                        .font(.system(size: 9))
+                    Spacer()
+                    Text("$\(Int(specificCoinViewModel.selectedSpecificCoinModel?.marketData?.totalVolume["usd"] ?? 0))")
+                        .offset(x: isListVisible ? 0 : 500, y: 0)
+                        .foregroundColor(.white)
+                        .font(.system(size: 9))
+                }
+                .padding(.top, 1)
+                
+                Divider()
+                    .background(.gray)
+                
+                VStack {
+                    HStack {
+                        Text("24H High Price")
+                            .offset(x: isListVisible ? 0 : -800, y: 0)
+                            .foregroundColor(.gray)
+                            .font(.system(size: 9))
+                        Spacer()
+                        Text("$\((specificCoinViewModel.selectedSpecificCoinModel?.marketData?.high24H["usd"] ?? 0).formatted())")
+                            .offset(x: isListVisible ? 0 : 800, y: 0)
+                            .foregroundColor(.white)
+                            .font(.system(size: 9))
+                    }
+                    .padding(.top, 1)
+                    
+                    Divider()
+                        .background(.gray)
+                    
+                    HStack {
+                        Text("24H Low Price")
+                            .offset(x: isListVisible ? 0 : -1100, y: 0)
+                            .foregroundColor(.gray)
+                            .font(.system(size: 9))
+                        Spacer()
+                        Text("$\((specificCoinViewModel.selectedSpecificCoinModel?.marketData?.low24H["usd"] ?? 0).formatted())")
+                            .offset(x: isListVisible ? 0 : 1100, y: 0)
+                            .foregroundColor(.white)
+                            .font(.system(size: 9))
+                    }
+                    .padding(.top, 1)
+                    
+                    Divider()
+                        .background(.gray)
+                }
+                
+                VStack {
+                    HStack {
+                        Text("Max. Supply")
+                            .offset(x: isListVisible ? 0 : -1400, y: 0)
+                            .foregroundColor(.gray)
+                            .font(.system(size: 9))
+                        Spacer()
+                        Text("\(Int(specificCoinViewModel.selectedSpecificCoinModel?.marketData?.maxSupply ?? 0))")
+                            .offset(x: isListVisible ? 0 : 1400, y: 0)
+                            .foregroundColor(.white)
+                            .font(.system(size: 9))
+                    }
+                    .padding(.top, 1)
+                    
+                    Divider()
+                        .background(.gray)
+                    
+                    HStack {
+                        Text("Total Supply")
+                            .offset(x: isListVisible ? 0 : -1700, y: 0)
+                            .foregroundColor(.gray)
+                            .font(.system(size: 9))
+                        Spacer()
+                        Text("\(Int(specificCoinViewModel.selectedSpecificCoinModel?.marketData?.totalSupply ?? 0))")
+                            .offset(x: isListVisible ? 0 : 1700, y: 0)
+                            .foregroundColor(.white)
+                            .font(.system(size: 9))
+                    }
+                    .padding(.top, 1)
+                    
+                    Divider()
+                        .background(.gray)
+                    
+                    HStack {
+                        Text("Circulating Supply")
+                            .offset(x: isListVisible ? 0 : -2000, y: 0)
+                            .foregroundColor(.gray)
+                            .font(.system(size: 9))
+                        Spacer()
+                        Text("\(Int(specificCoinViewModel.selectedSpecificCoinModel?.marketData?.circulatingSupply ?? 0))")
+                            .offset(x: isListVisible ? 0 : 2000, y: 0)
+                            .foregroundColor(.white)
+                            .font(.system(size: 9))
+                    }
+                    .padding(.top, 1)
+                    
+                    Divider()
+                        .background(.gray)
+                }
+                
+                VStack {
+                    HStack {
+                        Text("All time high")
+                            .offset(x: isListVisible ? 0 : -2300, y: 0)
+                            .foregroundColor(.white)
+                            .font(.system(size: 9))
+                        Spacer()
+                        Text("$\((specificCoinViewModel.selectedSpecificCoinModel?.marketData?.ath["usd"] ?? 0).formatted())")
+                            .offset(x: isListVisible ? 0 : 2300, y: 0)
+                            .foregroundColor(.white)
+                            .font(.system(size: 9))
+                    }
+                    .padding(.top, 1)
+                    
+                    Divider()
+                        .background(.gray)
+                    
+                    HStack {
+                        Text("All time low")
+                            .offset(x: isListVisible ? 0 : -2600, y: 0)
+                            .foregroundColor(.gray)
+                            .font(.system(size: 9))
+                        Spacer()
+                        Text("$\((specificCoinViewModel.selectedSpecificCoinModel?.marketData?.atl["usd"] ?? 0).formatted())")
+                            .offset(x: isListVisible ? 0 : 2600, y: 0)
+                            .foregroundColor(.white)
+                            .font(.system(size: 9))
+                    }
+                    .padding(.top, 1)
+                }
             }
+            .padding(.horizontal, 10)
         }
         .padding(.vertical, 10)
         .background(
@@ -409,25 +379,33 @@ struct AssetView: View {
                 .fill(.ultraThinMaterial)
                 .blur(radius: 0)
                 .opacity(0.9)
+                .matchedGeometryEffect(id: "background", in: animation)
         )
-        .padding(.horizontal, 10)
-        .padding(.vertical, 10)
+        .mask(
+            RoundedRectangle(cornerRadius: 10, style: .continuous)
+                .matchedGeometryEffect(id: "mask", in: animation)
+        )
         .onAppear {
             specificCoinViewModel.getSpecificCoin(selectedCoin: self.id)
             print(specificCoinViewModel.specificCoinModel)
             print(self.id)
         }
+        .preferredColorScheme(.dark)
         
     }
 }
+    
+
 
 struct SpecificAssetView_Previews: PreviewProvider {
     
+    @Namespace static var animation
     @State static var name: String = "bitcoin"
     @State static var rank: Int = 1
     @State static var img: String = dev.coin.image!
     
     static var previews: some View {
-        SpecificAssetView(name: $name, imgURL: $img, marketCapRank: $rank, id: $name, coin: CoinsModel(id: dev.coin.id, symbol: dev.coin.symbol, name: dev.coin.name, image: dev.coin.image, currentPrice: dev.coin.currentPrice, marketCap: dev.coin.marketCap, marketCapRank: dev.coin.marketCapRank, fullyDilutedValuation: dev.coin.fullyDilutedValuation, totalVolume: dev.coin.totalVolume, high24H: dev.coin.high24H, low24H: dev.coin.low24H, priceChange24H: dev.coin.priceChange24H, priceChangePercentage24H: dev.coin.priceChangePercentage24H, marketCapChange24H: dev.coin.marketCapChange24H, marketCapChangePercentage24H: dev.coin.priceChangePercentage24H, circulatingSupply: dev.coin.circulatingSupply, totalSupply: dev.coin.totalSupply, maxSupply: dev.coin.maxSupply, ath: dev.coin.ath, athChangePercentage: dev.coin.athChangePercentage, athDate: dev.coin.athDate, atl: dev.coin.atl, atlChangePercentage: dev.coin.atlChangePercentage, atlDate: dev.coin.athDate, lastUpdated: dev.coin.lastUpdated, sparkLine7D: dev.coin.sparkLine7D))
+        SpecificAssetView(imgURL: dev.coin.image ?? "", name: dev.coin.name ?? "", marketCapRank: dev.coin.marketCapRank ?? 1, symbol: dev.coin.symbol ?? "", coin: CoinsModel(id: dev.coin.id, symbol: dev.coin.symbol, name: dev.coin.name, image: dev.coin.image, currentPrice: dev.coin.currentPrice, marketCap: dev.coin.marketCap, marketCapRank: dev.coin.marketCapRank, fullyDilutedValuation: dev.coin.fullyDilutedValuation, totalVolume: dev.coin.totalVolume, high24H: dev.coin.high24H, low24H: dev.coin.low24H, priceChange24H: dev.coin.priceChange24H, priceChangePercentage24H: dev.coin.priceChangePercentage24H, marketCapChange24H: dev.coin.marketCapChange24H, marketCapChangePercentage24H: dev.coin.priceChangePercentage24H, circulatingSupply: dev.coin.circulatingSupply, totalSupply: dev.coin.totalSupply, maxSupply: dev.coin.maxSupply, ath: dev.coin.ath, athChangePercentage: dev.coin.athChangePercentage, athDate: dev.coin.athDate, atl: dev.coin.atl, atlChangePercentage: dev.coin.atlChangePercentage, atlDate: dev.coin.athDate, lastUpdated: dev.coin.lastUpdated, sparkLine7D: dev.coin.sparkLine7D), id: dev.coin.id ?? "", isMoreInfoClicked: false, isAddedToPorfolio: .constant(false), isTouched: .constant(false), isListVisible: .constant(false), animation: animation)
     }
 }
+
