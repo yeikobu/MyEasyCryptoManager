@@ -170,7 +170,7 @@ struct CoinsMarketListView: View {
                     RefreshableScrollView(showsIndicators: false) {
                         LazyVGrid(columns: gridForm) {
                             ForEach(coinViewModel.coinModel, id: \.self) { coin in
-                                CoinsDataListView(name: coin.name ?? "", marketCapRank: coin.marketCapRank ?? 0, symbol: coin.symbol ?? "", priceChangePercentage: coin.priceChangePercentage24H ?? 0, currentPrice: coin.currentPrice ?? 0, marketCap: coin.marketCap ?? 0, imgURL: coin.image ?? "", totalVolume: coin.totalVolume ?? 0, high24H: coin.high24H ?? 0, low24H: coin.low24H ?? 0, maxSupply: coin.maxSupply ?? 0, totalSupply: coin.totalSupply ?? 0, circulatingSupply: coin.circulatingSupply ?? 0, ath: coin.ath ?? 0, atl: coin.atl ?? 0, coin: coin)
+                                CoinsDataListView(name: coin.name ?? "", marketCapRank: coin.marketCapRank ?? 0, symbol: coin.symbol ?? "", priceChangePercentage: coin.priceChangePercentage24H ?? 0, currentPrice: coin.currentPrice ?? 0, marketCap: coin.marketCap ?? 0, imgURL: coin.image ?? "", totalVolume: coin.totalVolume ?? 0, high24H: coin.high24H ?? 0, low24H: coin.low24H ?? 0, maxSupply: coin.maxSupply ?? 0, totalSupply: coin.totalSupply ?? 0, circulatingSupply: coin.circulatingSupply ?? 0, ath: coin.ath ?? 0, atl: coin.atl ?? 0, coin: coin, id: coin.id ?? "")
                                     .task {
                                         getGlobalData()
                                     }
@@ -247,6 +247,7 @@ struct CoinsDataListView: View {
     @State var addButtonAnimate: Bool = false
     @Namespace var animation
     @State var coin: CoinsModel
+    @State var id: String
     
     let buttonAnimationDuration:  Double = 0.15
     var addButtonScale: CGFloat {
@@ -260,7 +261,7 @@ struct CoinsDataListView: View {
                 if !isTouched {
                     BasicAssetInfoCardView(name: $name, marketCapRank: $marketCapRank, symbol: $symbol, priceChangePercentage: $priceChangePercentage, currentPrice: $currentPrice, marketCap: $marketCap, imgURL: $imgURL, totalVolume: $totalVolume, high24H: $high24H, low24H: $low24H, maxSupply: $maxSupply, totalSupply: $totalSupply, circulatingSupply: $circulatingSupply, ath: $ath, atl: $atl, isTouched: $isTouched, isListVisible: $isListVisible, animation: animation)
                 } else {
-                    CompleteAssetInfoCardView(name: self.name, marketCapRank: self.marketCapRank, symbol: self.symbol, priceChangePercentage: self.priceChangePercentage, currentPrice: self.currentPrice, marketCap: self.marketCap, imgURL: self.imgURL, totalVolume: self.totalVolume, high24H: self.high24H, low24H: self.low24H, maxSupply: self.maxSupply, totalSupply: self.totalSupply, circulatingSupply: self.circulatingSupply, ath: self.ath, atl: self.atl, isTouched: self.$isTouched, isListVisible: self.$isListVisible, animation: animation, coin: self.coin, isMoreInfoClicked: false, isAddedToPorfolio: self.$isAddedToPorfolio)
+                    CompleteAssetInfoCardView(name: self.name, marketCapRank: self.marketCapRank, symbol: self.symbol, priceChangePercentage: self.priceChangePercentage, currentPrice: self.currentPrice, marketCap: self.marketCap, imgURL: self.imgURL, totalVolume: self.totalVolume, high24H: self.high24H, low24H: self.low24H, maxSupply: self.maxSupply, totalSupply: self.totalSupply, circulatingSupply: self.circulatingSupply, ath: self.ath, atl: self.atl, isTouched: self.$isTouched, isListVisible: self.$isListVisible, animation: animation, coin: self.coin, isMoreInfoClicked: false, isAddedToPorfolio: self.$isAddedToPorfolio, id: self.id)
                 }
                 
             }

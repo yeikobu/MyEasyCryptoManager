@@ -14,7 +14,11 @@ final class SpecificCoinRepository {
         self.specificCoinDataSource = specificCoinDataSource
     }
     
-    func getSpecificCoin(selectedCoin: String, completionBlock: @escaping (Result<[SpecificCoinModel], Error>) -> Void) {
+    func getAllSpecificCoins(selectedCoin: String, completionBlock: @escaping (Result<[SpecificCoinModel], Error>) -> Void) {
+        self.specificCoinDataSource.getAllSpecificCoins(selectedCoin: selectedCoin, completionBlock: completionBlock)
+    }
+    
+    func getSpecificCoin(selectedCoin: String, completionBlock: @escaping (Result<SpecificCoinModel, Error>) -> Void) {
         self.specificCoinDataSource.getSpecificCoin(selectedCoin: selectedCoin, completionBlock: completionBlock)
     }
 }

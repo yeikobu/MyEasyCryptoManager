@@ -38,7 +38,7 @@ struct UserAssetsView: View {
                         Divider()
                             .onAppear() {
                                 if let selectedCoin = asset.name {
-                                    specificCoinVM.getSpecificCoin(selectedCoin: selectedCoin)
+                                    specificCoinVM.getAllSpecificCoins(selectedCoin: selectedCoin)
                                 }
                                 
                             }

@@ -39,6 +39,7 @@ struct CompleteAssetInfoCardView: View {
     var addButtonScale: CGFloat {
         isTouched ? 1.5 : 0.8
     }
+    @State var id: String
     
     var body: some View {
         ZStack {
@@ -366,7 +367,7 @@ struct CompleteAssetInfoCardView: View {
             )
             
             NavigationLink(isActive: $isMoreInfoClicked) {
-                SpecificAssetView(name: $name)
+                SpecificAssetView(name: $name, imgURL: $imgURL, marketCapRank: $marketCapRank, id: $id, coin: self.coin)
             } label: {
                 EmptyView()
             }
@@ -382,7 +383,7 @@ struct CompleteAssetInfoCardView_Previews: PreviewProvider {
     @State static var priceChangePercentage = 2.0
     
     static var previews: some View {
-        CompleteAssetInfoCardView(name: "Bitcoin", marketCapRank: 1, symbol: "btc", priceChangePercentage: 2, currentPrice: 47000, marketCap: 12121212, imgURL: "https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1547033579", totalVolume: 1212121, high24H: 121221212, low24H: 121221, maxSupply: 121212, totalSupply: 12211, circulatingSupply: 1212, ath: 1212, atl: 121212, isTouched: .constant(false), isListVisible: .constant(false), animation: animation, coin: CoinsModel(id: dev.coin.id, symbol: dev.coin.symbol, name: dev.coin.name, image: dev.coin.image, currentPrice: dev.coin.currentPrice, marketCap: dev.coin.marketCap, marketCapRank: dev.coin.marketCapRank, fullyDilutedValuation: dev.coin.fullyDilutedValuation, totalVolume: dev.coin.totalVolume, high24H: dev.coin.high24H, low24H: dev.coin.low24H, priceChange24H: dev.coin.priceChange24H, priceChangePercentage24H: dev.coin.priceChangePercentage24H, marketCapChange24H: dev.coin.marketCapChange24H, marketCapChangePercentage24H: dev.coin.priceChangePercentage24H, circulatingSupply: dev.coin.circulatingSupply, totalSupply: dev.coin.totalSupply, maxSupply: dev.coin.maxSupply, ath: dev.coin.ath, athChangePercentage: dev.coin.athChangePercentage, athDate: dev.coin.athDate, atl: dev.coin.atl, atlChangePercentage: dev.coin.atlChangePercentage, atlDate: dev.coin.athDate, lastUpdated: dev.coin.lastUpdated, sparkLine7D: dev.coin.sparkLine7D), isMoreInfoClicked: false, isAddedToPorfolio: .constant(false))
+        CompleteAssetInfoCardView(name: "Bitcoin", marketCapRank: 1, symbol: "btc", priceChangePercentage: 2, currentPrice: 47000, marketCap: 12121212, imgURL: "https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1547033579", totalVolume: 1212121, high24H: 121221212, low24H: 121221, maxSupply: 121212, totalSupply: 12211, circulatingSupply: 1212, ath: 1212, atl: 121212, isTouched: .constant(false), isListVisible: .constant(false), animation: animation, coin: CoinsModel(id: dev.coin.id, symbol: dev.coin.symbol, name: dev.coin.name, image: dev.coin.image, currentPrice: dev.coin.currentPrice, marketCap: dev.coin.marketCap, marketCapRank: dev.coin.marketCapRank, fullyDilutedValuation: dev.coin.fullyDilutedValuation, totalVolume: dev.coin.totalVolume, high24H: dev.coin.high24H, low24H: dev.coin.low24H, priceChange24H: dev.coin.priceChange24H, priceChangePercentage24H: dev.coin.priceChangePercentage24H, marketCapChange24H: dev.coin.marketCapChange24H, marketCapChangePercentage24H: dev.coin.priceChangePercentage24H, circulatingSupply: dev.coin.circulatingSupply, totalSupply: dev.coin.totalSupply, maxSupply: dev.coin.maxSupply, ath: dev.coin.ath, athChangePercentage: dev.coin.athChangePercentage, athDate: dev.coin.athDate, atl: dev.coin.atl, atlChangePercentage: dev.coin.atlChangePercentage, atlDate: dev.coin.athDate, lastUpdated: dev.coin.lastUpdated, sparkLine7D: dev.coin.sparkLine7D), isMoreInfoClicked: false, isAddedToPorfolio: .constant(false), id: "bitcoin")
             .preferredColorScheme(.dark)
     }
 }

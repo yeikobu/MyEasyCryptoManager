@@ -30,7 +30,7 @@ struct SpecificCoinModel: Decodable, Hashable {
     let communityData: CommunityData?
     let developerData: DeveloperData?
     let publicInterestStats: PublicInterestStats?
-    let statusUpdates: [String?]
+//    let statusUpdates: [String?]
     let lastUpdated: String?
     let tickers: [Ticker?]
     
@@ -61,7 +61,7 @@ struct SpecificCoinModel: Decodable, Hashable {
         case communityData = "community_data"
         case developerData = "developer_data"
         case publicInterestStats = "public_interest_stats"
-        case statusUpdates = "status_updates"
+//        case statusUpdates = "status_updates"
         case lastUpdated = "last_updated"
         case tickers
     }

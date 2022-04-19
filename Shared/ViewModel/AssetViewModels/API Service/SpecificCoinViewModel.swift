@@ -10,9 +10,12 @@ import Foundation
 final class SpecificCoinViewModel: ObservableObject {
     
     @Published var specificCoinModel: [SpecificCoinModel] = []
-    @Published var selectedSpecificCoinModel: [SpecificCoinModel]?
+    @Published var selectedSpecificCoinModel: SpecificCoinModel?
     @Published var selectedCoin: String?
     @Published var currentPrice: Double?
+    @Published var selectedCoinCurrentPrice: Double?
+//    @Published var selectedCoinDescription: NSAttributedString?
+    @Published var selectedCoinDescription: String?
     private let specificCoinRepository: SpecificCoinRepository
     
     
@@ -21,13 +24,12 @@ final class SpecificCoinViewModel: ObservableObject {
     }
     
     
-    func getSpecificCoin(selectedCoin: String) {
-        specificCoinRepository.getSpecificCoin(selectedCoin: selectedCoin) { [weak self] result in
+    func getAllSpecificCoins(selectedCoin: String) {
+        specificCoinRepository.getAllSpecificCoins(selectedCoin: selectedCoin) { [weak self] result in
+            
             switch result {
-                
             case .success(let specificCoinModel):
                 print("Vm specific coin model: \(specificCoinModel)")
-                self?.selectedSpecificCoinModel = specificCoinModel
                 self?.specificCoinModel = specificCoinModel
                 self?.specificCoinModel.forEach({ item in
                     if let currentPrice = item.marketData?.currentPrice["usd"] {
@@ -44,6 +46,33 @@ final class SpecificCoinViewModel: ObservableObject {
             }
         }
     }
-
+    
+    
+    func getSpecificCoin(selectedCoin: String) {
+        specificCoinRepository.getSpecificCoin(selectedCoin: selectedCoin) { result in
+            switch result {
+            case .success(let specificCoinModel):
+                self.selectedSpecificCoinModel = specificCoinModel
+                if let selectedCoinCurrentPrice = specificCoinModel.marketData?.currentPrice["usd"] {
+                    self.selectedCoinCurrentPrice = selectedCoinCurrentPrice
+                }
+                
+                if let selectedCoinDescription = specificCoinModel.coinModelDescription?.en {
+//                    let htmlDescription = Data(selectedCoinDescription.utf8)
+//
+//                    if let attributedString = try? NSAttributedString(data: htmlDescription, options: [.documentType: NSAttributedString.DocumentType.html], documentAttributes: nil) {
+//                        self.selectedCoinDescription = attributedString
+//                    }
+                    let range = NSRange(location: 0, length: selectedCoinDescription.count)
+                    let regex = try! NSRegularExpression(pattern: "<.*?>", options: NSRegularExpression.Options.caseInsensitive)
+                    let modString = regex.stringByReplacingMatches(in: selectedCoinDescription, options: [], range: range, withTemplate: "")
+                    self.selectedCoinDescription = modString
+                }
+                
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
     
 }

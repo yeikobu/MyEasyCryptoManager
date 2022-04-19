@@ -12,6 +12,7 @@
 		1603780827FB63E8006ADDA1 /* FavouriteAssetsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1603780727FB63E7006ADDA1 /* FavouriteAssetsRepository.swift */; };
 		1603780A27FB6503006ADDA1 /* FavouriteAssetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1603780927FB6503006ADDA1 /* FavouriteAssetViewModel.swift */; };
 		161864E62808D8DD008F1CF4 /* SpecificAssetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 161864E52808D8DD008F1CF4 /* SpecificAssetView.swift */; };
+		161864E8280DE775008F1CF4 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 161864E7280DE775008F1CF4 /* String.swift */; };
 		163A398A27E4039000F8D6F5 /* RefreshableScrollView in Frameworks */ = {isa = PBXBuildFile; productRef = 163A398927E4039000F8D6F5 /* RefreshableScrollView */; };
 		163A398D27E543E200F8D6F5 /* BasicAssetInfoCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 163A398C27E543E200F8D6F5 /* BasicAssetInfoCardView.swift */; };
 		163A398F27E561A900F8D6F5 /* CompleteAssetInfoCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 163A398E27E561A900F8D6F5 /* CompleteAssetInfoCardView.swift */; };
@@ -76,6 +77,7 @@
 		1603780727FB63E7006ADDA1 /* FavouriteAssetsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteAssetsRepository.swift; sourceTree = "<group>"; };
 		1603780927FB6503006ADDA1 /* FavouriteAssetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteAssetViewModel.swift; sourceTree = "<group>"; };
 		161864E52808D8DD008F1CF4 /* SpecificAssetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecificAssetView.swift; sourceTree = "<group>"; };
+		161864E7280DE775008F1CF4 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		163A398C27E543E200F8D6F5 /* BasicAssetInfoCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicAssetInfoCardView.swift; sourceTree = "<group>"; };
 		163A398E27E561A900F8D6F5 /* CompleteAssetInfoCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteAssetInfoCardView.swift; sourceTree = "<group>"; };
 		163A399027E56AEB00F8D6F5 /* GlobalMarketModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalMarketModel.swift; sourceTree = "<group>"; };
@@ -200,6 +202,7 @@
 			children = (
 				163A399727E90BCE00F8D6F5 /* PreviewProvider.swift */,
 				163A399927E917EB00F8D6F5 /* Date.swift */,
+				161864E7280DE775008F1CF4 /* String.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -545,6 +548,7 @@
 				163A398F27E561A900F8D6F5 /* CompleteAssetInfoCardView.swift in Sources */,
 				16D821D327EE500400528869 /* AddAssetView.swift in Sources */,
 				166BEEC027D6E5DF00072115 /* MyEasyCryptoManagerApp.swift in Sources */,
+				161864E8280DE775008F1CF4 /* String.swift in Sources */,
 				16C24BEB27F1158200B70B24 /* AuthenticationVIewModel.swift in Sources */,
 				1603780427FB5A02006ADDA1 /* FavouriteCoinModel.swift in Sources */,
 				16C24BE727F1151C00B70B24 /* AuthenticationDatasource.swift in Sources */,
