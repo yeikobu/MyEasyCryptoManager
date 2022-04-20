@@ -29,13 +29,10 @@ final class SpecificCoinViewModel: ObservableObject {
             
             switch result {
             case .success(let specificCoinModel):
-                print("Vm specific coin model: \(specificCoinModel)")
                 self?.specificCoinModel = specificCoinModel
                 self?.specificCoinModel.forEach({ item in
                     if let currentPrice = item.marketData?.currentPrice["usd"] {
                         self?.currentPrice = currentPrice
-                        print("VM current price \(String(describing: self?.currentPrice))")
-                        print("Closure current price \(currentPrice)")
                     } else {
                         print("error")
                     }
@@ -58,11 +55,6 @@ final class SpecificCoinViewModel: ObservableObject {
                 }
                 
                 if let selectedCoinDescription = specificCoinModel.coinModelDescription?.en {
-//                    let htmlDescription = Data(selectedCoinDescription.utf8)
-//
-//                    if let attributedString = try? NSAttributedString(data: htmlDescription, options: [.documentType: NSAttributedString.DocumentType.html], documentAttributes: nil) {
-//                        self.selectedCoinDescription = attributedString
-//                    }
                     let range = NSRange(location: 0, length: selectedCoinDescription.count)
                     let regex = try! NSRegularExpression(pattern: "<.*?>", options: NSRegularExpression.Options.caseInsensitive)
                     let modString = regex.stringByReplacingMatches(in: selectedCoinDescription, options: [], range: range, withTemplate: "")

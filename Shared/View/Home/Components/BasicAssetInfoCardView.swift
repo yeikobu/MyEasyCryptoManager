@@ -12,53 +12,50 @@ import RefreshableScrollView
 
 struct BasicAssetInfoCardView: View {
     
-    @Binding var name: String
-    @Binding var marketCapRank: Int
-    @Binding var symbol: String
-    @Binding var priceChangePercentage: Double
-    @Binding var currentPrice: Double
-    @Binding var marketCap: Int
-    @Binding var imgURL: String
-    @Binding var totalVolume: Double
-    @Binding var high24H: Double
-    @Binding var low24H: Double
-    @Binding var maxSupply: Double
-    @Binding var totalSupply: Double
-    @Binding var circulatingSupply: Double
-    @Binding var ath: Double
-    @Binding var atl: Double
+    @State var name: String
+    @State var marketCapRank: Int
+    @State var symbol: String
+    @State var priceChangePercentage: Double
+    @State var currentPrice: Double
+    @State var marketCap: Int
+    @State var imgURL: String
+    @State var totalVolume: Double
+    @State var high24H: Double
+    @State var low24H: Double
+    @State var maxSupply: Double
+    @State var totalSupply: Double
+    @State var circulatingSupply: Double
+    @State var ath: Double
+    @State var atl: Double
     @Binding var isTouched: Bool
     @Binding var isListVisible: Bool
     var animation: Namespace.ID
     @State var engine: CHHapticEngine?
+    @State var coin: CoinsModel
     
     
     var body: some View {
         VStack(alignment: .leading) {
             HStack {
                 HStack {
-                    KFImage(URL(string: imgURL))
+                    KFImage(URL(string: coin.image ?? ""))
                         .resizable()
                         .aspectRatio(contentMode: .fit)
-                        .matchedGeometryEffect(id: "icon", in: animation)
                         .frame(width: 40, height: 40)
 
                     VStack(alignment: .leading) {
-                        Text(name)
+                        Text(coin.name ?? "")
                             .foregroundColor(.white)
                             .font(.system(size: 15, weight: .bold, design: .rounded))
-                            .matchedGeometryEffect(id: "name", in: animation)
                             .padding(.bottom, -3)
 
                         HStack {
-                            Text("\(marketCapRank)")
-                                .matchedGeometryEffect(id: "rank", in: animation)
+                            Text("\(coin.marketCapRank ?? 0)")
                                 .foregroundColor(.white)
                                 .font(.system(size: 9, weight: .bold, design: .rounded))
                                 .padding(5)
 
                             Text(symbol.uppercased())
-                                .matchedGeometryEffect(id: "symbol", in: animation)
                                 .foregroundColor(.white)
                                 .font(.system(size: 12, weight: .regular, design: .rounded))
                         }
@@ -68,7 +65,7 @@ struct BasicAssetInfoCardView: View {
                 .frame(width: 125, alignment: .leading)
 
                 VStack(alignment: .trailing) {
-                    if priceChangePercentage > 0 {
+                    if coin.priceChangePercentage24H ?? 0 > 0 {
                         HStack {
                             Image(systemName: "arrowtriangle.up.fill")
                                 .foregroundColor(.green)
@@ -81,7 +78,7 @@ struct BasicAssetInfoCardView: View {
                         }
                     }
 
-                    if priceChangePercentage < 0 {
+                    if coin.priceChangePercentage24H ?? 0 < 0 {
                         HStack {
                             Image(systemName: "arrowtriangle.down.fill")
                                 .foregroundColor(.red)
@@ -94,7 +91,7 @@ struct BasicAssetInfoCardView: View {
                         }
                     }
 
-                    if priceChangePercentage == 0 {
+                    if coin.priceChangePercentage24H ?? 0 == 0 {
                         HStack {
                             Image(systemName: "arrowtriangle.right.fill")
                                 .foregroundColor(.gray)
@@ -107,11 +104,9 @@ struct BasicAssetInfoCardView: View {
                         }
                     }
                 }
-                .matchedGeometryEffect(id: "priceChangePercentage", in: animation)
 
                 VStack(alignment: .trailing) {
-                    Text("$\(currentPrice.formatted())")
-                        .matchedGeometryEffect(id: "currentPrice", in: animation)
+                    Text("$\((coin.currentPrice ?? 0).formatted())")
                         .foregroundColor(.white)
                         .font(.system(size: 14, weight: .bold, design: .rounded))
                         .padding(.bottom, 2)
@@ -121,12 +116,11 @@ struct BasicAssetInfoCardView: View {
                             .foregroundColor(.gray)
                             .font(.system(size: 8, weight: .regular, design: .rounded))
 
-                        Text("$\(marketCap)")
+                        Text("$\(coin.marketCap ?? 0)")
                             .foregroundColor(.white)
                             .font(.system(size: 8, weight: .regular, design: .rounded))
                             .padding(.leading, -5)
                     }
-                    .matchedGeometryEffect(id: "mcap", in: animation)
                 }
                 .frame(maxWidth: .infinity, alignment: .trailing)
             }
@@ -135,13 +129,12 @@ struct BasicAssetInfoCardView: View {
 
             VStack {
                 Text("Asset information")
-                    .matchedGeometryEffect(id: "information", in: animation)
                     .foregroundColor(.white)
                     .font(.system(size: 1, weight: .bold))
                     .opacity(0)
                     .frame(maxWidth: .infinity, alignment: .leading)
             }
-            .matchedGeometryEffect(id: "assetInformation", in: animation)
+            
         }
         .padding(.vertical, 10)
         .background(
@@ -149,13 +142,12 @@ struct BasicAssetInfoCardView: View {
                 .fill(.ultraThinMaterial)
                 .blur(radius: 0)
                 .opacity(0.9)
-                .matchedGeometryEffect(id: "background", in: animation)
         )
         .mask(
             RoundedRectangle(cornerRadius: 10, style: .continuous)
-                .matchedGeometryEffect(id: "mask", in: animation)
         )
         .preferredColorScheme(.dark)
+        
     }
 }
 
@@ -167,6 +159,6 @@ struct BasicAssetInfoCardView_Previews: PreviewProvider {
     @State static var priceChangePercentage = 2.0
     
     static var previews: some View {
-        BasicAssetInfoCardView(name: $name, marketCapRank: $marketCapRank, symbol: $name, priceChangePercentage: $priceChangePercentage, currentPrice: $priceChangePercentage, marketCap: $marketCapRank, imgURL: $name, totalVolume: $priceChangePercentage, high24H: $priceChangePercentage, low24H: $priceChangePercentage, maxSupply: $priceChangePercentage, totalSupply: $priceChangePercentage, circulatingSupply: $priceChangePercentage, ath: $priceChangePercentage, atl: $priceChangePercentage, isTouched: .constant(false), isListVisible: .constant(false), animation: animation)
+        BasicAssetInfoCardView(name: name, marketCapRank: marketCapRank, symbol: name, priceChangePercentage: priceChangePercentage, currentPrice: priceChangePercentage, marketCap: marketCapRank, imgURL: name, totalVolume: priceChangePercentage, high24H: priceChangePercentage, low24H: priceChangePercentage, maxSupply: priceChangePercentage, totalSupply: priceChangePercentage, circulatingSupply: priceChangePercentage, ath: priceChangePercentage, atl: priceChangePercentage, isTouched: .constant(false), isListVisible: .constant(false), animation: animation, coin: CoinsModel.init())
     }
 }

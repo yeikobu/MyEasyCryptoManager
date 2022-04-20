@@ -18,8 +18,6 @@ final class SpecificCoinDataSource {
             do {
                 if let jsonData = data {
                     let decodeData = try JSONDecoder().decode(SpecificCoinModel.self, from: jsonData)
-                    print("")
-//                    print("Specific coin: \(decodeData)")
                     DispatchQueue.main.async {
                         self.specificCoinModel = decodeData
                         completionBlock(.success([decodeData]))
@@ -42,8 +40,6 @@ final class SpecificCoinDataSource {
             do {
                 if let jsonData = data {
                     let decodeData = try JSONDecoder().decode(SpecificCoinModel.self, from: jsonData)
-                    print("")
-//                    print("Specific coin: \(decodeData)")
                     DispatchQueue.main.async {
                         self.specificCoinModel = decodeData
                         completionBlock(.success(decodeData))

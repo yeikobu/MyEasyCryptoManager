@@ -15,7 +15,7 @@ struct CoinsListView: View {
     var body: some View {
         ZStack {
             
-            CoinsMarketListView()
+            CoinsMarketListView(coin: CoinsModel.init())
                 .preferredColorScheme(.dark)
         }
     }
@@ -32,163 +32,237 @@ struct CoinsMarketListView: View {
     @State var totalVolume: Double = 0
     @State var activeCryptos: Int = 0
     @State var isMoreInfoClicked: Bool = false
+    @State var isTouched: Bool = false
+    @State var isListVisible: Bool = false
+    @State var isAddedToPorfolio: Bool = false
+    @State var addButtonAnimate: Bool = false
+    @State var id: String = ""
+    @State var imgURL: String = ""
+    @State var name: String = ""
+    @State var marketCapRank: Int = 0
+    @State var symbol: String = ""
+    @Namespace var animation
+    @State var coin: CoinsModel
     
     var body: some View {
         ZStack {
             VStack(alignment: .leading) {
                 
-                HStack {
-                    Text("Market Information")
-                        .foregroundColor(.white)
-                        .font(.system(size: 28, weight: .black, design: .rounded))
-                }
-                .padding(.horizontal, 10)
-                .padding(.vertical, 5)
-                    
-                
-                ScrollView(.horizontal, showsIndicators: false) {
+                if !isTouched {
                     HStack {
-                        //Global market cap stack
-                        VStack(alignment: .leading) {
-                            Text("Global Market Cap")
-                                .foregroundColor(.white)
-                                .font(.system(size: 12, weight: .bold, design: .rounded))
-                                .padding(.vertical, -5)
-                            
-                            Divider()
-                                .background(.gray)
-                                .frame(maxWidth: .infinity)
-                                .padding(.horizontal, -10)
-                            
-                            HStack {
-                                Text("$\(Int(totalMarketCap))")
+                        Text("Market Information")
+                            .foregroundColor(.white)
+                            .font(.system(size: 28, weight: .black, design: .rounded))
+                    }
+                    .padding(.horizontal, 10)
+                    .padding(.vertical, 5)
+                        
+                    
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        HStack {
+                            //Global market cap stack
+                            VStack(alignment: .leading) {
+                                Text("Global Market Cap")
                                     .foregroundColor(.white)
-                                    .font(.system(size: 10, weight: .bold, design: .rounded))
+                                    .font(.system(size: 12, weight: .bold, design: .rounded))
+                                    .padding(.vertical, -5)
                                 
-                                if mcapChangePercentage > 0 {
-                                    Image(systemName: "arrowtriangle.up.fill")
-                                        .foregroundColor(.green)
-                                        .font(.system(size: 8))
-                                        .padding(.trailing, -6)
+                                Divider()
+                                    .background(.gray)
+                                    .frame(maxWidth: .infinity)
+                                    .padding(.horizontal, -10)
+                                
+                                HStack {
+                                    Text("$\(Int(totalMarketCap))")
+                                        .foregroundColor(.white)
+                                        .font(.system(size: 10, weight: .bold, design: .rounded))
                                     
-                                    Text("\(String(format: "%.2f", mcapChangePercentage))%")
-                                        .foregroundColor(.green)
-                                        .font(.system(size: 10))
-                                } else if mcapChangePercentage < 0 {
-                                    Image(systemName: "arrowtriangle.down.fill")
-                                        .foregroundColor(.red)
-                                        .font(.system(size: 8))
-                                        .padding(.trailing, -6)
-                                    
-                                    Text("\(String(format: "%.2f", mcapChangePercentage))%")
-                                        .foregroundColor(.red)
-                                        .font(.system(size: 10))
-                                } else {
-                                    Image(systemName: "arrowtriangle.right.fill")
-                                        .foregroundColor(.gray)
-                                        .font(.system(size: 8))
-                                        .padding(.trailing, -6)
-                                    
-                                    Text("\(String(format: "%.2f", mcapChangePercentage))%")
-                                        .foregroundColor(.gray)
-                                        .font(.system(size: 10))
+                                    if mcapChangePercentage > 0 {
+                                        Image(systemName: "arrowtriangle.up.fill")
+                                            .foregroundColor(.green)
+                                            .font(.system(size: 8))
+                                            .padding(.trailing, -6)
+                                        
+                                        Text("\(String(format: "%.2f", mcapChangePercentage))%")
+                                            .foregroundColor(.green)
+                                            .font(.system(size: 10))
+                                    } else if mcapChangePercentage < 0 {
+                                        Image(systemName: "arrowtriangle.down.fill")
+                                            .foregroundColor(.red)
+                                            .font(.system(size: 8))
+                                            .padding(.trailing, -6)
+                                        
+                                        Text("\(String(format: "%.2f", mcapChangePercentage))%")
+                                            .foregroundColor(.red)
+                                            .font(.system(size: 10))
+                                    } else {
+                                        Image(systemName: "arrowtriangle.right.fill")
+                                            .foregroundColor(.gray)
+                                            .font(.system(size: 8))
+                                            .padding(.trailing, -6)
+                                        
+                                        Text("\(String(format: "%.2f", mcapChangePercentage))%")
+                                            .foregroundColor(.gray)
+                                            .font(.system(size: 10))
+                                    }
                                 }
                             }
-                        }
-                        .padding()
-                        .background(
-                            RoundedRectangle(cornerRadius: 10, style: .continuous)
-                                .fill(.ultraThinMaterial)
-                                .blur(radius: 0)
-                                .opacity(0.9)
-                        )
-                        .cornerRadius(10)
-                        
-                        //24HRS Volume
-                        VStack(alignment: .leading) {
-                            Text("24 Hours Volume")
-                                .foregroundColor(.white)
-                                .font(.system(size: 12, weight: .bold, design: .rounded))
-                                .padding(.vertical, -5)
+                            .padding()
+                            .background(
+                                RoundedRectangle(cornerRadius: 10, style: .continuous)
+                                    .fill(.ultraThinMaterial)
+                                    .blur(radius: 0)
+                                    .opacity(0.9)
+                            )
+                            .cornerRadius(10)
                             
-                            Divider()
-                                .background(.gray)
-                                .frame(maxWidth: .infinity)
-                                .padding(.horizontal, -10)
-                            
-                            HStack {
-                                Text("$\(Int(totalVolume))")
+                            //24HRS Volume
+                            VStack(alignment: .leading) {
+                                Text("24 Hours Volume")
                                     .foregroundColor(.white)
-                                    .font(.system(size: 10, weight: .bold, design: .rounded))
+                                    .font(.system(size: 12, weight: .bold, design: .rounded))
+                                    .padding(.vertical, -5)
+                                
+                                Divider()
+                                    .background(.gray)
+                                    .frame(maxWidth: .infinity)
+                                    .padding(.horizontal, -10)
+                                
+                                HStack {
+                                    Text("$\(Int(totalVolume))")
+                                        .foregroundColor(.white)
+                                        .font(.system(size: 10, weight: .bold, design: .rounded))
+                                }
+                                
                             }
+                            .padding()
+                            .background(
+                                RoundedRectangle(cornerRadius: 10, style: .continuous)
+                                    .fill(.ultraThinMaterial)
+                                    .blur(radius: 0)
+                                    .opacity(0.9)
+                            )
+                            .cornerRadius(10)
                             
-                        }
-                        .padding()
-                        .background(
-                            RoundedRectangle(cornerRadius: 10, style: .continuous)
-                                .fill(.ultraThinMaterial)
-                                .blur(radius: 0)
-                                .opacity(0.9)
-                        )
-                        .cornerRadius(10)
-                        
-                        VStack(alignment: .leading) {
-                            Text("Active Cryptocurrencys")
-                                .foregroundColor(.white)
-                                .font(.system(size: 12, weight: .bold, design: .rounded))
-                                .padding(.vertical, -5)
-                            
-                            Divider()
-                                .background(.gray)
-                                .frame(maxWidth: .infinity)
-                                .padding(.horizontal, -10)
-                            
-                            HStack {
-                                Text("\(Int(activeCryptos))")
+                            VStack(alignment: .leading) {
+                                Text("Active Cryptocurrencys")
                                     .foregroundColor(.white)
-                                    .font(.system(size: 10, weight: .bold, design: .rounded))
+                                    .font(.system(size: 12, weight: .bold, design: .rounded))
+                                    .padding(.vertical, -5)
+                                
+                                Divider()
+                                    .background(.gray)
+                                    .frame(maxWidth: .infinity)
+                                    .padding(.horizontal, -10)
+                                
+                                HStack {
+                                    Text("\(Int(activeCryptos))")
+                                        .foregroundColor(.white)
+                                        .font(.system(size: 10, weight: .bold, design: .rounded))
+                                }
                             }
+                            .padding()
+                            .background(
+                                RoundedRectangle(cornerRadius: 10, style: .continuous)
+                                    .fill(.ultraThinMaterial)
+                                    .blur(radius: 0)
+                                    .opacity(0.9)
+                            )
+                            .cornerRadius(10)
                         }
-                        .padding()
-                        .background(
-                            RoundedRectangle(cornerRadius: 10, style: .continuous)
-                                .fill(.ultraThinMaterial)
-                                .blur(radius: 0)
-                                .opacity(0.9)
-                        )
-                        .cornerRadius(10)
-                    }
-                }
-                .cornerRadius(10)
-                .padding(.horizontal, 10)
-                
-                Divider()
-                    .background(.gray)
-                
-                
-                VStack {
-                    RefreshableScrollView(showsIndicators: false) {
-                        LazyVGrid(columns: gridForm) {
-                            ForEach(coinViewModel.coinModel, id: \.self) { coin in
-                                CoinsDataListView(name: coin.name ?? "", marketCapRank: coin.marketCapRank ?? 0, symbol: coin.symbol ?? "", priceChangePercentage: coin.priceChangePercentage24H ?? 0, currentPrice: coin.currentPrice ?? 0, marketCap: coin.marketCap ?? 0, imgURL: coin.image ?? "", totalVolume: coin.totalVolume ?? 0, high24H: coin.high24H ?? 0, low24H: coin.low24H ?? 0, maxSupply: coin.maxSupply ?? 0, totalSupply: coin.totalSupply ?? 0, circulatingSupply: coin.circulatingSupply ?? 0, ath: coin.ath ?? 0, atl: coin.atl ?? 0, coin: coin, id: coin.id ?? "")
-                                    .task {
-                                        getGlobalData()
-                                    }
-                                    .listRowInsets(EdgeInsets())
-                            }
-                        }
-                    }
-                    .ignoresSafeArea()
-                    .refreshable {
-                        coinViewModel.updateInfo()
-                        getGlobalData()
-                        haptics.scrollFunctionVibration()
-                        try? await Task.sleep(nanoseconds: 1000000000)
                     }
                     .cornerRadius(10)
                     .padding(.horizontal, 10)
+                    
+                    Divider()
+                        .background(.gray)
+                    
+                    
+                    VStack {
+                        RefreshableScrollView(showsIndicators: false) {
+                            LazyVGrid(columns: gridForm) {
+                                ForEach(coinViewModel.coinModel, id: \.self) { coin in
+    //
+                                    BasicAssetInfoCardView(name: coin.name ?? "", marketCapRank: coin.marketCapRank ?? 1, symbol: coin.symbol ?? "", priceChangePercentage: coin.priceChangePercentage24H ?? 0, currentPrice: coin.currentPrice ?? 0, marketCap: coin.marketCap ?? 0, imgURL: coin.image ?? "", totalVolume: coin.totalVolume ?? 0, high24H: coin.high24H ?? 0, low24H: coin.low24H ?? 0, maxSupply: coin.maxSupply ?? 0, totalSupply: coin.totalSupply ?? 0, circulatingSupply: coin.circulatingSupply ?? 0, ath: coin.ath ?? 0, atl: coin.atl ?? 0, isTouched: $isTouched, isListVisible: $isListVisible, animation: animation, coin: coin)
+                                        .task {
+                                            getGlobalData()
+                                        }
+                                        .onTapGesture {
+                                            if let id = coin.id {
+                                                self.id = id
+                                            }
+                                            if let imgurl = coin.image {
+                                                self.imgURL = imgurl
+                                            }
+                                            if let name = coin.name {
+                                                self.name = name
+                                            }
+                                            if let marketcaprank = coin.marketCapRank {
+                                                self.marketCapRank = marketcaprank
+                                            }
+                                            if let symbol = coin.symbol {
+                                                self.symbol = symbol
+                                            }
+                                            self.coin = coin
+                                            
+                                            withAnimation(.spring(response: 0.5, dampingFraction: 0.75)) {
+                                                self.isTouched.toggle()
+                                            }
+                                            withAnimation(.spring(response: 0.6, dampingFraction: 1)) {
+                                                self.isListVisible.toggle()
+                                            }
+                                        }
+                                        .matchedGeometryEffect(id: "\(coin.id ?? "")", in: animation)
+                                        
+                                }
+                            }
+                        }
+                        .ignoresSafeArea()
+                        .refreshable {
+                            coinViewModel.updateInfo()
+                            getGlobalData()
+                            haptics.scrollFunctionVibration()
+                            try? await Task.sleep(nanoseconds: 1000000000)
+                        }
+                        .cornerRadius(10)
+                        .padding(.horizontal, 10)
+                    }
+                    .ignoresSafeArea()
+                    
+                    if isTouched {
+                        Spacer()
+                    }
                 }
-                .ignoresSafeArea()
+                
+                
+                if isTouched {
+                    ZStack(alignment: .topTrailing) {
+                        SpecificAssetView(imgURL: self.$imgURL, name: self.$name, marketCapRank: self.$marketCapRank, symbol: self.$symbol, coin: coin, id: self.$id, isMoreInfoClicked: self.$isMoreInfoClicked, isAddedToPorfolio: self.$isAddedToPorfolio, isTouched: self.$isTouched, isListVisible: self.$isListVisible, animation: animation)
+                            .padding(.horizontal, 10)
+                            .padding(.top, 30)
+                            .padding(.bottom, 45)
+                        
+                        Button {
+                            withAnimation(.spring(response: 0.4, dampingFraction: 0.8)) {
+                                self.isTouched.toggle()
+                            }
+                            withAnimation(.spring(response: 0.5, dampingFraction: 1)) {
+                                self.isListVisible.toggle()
+                            }
+                        } label: {
+                            Image(systemName: "x.circle")
+                                .foregroundColor(Color("Buttons"))
+                                .font(.system(size: 22))
+                                .shadow(color: .black.opacity(0.4), radius: 5, x: 3, y: 3)
+                                .shadow(color: .black.opacity(0.4), radius: 5, x: -3, y: -3)
+                        }
+                        .padding(.trailing, 10)
+                        
+                    }
+                    .matchedGeometryEffect(id: "\(coin.id ?? "")", in: animation)
+                   
+                    Spacer()
+                }
             }
         }
     }
@@ -223,65 +297,12 @@ struct CoinsMarketListView: View {
         }
     }
 }
-
-struct CoinsDataListView: View {
-    
-    @ObservedObject var haptics: Haptics = Haptics()
-    @State var name: String
-    @State var marketCapRank: Int
-    @State var symbol: String
-    @State var priceChangePercentage: Double
-    @State var currentPrice: Double
-    @State var marketCap: Int
-    @State var imgURL: String
-    @State var totalVolume: Double
-    @State var high24H: Double
-    @State var low24H: Double
-    @State var maxSupply: Double
-    @State var totalSupply: Double
-    @State var circulatingSupply: Double
-    @State var ath: Double
-    @State var atl: Double
-    @State var isTouched: Bool = false
-    @State var isListVisible: Bool = false
-    @State var isAddedToPorfolio: Bool = false
-    @State var addButtonAnimate: Bool = false
-    @Namespace var animation
-    @State var coin: CoinsModel
-    @State var id: String
-    
-    let buttonAnimationDuration:  Double = 0.15
-    var addButtonScale: CGFloat {
-        isTouched ? 1.5 : 0.8
-    }
-    
-    var body: some View {
-        VStack(alignment: .leading) {
-            ZStack {
-                
-                if !isTouched {
-                    BasicAssetInfoCardView(name: $name, marketCapRank: $marketCapRank, symbol: $symbol, priceChangePercentage: $priceChangePercentage, currentPrice: $currentPrice, marketCap: $marketCap, imgURL: $imgURL, totalVolume: $totalVolume, high24H: $high24H, low24H: $low24H, maxSupply: $maxSupply, totalSupply: $totalSupply, circulatingSupply: $circulatingSupply, ath: $ath, atl: $atl, isTouched: $isTouched, isListVisible: $isListVisible, animation: animation)
-                } else {
-//                    CompleteAssetInfoCardView(name: self.name, marketCapRank: self.marketCapRank, symbol: self.symbol, priceChangePercentage: self.priceChangePercentage, currentPrice: self.currentPrice, marketCap: self.marketCap, imgURL: self.imgURL, totalVolume: self.totalVolume, high24H: self.high24H, low24H: self.low24H, maxSupply: self.maxSupply, totalSupply: self.totalSupply, circulatingSupply: self.circulatingSupply, ath: self.ath, atl: self.atl, isTouched: self.$isTouched, isListVisible: self.$isListVisible, animation: animation, coin: self.coin, isMoreInfoClicked: false, isAddedToPorfolio: self.$isAddedToPorfolio, id: self.id)
-                    SpecificAssetView(imgURL: self.imgURL, name: self.name, marketCapRank: self.marketCapRank, symbol: self.symbol, coin: coin, id: self.id, isMoreInfoClicked: false, isAddedToPorfolio: self.$isAddedToPorfolio, isTouched: self.$isTouched, isListVisible: self.$isListVisible, animation: animation)
-                }
-                
-            }
-            .onTapGesture {
-                withAnimation(.spring(response: 0.6, dampingFraction: 0.9)) {
-                    isTouched.toggle()
-                }
-                withAnimation(.spring(response: 0.6, dampingFraction: 1)) {
-                    isListVisible.toggle()
-                }
-            }
-            
-        }
-    }
-    
-}
+  
 
 struct CoinsListView_Previews: PreviewProvider {
+    
+    @State static var name: String = "bitcoin"
+    
     static var previews: some View {
         CoinsListView()
     }
