@@ -19,7 +19,6 @@ struct DashboardView: View {
         ZStack {
             CustomTabView()
                 .accentColor(.white)
-                .transition(.slide)
                 .navigationBarHidden(true)
                 .navigationBarBackButtonHidden(true)
                 .preferredColorScheme(.dark)
@@ -30,7 +29,9 @@ struct DashboardView: View {
                         .blur(radius: 20)
                         .opacity(0.8)
                 )
+                .padding(.bottom, 10)
         }
+        .ignoresSafeArea()
         .background(
             Image("wallpaper2")
                 .resizable()

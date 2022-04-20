@@ -34,8 +34,6 @@ final class FavouriteAssetsDataSource {
                 .map { try? $0.data(as: FavouriteCoinModel.self) }
                 .compactMap { $0 }
             
-            print(assets)
-            print("Data source")
             completionBlock(.success(assets))
         }
     }
