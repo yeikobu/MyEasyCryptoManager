@@ -23,9 +23,9 @@ struct CoinsListView: View {
 
 struct CoinsMarketListView: View {
     
-    @ObservedObject var coinViewModel: CoinInfoViewModel = CoinInfoViewModel()
-    @ObservedObject var globalMarketViewModel: GlobalMarketViewModel = GlobalMarketViewModel()
-    @ObservedObject var haptics: Haptics = Haptics()
+    @StateObject var coinViewModel: CoinInfoViewModel = CoinInfoViewModel()
+    @StateObject var globalMarketViewModel: GlobalMarketViewModel = GlobalMarketViewModel()
+    @StateObject var haptics: Haptics = Haptics()
     let gridForm = [GridItem(.flexible())]
     @State var mcapChangePercentage: Double = 0
     @State var totalMarketCap: Double = 0
@@ -237,7 +237,7 @@ struct CoinsMarketListView: View {
                 
                 if isTouched {
                     ZStack(alignment: .topTrailing) {
-                        SpecificAssetView(imgURL: self.$imgURL, name: self.$name, marketCapRank: self.$marketCapRank, symbol: self.$symbol, coin: coin, id: self.$id, isMoreInfoClicked: self.$isMoreInfoClicked, isAddedToPorfolio: self.$isAddedToPorfolio, isTouched: self.$isTouched, isListVisible: self.$isListVisible, animation: animation)
+                        SpecificAssetView(favouriteAssetViewModel: FavouriteAssetViewModel(), imgURL: self.$imgURL, name: self.$name, marketCapRank: self.$marketCapRank, symbol: self.$symbol, coin: coin, id: self.$id, isMoreInfoClicked: self.$isMoreInfoClicked, isAddedToPorfolio: self.isAddedToPorfolio, isTouched: self.$isTouched, isListVisible: self.$isListVisible, animation: animation)
                             .padding(.horizontal, 10)
                             .padding(.top, 30)
                             .padding(.bottom, 45)

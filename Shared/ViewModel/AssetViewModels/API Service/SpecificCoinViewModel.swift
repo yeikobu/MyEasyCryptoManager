@@ -9,43 +9,25 @@ import Foundation
 
 final class SpecificCoinViewModel: ObservableObject {
     
-    @Published var specificCoinModel: [SpecificCoinModel] = []
     @Published var selectedSpecificCoinModel: SpecificCoinModel?
-    @Published var selectedCoin: String?
-    @Published var currentPrice: Double?
+    @Published var currentPrice: [String : Double] = [ : ]
     @Published var selectedCoinCurrentPrice: Double?
-//    @Published var selectedCoinDescription: NSAttributedString?
     @Published var selectedCoinDescription: String?
     private let specificCoinRepository: SpecificCoinRepository
-    
     
     init(specificCoinRepository: SpecificCoinRepository = SpecificCoinRepository()) {
         self.specificCoinRepository = specificCoinRepository
     }
     
-    
-    func getAllSpecificCoins(selectedCoin: String) {
-        specificCoinRepository.getAllSpecificCoins(selectedCoin: selectedCoin) { [weak self] result in
-            
-            switch result {
-            case .success(let specificCoinModel):
-                self?.specificCoinModel = specificCoinModel
-                self?.specificCoinModel.forEach({ item in
-                    if let currentPrice = item.marketData?.currentPrice["usd"] {
-                        self?.currentPrice = currentPrice
-                    } else {
-                        print("error")
-                    }
-                })
-                
-            case .failure(let error):
-                print(error)
-            }
-        }
+    @MainActor
+    func getCurrentPrice(selectedCoin: String) async throws {
+        self.selectedSpecificCoinModel = try await specificCoinRepository.getCurrentPrice(selectedCoin: selectedCoin)
+        self.selectedCoinCurrentPrice = self.selectedSpecificCoinModel?.marketData?.currentPrice["usd"] ?? 0
+        self.currentPrice[selectedCoin] = self.selectedSpecificCoinModel?.marketData?.currentPrice["usd"] ?? 0
     }
     
     
-    func getSpecificCoin(selectedCoin: String) {
+    func getSpecificCoin(selectedCoin: String) async {
         specificCoinRepository.getSpecificCoin(selectedCoin: selectedCoin) { result in
             switch result {
             case .success(let specificCoinModel):

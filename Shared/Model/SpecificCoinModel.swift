@@ -15,7 +15,7 @@ struct SpecificCoinModel: Decodable, Hashable {
     let platforms: Platforms?
     let blockTimeInMinutes: Int?
     let hashingAlgorithm: String?
-    let categories: [String?]
+//    let categories: [String?]
     let publicNotice: String?
     let additionalNotices: [String?]
     let localization, coinModelDescription: Tion?
@@ -40,7 +40,7 @@ struct SpecificCoinModel: Decodable, Hashable {
         case platforms
         case blockTimeInMinutes = "block_time_in_minutes"
         case hashingAlgorithm = "hashing_algorithm"
-        case categories
+//        case categories
         case publicNotice = "public_notice"
         case additionalNotices = "additional_notices"
         case localization
@@ -171,7 +171,7 @@ struct ReposURL: Decodable, Hashable  {
 // MARK: - MarketData
 struct MarketData: Decodable, Hashable  {
     let currentPrice: [String: Double]
-    let totalValueLocked, mcapToTvlRatio, fdvToTvlRatio: Double?
+//    let totalValueLocked, mcapToTvlRatio, fdvToTvlRatio: Double?
     let roi: Roi?
     let ath, athChangePercentage: [String: Double]
     let athDate: [String: String]
@@ -191,9 +191,9 @@ struct MarketData: Decodable, Hashable  {
     
     enum CodingKeys: String, CodingKey {
         case currentPrice = "current_price"
-        case totalValueLocked = "total_value_locked"
-        case mcapToTvlRatio = "mcap_to_tvl_ratio"
-        case fdvToTvlRatio = "fdv_to_tvl_ratio"
+//        case totalValueLocked = "total_value_locked"
+//        case mcapToTvlRatio = "mcap_to_tvl_ratio"
+//        case fdvToTvlRatio = "fdv_to_tvl_ratio"
         case roi, ath
         case athChangePercentage = "ath_change_percentage"
         case athDate = "ath_date"

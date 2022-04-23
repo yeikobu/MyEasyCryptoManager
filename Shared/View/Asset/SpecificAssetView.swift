@@ -11,8 +11,9 @@ import RefreshableScrollView
 
 struct SpecificAssetView: View {
     
-    @ObservedObject var haptics: Haptics = Haptics()
-    @ObservedObject var specificCoinViewModel: SpecificCoinViewModel = SpecificCoinViewModel()
+    @StateObject var haptics: Haptics = Haptics()
+    @StateObject var specificCoinViewModel: SpecificCoinViewModel = SpecificCoinViewModel()
+    @StateObject var favouriteAssetViewModel: FavouriteAssetViewModel
     @Binding var imgURL: String
     @Binding var name: String
     @Binding var marketCapRank: Int
@@ -22,7 +23,7 @@ struct SpecificAssetView: View {
     
     @State var addButtonAnimate: Bool = false
     @Binding var isMoreInfoClicked: Bool
-    @Binding var isAddedToPorfolio: Bool
+    @State var isAddedToPorfolio: Bool
     @Binding var isTouched: Bool
     @Binding var isListVisible: Bool
     var addButtonScale: CGFloat {
@@ -81,6 +82,10 @@ struct SpecificAssetView: View {
                                         addButtonAnimate = false
                                         isAddedToPorfolio.toggle()
                                     }
+                                }
+                                
+                                DispatchQueue.main.asyncAfter(deadline: .now()) {
+                                    favouriteAssetViewModel.addFavouriteAsset(id: self.id, name: self.name, symbol: self.symbol, imgURL: self.imgURL, purchasePrice: 0, purchaseQuantity: 0, currentPrice: specificCoinViewModel.selectedCoinCurrentPrice ?? 0)
                                 }
                             } label: {
                                 VStack {
@@ -392,13 +397,15 @@ struct SpecificAssetView: View {
                         .matchedGeometryEffect(id: "mask", in: animation)
                 )
                 .onAppear {
-                    specificCoinViewModel.getSpecificCoin(selectedCoin: self.id)
+                    Task {
+                        await specificCoinViewModel.getSpecificCoin(selectedCoin: self.id)
+                    }
                 }
                 .preferredColorScheme(.dark)
             }
         }
         .refreshable {
-            specificCoinViewModel.getSpecificCoin(selectedCoin: self.id)
+            await specificCoinViewModel.getSpecificCoin(selectedCoin: self.id)
             haptics.scrollFunctionVibration()
             try? await Task.sleep(nanoseconds: 1000000000)
         }
@@ -417,7 +424,7 @@ struct SpecificAssetView_Previews: PreviewProvider {
     @State static var img: String = dev.coin.image!
     
     static var previews: some View {
-        SpecificAssetView(imgURL: $name, name: $name, marketCapRank: $rank, symbol: $name, coin: CoinsModel(id: dev.coin.id, symbol: dev.coin.symbol, name: dev.coin.name, image: dev.coin.image, currentPrice: dev.coin.currentPrice, marketCap: dev.coin.marketCap, marketCapRank: dev.coin.marketCapRank, fullyDilutedValuation: dev.coin.fullyDilutedValuation, totalVolume: dev.coin.totalVolume, high24H: dev.coin.high24H, low24H: dev.coin.low24H, priceChange24H: dev.coin.priceChange24H, priceChangePercentage24H: dev.coin.priceChangePercentage24H, marketCapChange24H: dev.coin.marketCapChange24H, marketCapChangePercentage24H: dev.coin.priceChangePercentage24H, circulatingSupply: dev.coin.circulatingSupply, totalSupply: dev.coin.totalSupply, maxSupply: dev.coin.maxSupply, ath: dev.coin.ath, athChangePercentage: dev.coin.athChangePercentage, athDate: dev.coin.athDate, atl: dev.coin.atl, atlChangePercentage: dev.coin.atlChangePercentage, atlDate: dev.coin.athDate, lastUpdated: dev.coin.lastUpdated, sparkLine7D: dev.coin.sparkLine7D), id: $name, isMoreInfoClicked: .constant(false), isAddedToPorfolio: .constant(false), isTouched: .constant(false), isListVisible: .constant(false), animation: animation)
+        SpecificAssetView(favouriteAssetViewModel: FavouriteAssetViewModel(), imgURL: $name, name: $name, marketCapRank: $rank, symbol: $name, coin: CoinsModel(id: dev.coin.id, symbol: dev.coin.symbol, name: dev.coin.name, image: dev.coin.image, currentPrice: dev.coin.currentPrice, marketCap: dev.coin.marketCap, marketCapRank: dev.coin.marketCapRank, fullyDilutedValuation: dev.coin.fullyDilutedValuation, totalVolume: dev.coin.totalVolume, high24H: dev.coin.high24H, low24H: dev.coin.low24H, priceChange24H: dev.coin.priceChange24H, priceChangePercentage24H: dev.coin.priceChangePercentage24H, marketCapChange24H: dev.coin.marketCapChange24H, marketCapChangePercentage24H: dev.coin.priceChangePercentage24H, circulatingSupply: dev.coin.circulatingSupply, totalSupply: dev.coin.totalSupply, maxSupply: dev.coin.maxSupply, ath: dev.coin.ath, athChangePercentage: dev.coin.athChangePercentage, athDate: dev.coin.athDate, atl: dev.coin.atl, atlChangePercentage: dev.coin.atlChangePercentage, atlDate: dev.coin.athDate, lastUpdated: dev.coin.lastUpdated, sparkLine7D: dev.coin.sparkLine7D), id: $name, isMoreInfoClicked: .constant(false), isAddedToPorfolio: false, isTouched: .constant(false), isListVisible: .constant(false), animation: animation)
     }
 }
 

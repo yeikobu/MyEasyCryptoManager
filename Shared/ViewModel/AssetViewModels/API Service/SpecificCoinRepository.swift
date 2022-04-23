@@ -21,4 +21,9 @@ final class SpecificCoinRepository {
     func getSpecificCoin(selectedCoin: String, completionBlock: @escaping (Result<SpecificCoinModel, Error>) -> Void) {
         self.specificCoinDataSource.getSpecificCoin(selectedCoin: selectedCoin, completionBlock: completionBlock)
     }
+    
+    func getCurrentPrice(selectedCoin: String) async throws -> SpecificCoinModel {
+        let coin = try await self.specificCoinDataSource.getCurrentPrice(selectedCoin: selectedCoin)
+        return coin
+    }
 }

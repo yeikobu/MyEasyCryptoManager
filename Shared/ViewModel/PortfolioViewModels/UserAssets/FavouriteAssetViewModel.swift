@@ -27,4 +27,17 @@ final class FavouriteAssetViewModel: ObservableObject {
             }
         }
     }
+    
+    func addFavouriteAsset(id: String, name: String, symbol: String, imgURL: String, purchasePrice: Double, purchaseQuantity: Double, currentPrice: Double) {
+        
+        favouriteAssetsRepository.addFavouriteAsset(id: id, name: name, symbol: symbol, imgURL: imgURL, purchasePrice: purchasePrice, purchaseQuantity: purchaseQuantity) { result in
+            switch result {
+            case .success(_):
+                print("Asset has been added to porfolio")
+            case .failure(let error):
+                self.messageError = error.localizedDescription
+                print(error)
+            }
+        }
+    }
 }
