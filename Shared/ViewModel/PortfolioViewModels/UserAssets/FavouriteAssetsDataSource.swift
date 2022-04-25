@@ -38,8 +38,8 @@ final class FavouriteAssetsDataSource {
         }
     }
     
-    func addFavouriteAsset(id: String, name: String, symbol: String, imgURL: String, purchasePrice: Double, purchaseQuantity: Double, completionBlock: @escaping (Result<FavouriteCoinModel, Error>) -> Void) {
-        let favouriteAsset = FavouriteCoinModel(id: id, name: name, symbol: symbol, imgURL: imgURL, purchasePrice: purchasePrice, purchaseQuantity: purchaseQuantity)
+    func addFavouriteAsset(id: String, name: String, symbol: String, imgURL: String, purchasePrice: Double, purchaseQuantity: Double, currentPrice: Double, priceChangePercentage24h: Double, completionBlock: @escaping (Result<FavouriteCoinModel, Error>) -> Void) {
+        let favouriteAsset = FavouriteCoinModel(id: id, name: name, symbol: symbol, imgURL: imgURL, purchasePrice: purchasePrice, purchaseQuantity: purchaseQuantity, currentPrice: currentPrice, priceChangePercentage24h: priceChangePercentage24h)
         
         do {
             try database.collection(collection).document(uid).collection(subCollection).document(String(id)).setData(from: favouriteAsset)
@@ -49,4 +49,5 @@ final class FavouriteAssetsDataSource {
             completionBlock(.failure(error))
         }
     }
+    
 }

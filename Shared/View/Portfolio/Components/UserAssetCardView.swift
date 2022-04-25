@@ -37,13 +37,13 @@ struct UserAssetCardView: View {
                     KFImage(URL(string: imgURL))
                         .resizable()
                         .aspectRatio(contentMode: .fit)
-                        .matchedGeometryEffect(id: "icon", in: animation)
+//                        .matchedGeometryEffect(id: "icon", in: animation
                         .frame(width: 40, height: 40)
                     
                     Text(name)
                         .foregroundColor(.white)
                         .font(.system(size: 15, weight: .bold, design: .rounded))
-                        .matchedGeometryEffect(id: "name", in: animation)
+//                        .matchedGeometryEffect(id: "name", in: animation)
                         .padding(.bottom, -3)
                 }
                 
@@ -53,7 +53,7 @@ struct UserAssetCardView: View {
                 
                 VStack(alignment: .leading) {
                     Text("\(currentPrice.formatted())")
-                        .matchedGeometryEffect(id: "currentPrice", in: animation)
+//                        .matchedGeometryEffect(id: "currentPrice", in: animation)
                         .foregroundColor(.white)
                         .font(.system(size: 14, weight: .bold, design: .rounded))
                         .padding(.bottom, -4)
@@ -101,7 +101,7 @@ struct UserAssetCardView: View {
                             }
                         }
                     }
-                    .matchedGeometryEffect(id: "priceChangePercentage", in: animation)
+//                    .matchedGeometryEffect(id: "priceChangePercentage", in: animation)
                     .padding(.top, -4)
                 }
                 
@@ -110,13 +110,13 @@ struct UserAssetCardView: View {
                 
                 VStack(alignment: .trailing) {
                     Text("\(quantityUSD.formatted())")
-                        .matchedGeometryEffect(id: "holdingPrice", in: animation)
+//                        .matchedGeometryEffect(id: "holdingPrice", in: animation)
                         .foregroundColor(.white)
                         .font(.system(size: 14, weight: .bold, design: .rounded))
                         .padding(.bottom, -4)
                     
                     Text("\(purchaseQuantity.formatted())")
-                        .matchedGeometryEffect(id: "holdingcoins", in: animation)
+//                        .matchedGeometryEffect(id: "holdingcoins", in: animation)
                         .foregroundColor(.white)
                         .font(.system(size: 14, weight: .bold, design: .rounded))
                         .padding(.bottom, -4)
@@ -154,7 +154,7 @@ struct UserAssetCardView: View {
                                 .font(.system(size: 8))
                         }
                     }
-                    .matchedGeometryEffect(id: "favorite", in: animation)
+//                    .matchedGeometryEffect(id: "favorite", in: animation)
                     .padding(.leading, 5)
                     .scaleEffect(addButtonAnimate ? addButtonScale : 1)
                 }
@@ -169,11 +169,11 @@ struct UserAssetCardView: View {
                 .fill(.ultraThinMaterial)
                 .blur(radius: 0)
                 .opacity(0.9)
-                .matchedGeometryEffect(id: "background", in: animation)
+//                .matchedGeometryEffect(id: "background", in: animation)
         )
         .mask(
             RoundedRectangle(cornerRadius: 10, style: .continuous)
-                .matchedGeometryEffect(id: "mask", in: animation)
+//                .matchedGeometryEffect(id: "mask", in: animation)
         )
         .preferredColorScheme(.dark)
         .task {

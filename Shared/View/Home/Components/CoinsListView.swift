@@ -23,9 +23,9 @@ struct CoinsListView: View {
 
 struct CoinsMarketListView: View {
     
-    @ObservedObject var coinViewModel: CoinInfoViewModel = CoinInfoViewModel()
-    @ObservedObject var globalMarketViewModel: GlobalMarketViewModel = GlobalMarketViewModel()
-    @ObservedObject var haptics: Haptics = Haptics()
+    @StateObject var coinViewModel: CoinInfoViewModel = CoinInfoViewModel()
+    @StateObject var globalMarketViewModel: GlobalMarketViewModel = GlobalMarketViewModel()
+    @StateObject var haptics: Haptics = Haptics()
     let gridForm = [GridItem(.flexible())]
     @State var mcapChangePercentage: Double = 0
     @State var totalMarketCap: Double = 0
@@ -43,6 +43,7 @@ struct CoinsMarketListView: View {
     @State var symbol: String = ""
     @Namespace var animation
     @State var coin: CoinsModel
+    @State var lastAssetID: String = ""
     
     var body: some View {
         ZStack {
@@ -184,6 +185,7 @@ struct CoinsMarketListView: View {
                                 ForEach(coinViewModel.coinModel, id: \.self) { coin in
     //
                                     BasicAssetInfoCardView(name: coin.name ?? "", marketCapRank: coin.marketCapRank ?? 1, symbol: coin.symbol ?? "", priceChangePercentage: coin.priceChangePercentage24H ?? 0, currentPrice: coin.currentPrice ?? 0, marketCap: coin.marketCap ?? 0, imgURL: coin.image ?? "", totalVolume: coin.totalVolume ?? 0, high24H: coin.high24H ?? 0, low24H: coin.low24H ?? 0, maxSupply: coin.maxSupply ?? 0, totalSupply: coin.totalSupply ?? 0, circulatingSupply: coin.circulatingSupply ?? 0, ath: coin.ath ?? 0, atl: coin.atl ?? 0, isTouched: $isTouched, isListVisible: $isListVisible, animation: animation, coin: coin)
+                                        .padding(.bottom, self.lastAssetID == coin.id ? 75 : 1)
                                         .task {
                                             getGlobalData()
                                         }
@@ -228,16 +230,17 @@ struct CoinsMarketListView: View {
                         .padding(.horizontal, 10)
                     }
                     .ignoresSafeArea()
-                    
-                    if isTouched {
-                        Spacer()
+                    .onAppear {
+                        if let lastAsset = coinViewModel.coinModel.last {
+                            self.lastAssetID = lastAsset.id ?? ""
+                        }
                     }
                 }
                 
                 
                 if isTouched {
                     ZStack(alignment: .topTrailing) {
-                        SpecificAssetView(imgURL: self.$imgURL, name: self.$name, marketCapRank: self.$marketCapRank, symbol: self.$symbol, coin: coin, id: self.$id, isMoreInfoClicked: self.$isMoreInfoClicked, isAddedToPorfolio: self.$isAddedToPorfolio, isTouched: self.$isTouched, isListVisible: self.$isListVisible, animation: animation)
+                        SpecificAssetView(favouriteAssetViewModel: FavouriteAssetViewModel(), imgURL: self.$imgURL, name: self.$name, marketCapRank: self.$marketCapRank, symbol: self.$symbol, coin: coin, id: self.$id, isMoreInfoClicked: self.$isMoreInfoClicked, isAddedToPorfolio: self.isAddedToPorfolio, isTouched: self.$isTouched, isListVisible: self.$isListVisible, animation: animation)
                             .padding(.horizontal, 10)
                             .padding(.top, 30)
                             .padding(.bottom, 45)
@@ -264,6 +267,7 @@ struct CoinsMarketListView: View {
                     Spacer()
                 }
             }
+           
         }
     }
     

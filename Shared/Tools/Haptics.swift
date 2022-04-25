@@ -18,7 +18,7 @@ class Haptics: ObservableObject {
         do {
             engine = try CHHapticEngine()
             try engine?.start()
-            print("Preparing haptics ")
+//            print("Preparing haptics ")
         } catch {
             print(error.localizedDescription)
         }
