@@ -22,6 +22,8 @@ struct UserAssetsView: View {
         isTouched ? 1.5 : 0.8
     }
     
+    @State var lastItemID: String = ""
+    
     @State var counter = 0
     @State var currentPrice: Double = 0
     
@@ -37,6 +39,7 @@ struct UserAssetsView: View {
                     ForEach(favouriteAssetViewModel.favouriteCoins, id: \.self) { asset in
                         
                         UserAssetCardView(name: asset.name ?? "", symbol: asset.symbol ?? "", priceChangePercentage: asset.priceChangePercentage24h ?? 0, currentPrice: asset.currentPrice ?? 0, imgURL: asset.imgURL ?? "", purchaseQuantity: asset.purchaseQuantity ?? 0, animation: animation, addButtonAnimate: addButtonAnimate, isAddedToPorfolio: isAddedToPorfolio, isTouched: $isTouched)
+                            .padding(.bottom, lastItemID == asset.id ? 65 : 1)
                             
                     }
                 }
@@ -50,12 +53,9 @@ struct UserAssetsView: View {
             Task {
                 await favouriteAssetViewModel.getAllAssets()
                 if let last = favouriteAssetViewModel.favouriteCoins.last {
-                    print(last)
+                    self.lastItemID = last.id ?? ""
                 }
             }
-        }
-        .task {
-            
         }
     }
 }
