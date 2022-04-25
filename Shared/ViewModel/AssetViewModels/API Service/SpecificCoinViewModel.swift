@@ -20,10 +20,12 @@ final class SpecificCoinViewModel: ObservableObject {
     }
     
     @MainActor
-    func getCurrentPrice(selectedCoin: String) async throws {
+    func getCurrentPrice(selectedCoin: String) async throws -> Double {
         self.selectedSpecificCoinModel = try await specificCoinRepository.getCurrentPrice(selectedCoin: selectedCoin)
         self.selectedCoinCurrentPrice = self.selectedSpecificCoinModel?.marketData?.currentPrice["usd"] ?? 0
         self.currentPrice[selectedCoin] = self.selectedSpecificCoinModel?.marketData?.currentPrice["usd"] ?? 0
+        
+        return self.selectedSpecificCoinModel?.marketData?.currentPrice["usd"] ?? 0
     }
     
     

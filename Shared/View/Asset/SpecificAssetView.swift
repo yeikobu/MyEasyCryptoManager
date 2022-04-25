@@ -85,7 +85,7 @@ struct SpecificAssetView: View {
                                 }
                                 
                                 DispatchQueue.main.asyncAfter(deadline: .now()) {
-                                    favouriteAssetViewModel.addFavouriteAsset(id: self.id, name: self.name, symbol: self.symbol, imgURL: self.imgURL, purchasePrice: 0, purchaseQuantity: 0, currentPrice: specificCoinViewModel.selectedCoinCurrentPrice ?? 0)
+                                    favouriteAssetViewModel.addFavouriteAsset(id: self.id, name: self.name, symbol: self.symbol, imgURL: self.imgURL, purchasePrice: 0, purchaseQuantity: 0, currentPrice: specificCoinViewModel.selectedCoinCurrentPrice ?? 0, priceChangePercentage24h: 0)
                                 }
                             } label: {
                                 VStack {

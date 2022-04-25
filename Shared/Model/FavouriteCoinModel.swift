@@ -14,4 +14,6 @@ struct FavouriteCoinModel: Decodable, Hashable, Encodable {
     var imgURL: String?
     var purchasePrice: Double?
     var purchaseQuantity: Double?
+    var currentPrice: Double?
+    var priceChangePercentage24h: Double?
 }

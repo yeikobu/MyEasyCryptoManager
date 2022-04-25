@@ -9,8 +9,8 @@ import SwiftUI
 
 struct UserAssetsView: View {
     
-    @StateObject var specificCoinVM: SpecificCoinViewModel
-    @StateObject var favouriteAssetViewModel: FavouriteAssetViewModel
+    @StateObject var specificCoinVM: SpecificCoinViewModel = SpecificCoinViewModel()
+    @StateObject var favouriteAssetViewModel: FavouriteAssetViewModel = FavouriteAssetViewModel()
     let gridForm = [GridItem(.flexible())]
     @Binding var isAddedToPorfolio: Bool
     @State var addButtonAnimate: Bool = false
@@ -27,7 +27,7 @@ struct UserAssetsView: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            Text("Added Assets")
+            Text("Portfolio's Assets")
                 .foregroundColor(.gray)
                 .font(.system(size: 18, weight: .bold, design: .rounded))
                 .padding(.bottom, -5)
@@ -36,17 +36,7 @@ struct UserAssetsView: View {
                 LazyVGrid(columns: gridForm) {
                     ForEach(favouriteAssetViewModel.favouriteCoins, id: \.self) { asset in
                         
-                        
-                        UserAssetCardView(name: asset.name ?? "", symbol: asset.symbol ?? "", priceChangePercentage: 2, currentPrice: self.currentPrice, imgURL: asset.imgURL ?? "", purchaseQuantity: asset.purchaseQuantity ?? 0, animation: animation, addButtonAnimate: addButtonAnimate, isAddedToPorfolio: isAddedToPorfolio, isTouched: $isTouched)
-                            .task {
-                                do {
-                                    try await specificCoinVM.getCurrentPrice(selectedCoin: asset.id ?? "")
-                                    self.currentPrice = specificCoinVM.selectedCoinCurrentPrice ?? 0
-                                } catch {
-                                    print(error)
-                                }
-                                
-                            }
+                        UserAssetCardView(name: asset.name ?? "", symbol: asset.symbol ?? "", priceChangePercentage: asset.priceChangePercentage24h ?? 0, currentPrice: asset.currentPrice ?? 0, imgURL: asset.imgURL ?? "", purchaseQuantity: asset.purchaseQuantity ?? 0, animation: animation, addButtonAnimate: addButtonAnimate, isAddedToPorfolio: isAddedToPorfolio, isTouched: $isTouched)
                             
                     }
                 }
@@ -58,7 +48,10 @@ struct UserAssetsView: View {
         .padding(.horizontal, 10)
         .onAppear {
             Task {
-                favouriteAssetViewModel.getAllAssets()
+                await favouriteAssetViewModel.getAllAssets()
+                if let last = favouriteAssetViewModel.favouriteCoins.last {
+                    print(last)
+                }
             }
         }
         .task {
