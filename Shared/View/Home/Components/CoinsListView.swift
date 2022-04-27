@@ -25,6 +25,7 @@ struct CoinsMarketListView: View {
     
     @StateObject var coinViewModel: CoinInfoViewModel = CoinInfoViewModel()
     @StateObject var globalMarketViewModel: GlobalMarketViewModel = GlobalMarketViewModel()
+    @StateObject var specificCoinViewModel: SpecificCoinViewModel = SpecificCoinViewModel()
     @StateObject var haptics: Haptics = Haptics()
     let gridForm = [GridItem(.flexible())]
     @State var mcapChangePercentage: Double = 0
@@ -183,7 +184,7 @@ struct CoinsMarketListView: View {
                         RefreshableScrollView(showsIndicators: false) {
                             LazyVGrid(columns: gridForm) {
                                 ForEach(coinViewModel.coinModel, id: \.self) { coin in
-    //
+                                    
                                     BasicAssetInfoCardView(name: coin.name ?? "", marketCapRank: coin.marketCapRank ?? 1, symbol: coin.symbol ?? "", priceChangePercentage: coin.priceChangePercentage24H ?? 0, currentPrice: coin.currentPrice ?? 0, marketCap: coin.marketCap ?? 0, imgURL: coin.image ?? "", totalVolume: coin.totalVolume ?? 0, high24H: coin.high24H ?? 0, low24H: coin.low24H ?? 0, maxSupply: coin.maxSupply ?? 0, totalSupply: coin.totalSupply ?? 0, circulatingSupply: coin.circulatingSupply ?? 0, ath: coin.ath ?? 0, atl: coin.atl ?? 0, isTouched: $isTouched, isListVisible: $isListVisible, animation: animation, coin: coin)
                                         .padding(.bottom, self.lastAssetID == coin.id ? 75 : 1)
                                         .task {
@@ -192,6 +193,9 @@ struct CoinsMarketListView: View {
                                         .onTapGesture {
                                             if let id = coin.id {
                                                 self.id = id
+                                            }
+                                            Task {
+                                                await specificCoinViewModel.getSpecificCoin(selectedCoin: self.id)
                                             }
                                             if let imgurl = coin.image {
                                                 self.imgURL = imgurl
@@ -240,7 +244,7 @@ struct CoinsMarketListView: View {
                 
                 if isTouched {
                     ZStack(alignment: .topTrailing) {
-                        SpecificAssetView(favouriteAssetViewModel: FavouriteAssetViewModel(), imgURL: self.$imgURL, name: self.$name, marketCapRank: self.$marketCapRank, symbol: self.$symbol, coin: coin, id: self.$id, isMoreInfoClicked: self.$isMoreInfoClicked, isAddedToPorfolio: self.isAddedToPorfolio, isTouched: self.$isTouched, isListVisible: self.$isListVisible, animation: animation)
+                        SpecificAssetView(favouriteAssetViewModel: FavouriteAssetViewModel(), imgURL: self.$imgURL, name: self.$name, marketCapRank: self.$marketCapRank, symbol: self.$symbol, coin: self.coin, id: self.$id, isMoreInfoClicked: self.$isMoreInfoClicked, isAddedToPorfolio: self.isAddedToPorfolio, isTouched: self.$isTouched, isListVisible: self.$isListVisible, animation: animation)
                             .padding(.horizontal, 10)
                             .padding(.top, 30)
                             .padding(.bottom, 45)

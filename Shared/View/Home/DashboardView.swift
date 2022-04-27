@@ -85,7 +85,7 @@ struct CustomTabView: View {
                 PortfolioVIew()
                     .tag("house.fill")
                 
-                Text("Search")
+                SearchView()
                     .tag("magnifyingglass")
             }
             .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
