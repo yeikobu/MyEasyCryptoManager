@@ -29,7 +29,7 @@ struct DashboardView: View {
                         .blur(radius: 20)
                         .opacity(0.8)
                 )
-                .padding(.bottom, 10)
+                .padding(.bottom, 25)
         }
         .ignoresSafeArea()
         .background(
@@ -110,8 +110,6 @@ struct CustomTabView: View {
             .shadow(color: .black.opacity(0.5), radius: 5, x: 3, y: 3)
             .shadow(color: .black.opacity(0.5), radius: 5, x: -3, y: -3)
             .padding(.horizontal, 20)
-            .padding(.bottom, 1)
-            
         }
         .ignoresSafeArea(.keyboard, edges: .bottom)
         
