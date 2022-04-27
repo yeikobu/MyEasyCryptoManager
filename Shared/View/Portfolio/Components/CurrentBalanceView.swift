@@ -11,11 +11,11 @@ import SwiftUICharts
 struct CurrentBalanceView: View {
     var body: some View {
         VStack(alignment: .leading) {
-            Text("Portfolio")
-                .foregroundColor(.white)
-                .font(.system(size: 28, weight: .black, design: .rounded))
-            
-            Spacer()
+//            Text("Portfolio")
+//                .foregroundColor(.white)
+//                .font(.system(size: 28, weight: .black, design: .rounded))
+//            
+//            Spacer()
             
             VStack(alignment: .leading) {
                 Text("Current Balance")

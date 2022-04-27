@@ -37,8 +37,16 @@ struct PortfolioVIew: View {
     
     var body: some View {
         ZStack {
-            VStack {
+            VStack(alignment: .leading) {
                 if !isTouched && !isCardTouched {
+                    
+                    Text("Portfolio")
+                        .foregroundColor(.white)
+                        .font(.system(size: 28, weight: .black, design: .rounded))
+                        .padding(.leading, 10)
+                    
+                    Spacer()
+                    
                     ScrollView(showsIndicators: false) {
                         CurrentBalanceView()
                         UserAssetsView(specificCoinVM: SpecificCoinViewModel(), favouriteAssetViewModel: FavouriteAssetViewModel(), isAddedToPorfolio: $isAddedToPorfolio, isTouched: $isTouched)
@@ -49,6 +57,7 @@ struct PortfolioVIew: View {
                     }
                     .matchedGeometryEffect(id: "add", in: animation)
                     .transition(.scale)
+                    .cornerRadius(10)
                 }
                 
                 if isTouched {

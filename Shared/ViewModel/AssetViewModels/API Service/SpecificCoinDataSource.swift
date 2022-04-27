@@ -13,7 +13,7 @@ final class SpecificCoinDataSource {
     private let baseUrl: String = "https://api.coingecko.com/api/v3/coins/"
     
     func getAllSpecificCoins(selectedCoin: String, completionBlock: @escaping (Result<[SpecificCoinModel], Error>) -> Void) {
-        let finalURL = URL(string: baseUrl + selectedCoin)!
+        let finalURL = URL(string: "\(baseUrl)\(selectedCoin)?sparkline=true")!
         URLSession.shared.dataTask(with: finalURL) { data, response, error in
             do {
                 if let jsonData = data {
@@ -34,7 +34,7 @@ final class SpecificCoinDataSource {
     
     
     func getSpecificCoin(selectedCoin: String, completionBlock: @escaping (Result<SpecificCoinModel, Error>) -> Void) {
-        let finalURL = URL(string: baseUrl + selectedCoin)!
+        let finalURL = URL(string: "\(baseUrl)\(selectedCoin)?sparkline=true")!
         
         URLSession.shared.dataTask(with: finalURL) { data, response, error in
             do {

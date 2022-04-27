@@ -9,30 +9,37 @@ import Foundation
 
 // MARK: - CoinModel
 struct SpecificCoinModel: Decodable, Hashable {
-    let id: String?
-    let symbol, name: String?
-    let assetPlatformID: String?
-    let platforms: Platforms?
-    let blockTimeInMinutes: Int?
-    let hashingAlgorithm: String?
-//    let categories: [String?]
-    let publicNotice: String?
-    let additionalNotices: [String?]
-    let localization, coinModelDescription: Tion?
-    let links: Links?
-    let image: AssetImage?
-    let countryOrigin, genesisDate: String?
-    let sentimentVotesUpPercentage, sentimentVotesDownPercentage: Double?
-    let marketCapRank, coingeckoRank: Int?
-    let coingeckoScore, developerScore, communityScore, liquidityScore: Double?
-    let publicInterestScore: Int?
-    let marketData: MarketData?
-    let communityData: CommunityData?
-    let developerData: DeveloperData?
-    let publicInterestStats: PublicInterestStats?
-//    let statusUpdates: [String?]
-    let lastUpdated: String?
-    let tickers: [Ticker?]
+    var id: String? = ""
+    var symbol: String? = ""
+    var name: String? = ""
+    var assetPlatformID: String? = ""
+    var platforms: Platforms?
+    var blockTimeInMinutes: Int? = 0
+    var hashingAlgorithm: String? = ""
+//    varet categories: [String?]
+    var publicNotice: String? = ""
+    var additionalNotices: [String?] = []
+    var localization, coinModelDescription: Tion?
+    var links: Links?
+    var image: AssetImage?
+    var countryOrigin: String? = ""
+    var genesisDate: String? = ""
+    var sentimentVotesUpPercentage: Double? = 0
+    var sentimentVotesDownPercentage: Double? = 0
+    var marketCapRank: Int? = 0
+    var coingeckoRank: Int? = 0
+    var coingeckoScore: Double? = 0
+    var developerScore: Double? = 0
+    var communityScore: Double? = 0
+    var liquidityScore: Double? = 0
+    var publicInterestScore: Int? = 0
+    var marketData: MarketData?
+    var communityData: CommunityData?
+    var developerData: DeveloperData?
+    var publicInterestStats: PublicInterestStats?
+//    varet statusUpdates: [String?]
+    var lastUpdated: String? = ""
+    var tickers: [Ticker?] = []
     
     enum CodingKeys: String, CodingKey {
         case id, symbol, name
@@ -69,15 +76,15 @@ struct SpecificCoinModel: Decodable, Hashable {
 
 // MARK: - Tion
 struct Tion: Decodable, Hashable {
-    let en, de, es, fr: String?
-    let it, pl, ro, hu: String?
-    let nl, pt, sv, vi: String?
-    let tr, ru, ja, zh: String?
-    let zhTw, ko, ar, th: String?
-    let id, cs, da, el: String?
-    let hi, no, sk, uk: String?
-    let he, fi, bg, hr: String?
-    let lt, sl: String?
+    var en: String? = "", de: String? = "", es: String? = "", fr: String? = ""
+    var it: String? = "", pl: String? = "", ro: String? = "", hu: String? = ""
+    var nl: String? = "", pt: String? = "", sv: String? = "", vi: String? = ""
+    var tr: String? = "", ru: String? = "", ja: String? = "", zh: String? = ""
+    var zhTw: String? = "", ko: String? = "", ar: String? = "", th: String? = ""
+    var id: String? = "", cs: String? = "", da: String? = "", el: String? = ""
+    var hi: String? = "", no: String? = "", sk: String? = "", uk: String? = ""
+    var he: String? = "", fi: String? = "", bg: String? = "", hr: String? = ""
+    var lt: String? = "", sl: String? = ""
     
     enum CodingKeys: String, CodingKey {
         case en, de, es, fr, it, pl, ro, hu, nl, pt, sv, vi, tr, ru, ja, zh
@@ -88,11 +95,11 @@ struct Tion: Decodable, Hashable {
 
 // MARK: - CommunityData
 struct CommunityData: Decodable, Hashable  {
-    let facebookLikes: Int?
-    let twitterFollowers: Int?
-    let redditAveragePosts48H, redditAverageComments48H: Double?
-    let redditSubscribers, redditAccountsActive48H: Int?
-    let telegramChannelUserCount: Int?
+    var facebookLikes: Int? = 0
+    var twitterFollowers: Int? = 0
+    var redditAveragePosts48H: Double? = 0, redditAverageComments48H: Double? = 0
+    var redditSubscribers: Int? = 0, redditAccountsActive48H: Int? = 0
+    var telegramChannelUserCount: Int? = 0
     
     enum CodingKeys: String, CodingKey {
         case facebookLikes = "facebook_likes"
@@ -107,11 +114,11 @@ struct CommunityData: Decodable, Hashable  {
 
 // MARK: - DeveloperData
 struct DeveloperData: Decodable, Hashable  {
-    let forks, stars, subscribers, totalIssues: Int?
-    let closedIssues, pullRequestsMerged, pullRequestContributors: Int?
-    let codeAdditionsDeletions4_Weeks: CodeAdditionsDeletions4_Weeks?
-    let commitCount4_Weeks: Int?
-    let last4_WeeksCommitActivitySeries: [Int?]
+    var forks: Int? = 0, stars: Int? = 0, subscribers: Int? = 0, totalIssues: Int? = 0
+    var closedIssues: Int? = 0, pullRequestsMerged: Int? = 0, pullRequestContributors: Int? = 0
+    var codeAdditionsDeletions4_Weeks: CodeAdditionsDeletions4_Weeks?
+    var commitCount4_Weeks: Int? = 0
+    var last4_WeeksCommitActivitySeries: [Int?] = []
     
     enum CodingKeys: String, CodingKey {
         case forks, stars, subscribers
@@ -127,25 +134,25 @@ struct DeveloperData: Decodable, Hashable  {
 
 // MARK: - CodeAdditionsDeletions4_Weeks
 struct CodeAdditionsDeletions4_Weeks: Decodable, Hashable  {
-    let additions, deletions: Int?
+    var additions: Int? = 0, deletions: Int? = 0
 }
 
 // MARK: - Image
 struct AssetImage: Decodable, Hashable  {
-    let thumb, small, large: String?
+    var thumb: String? = "", small: String? = "", large: String? = ""
 }
 
 //// MARK: - Links
 struct Links: Decodable, Hashable  {
-    let homepage: [String?]
-    let blockchainSite, officialForumURL: [String?]
-    let chatURL, announcementURL: [String?]
-    let twitterScreenName: String?
-    let facebookUsername: String?
-    let bitcointalkThreadIdentifier: Double?
-    let telegramChannelIdentifier: String?
-    let subredditURL: String?
-    let reposURL: ReposURL?
+    var homepage: [String?] = []
+    var blockchainSite: [String?] = [], officialForumURL: [String?] = []
+    var chatURL: [String?] = [], announcementURL: [String?] = []
+    var twitterScreenName: String? = ""
+    var facebookUsername: String? = ""
+    var bitcointalkThreadIdentifier: Double? = 0
+    var telegramChannelIdentifier: String? = ""
+    var subredditURL: String? = ""
+    var reposURL: ReposURL?
     
     enum CodingKeys: String, CodingKey {
         case homepage
@@ -164,30 +171,31 @@ struct Links: Decodable, Hashable  {
 
 // MARK: - ReposURL
 struct ReposURL: Decodable, Hashable  {
-    let github: [String?]
-    let bitbucket: [String?]
+    var github: [String?] = []
+    var bitbucket: [String?] = []
 }
 
 // MARK: - MarketData
 struct MarketData: Decodable, Hashable  {
-    let currentPrice: [String: Double]
-//    let totalValueLocked, mcapToTvlRatio, fdvToTvlRatio: Double?
-    let roi: Roi?
-    let ath, athChangePercentage: [String: Double]
-    let athDate: [String: String]
-    let atl, atlChangePercentage: [String: Double]
-    let atlDate: [String: String]
-    let marketCap: [String: Double]
-    let marketCapRank: Int?
-    let fullyDilutedValuation, totalVolume, high24H, low24H: [String: Double]
-    let priceChange24H, priceChangePercentage24H, priceChangePercentage7D, priceChangePercentage14D: Double?
-    let priceChangePercentage30D, priceChangePercentage60D, priceChangePercentage200D, priceChangePercentage1Y: Double?
-    let marketCapChange24H, marketCapChangePercentage24H: Double?
-    let priceChange24HInCurrency, priceChangePercentage1HInCurrency, priceChangePercentage24HInCurrency, priceChangePercentage7DInCurrency: [String: Double]
-    let priceChangePercentage14DInCurrency, priceChangePercentage30DInCurrency, priceChangePercentage60DInCurrency, priceChangePercentage200DInCurrency: [String: Double]
-    let priceChangePercentage1YInCurrency, marketCapChange24HInCurrency, marketCapChangePercentage24HInCurrency: [String: Double]
-    let totalSupply, maxSupply, circulatingSupply: Double?
-    let lastUpdated: String?
+    var currentPrice: [String: Double] = [:]
+//varet totalValueLocked, mcapToTvlRatio, fdvToTvlRatio: Double?
+    var roi: Roi?
+    var ath: [String: Double] = [:], athChangePercentage: [String: Double] = [:]
+    var athDate: [String: String] = [:]
+    var atl: [String: Double] = [:], atlChangePercentage: [String: Double] = [:]
+    var atlDate: [String: String] = [:]
+    var marketCap: [String: Double] = [:]
+    var marketCapRank: Int? = 0
+    var fullyDilutedValuation: [String: Double] = [:], totalVolume: [String: Double] = [:], high24H: [String: Double] = [:], low24H: [String: Double] = [:]
+    var priceChange24H: Double? = 0, priceChangePercentage24H: Double? = 0, priceChangePercentage7D: Double? = 0, priceChangePercentage14D: Double? = 0
+    var priceChangePercentage30D: Double? = 0, priceChangePercentage60D: Double? = 0, priceChangePercentage200D: Double? = 0, priceChangePercentage1Y: Double? = 0
+    var marketCapChange24H: Double? = 0, marketCapChangePercentage24H: Double?
+    var priceChange24HInCurrency: [String: Double] = [:], priceChangePercentage1HInCurrency: [String: Double] = [:], priceChangePercentage24HInCurrency: [String: Double] = [:], priceChangePercentage7DInCurrency: [String: Double] = [:]
+    var priceChangePercentage14DInCurrency: [String: Double] = [:], priceChangePercentage30DInCurrency: [String: Double] = [:], priceChangePercentage60DInCurrency: [String: Double] = [:], priceChangePercentage200DInCurrency: [String: Double]
+    var priceChangePercentage1YInCurrency: [String: Double] = [:], marketCapChange24HInCurrency: [String: Double] = [:], marketCapChangePercentage24HInCurrency: [String: Double] = [:]
+    var totalSupply, maxSupply, circulatingSupply: Double?
+    var sparkline7D: Sparkline7D?
+    var lastUpdated: String?
     
     enum CodingKeys: String, CodingKey {
         case currentPrice = "current_price"
@@ -230,13 +238,18 @@ struct MarketData: Decodable, Hashable  {
         case totalSupply = "total_supply"
         case maxSupply = "max_supply"
         case circulatingSupply = "circulating_supply"
+        case sparkline7D = "sparkline_7d"
         case lastUpdated = "last_updated"
     }
 }
 
+struct Sparkline7D: Decodable, Hashable {
+    var price: [Double] = []
+}
+
 // MARK: - Platforms
 struct Platforms: Decodable, Hashable  {
-    let empty: String?
+    var empty: String? = ""
     
     enum CodingKeys: String, CodingKey {
         case empty = ""
@@ -245,8 +258,8 @@ struct Platforms: Decodable, Hashable  {
 
 // MARK: - PublicInterestStats
 struct PublicInterestStats: Decodable, Hashable  {
-    let alexaRank: Int?
-    let bingMatches: Int?
+    var alexaRank: Int? = 0
+    var bingMatches: Int? = 0
     
     enum CodingKeys: String, CodingKey {
         case alexaRank = "alexa_rank"
@@ -256,18 +269,18 @@ struct PublicInterestStats: Decodable, Hashable  {
 
 // MARK: - Ticker
 struct Ticker: Decodable, Hashable  {
-    let base, target: String?
-    let market: Market?
-    let last, volume: Double?
-//    let convertedLast, convertedVolume: [String?: Double?]
-    let trustScore: String?
-    let bidAskSpreadPercentage: Double?
-    let timestamp, lastTradedAt, lastFetchAt: String?
-    let isAnomaly, isStale: Bool?
-    let tradeURL: String?
-    let tokenInfoURL: String?
-    let coinID: String?
-    let targetCoinID: String?
+    var base: String? = "", target: String? = ""
+    var market: Market?
+    var last: Double? = 0, volume: Double? = 0
+//  varet convertedLast, convertedVolume: [String?: Double?]
+    var trustScore: String? = ""
+    var bidAskSpreadPercentage: Double? = 0
+    var timestamp: String? = "", lastTradedAt: String? = "", lastFetchAt: String? = ""
+    var isAnomaly: Bool? = false, isStale: Bool? = false
+    var tradeURL: String? = ""
+    var tokenInfoURL: String? = ""
+    var coinID: String? = ""
+    var targetCoinID: String? = ""
     
     enum CodingKeys: String, CodingKey {
         case base, target, market, last, volume
@@ -289,8 +302,8 @@ struct Ticker: Decodable, Hashable  {
 
 // MARK: - Market
 struct Market: Decodable, Hashable  {
-    let name, identifier: String?
-    let hasTradingIncentive: Bool?
+    var name: String? = "", identifier: String? = ""
+    var hasTradingIncentive: Bool? = false
     
     enum CodingKeys: String, CodingKey {
         case name, identifier
@@ -301,9 +314,9 @@ struct Market: Decodable, Hashable  {
 
 // MARK: - Roi
 struct Roi: Decodable, Hashable  {
-    let times: Double?
-    let currency: String?
-    let percentage: Double?
+    var times: Double? = 0
+    var currency: String? = ""
+    var percentage: Double? = 0
     
     enum CodingKeys: String, CodingKey {
         case times, currency, percentage
