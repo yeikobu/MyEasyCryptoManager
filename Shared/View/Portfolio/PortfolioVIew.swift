@@ -33,6 +33,13 @@ struct PortfolioView: View {
         isTouched ? 1.5 : 0.8
     }
     
+    let formatter: NumberFormatter = {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        formatter.minimumFractionDigits = 2
+        return formatter
+    }()
+    
     @State var lastItemID: String = ""
     
     var body: some View {
@@ -161,7 +168,7 @@ struct PortfolioView: View {
 
 
                                             VStack(alignment: .trailing) {
-                                                Text("$\(String(format: "%.2f", (asset.currentPrice ?? 0) * (asset.purchaseQuantity ?? 0)))")
+                                                Text("$\(formatter.string(from: ((asset.currentPrice ?? 0) * (asset.purchaseQuantity ?? 0)) as NSNumber) ?? "")")
                                                     .foregroundColor(.white)
                                                     .font(.system(size: 12, weight: .bold, design: .rounded))
                                                     .padding(.bottom, -4)
@@ -219,7 +226,9 @@ struct PortfolioView: View {
                                                 
                                                 if isDeletingAsset {
                                                     Button {
-                                                        //
+                                                        withAnimation(.spring(response: 0.3, dampingFraction: 0.8)) {
+                                                            favouriteAssetViewModel.deleteAsset(id: asset.id ?? "")
+                                                        }
                                                     } label: {
                                                         VStack {
                                                             Image(systemName: "trash.square")

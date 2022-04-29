@@ -7,6 +7,7 @@
 
 import Foundation
 import CloudKit
+import SwiftUI
 
 final class FavouriteAssetsRepository {
     private let favouritesAssetsDataSource: FavouriteAssetsDataSource
@@ -25,5 +26,9 @@ final class FavouriteAssetsRepository {
     
     func checkIsAssetLiked(id: String, completionBlock: @escaping (Bool) -> Void) {
         self.favouritesAssetsDataSource.checkIsAssetLiked(id: id, completionBlock: completionBlock)
+    }
+    
+    func deleteAsset(id: String, completionBlock: @escaping (Bool) -> Void) {
+        self.favouritesAssetsDataSource.deleteAsset(id: id, completionBlock: completionBlock)
     }
 }

@@ -13,6 +13,13 @@ struct CurrentBalanceView: View {
     @StateObject var favouriteAssetViewModel: FavouriteAssetViewModel = FavouriteAssetViewModel()
     @Binding var currentBalanceUSD: Double
     
+    let formatter: NumberFormatter = {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        formatter.minimumFractionDigits = 2
+        return formatter
+    }()
+    
     var body: some View {
         VStack(alignment: .leading) {
             
@@ -23,7 +30,7 @@ struct CurrentBalanceView: View {
                     .padding(.bottom, -5)
                 
                 VStack(alignment: .leading, spacing: 5) {
-                    Text("$\(String(format: "%.2f", favouriteAssetViewModel.currentBalance ?? 0))")
+                    Text("$\(formatter.string(from: (favouriteAssetViewModel.currentBalance ?? 0) as NSNumber) ?? "")")
                         .foregroundColor(.white)
                         .font(.system(size: 24, weight: .black, design: .rounded))
                     
@@ -33,14 +40,15 @@ struct CurrentBalanceView: View {
                                 .foregroundColor(.gray)
                                 .font(.system(size: 12, weight: .regular, design: .rounded))
                             
-                            Image(systemName: "arrowtriangle.up.fill")
-                                .foregroundColor(.green)
+                            Image(systemName: (favouriteAssetViewModel.profitLoss ?? 0) >= 0 ? "arrowtriangle.up.fill" : "arrowtriangle.down.fill")
+                                .foregroundColor((favouriteAssetViewModel.profitLoss ?? 0) >= 0 ? .green : .red)
                                 .font(.system(size: 8))
                                 .padding(.trailing, -6)
                                 .padding(.leading, -4)
                             
-                            Text("$92,02")
-                                .foregroundColor(.green)
+                            //Formatting numbers to get max 3 decimals
+                            Text((favouriteAssetViewModel.profitLoss ?? 0) >= 0 ? "$\(formatter.string(from: (favouriteAssetViewModel.profitLoss ?? 0) as NSNumber) ?? "")" : "-$\(formatter.string(from: (favouriteAssetViewModel.profitLoss ?? 0) as NSNumber) ?? "")")
+                                .foregroundColor((favouriteAssetViewModel.profitLoss ?? 0) >= 0 ? .green : .red)
                                 .font(.system(size: 12, weight: .bold, design: .rounded))
                                 .padding(.leading, -4)
                         }
@@ -48,18 +56,19 @@ struct CurrentBalanceView: View {
                         Spacer()
                         
                         HStack {
-                            Text("24H Percentage:")
+                            Text("Percentage:")
                                 .foregroundColor(.gray)
                                 .font(.system(size: 12, weight: .regular, design: .rounded))
                             
-                            Image(systemName: "arrowtriangle.up.fill")
-                                .foregroundColor(.green)
+                            Image(systemName: (favouriteAssetViewModel.profitLossPercentage ?? 0) >= 0 ? "arrowtriangle.up.fill" : "arrowtriangle.down.fill")
+                                .foregroundColor((favouriteAssetViewModel.profitLossPercentage ?? 0) >= 0 ? .green : .red)
                                 .font(.system(size: 8))
                                 .padding(.trailing, -6)
                                 .padding(.leading, -4)
                             
-                            Text("5,2%")
-                                .foregroundColor(.green)
+                            //Formatting numbers to get max 3 decimals
+                            Text((favouriteAssetViewModel.profitLossPercentage ?? 0) >= 0 ? "\(formatter.string(from: (favouriteAssetViewModel.profitLossPercentage ?? 0) as NSNumber) ?? "")%" : "-\(formatter.string(from: (favouriteAssetViewModel.profitLossPercentage ?? 0) as NSNumber) ?? "")%")
+                                .foregroundColor((favouriteAssetViewModel.profitLossPercentage ?? 0) >= 0 ? .green : .red)
                                 .font(.system(size: 12, weight: .bold, design: .rounded))
                                 .padding(.leading, -4)
                         }

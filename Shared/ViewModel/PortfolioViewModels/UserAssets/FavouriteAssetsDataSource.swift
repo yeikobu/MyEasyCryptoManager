@@ -66,4 +66,17 @@ final class FavouriteAssetsDataSource {
         }
     }
     
+    
+    func deleteAsset(id: String, completionBlock: @escaping (Bool) -> Void) {
+        var isRemoved: Bool = false
+        database.collection(collection).document(uid).collection(subCollection).document(id).delete() { error in
+            if let error = error {
+                print(error)
+            } else {
+                isRemoved = true
+                completionBlock(isRemoved)
+            }
+        }
+    }
+    
 }
