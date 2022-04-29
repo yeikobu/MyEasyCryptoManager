@@ -13,7 +13,6 @@
 		1603780A27FB6503006ADDA1 /* FavouriteAssetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1603780927FB6503006ADDA1 /* FavouriteAssetViewModel.swift */; };
 		161864E62808D8DD008F1CF4 /* SpecificAssetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 161864E52808D8DD008F1CF4 /* SpecificAssetView.swift */; };
 		161864E8280DE775008F1CF4 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 161864E7280DE775008F1CF4 /* String.swift */; };
-		16321EC6281A342D00C54CF2 /* BottomSheet in Frameworks */ = {isa = PBXBuildFile; productRef = 16321EC5281A342D00C54CF2 /* BottomSheet */; };
 		163A398A27E4039000F8D6F5 /* RefreshableScrollView in Frameworks */ = {isa = PBXBuildFile; productRef = 163A398927E4039000F8D6F5 /* RefreshableScrollView */; };
 		163A398D27E543E200F8D6F5 /* BasicAssetInfoCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 163A398C27E543E200F8D6F5 /* BasicAssetInfoCardView.swift */; };
 		163A398F27E561A900F8D6F5 /* CompleteAssetInfoCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 163A398E27E561A900F8D6F5 /* CompleteAssetInfoCardView.swift */; };
@@ -139,7 +138,6 @@
 				1671E70927EE8BD40090FD28 /* FirebaseAuth in Frameworks */,
 				1671E70D27EE8BD40090FD28 /* FirebaseFirestoreSwift-Beta in Frameworks */,
 				166BEEDF27E39F8E00072115 /* Kingfisher in Frameworks */,
-				16321EC6281A342D00C54CF2 /* BottomSheet in Frameworks */,
 				1671E70727EE8BD40090FD28 /* FirebaseAnalyticsSwift-Beta in Frameworks */,
 				1671E70527EE8BD40090FD28 /* FirebaseAnalytics in Frameworks */,
 				1671E70B27EE8BD40090FD28 /* FirebaseFirestore in Frameworks */,
@@ -471,7 +469,6 @@
 				1671E70C27EE8BD40090FD28 /* FirebaseFirestoreSwift-Beta */,
 				16C24BF527F22C6400B70B24 /* Lottie */,
 				16C24C0C27F3EE5100B70B24 /* SwiftUICharts */,
-				16321EC5281A342D00C54CF2 /* BottomSheet */,
 			);
 			productName = "MyEasyCryptoManager (iOS)";
 			productReference = 166BEEB727D6E5DF00072115 /* MyEasyCryptoManager.app */;
@@ -527,7 +524,6 @@
 				1671E70327EE8BD40090FD28 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				16C24BF427F22C6300B70B24 /* XCRemoteSwiftPackageReference "lottie-ios" */,
 				16C24C0B27F3EE5000B70B24 /* XCRemoteSwiftPackageReference "ChartView" */,
-				16321EC4281A342D00C54CF2 /* XCRemoteSwiftPackageReference "BottomSheet" */,
 			);
 			productRefGroup = 166BEEB827D6E5DF00072115 /* Products */;
 			projectDirPath = "";
@@ -894,14 +890,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		16321EC4281A342D00C54CF2 /* XCRemoteSwiftPackageReference "BottomSheet" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/danielsaidi/BottomSheet.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.3.0;
-			};
-		};
 		163A398827E4039000F8D6F5 /* XCRemoteSwiftPackageReference "RefreshableScrollView" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/elegantchaos/RefreshableScrollView.git";
@@ -945,11 +933,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		16321EC5281A342D00C54CF2 /* BottomSheet */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 16321EC4281A342D00C54CF2 /* XCRemoteSwiftPackageReference "BottomSheet" */;
-			productName = BottomSheet;
-		};
 		163A398927E4039000F8D6F5 /* RefreshableScrollView */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 163A398827E4039000F8D6F5 /* XCRemoteSwiftPackageReference "RefreshableScrollView" */;

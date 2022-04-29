@@ -78,7 +78,6 @@ final class FavouriteAssetViewModel: ObservableObject {
     
     
     func calcCurrentBalance() async {
-        
         var currentBalanceUSD: Double = 0
         
         favouriteAssetsRepository.getAllAssets { [weak self] result in
@@ -89,12 +88,18 @@ final class FavouriteAssetViewModel: ObservableObject {
                 }
                 self?.assetsCount = favouriteCoinModel.count
                 self?.currentBalance = currentBalanceUSD
+                
             case .failure(let error):
                 self?.messageError = error.localizedDescription
             }
         }
-        
-        
+    }
+    
+    
+    func checkIsAssetLiked(id: String, completionBlock: @escaping (Bool) -> Void) {
+        favouriteAssetsRepository.checkIsAssetLiked(id: id) { result in
+            completionBlock(result)
+        }
     }
     
 }

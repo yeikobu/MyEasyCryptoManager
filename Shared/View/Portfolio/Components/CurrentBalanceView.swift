@@ -15,11 +15,6 @@ struct CurrentBalanceView: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-//            Text("Portfolio")
-//                .foregroundColor(.white)
-//                .font(.system(size: 28, weight: .black, design: .rounded))
-//            
-//            Spacer()
             
             VStack(alignment: .leading) {
                 Text("Current Balance")
@@ -34,7 +29,7 @@ struct CurrentBalanceView: View {
                     
                     HStack {
                         HStack {
-                            Text("24H Change:")
+                            Text("Profit/Loss")
                                 .foregroundColor(.gray)
                                 .font(.system(size: 12, weight: .regular, design: .rounded))
                             

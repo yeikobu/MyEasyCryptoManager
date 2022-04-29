@@ -16,6 +16,7 @@ struct PortfolioView: View {
     let gridForm = [GridItem(.flexible())]
     @State var isAddedToPorfolio: Bool
     @State var addButtonAnimate: Bool = false
+    @State var isDeletingAsset: Bool = false
     @Namespace var animation
     @Binding var isTouched: Bool
     @State var name: String
@@ -46,9 +47,10 @@ struct PortfolioView: View {
             
 //            if favouriteAssetViewModel.favouriteCoins.count > 0 {
                 ScrollView(showsIndicators: false) {
-                    
+                    // MARK: - Current Balance
                     CurrentBalanceView(currentBalanceUSD: self.$quantityUSD)
                     
+                    // MARK: - Porfolios assets
                     VStack(alignment: .leading) {
                         
                         HStack {
@@ -58,14 +60,32 @@ struct PortfolioView: View {
                                 
                             Spacer()
                             
-                            Text("Delete assets")
-                                .foregroundColor(.white)
-                                .font(.system(size: 12, design: .rounded))
+                            Text(self.isDeletingAsset ? "Done" : "Delete")
+                                .matchedGeometryEffect(id: "delete", in: animation)
+                                .foregroundColor(self.isDeletingAsset ? .white : .red)
+                                .font(.system(size: 10, weight: .bold, design: .rounded))
+                                .padding(4)
+                                .background(
+                                    RoundedRectangle(cornerRadius: 5, style: .continuous)
+                                        .fill(.ultraThinMaterial)
+                                        .ignoresSafeArea()
+                                        .blur(radius: 0)
+                                        .opacity(1)
+                                )
+                                .shadow(color: Color(.black).opacity(0.2), radius: 3, x: 3, y: 3)
+                                .shadow(color: Color(.black).opacity(0.2), radius: 3, x: -3, y: -3)
+                                .padding(4)
+                                .padding(.top, 20)
+                                .onTapGesture {
+                                    withAnimation(.spring()) {
+                                        self.isDeletingAsset.toggle()
+                                    }
+                                }
                         }
                         .padding(.bottom, -5)
                         .padding(.top, 15)
                         
-                        
+                        // MARK: - Portfolio subtitles
                         HStack {
                             
                             Spacer()
@@ -94,6 +114,7 @@ struct PortfolioView: View {
                             
                         }
                         
+                        // MARK: - Assets
                         VStack {
                             LazyVGrid(columns: gridForm) {
                                 ForEach(favouriteAssetViewModel.favouriteCoins, id: \.self) { asset in
@@ -153,45 +174,71 @@ struct PortfolioView: View {
                                             .frame(width: 80, height: 40, alignment: .trailing)
 
                                             VStack(alignment: .center) {
-                                                Button {
-                                                    DispatchQueue.main.asyncAfter(deadline: .now() + buttonAnimationDuration) {
-                                                        withAnimation(.spring(response: 0.6, dampingFraction: 1)) {
-                                                            self.isTouched = true
+                                                
+                                                if !isDeletingAsset {
+                                                    Button {
+                                                        DispatchQueue.main.asyncAfter(deadline: .now() + buttonAnimationDuration) {
+                                                            withAnimation(.spring(response: 0.6, dampingFraction: 1)) {
+                                                                self.isTouched = true
+                                                            }
+                                                        }
+
+                                                        self.haptics.addFunctionVibration()
+
+                                                        withAnimation(.spring(response: 0.4, dampingFraction: 0.8)) {
+                                                            self.isAddedToPorfolio = true
+                                                        }
+                                                        
+                                                        self.name = asset.name ?? ""
+                                                        self.id = asset.id ?? ""
+                                                        self.currentPrice = asset.currentPrice ?? 0
+                                                        self.symbol = asset.symbol ?? ""
+                                                        self.imgURL = asset.imgURL ?? ""
+                                                        self.priceChangePercentage = asset.priceChangePercentage24h ?? 0
+                                                    } label: {
+                                                        VStack {
+                                                            Image(systemName: "plus.app.fill")
+                                                                .resizable()
+                                                                .aspectRatio(contentMode: .fit)
+                                                                .frame(width: 20)
+                                                                .foregroundColor(Color("Buttons"))
+                                                                .shadow(color: Color(.black).opacity(0.2), radius: 2, x: 2, y: 2)
+                                                                .shadow(color: Color(.black).opacity(0.2), radius: 2, x: -2, y: -2)
+
+                                                            Text("Add coins")
+                                                                .foregroundColor(.gray)
+                                                                .font(.system(size: 8))
                                                         }
                                                     }
-
-                                                    self.haptics.addFunctionVibration()
-
-                                                    withAnimation(.spring(response: 0.4, dampingFraction: 0.8)) {
-                                                        self.isAddedToPorfolio = true
-                                                    }
-                                                    
-                                                    self.name = asset.name ?? ""
-                                                    self.id = asset.id ?? ""
-                                                    self.currentPrice = asset.currentPrice ?? 0
-                                                    self.symbol = asset.symbol ?? ""
-                                                    self.imgURL = asset.imgURL ?? ""
-                                                    self.priceChangePercentage = asset.priceChangePercentage24h ?? 0
-                                                } label: {
-                                                    VStack {
-                                                        Image(systemName: "plus.app")
-                                                            .resizable()
-                                                            .aspectRatio(contentMode: .fit)
-                                                            .frame(width: 20)
-                                                            .foregroundColor(Color("Buttons"))
-
-                                                        Text("Add more")
-                                                            .foregroundColor(.gray)
-                                                            .font(.system(size: 8))
-                                                    }
+                                                    .fullScreenCover(isPresented: $isAddedToPorfolio, content: {
+                                                        AddAssetView(purcharsePrice: self.currentPrice, isAddedToPorfolio: self.$isAddedToPorfolio, assetName: self.name, assetId: self.id, currentPrice: self.currentPrice, assetSymbol: self.symbol, assetImgURL: self.imgURL, assetChangePercentage: self.priceChangePercentage, animation: animation)
+                                                    })
+                                                    .padding(.leading, 1)
+                                                    .scaleEffect(self.addButtonAnimate ? addButtonScale : 1)
                                                 }
-                                                .fullScreenCover(isPresented: $isAddedToPorfolio, content: {
-                                                    AddAssetView(purcharsePrice: self.currentPrice, isAddedToPorfolio: self.$isAddedToPorfolio, assetName: self.name, assetId: self.id, currentPrice: self.currentPrice, assetSymbol: self.symbol, assetImgURL: self.imgURL, assetChangePercentage: self.priceChangePercentage, animation: animation)
-                                                })
-                                                .padding(.leading, 1)
-                                                .scaleEffect(self.addButtonAnimate ? addButtonScale : 1)
+                                                
+                                                if isDeletingAsset {
+                                                    Button {
+                                                        //
+                                                    } label: {
+                                                        VStack {
+                                                            Image(systemName: "trash.square")
+                                                                .resizable()
+                                                                .aspectRatio(contentMode: .fit)
+                                                                .frame(width: 20)
+                                                                .foregroundColor(Color(.red))
+
+                                                            Text("Delete")
+                                                                .foregroundColor(Color(.gray))
+                                                                .font(.system(size: 8))
+                                                        }
+                                                    }
+                                                    .padding(.leading, 1)
+
+                                                }
+                                                
                                             }
-                                            .frame(width: 40)
+                                            .frame(width: 45)
                                         }
                                         .frame(maxWidth: .infinity, minHeight: 50,alignment: .leading)
                                     }

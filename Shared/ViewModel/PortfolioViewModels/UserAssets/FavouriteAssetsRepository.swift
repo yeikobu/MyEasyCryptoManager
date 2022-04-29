@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CloudKit
 
 final class FavouriteAssetsRepository {
     private let favouritesAssetsDataSource: FavouriteAssetsDataSource
@@ -20,5 +21,9 @@ final class FavouriteAssetsRepository {
     
     func addFavouriteAsset(id: String, name: String, symbol: String, imgURL: String, purchasePrice: Double, purchaseQuantity: Double, currentPrice: Double, priceChangePercentage24h: Double, completionBlock: @escaping (Result<FavouriteCoinModel, Error>) -> Void) {
         self.favouritesAssetsDataSource.addFavouriteAsset(id: id, name: name, symbol: symbol, imgURL: imgURL, purchasePrice: purchasePrice, purchaseQuantity: purchaseQuantity, currentPrice: currentPrice, priceChangePercentage24h: priceChangePercentage24h, completionBlock: completionBlock)
+    }
+    
+    func checkIsAssetLiked(id: String, completionBlock: @escaping (Bool) -> Void) {
+        self.favouritesAssetsDataSource.checkIsAssetLiked(id: id, completionBlock: completionBlock)
     }
 }

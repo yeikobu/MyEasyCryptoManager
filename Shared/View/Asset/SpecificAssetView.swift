@@ -399,6 +399,13 @@ struct SpecificAssetView: View {
                 .onAppear {
                     Task {
                         await specificCoinViewModel.getSpecificCoin(selectedCoin: self.id)
+                        self.favouriteAssetViewModel.checkIsAssetLiked(id: self.id) { result in
+                            if result {
+                                self.isAddedToPorfolio = true
+                            } else {
+                                self.isAddedToPorfolio = false
+                            }
+                        }
                     }
                 }
                 .preferredColorScheme(.dark)

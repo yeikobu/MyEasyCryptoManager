@@ -50,4 +50,20 @@ final class FavouriteAssetsDataSource {
         }
     }
     
+    func checkIsAssetLiked(id: String, completionBlock: @escaping (Bool) -> Void) {
+        var isAssetLiked: Bool = false
+        database.collection(collection).document(uid).collection(subCollection).getDocuments { documents, error in
+            if error == nil {
+                if documents != nil {
+                    for document in documents!.documents {
+                        if id == document.documentID {
+                            isAssetLiked = true
+                        }
+                    }
+                    completionBlock(isAssetLiked)
+                }
+            }
+        }
+    }
+    
 }
