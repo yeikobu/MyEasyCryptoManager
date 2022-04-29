@@ -93,6 +93,8 @@ struct SearchView: View {
                             .blur(radius: 0)
                             .opacity(0.7)
                     )
+                    .shadow(color: .black.opacity(0.4), radius: 5, x: 3, y: 3)
+                    .shadow(color: .black.opacity(0.4), radius: 5, x: -3, y: -3)
                     .padding(.horizontal, 10)
                     
                     if !coinsAppear {

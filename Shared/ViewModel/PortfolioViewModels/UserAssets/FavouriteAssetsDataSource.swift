@@ -50,4 +50,33 @@ final class FavouriteAssetsDataSource {
         }
     }
     
+    func checkIsAssetLiked(id: String, completionBlock: @escaping (Bool) -> Void) {
+        var isAssetLiked: Bool = false
+        database.collection(collection).document(uid).collection(subCollection).getDocuments { documents, error in
+            if error == nil {
+                if documents != nil {
+                    for document in documents!.documents {
+                        if id == document.documentID {
+                            isAssetLiked = true
+                        }
+                    }
+                    completionBlock(isAssetLiked)
+                }
+            }
+        }
+    }
+    
+    
+    func deleteAsset(id: String, completionBlock: @escaping (Bool) -> Void) {
+        var isRemoved: Bool = false
+        database.collection(collection).document(uid).collection(subCollection).document(id).delete() { error in
+            if let error = error {
+                print(error)
+            } else {
+                isRemoved = true
+                completionBlock(isRemoved)
+            }
+        }
+    }
+    
 }
