@@ -28,7 +28,7 @@ struct CurrentBalanceView: View {
                     .padding(.bottom, -5)
                 
                 VStack(alignment: .leading, spacing: 5) {
-                    Text("$\((favouriteAssetViewModel.currentBalance ?? 0).formatted())")
+                    Text("$\(String(format: "%.2f", favouriteAssetViewModel.currentBalance ?? 0))")
                         .foregroundColor(.white)
                         .font(.system(size: 24, weight: .black, design: .rounded))
                     

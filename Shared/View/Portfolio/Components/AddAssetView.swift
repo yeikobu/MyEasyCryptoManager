@@ -12,9 +12,9 @@ struct AddAssetView: View {
     @StateObject var favouriteAssetViewModel: FavouriteAssetViewModel = FavouriteAssetViewModel()
     @Environment(\.presentationMode) var presentationMode
     @State var amount: String = ""
-    @State var quantity: Double = 0
+    @State var quantity: Double = 1
     @State var purcharsePriceString: String = ""
-    @State var purcharsePrice: Double = 0
+    @State var purcharsePrice: Double
     @Binding var isAddedToPorfolio: Bool
     @State var assetName: String
     @State var assetId: String
@@ -22,6 +22,8 @@ struct AddAssetView: View {
     @State var assetSymbol: String
     @State var assetImgURL: String
     @State var assetChangePercentage: Double
+    @State var isQuantityChanging: Bool = false
+    @State var isPurchasePriceChanging: Bool = false
     var animation: Namespace.ID
     
     var body: some View {
@@ -46,17 +48,14 @@ struct AddAssetView: View {
                             
                             HStack {
                                 ZStack(alignment: .leading) {
-                                    if amount.isEmpty {
-                                        Text("1")
-                                            .foregroundColor(.gray)
-                                            .font(.caption)
-                                            .padding(.leading, 10)
-                                    }
                                     
-                                    TextField("", text: $amount)
-                                        .foregroundColor(.white)
+                                    TextField("1", value: $quantity, format: .number)
+                                        .onChange(of: quantity, perform: { newValue in
+                                            self.isQuantityChanging = true
+                                        })
+                                        .foregroundColor(self.isQuantityChanging ? .white : .gray)
                                         .keyboardType(.decimalPad)
-                                        .font(.body)
+                                        .font(.system(size: 12, design: .rounded))
                                         .padding(8)
                                         .padding(.leading, 2)
                                         .disableAutocorrection(true)
@@ -85,21 +84,25 @@ struct AddAssetView: View {
                             
                             HStack {
                                 ZStack(alignment: .leading) {
-                                    if purcharsePriceString.isEmpty {
+                                    
+                                    TextField("\(purcharsePrice.formatted())", value: $purcharsePrice, format: .number)
+                                        .onChange(of: purcharsePrice, perform: { newValue in
+                                            self.isPurchasePriceChanging = true
+                                        })
+                                        .foregroundColor(self.isPurchasePriceChanging ? .white : .gray)
+                                        .keyboardType(.decimalPad)
+                                        .font(.system(size: 12, design: .rounded))
+                                        .padding(8)
+                                        .padding(.leading, 2)
+                                        .disableAutocorrection(true)
+                                        .autocapitalization(.none)
+                                    
+                                    if purcharsePrice == 0 {
                                         Text("\(currentPrice.formatted())")
                                             .foregroundColor(.gray)
                                             .font(.system(size: 12, design: .rounded))
                                             .padding(.leading, 10)
                                     }
-                                    
-                                    TextField("", text: $purcharsePriceString)
-                                        .foregroundColor(.white)
-                                        .keyboardType(.decimalPad)
-                                        .font(.body)
-                                        .padding(8)
-                                        .padding(.leading, 2)
-                                        .disableAutocorrection(true)
-                                        .autocapitalization(.none)
                                 }
                                 
                                 Text("USD")
@@ -122,8 +125,8 @@ struct AddAssetView: View {
                     
                     Button {
                         
-                        self.quantity = Double(self.amount) ?? 1
-                        self.purcharsePrice = Double(self.purcharsePriceString) ?? self.currentPrice
+//                        self.quantity = Double(self.amount) ?? 1
+//                        self.purcharsePrice = Double(self.purcharsePriceString) ?? self.currentPrice
                         
                         withAnimation(.spring(response: 0.4, dampingFraction: 1)) {
                             isAddedToPorfolio = false
@@ -195,6 +198,9 @@ struct AddAssetView: View {
                 .opacity(0.4)
         )
         .preferredColorScheme(.dark)
+        .onAppear {
+            self.purcharsePrice = self.currentPrice
+        }
     }
 }
 
@@ -208,7 +214,7 @@ struct AddAssetView_Previews: PreviewProvider {
     
     
     static var previews: some View {
-        AddAssetView(isAddedToPorfolio: .constant(true),assetName: name, assetId: id, currentPrice: currentPrice, assetSymbol: symbol,assetImgURL: "", assetChangePercentage: currentPrice, animation: animation)
+        AddAssetView(purcharsePrice: currentPrice, isAddedToPorfolio: .constant(true),assetName: name, assetId: id, currentPrice: currentPrice, assetSymbol: symbol,assetImgURL: "", assetChangePercentage: currentPrice, animation: animation)
             .preferredColorScheme(.light)
     }
 }

@@ -42,7 +42,6 @@ final class FavouriteAssetViewModel: ObservableObject {
                 print(error)
             }
             
-            print("updating.....")
             self.updateAsset(id: asset.id ?? "", name: asset.name ?? "", symbol: asset.symbol ?? "", imgURL: asset.imgURL ?? "", purchasePrice: asset.purchasePrice ?? 0, purchaseQuantity: asset.purchaseQuantity ?? 0, currentPrice: currentPrice, priceChangePercentage24h: changepercentage)
         }
         
@@ -69,7 +68,7 @@ final class FavouriteAssetViewModel: ObservableObject {
         favouriteAssetsRepository.addFavouriteAsset(id: id, name: name, symbol: symbol, imgURL: imgURL, purchasePrice: purchasePrice, purchaseQuantity: purchaseQuantity, currentPrice: currentPrice, priceChangePercentage24h: priceChangePercentage24h) { result in
             switch result {
             case .success( _):
-                print("")
+                print("Updating user asset information")
             case .failure(let error):
                 self.messageError = error.localizedDescription
                 print(error)

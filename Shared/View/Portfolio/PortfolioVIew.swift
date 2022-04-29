@@ -50,11 +50,49 @@ struct PortfolioView: View {
                     CurrentBalanceView(currentBalanceUSD: self.$quantityUSD)
                     
                     VStack(alignment: .leading) {
-                        Text("Portfolio's Assets")
-                            .foregroundColor(.gray)
-                            .font(.system(size: 18, weight: .bold, design: .rounded))
-                            .padding(.bottom, -5)
-                            .padding(.top, 10)
+                        
+                        HStack {
+                            Text("Portfolio's Assets")
+                                .foregroundColor(.gray)
+                                .font(.system(size: 18, weight: .bold, design: .rounded))
+                                
+                            Spacer()
+                            
+                            Text("Delete assets")
+                                .foregroundColor(.white)
+                                .font(.system(size: 12, design: .rounded))
+                        }
+                        .padding(.bottom, -5)
+                        .padding(.top, 15)
+                        
+                        
+                        HStack {
+                            
+                            Spacer()
+                            
+                            Text("Asset name")
+                                .foregroundColor(.gray)
+                                .font(.system(size: 10, design: .rounded))
+                            
+                            Spacer()
+                            Spacer()
+                            
+                            Text("Current price")
+                                .foregroundColor(.gray)
+                                .font(.system(size: 10, design: .rounded))
+                            
+                            Spacer()
+                            Spacer()
+                            
+                            Text("Holdings")
+                                .foregroundColor(.gray)
+                                .font(.system(size: 10, design: .rounded))
+                                .padding(.trailing, -5)
+                            
+                            Spacer()
+                            Spacer()
+                            
+                        }
                         
                         VStack {
                             LazyVGrid(columns: gridForm) {
@@ -70,7 +108,7 @@ struct PortfolioView: View {
 
                                                 Text(asset.name ?? "")
                                                     .foregroundColor(.white)
-                                                    .font(.system(size: 15, weight: .bold, design: .rounded))
+                                                    .font(.system(size: 13, weight: .bold, design: .rounded))
                                                     .padding(.bottom, -3)
                                             }
                                             .frame(maxWidth: 120, maxHeight: 40, alignment: .leading)
@@ -79,9 +117,9 @@ struct PortfolioView: View {
                                             Spacer()
 
                                             VStack(alignment: .leading) {
-                                                Text("\((asset.currentPrice ?? 0).formatted())")
+                                                Text("$\((asset.currentPrice ?? 0).formatted())")
                                                     .foregroundColor(.white)
-                                                    .font(.system(size: 14, weight: .bold, design: .rounded))
+                                                    .font(.system(size: 12, weight: .bold, design: .rounded))
                                                     .padding(.bottom, -4)
 
                                                     VStack(alignment: .trailing) {
@@ -102,14 +140,14 @@ struct PortfolioView: View {
 
 
                                             VStack(alignment: .trailing) {
-                                                Text("\(((asset.currentPrice ?? 0) * (asset.purchaseQuantity ?? 0)).formatted())")
+                                                Text("$\(String(format: "%.2f", (asset.currentPrice ?? 0) * (asset.purchaseQuantity ?? 0)))")
                                                     .foregroundColor(.white)
-                                                    .font(.system(size: 14, weight: .bold, design: .rounded))
+                                                    .font(.system(size: 12, weight: .bold, design: .rounded))
                                                     .padding(.bottom, -4)
 
                                                 Text("\((asset.purchaseQuantity ?? 0).formatted())")
                                                     .foregroundColor(.white)
-                                                    .font(.system(size: 14, weight: .bold, design: .rounded))
+                                                    .font(.system(size: 12, weight: .bold, design: .rounded))
                                                     .padding(.bottom, -4)
                                             }
                                             .frame(width: 80, height: 40, alignment: .trailing)
@@ -148,7 +186,7 @@ struct PortfolioView: View {
                                                     }
                                                 }
                                                 .fullScreenCover(isPresented: $isAddedToPorfolio, content: {
-                                                    AddAssetView(isAddedToPorfolio: self.$isAddedToPorfolio, assetName: self.name, assetId: self.id, currentPrice: self.currentPrice, assetSymbol: self.symbol, assetImgURL: self.imgURL, assetChangePercentage: self.priceChangePercentage, animation: animation)
+                                                    AddAssetView(purcharsePrice: self.currentPrice, isAddedToPorfolio: self.$isAddedToPorfolio, assetName: self.name, assetId: self.id, currentPrice: self.currentPrice, assetSymbol: self.symbol, assetImgURL: self.imgURL, assetChangePercentage: self.priceChangePercentage, animation: animation)
                                                 })
                                                 .padding(.leading, 1)
                                                 .scaleEffect(self.addButtonAnimate ? addButtonScale : 1)
@@ -168,7 +206,6 @@ struct PortfolioView: View {
                                     .mask(
                                         RoundedRectangle(cornerRadius: 10, style: .continuous)
                                     )
-                                    
                                 }
                             }
                         }
