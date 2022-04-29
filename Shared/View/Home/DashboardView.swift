@@ -82,7 +82,7 @@ struct CustomTabView: View {
                 CoinsListView()
                     .tag("chart.bar.xaxis")
                 
-                PortfolioVIew()
+                PortfolioView(isAddedToPorfolio: false, isTouched: .constant(false), name: "", id: "", symbol: "", currentPrice: 0)
                     .tag("house.fill")
                 
                 SearchView()

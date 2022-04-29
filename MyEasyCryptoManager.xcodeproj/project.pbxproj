@@ -13,6 +13,7 @@
 		1603780A27FB6503006ADDA1 /* FavouriteAssetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1603780927FB6503006ADDA1 /* FavouriteAssetViewModel.swift */; };
 		161864E62808D8DD008F1CF4 /* SpecificAssetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 161864E52808D8DD008F1CF4 /* SpecificAssetView.swift */; };
 		161864E8280DE775008F1CF4 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 161864E7280DE775008F1CF4 /* String.swift */; };
+		16321EC6281A342D00C54CF2 /* BottomSheet in Frameworks */ = {isa = PBXBuildFile; productRef = 16321EC5281A342D00C54CF2 /* BottomSheet */; };
 		163A398A27E4039000F8D6F5 /* RefreshableScrollView in Frameworks */ = {isa = PBXBuildFile; productRef = 163A398927E4039000F8D6F5 /* RefreshableScrollView */; };
 		163A398D27E543E200F8D6F5 /* BasicAssetInfoCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 163A398C27E543E200F8D6F5 /* BasicAssetInfoCardView.swift */; };
 		163A398F27E561A900F8D6F5 /* CompleteAssetInfoCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 163A398E27E561A900F8D6F5 /* CompleteAssetInfoCardView.swift */; };
@@ -58,7 +59,6 @@
 		16C24BF827F22C8E00B70B24 /* SplashScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C24BF727F22C8E00B70B24 /* SplashScreenView.swift */; };
 		16C24BFB27F22F2A00B70B24 /* LottieImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C24BFA27F22F2A00B70B24 /* LottieImage.swift */; };
 		16C24BFD27F23CBA00B70B24 /* chartpurple.json in Resources */ = {isa = PBXBuildFile; fileRef = 16C24BFC27F23CBA00B70B24 /* chartpurple.json */; };
-		16C24C0827F3E97100B70B24 /* PortfolioVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C24C0727F3E97100B70B24 /* PortfolioVIew.swift */; };
 		16C24C0D27F3EE5100B70B24 /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = 16C24C0C27F3EE5100B70B24 /* SwiftUICharts */; };
 		16CC89EA27FCF05B00E194A7 /* SpecificCoinModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16CC89E927FCF05B00E194A7 /* SpecificCoinModel.swift */; };
 		16CC89F327FD1ADF00E194A7 /* SpecificCoinViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16CC89F227FD1ADF00E194A7 /* SpecificCoinViewModel.swift */; };
@@ -72,8 +72,7 @@
 		16D8896B28189D9500DB1BEC /* SearchCoinViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16D8896A28189D9500DB1BEC /* SearchCoinViewModel.swift */; };
 		16D8896E2818B1AE00DB1BEC /* SearchedCoinCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16D8896D2818B1AE00DB1BEC /* SearchedCoinCardView.swift */; };
 		16F3110E27F4B5BC002A2844 /* CurrentBalanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F3110D27F4B5BC002A2844 /* CurrentBalanceView.swift */; };
-		16F3111027F4BB61002A2844 /* UserAssetsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F3110F27F4BB61002A2844 /* UserAssetsView.swift */; };
-		16F3111227F4BDA3002A2844 /* UserAssetCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F3111127F4BDA3002A2844 /* UserAssetCardView.swift */; };
+		16F3111027F4BB61002A2844 /* PortfolioVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F3110F27F4BB61002A2844 /* PortfolioVIew.swift */; };
 		16F3111627F4F9AD002A2844 /* Haptics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F3111527F4F9AD002A2844 /* Haptics.swift */; };
 /* End PBXBuildFile section */
 
@@ -114,7 +113,6 @@
 		16C24BF727F22C8E00B70B24 /* SplashScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreenView.swift; sourceTree = "<group>"; };
 		16C24BFA27F22F2A00B70B24 /* LottieImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieImage.swift; sourceTree = "<group>"; };
 		16C24BFC27F23CBA00B70B24 /* chartpurple.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = chartpurple.json; sourceTree = "<group>"; };
-		16C24C0727F3E97100B70B24 /* PortfolioVIew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioVIew.swift; sourceTree = "<group>"; };
 		16CC89E927FCF05B00E194A7 /* SpecificCoinModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecificCoinModel.swift; sourceTree = "<group>"; };
 		16CC89F227FD1ADF00E194A7 /* SpecificCoinViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecificCoinViewModel.swift; sourceTree = "<group>"; };
 		16CC89F427FE6B1300E194A7 /* SpecificCoinDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecificCoinDataSource.swift; sourceTree = "<group>"; };
@@ -127,8 +125,7 @@
 		16D8896A28189D9500DB1BEC /* SearchCoinViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCoinViewModel.swift; sourceTree = "<group>"; };
 		16D8896D2818B1AE00DB1BEC /* SearchedCoinCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchedCoinCardView.swift; sourceTree = "<group>"; };
 		16F3110D27F4B5BC002A2844 /* CurrentBalanceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentBalanceView.swift; sourceTree = "<group>"; };
-		16F3110F27F4BB61002A2844 /* UserAssetsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAssetsView.swift; sourceTree = "<group>"; };
-		16F3111127F4BDA3002A2844 /* UserAssetCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAssetCardView.swift; sourceTree = "<group>"; };
+		16F3110F27F4BB61002A2844 /* PortfolioVIew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioVIew.swift; sourceTree = "<group>"; };
 		16F3111527F4F9AD002A2844 /* Haptics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Haptics.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -142,6 +139,7 @@
 				1671E70927EE8BD40090FD28 /* FirebaseAuth in Frameworks */,
 				1671E70D27EE8BD40090FD28 /* FirebaseFirestoreSwift-Beta in Frameworks */,
 				166BEEDF27E39F8E00072115 /* Kingfisher in Frameworks */,
+				16321EC6281A342D00C54CF2 /* BottomSheet in Frameworks */,
 				1671E70727EE8BD40090FD28 /* FirebaseAnalyticsSwift-Beta in Frameworks */,
 				1671E70527EE8BD40090FD28 /* FirebaseAnalytics in Frameworks */,
 				1671E70B27EE8BD40090FD28 /* FirebaseFirestore in Frameworks */,
@@ -371,7 +369,7 @@
 		16C24C0227F3DDED00B70B24 /* Portfolio */ = {
 			isa = PBXGroup;
 			children = (
-				16C24C0727F3E97100B70B24 /* PortfolioVIew.swift */,
+				16F3110F27F4BB61002A2844 /* PortfolioVIew.swift */,
 				16C24C0627F3DE4B00B70B24 /* Components */,
 			);
 			path = Portfolio;
@@ -405,8 +403,6 @@
 			isa = PBXGroup;
 			children = (
 				16F3110D27F4B5BC002A2844 /* CurrentBalanceView.swift */,
-				16F3110F27F4BB61002A2844 /* UserAssetsView.swift */,
-				16F3111127F4BDA3002A2844 /* UserAssetCardView.swift */,
 				16D821D227EE500400528869 /* AddAssetView.swift */,
 			);
 			path = Components;
@@ -475,6 +471,7 @@
 				1671E70C27EE8BD40090FD28 /* FirebaseFirestoreSwift-Beta */,
 				16C24BF527F22C6400B70B24 /* Lottie */,
 				16C24C0C27F3EE5100B70B24 /* SwiftUICharts */,
+				16321EC5281A342D00C54CF2 /* BottomSheet */,
 			);
 			productName = "MyEasyCryptoManager (iOS)";
 			productReference = 166BEEB727D6E5DF00072115 /* MyEasyCryptoManager.app */;
@@ -530,6 +527,7 @@
 				1671E70327EE8BD40090FD28 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				16C24BF427F22C6300B70B24 /* XCRemoteSwiftPackageReference "lottie-ios" */,
 				16C24C0B27F3EE5000B70B24 /* XCRemoteSwiftPackageReference "ChartView" */,
+				16321EC4281A342D00C54CF2 /* XCRemoteSwiftPackageReference "BottomSheet" */,
 			);
 			productRefGroup = 166BEEB827D6E5DF00072115 /* Products */;
 			projectDirPath = "";
@@ -580,7 +578,6 @@
 				163A399327E56BCE00F8D6F5 /* GlobalMarketViewModel.swift in Sources */,
 				16CC89F327FD1ADF00E194A7 /* SpecificCoinViewModel.swift in Sources */,
 				16D889622818970300DB1BEC /* SearchView.swift in Sources */,
-				16F3111227F4BDA3002A2844 /* UserAssetCardView.swift in Sources */,
 				16C24BF127F1572800B70B24 /* ValidationFormView.swift in Sources */,
 				166BEECF27D9331F00072115 /* CoinsModel.swift in Sources */,
 				1603780827FB63E8006ADDA1 /* FavouriteAssetsRepository.swift in Sources */,
@@ -589,7 +586,7 @@
 				1603780627FB5B53006ADDA1 /* FavouriteAssetsDataSource.swift in Sources */,
 				16C24BDC27EFF09400B70B24 /* SigninSignupView.swift in Sources */,
 				16D88966281899F600DB1BEC /* SearchCoinDataSource.swift in Sources */,
-				16F3111027F4BB61002A2844 /* UserAssetsView.swift in Sources */,
+				16F3111027F4BB61002A2844 /* PortfolioVIew.swift in Sources */,
 				163A398F27E561A900F8D6F5 /* CompleteAssetInfoCardView.swift in Sources */,
 				16D821D327EE500400528869 /* AddAssetView.swift in Sources */,
 				166BEEC027D6E5DF00072115 /* MyEasyCryptoManagerApp.swift in Sources */,
@@ -600,7 +597,6 @@
 				16C24BE727F1151C00B70B24 /* AuthenticationDatasource.swift in Sources */,
 				16D8896E2818B1AE00DB1BEC /* SearchedCoinCardView.swift in Sources */,
 				16C24BEF27F1237900B70B24 /* FieldValidationViewModel.swift in Sources */,
-				16C24C0827F3E97100B70B24 /* PortfolioVIew.swift in Sources */,
 				161864E62808D8DD008F1CF4 /* SpecificAssetView.swift in Sources */,
 				163A399527E9074100F8D6F5 /* ChartView.swift in Sources */,
 				163A398D27E543E200F8D6F5 /* BasicAssetInfoCardView.swift in Sources */,
@@ -898,6 +894,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		16321EC4281A342D00C54CF2 /* XCRemoteSwiftPackageReference "BottomSheet" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/danielsaidi/BottomSheet.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.3.0;
+			};
+		};
 		163A398827E4039000F8D6F5 /* XCRemoteSwiftPackageReference "RefreshableScrollView" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/elegantchaos/RefreshableScrollView.git";
@@ -941,6 +945,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		16321EC5281A342D00C54CF2 /* BottomSheet */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 16321EC4281A342D00C54CF2 /* XCRemoteSwiftPackageReference "BottomSheet" */;
+			productName = BottomSheet;
+		};
 		163A398927E4039000F8D6F5 /* RefreshableScrollView */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 163A398827E4039000F8D6F5 /* XCRemoteSwiftPackageReference "RefreshableScrollView" */;

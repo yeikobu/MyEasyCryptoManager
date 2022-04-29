@@ -9,6 +9,10 @@ import SwiftUI
 import SwiftUICharts
 
 struct CurrentBalanceView: View {
+    
+    @StateObject var favouriteAssetViewModel: FavouriteAssetViewModel = FavouriteAssetViewModel()
+    @Binding var currentBalanceUSD: Double
+    
     var body: some View {
         VStack(alignment: .leading) {
 //            Text("Portfolio")
@@ -24,7 +28,7 @@ struct CurrentBalanceView: View {
                     .padding(.bottom, -5)
                 
                 VStack(alignment: .leading, spacing: 5) {
-                    Text("$47.000,2")
+                    Text("$\((favouriteAssetViewModel.currentBalance ?? 0).formatted())")
                         .foregroundColor(.white)
                         .font(.system(size: 24, weight: .black, design: .rounded))
                     
@@ -66,11 +70,11 @@ struct CurrentBalanceView: View {
                         }
                     }
                     
-                    VStack(alignment: .center) {
-                        PieChartView(data: [20, 10, 10, 60], title: "Asset percentage", style: ChartStyle(backgroundColor: Color.black.opacity(0.2), accentColor: .red, gradientColor: GradientColor(start: Color.red, end: Color.green), textColor: .white, legendTextColor: .gray, dropShadowColor: .black), dropShadow: false)
-                        
-                    }
-                    .frame(maxWidth: .infinity, alignment: .center)
+//                    VStack(alignment: .center) {
+//                        PieChartView(data: [20, 10, 10, 60], title: "Asset percentage", style: ChartStyle(backgroundColor: Color.black.opacity(0.2), accentColor: .red, gradientColor: GradientColor(start: Color.red, end: Color.green), textColor: .white, legendTextColor: .gray, dropShadowColor: .black), dropShadow: false)
+//                        
+//                    }
+//                    .frame(maxWidth: .infinity, alignment: .center)
                     
                 }
                 .padding(10)
@@ -86,13 +90,21 @@ struct CurrentBalanceView: View {
             
         }
         .frame(maxWidth: .infinity, alignment: .leading)
-        .padding(.horizontal, 10)
+        .onAppear {
+            Task {
+                await self.favouriteAssetViewModel.calcCurrentBalance()
+            }
+            
+        }
     }
 }
 
 struct CurrentBalanceView_Previews: PreviewProvider {
+    
+    @State static var currentPrice = 47000.2
+    
     static var previews: some View {
-        CurrentBalanceView()
+        CurrentBalanceView(currentBalanceUSD: $currentPrice)
             .preferredColorScheme(.dark)
     }
 }
