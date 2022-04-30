@@ -267,6 +267,7 @@ struct CoinsMarketListView: View {
                         
                     }
                     .matchedGeometryEffect(id: "\(coin.id ?? "")", in: animation)
+                    .padding(.top, 15)
                    
                     Spacer()
                 }
