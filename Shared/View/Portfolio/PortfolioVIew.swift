@@ -104,7 +104,7 @@ struct PortfolioView: View {
                             Spacer()
                             Spacer()
                             
-                            Text("Current price")
+                            Text("Current price/\nChange % 24H")
                                 .foregroundColor(.gray)
                                 .font(.system(size: 10, design: .rounded))
                             

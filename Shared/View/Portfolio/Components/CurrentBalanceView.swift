@@ -17,6 +17,7 @@ struct CurrentBalanceView: View {
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
         formatter.minimumFractionDigits = 2
+        formatter.number(from: "\(1e-06)")
         return formatter
     }()
     
@@ -96,7 +97,7 @@ struct CurrentBalanceView: View {
         .frame(maxWidth: .infinity, alignment: .leading)
         .onAppear {
             Task {
-                await self.favouriteAssetViewModel.calcCurrentBalance()
+                self.favouriteAssetViewModel.calcCurrentBalance()
             }
             
         }

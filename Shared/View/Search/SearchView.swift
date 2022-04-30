@@ -63,14 +63,14 @@ struct SearchView: View {
                                     .padding(.leading, 5)
                             }
                             
-                            TextField("", text: $text) {(_) in } onCommit: {
-                                withAnimation(.spring()) {
-                                    searchCoinViewModel.getCoins(searchedCoin: self.text)
+                            TextField("", text: $text)
+                                .onChange(of: text, perform: { newValue in
+                                    searchCoinViewModel.getCoins(searchedCoin: self.text.replacingOccurrences(of: " ", with: ""))
                                     self.coinsAppear = true
-                                }
-                            }
-                            .foregroundColor(.white)
-                            .disableAutocorrection(true)
+                                })
+                                .font(.system(size: 14, design: .rounded))
+                                .foregroundColor(.white)
+                                .disableAutocorrection(true)
                         }
                         
                         Button {
@@ -122,7 +122,7 @@ struct SearchView: View {
                                 .foregroundColor(.white)
                                 .font(.system(size: 14, weight: .bold, design: .rounded))
                                 .padding(.leading, 10)
-                                
+                            
                             
                             Divider()
                                 .matchedGeometryEffect(id: "divider", in: animation)
@@ -197,7 +197,7 @@ struct SearchView: View {
                 }
                 .matchedGeometryEffect(id: "\(self.id)", in: animation)
                 .transition(.scale)
-               
+                
                 Spacer()
             }
         }
