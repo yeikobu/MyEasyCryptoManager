@@ -84,18 +84,21 @@ final class FavouriteAssetViewModel: ObservableObject {
     func calcCurrentBalance() async {
         var currentBalanceUSD: Double = 0
         var profitLossUSD: Double = 0
+        var investedUSD: Double = 0
         
         favouriteAssetsRepository.getAllAssets { [weak self] result in
             switch result {
             case .success(let favouriteCoinModel):
                 for asset in favouriteCoinModel {
+                    investedUSD += (asset.purchasePrice ?? 0) * (asset.purchaseQuantity ?? 0)
                     currentBalanceUSD += (asset.currentPrice ?? 0) * (asset.purchaseQuantity ?? 0)
-                    profitLossUSD += (asset.currentPrice ?? 0) - (asset.purchasePrice ?? 0)
+                    profitLossUSD += currentBalanceUSD - investedUSD
                 }
                 self?.assetsCount = favouriteCoinModel.count
                 self?.profitLoss = profitLossUSD
                 self?.currentBalance = currentBalanceUSD
-                self?.profitLossPercentage = (currentBalanceUSD * profitLossUSD) / 100
+                self?.profitLossPercentage = (profitLossUSD / investedUSD) * 100
+                
                 
             case .failure(let error):
                 self?.messageError = error.localizedDescription
