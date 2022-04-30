@@ -81,7 +81,7 @@ final class FavouriteAssetViewModel: ObservableObject {
     }
     
     
-    func calcCurrentBalance() async {
+    func calcCurrentBalance() {
         var currentBalanceUSD: Double = 0
         var profitLossUSD: Double = 0
         var investedUSD: Double = 0

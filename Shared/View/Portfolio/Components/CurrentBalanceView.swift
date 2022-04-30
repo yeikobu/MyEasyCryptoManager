@@ -97,7 +97,7 @@ struct CurrentBalanceView: View {
         .frame(maxWidth: .infinity, alignment: .leading)
         .onAppear {
             Task {
-                await self.favouriteAssetViewModel.calcCurrentBalance()
+                self.favouriteAssetViewModel.calcCurrentBalance()
             }
             
         }
