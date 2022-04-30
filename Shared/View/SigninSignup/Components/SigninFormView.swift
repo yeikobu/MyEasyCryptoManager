@@ -55,6 +55,7 @@ struct SigninFormView: View {
                                 TextField("", text: $signupSigninValidation.email)
                                     .foregroundColor(.white)
                                     .keyboardType(.emailAddress)
+                                    .ignoresSafeArea(.keyboard, edges: .bottom)
                                     .font(.body)
                                     .padding(15)
                                     .padding(.leading, -10)
@@ -62,13 +63,13 @@ struct SigninFormView: View {
                                     .autocapitalization(.none)
                             }
                         }
+                        .matchedGeometryEffect(id: "emailfield", in: animation)
                         .background(
                             RoundedRectangle(cornerRadius: 10, style: .continuous)
                                 .fill(.ultraThinMaterial)
                                 .blur(radius: 0)
                                 .opacity(0.7)
                         )
-                        .matchedGeometryEffect(id: "emailfield", in: animation)
                         
                         Text("Password")
                             .matchedGeometryEffect(id: "password", in: animation)
@@ -104,6 +105,7 @@ struct SigninFormView: View {
                                     TextField("", text: $signupSigninValidation.password)
                                         .foregroundColor(.white)
                                         .keyboardType(.emailAddress)
+                                        .ignoresSafeArea(.keyboard, edges: .bottom)
                                         .font(.body)
                                         .padding(15)
                                         .padding(.leading, -10)
@@ -127,13 +129,13 @@ struct SigninFormView: View {
                                     .padding(.trailing)
                             }
                         }
+                        .matchedGeometryEffect(id: "passwordfield", in: animation)
                         .background(
                             RoundedRectangle(cornerRadius: 10, style: .continuous)
                                 .fill(.ultraThinMaterial)
                                 .blur(radius: 0)
                                 .opacity(0.7)
                         )
-                        .matchedGeometryEffect(id: "passwordfield", in: animation)
                         
                         //Forgot Pass
                         VStack(alignment: .trailing) {
@@ -152,19 +154,19 @@ struct SigninFormView: View {
                         .frame(maxWidth: .infinity, alignment: .trailing)
                         .padding(.top, 20)
                     }
+                    .matchedGeometryEffect(id: "signinform", in: animation)
                     .padding(.horizontal, 10)
                     .padding(.vertical, 40)
                 }
+                
                 .background(
                     RoundedRectangle(cornerRadius: 20, style: .continuous)
                         .fill(.ultraThinMaterial)
                         .blur(radius: 0)
                         .opacity(0.85)
                 )
-                .matchedGeometryEffect(id: "signinform", in: animation)
-                .offset(x: isSigninActive ? 0 : 0, y: isSigninActive ? 0 : 1400)
+//                .offset(x: isSigninActive ? 0 : 0, y: isSigninActive ? 0 : 0)
                 .padding(.horizontal, 10)
-                .frame(maxHeight: .infinity)
                 .navigationBarHidden(true)
                 .navigationBarBackButtonHidden(true)
                 .shadow(color: .black.opacity(0.4), radius: 5, x: 3, y: 3)
@@ -188,7 +190,7 @@ struct SigninFormView: View {
                         .shadow(color: .black.opacity(0.4), radius: 5, x: -3, y: -3)
                 }
                 .matchedGeometryEffect(id: "signinbutton", in: animation)
-                .offset(x: isSigninActive ? 0 : 0, y: isSigninActive ? 0 : 1000)
+//                .offset(x: isSigninActive ? 0 : 0, y: isSigninActive ? 0 : 0)
                 .padding(.top, 280)
                 .alert(isPresented: $showError) {
                     Alert(title: Text("ERROR"), message: Text("\(msgAlert)"), dismissButton: .default(Text("Okay")))

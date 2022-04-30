@@ -12,6 +12,7 @@ struct SigninSignupView: View {
         NavigationView {
             ZStack {
                 SignInSignUpButtonsView()
+                    .frame(maxHeight: .infinity)
                     .background(
                         RoundedRectangle(cornerRadius: 1, style: .continuous)
                             .fill(.ultraThinMaterial)
@@ -20,7 +21,7 @@ struct SigninSignupView: View {
                             .opacity(0.8)
                     )
             }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .frame(maxHeight: .infinity)
             .background(
                 Image("wallpaper2")
                     .resizable()
@@ -28,9 +29,8 @@ struct SigninSignupView: View {
                     .ignoresSafeArea()
                     .opacity(0.5)
             )
-            
+            .preferredColorScheme(.dark)
         }
-        .preferredColorScheme(.dark)
         .navigationBarHidden(true)
         .navigationBarBackButtonHidden(true)
     }
@@ -43,49 +43,45 @@ struct SignInSignUpButtonsView: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            
             HStack(spacing: 30) {
                 Spacer()
                 //Signin button
                 Button {
-                    withAnimation(.spring(response: 0.8, dampingFraction: 0.8)) {
+                    withAnimation(.spring(response: 0.4, dampingFraction: 1)) {
                         isSigninActive = true
                     }
                 } label: {
                     Text("Sign in")
                         .foregroundColor(isSigninActive ? .white : .gray)
                         .font(.system(size: 22, weight: .bold, design: .rounded))
-                        .matchedGeometryEffect(id: "signin", in: animation)
+//                        .matchedGeometryEffect(id: "signin", in: animation)
                 }
                 
                 //Signup button
                 Button {
-                    withAnimation(.spring(response: 0.8, dampingFraction: 0.8)) {
+                    withAnimation(.spring(response: 0.4, dampingFraction: 1)) {
                         isSigninActive = false
                     }
                 } label: {
                     Text("Sign up")
                         .foregroundColor(isSigninActive ? .gray : .white)
                         .font(.system(size: 22, weight: .bold, design: .rounded))
-                        .matchedGeometryEffect(id: "signup", in: animation)
                 }
                 
                 Spacer()
             }
-            .padding(.top, 200)
             
-            ZStack {
-                if isSigninActive {
-                    SigninFormView(authenticationViewModel: AuthenticationViewModel(), isSigninActive: $isSigninActive)
-                        .padding(.top, -200)
-                }
-                
-                if !isSigninActive {
-                    SignupFormView(authenticationViewModel: AuthenticationViewModel(), isSigninActive: $isSigninActive)
-                        .padding(.top, -150)
-                }
+            if isSigninActive {
+                SigninFormView(authenticationViewModel: AuthenticationViewModel(), isSigninActive: $isSigninActive)
+                    .matchedGeometryEffect(id: "form", in: animation)
+//                        .ignoresSafeArea(.keyboard, edges: .bottom)
             }
             
+            if !isSigninActive {
+                SignupFormView(authenticationViewModel: AuthenticationViewModel(), isSigninActive: $isSigninActive)
+                    .matchedGeometryEffect(id: "form", in: animation)
+//                        .ignoresSafeArea(.keyboard, edges: .bottom)
+            }
         }
     }
 }

@@ -55,6 +55,7 @@ struct SignupFormView: View {
                                 TextField("", text: $signupSigninValidation.email)
                                     .foregroundColor(.white)
                                     .keyboardType(.emailAddress)
+                                    .ignoresSafeArea(.keyboard, edges: .bottom)
                                     .font(.body)
                                     .padding(15)
                                     .padding(.leading, -10)
@@ -62,13 +63,13 @@ struct SignupFormView: View {
                                     .autocapitalization(.none)
                             }
                         }
+                        .matchedGeometryEffect(id: "emailfield", in: animation)
                         .background(
                             RoundedRectangle(cornerRadius: 10, style: .continuous)
                                 .fill(.ultraThinMaterial)
                                 .blur(radius: 0)
                                 .opacity(0.7)
                         )
-                        .matchedGeometryEffect(id: "emailfield", in: animation)
                         
                         Text("Password")
                             .matchedGeometryEffect(id: "password", in: animation)
@@ -104,6 +105,7 @@ struct SignupFormView: View {
                                     TextField("", text: $signupSigninValidation.password)
                                         .foregroundColor(.white)
                                         .keyboardType(.emailAddress)
+                                        .ignoresSafeArea(.keyboard, edges: .bottom)
                                         .font(.body)
                                         .padding(15)
                                         .padding(.leading, -10)
@@ -127,13 +129,13 @@ struct SignupFormView: View {
                                     .padding(.trailing)
                             }
                         }
+                        .matchedGeometryEffect(id: "passwordfield", in: animation)
                         .background(
                             RoundedRectangle(cornerRadius: 10, style: .continuous)
                                 .fill(.ultraThinMaterial)
                                 .blur(radius: 0)
                                 .opacity(0.7)
                         )
-                        .matchedGeometryEffect(id: "passwordfield", in: animation)
                         
                         Text("Confirm password")
                             .matchedGeometryEffect(id: "comfirmpass", in: animation)
@@ -169,6 +171,7 @@ struct SignupFormView: View {
                                     TextField("", text: $signupSigninValidation.confirmPassword)
                                         .foregroundColor(.white)
                                         .keyboardType(.emailAddress)
+                                        .ignoresSafeArea(.keyboard, edges: .bottom)
                                         .font(.body)
                                         .padding(15)
                                         .padding(.leading, -10)
@@ -198,8 +201,9 @@ struct SignupFormView: View {
                                 .blur(radius: 0)
                                 .opacity(0.7)
                         )
-                        .matchedGeometryEffect(id: "comfirmpassfield", in: animation)
+                        .matchedGeometryEffect(id: "forgotpass", in: animation)
                     }
+                    .matchedGeometryEffect(id: "signinform", in: animation)
                     .padding(.horizontal, 10)
                     .padding(.vertical, 40)
                 }
@@ -209,10 +213,8 @@ struct SignupFormView: View {
                         .blur(radius: 0)
                         .opacity(0.85)
                 )
-                .matchedGeometryEffect(id: "signupform", in: animation)
-                .offset(x: isSigninActive ? 0 : 0, y: isSigninActive ? 1400 : 0)
+//                .offset(x: isSigninActive ? 0 : 0, y: isSigninActive ? 1400 : 0)
                 .padding(.horizontal, 10)
-                .frame(maxHeight: .infinity)
                 .navigationBarHidden(true)
                 .navigationBarBackButtonHidden(true)
                 .shadow(color: .black.opacity(0.4), radius: 5, x: 3, y: 3)
@@ -234,8 +236,8 @@ struct SignupFormView: View {
                         .shadow(color: .black.opacity(0.4), radius: 5, x: 3, y: 3)
                         .shadow(color: .black.opacity(0.4), radius: 5, x: -3, y: -3)
                 }
-                .matchedGeometryEffect(id: "signupbutton", in: animation)
-                .offset(x: isSigninActive ? 0 : 0, y: isSigninActive ? 1000 : 0)
+                .matchedGeometryEffect(id: "signinbutton", in: animation)
+//                .offset(x: isSigninActive ? 0 : 0, y: isSigninActive ? 1000 : 0)
                 .padding(.top, 320)
                 .alert(isPresented: $areFieldsIncomplete) {
                     Alert(title: Text("ERROR"), message: Text(authenticationViewModel.errorMessage ?? "All fields must be completed correctly"), dismissButton: .default(Text("Okay")))

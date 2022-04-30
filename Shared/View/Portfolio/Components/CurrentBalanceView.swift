@@ -95,11 +95,10 @@ struct CurrentBalanceView: View {
             
         }
         .frame(maxWidth: .infinity, alignment: .leading)
-        .onAppear {
-            Task {
+        .task {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                 self.favouriteAssetViewModel.calcCurrentBalance()
             }
-            
         }
     }
 }
