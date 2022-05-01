@@ -10,8 +10,8 @@ import Kingfisher
 
 struct PortfolioView: View {
     
-    @StateObject var specificCoinVM: SpecificCoinViewModel = SpecificCoinViewModel()
-    @StateObject var favouriteAssetViewModel: FavouriteAssetViewModel = FavouriteAssetViewModel()
+    @ObservedObject var specificCoinVM: SpecificCoinViewModel = SpecificCoinViewModel()
+    @ObservedObject var favouriteAssetViewModel: FavouriteAssetViewModel = FavouriteAssetViewModel()
     @ObservedObject var haptics: Haptics = Haptics()
     let gridForm = [GridItem(.flexible())]
     @State var isAddedToPorfolio: Bool
