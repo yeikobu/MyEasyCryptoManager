@@ -90,14 +90,17 @@ final class FavouriteAssetViewModel: ObservableObject {
             switch result {
             case .success(let favouriteCoinModel):
                 for asset in favouriteCoinModel {
-                    investedUSD += (asset.purchasePrice ?? 0) * (asset.purchaseQuantity ?? 0)
-                    currentBalanceUSD += (asset.currentPrice ?? 0) * (asset.purchaseQuantity ?? 0)
-                    profitLossUSD += currentBalanceUSD - investedUSD
+                    if (asset.purchaseQuantity ?? 0) > 0 && (asset.purchasePrice ?? 0) > 0 {
+                        investedUSD += (asset.purchasePrice ?? 0) * (asset.purchaseQuantity ?? 0)
+                        currentBalanceUSD += (asset.currentPrice ?? 0) * (asset.purchaseQuantity ?? 0)
+                    }
                 }
+                profitLossUSD += currentBalanceUSD - investedUSD
+                print(profitLossUSD)
                 self?.assetsCount = favouriteCoinModel.count
                 self?.profitLoss = profitLossUSD
                 self?.currentBalance = currentBalanceUSD
-                self?.profitLossPercentage = (profitLossUSD / investedUSD) * 100
+                self?.profitLossPercentage = (currentBalanceUSD * profitLossUSD) / 100
                 
                 
             case .failure(let error):
