@@ -138,6 +138,13 @@ struct PortfolioView: View {
                                                     .foregroundColor(.white)
                                                     .font(.system(size: 13, weight: .bold, design: .rounded))
                                                     .padding(.bottom, -3)
+                                                    .task {
+                                                        do {
+                                                            self.currentPrice = try await specificCoinVM.getCurrentPrice(selectedCoin: asset.id ?? "")
+                                                        } catch {
+                                                            print(error)
+                                                        }
+                                                    }
                                             }
                                             .frame(maxWidth: 120, maxHeight: 40, alignment: .leading)
 
@@ -146,6 +153,7 @@ struct PortfolioView: View {
 
                                             VStack(alignment: .leading) {
                                                 Text("$\((asset.currentPrice ?? 0).formatted())")
+//                                                Text("$\((self.currentPrice).formatted())")
                                                     .foregroundColor(.white)
                                                     .font(.system(size: 12, weight: .bold, design: .rounded))
                                                     .padding(.bottom, -4)

@@ -10,7 +10,7 @@ import CloudKit
 import SwiftUI
 
 final class FavouriteAssetViewModel: ObservableObject {
-    @Published var favouriteCoins: [FavouriteCoinModel] = []
+    @Published var favouriteCoins: [FavouriteCoinModel] = [].uniqued()
     @Published var messageError: String?
     @Published var currentBalance: Double?
     @Published var assetsCount: Int?
@@ -49,7 +49,7 @@ final class FavouriteAssetViewModel: ObservableObject {
             self.updateAsset(id: asset.id ?? "", name: asset.name ?? "", symbol: asset.symbol ?? "", imgURL: asset.imgURL ?? "", purchasePrice: asset.purchasePrice ?? 0, purchaseQuantity: asset.purchaseQuantity ?? 0, currentPrice: currentPrice, priceChangePercentage24h: changepercentage)
         }
         
-        
+        calcCurrentBalance()
     }
     
     
@@ -96,7 +96,6 @@ final class FavouriteAssetViewModel: ObservableObject {
                     }
                 }
                 profitLossUSD += currentBalanceUSD - investedUSD
-                print(profitLossUSD)
                 self?.assetsCount = favouriteCoinModel.count
                 self?.profitLoss = profitLossUSD
                 self?.currentBalance = currentBalanceUSD
