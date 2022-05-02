@@ -49,8 +49,7 @@ final class FavouriteAssetViewModel: ObservableObject {
             
             self.updateAsset(id: asset.id ?? "", name: asset.name ?? "", symbol: asset.symbol ?? "", imgURL: asset.imgURL ?? "", purchasePrice: asset.purchasePrice ?? 0, purchaseQuantity: asset.purchaseQuantity ?? 0, currentPrice: currentPrice, priceChangePercentage24h: changepercentage)
         }
-        
-        
+
     }
     
     
@@ -86,13 +85,11 @@ final class FavouriteAssetViewModel: ObservableObject {
         var currentBalanceUSD: Double = 0
         var profitLossUSD: Double = 0
         var investedUSD: Double = 0
-        var coins: [FavouriteCoinModel] = [].uniqued()
         
         favouriteAssetsRepository.getAllAssets { [weak self] result in
             switch result {
             case .success(let favouriteCoinModel):
-                coins = favouriteCoinModel
-                for asset in coins {
+                for asset in favouriteCoinModel {
                     if (asset.purchaseQuantity ?? 0) > 0 && (asset.purchasePrice ?? 0) > 0 {
                         investedUSD += (asset.purchasePrice ?? 0) * (asset.purchaseQuantity ?? 0)
                         currentBalanceUSD += (asset.currentPrice ?? 0) * (asset.purchaseQuantity ?? 0)
@@ -112,7 +109,6 @@ final class FavouriteAssetViewModel: ObservableObject {
                 self?.messageError = error.localizedDescription
             }
         }
-        print(coins)
     }
     
     
