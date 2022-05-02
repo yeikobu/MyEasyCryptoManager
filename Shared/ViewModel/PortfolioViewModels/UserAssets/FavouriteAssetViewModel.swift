@@ -10,7 +10,7 @@ import CloudKit
 import SwiftUI
 
 final class FavouriteAssetViewModel: ObservableObject {
-    @Published var favouriteCoins: [FavouriteCoinModel] = []
+    @Published var favouriteCoins: [FavouriteCoinModel] = [].uniqued()
     @Published var messageError: String?
     @Published var currentBalance: Double?
     @Published var assetsCount: Int?
@@ -29,6 +29,7 @@ final class FavouriteAssetViewModel: ObservableObject {
             switch result {
             case .success(let favouriteCoinModel):
                 self?.favouriteCoins = favouriteCoinModel
+                self?.calcCurrentBalance()
                 
             case .failure(let error):
                 self?.messageError = error.localizedDescription
@@ -85,25 +86,33 @@ final class FavouriteAssetViewModel: ObservableObject {
         var currentBalanceUSD: Double = 0
         var profitLossUSD: Double = 0
         var investedUSD: Double = 0
+        var coins: [FavouriteCoinModel] = [].uniqued()
         
         favouriteAssetsRepository.getAllAssets { [weak self] result in
             switch result {
             case .success(let favouriteCoinModel):
-                for asset in favouriteCoinModel {
-                    investedUSD += (asset.purchasePrice ?? 0) * (asset.purchaseQuantity ?? 0)
-                    currentBalanceUSD += (asset.currentPrice ?? 0) * (asset.purchaseQuantity ?? 0)
-                    profitLossUSD += currentBalanceUSD - investedUSD
+                coins = favouriteCoinModel
+                for asset in coins {
+                    if (asset.purchaseQuantity ?? 0) > 0 && (asset.purchasePrice ?? 0) > 0 {
+                        investedUSD += (asset.purchasePrice ?? 0) * (asset.purchaseQuantity ?? 0)
+                        currentBalanceUSD += (asset.currentPrice ?? 0) * (asset.purchaseQuantity ?? 0)
+                    }
                 }
-                self?.assetsCount = favouriteCoinModel.count
-                self?.profitLoss = profitLossUSD
-                self?.currentBalance = currentBalanceUSD
-                self?.profitLossPercentage = (profitLossUSD / investedUSD) * 100
+                
+                if investedUSD > 0 {
+                    profitLossUSD += currentBalanceUSD - investedUSD
+                    self?.assetsCount = favouriteCoinModel.count
+                    self?.profitLoss = profitLossUSD
+                    self?.currentBalance = currentBalanceUSD
+                    self?.profitLossPercentage = (currentBalanceUSD * profitLossUSD) / 100
+                }
                 
                 
             case .failure(let error):
                 self?.messageError = error.localizedDescription
             }
         }
+        print(coins)
     }
     
     

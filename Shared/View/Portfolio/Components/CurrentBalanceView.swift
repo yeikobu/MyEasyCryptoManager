@@ -48,7 +48,7 @@ struct CurrentBalanceView: View {
                                 .padding(.leading, -4)
                             
                             //Formatting numbers to get max 3 decimals
-                            Text((favouriteAssetViewModel.profitLoss ?? 0) >= 0 ? "$\(formatter.string(from: (favouriteAssetViewModel.profitLoss ?? 0) as NSNumber) ?? "")" : "-$\(formatter.string(from: (favouriteAssetViewModel.profitLoss ?? 0) as NSNumber) ?? "")")
+                            Text((favouriteAssetViewModel.profitLoss ?? 0) >= 0 ? "$\(formatter.string(from: (favouriteAssetViewModel.profitLoss ?? 0) as NSNumber) ?? "")" : "$\(formatter.string(from: (favouriteAssetViewModel.profitLoss ?? 0) as NSNumber) ?? "")")
                                 .foregroundColor((favouriteAssetViewModel.profitLoss ?? 0) >= 0 ? .green : .red)
                                 .font(.system(size: 12, weight: .bold, design: .rounded))
                                 .padding(.leading, -4)
@@ -68,7 +68,7 @@ struct CurrentBalanceView: View {
                                 .padding(.leading, -4)
                             
                             //Formatting numbers to get max 3 decimals
-                            Text((favouriteAssetViewModel.profitLossPercentage ?? 0) >= 0 ? "\(formatter.string(from: (favouriteAssetViewModel.profitLossPercentage ?? 0) as NSNumber) ?? "")%" : "-\(formatter.string(from: (favouriteAssetViewModel.profitLossPercentage ?? 0) as NSNumber) ?? "")%")
+                            Text((favouriteAssetViewModel.profitLossPercentage ?? 0) >= 0 ? "\(formatter.string(from: (favouriteAssetViewModel.profitLossPercentage ?? 0) as NSNumber) ?? "")%" : "\(formatter.string(from: (favouriteAssetViewModel.profitLossPercentage ?? 0) as NSNumber) ?? "")%")
                                 .foregroundColor((favouriteAssetViewModel.profitLossPercentage ?? 0) >= 0 ? .green : .red)
                                 .font(.system(size: 12, weight: .bold, design: .rounded))
                                 .padding(.leading, -4)
@@ -96,9 +96,7 @@ struct CurrentBalanceView: View {
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .task {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                self.favouriteAssetViewModel.calcCurrentBalance()
-            }
+            await self.favouriteAssetViewModel.getAllAssets()
         }
     }
 }
