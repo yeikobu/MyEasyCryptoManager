@@ -14,7 +14,7 @@ import FirebaseAuth
 final class FavouriteAssetsDataSource {
     private let database = Firestore.firestore()
     private let collection = "FavouriteAssets"
-    private let uid = String(describing: Auth.auth().currentUser!.uid)
+    private let uid = String(describing: Auth.auth().currentUser?.uid)
     private let subCollection = "asset"
     
     func getAllAssets(completionBlock: @escaping (Result<[FavouriteCoinModel], Error>) -> Void) {

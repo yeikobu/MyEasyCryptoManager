@@ -32,7 +32,7 @@ struct SpecificCoinModel: Decodable, Hashable {
     var developerScore: Double? = 0
     var communityScore: Double? = 0
     var liquidityScore: Double? = 0
-    var publicInterestScore: Int? = 0
+//    var publicInterestScore: Int? = 0
     var marketData: MarketData?
     var communityData: CommunityData?
     var developerData: DeveloperData?
@@ -63,7 +63,7 @@ struct SpecificCoinModel: Decodable, Hashable {
         case developerScore = "developer_score"
         case communityScore = "community_score"
         case liquidityScore = "liquidity_score"
-        case publicInterestScore = "public_interest_score"
+//        case publicInterestScore = "public_interest_score"
         case marketData = "market_data"
         case communityData = "community_data"
         case developerData = "developer_data"
@@ -244,7 +244,11 @@ struct MarketData: Decodable, Hashable  {
 }
 
 struct Sparkline7D: Decodable, Hashable {
-    var price: [Double] = []
+    var price: [Double]? = []
+    
+    enum CodingKeys: String, CodingKey {
+        case price
+    }
 }
 
 // MARK: - Platforms
