@@ -42,7 +42,7 @@ final class FavouriteAssetViewModel: ObservableObject {
             
             do {
                 currentPrice = try await specificCoinVM.getCurrentPrice(selectedCoin: asset.id ?? "")
-                changepercentage = self.specificCoinVM.selectedSpecificCoinModel?.marketData?.priceChangePercentage24H ?? 0
+                changepercentage = self.specificCoinVM.selectedSpecificCoinModel.marketData?.priceChangePercentage24H ?? 0
             } catch {
                 print(error)
             }
@@ -101,7 +101,7 @@ final class FavouriteAssetViewModel: ObservableObject {
                     self?.assetsCount = favouriteCoinModel.count
                     self?.profitLoss = profitLossUSD
                     self?.currentBalance = currentBalanceUSD
-                    self?.profitLossPercentage = (currentBalanceUSD * profitLossUSD) / 100
+                    self?.profitLossPercentage = ((currentBalanceUSD - investedUSD) / investedUSD) * 100
                 }
                 
                 

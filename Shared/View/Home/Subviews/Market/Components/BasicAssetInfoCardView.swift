@@ -138,13 +138,13 @@ struct BasicAssetInfoCardView: View {
         }
         .padding(.vertical, 10)
         .background(
-            RoundedRectangle(cornerRadius: 10, style: .continuous)
+            RoundedRectangle(cornerRadius: 15, style: .continuous)
                 .fill(.ultraThinMaterial)
                 .blur(radius: 0)
                 .opacity(0.9)
         )
         .mask(
-            RoundedRectangle(cornerRadius: 10, style: .continuous)
+            RoundedRectangle(cornerRadius: 15, style: .continuous)
         )
         .preferredColorScheme(.dark)
         

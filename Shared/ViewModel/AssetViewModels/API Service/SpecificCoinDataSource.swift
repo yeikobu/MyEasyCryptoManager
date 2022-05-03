@@ -57,10 +57,11 @@ final class SpecificCoinDataSource {
     func getCurrentPrice(selectedCoin: String) async throws -> SpecificCoinModel {
 //        let finalURL = URL(string: baseUrl + selectedCoin)!
         
-        guard let finalURL = URL(string: baseUrl + selectedCoin) else { throw URLError(.badURL)}
+        guard let finalURL = URL(string: "\(baseUrl)\(selectedCoin)?sparkline=true") else { throw URLError(.badURL)}
         let (data, _) = try await URLSession.shared.data(from: finalURL)
         let decoder = JSONDecoder()
-        return try decoder.decode(SpecificCoinModel.self, from: data)
+        let coinModel = try decoder.decode(SpecificCoinModel.self, from: data)
+        return coinModel
     }
     
     

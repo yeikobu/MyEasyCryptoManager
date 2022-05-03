@@ -40,6 +40,7 @@ struct SpecificAssetView: View {
             LazyVGrid(columns: gridForm) {
                 VStack(alignment: .leading) {
                     
+                    // MARK: - Name, image, market cap rank and symbol
                     HStack {
                         KFImage(URL(string: imgURL))
                             .resizable()
@@ -71,6 +72,8 @@ struct SpecificAssetView: View {
                         Spacer()
                         Spacer()
                         
+                        
+                        // MARK: - Add to portfolio
                         VStack(alignment: .center) {
                             Button {
 
@@ -112,7 +115,8 @@ struct SpecificAssetView: View {
                     .frame(maxWidth: .infinity, minHeight: 50,alignment: .leading)
                     .padding(.horizontal, 10)
                     
-                    //Price and change price vstack
+                    
+                    // MARK: - Price and change price percentage
                     VStack {
                         HStack {
                             Spacer()
@@ -124,39 +128,39 @@ struct SpecificAssetView: View {
                                 .padding(.bottom, 2)
                             
                             VStack {
-                                if specificCoinViewModel.selectedSpecificCoinModel?.marketData?.priceChangePercentage24H ?? 0 > 0 {
+                                if specificCoinViewModel.selectedSpecificCoinModel.marketData?.priceChangePercentage24H ?? 0 > 0 {
                                     HStack {
                                         Image(systemName: "arrowtriangle.up.fill")
                                             .foregroundColor(.green)
                                             .font(.system(size: 14))
                                         
-                                        Text("\(String(format: "%.2f", specificCoinViewModel.selectedSpecificCoinModel?.marketData?.priceChangePercentage24H ?? 0))%")
+                                        Text("\(String(format: "%.2f", specificCoinViewModel.selectedSpecificCoinModel.marketData?.priceChangePercentage24H ?? 0))%")
                                             .foregroundColor(.green)
                                             .font(.system(size: 14, weight: .bold, design: .rounded))
                                             .frame(alignment: .leading)
                                     }
                                 }
                                 
-                                if specificCoinViewModel.selectedSpecificCoinModel?.marketData?.priceChangePercentage24H ?? 0 < 0 {
+                                if specificCoinViewModel.selectedSpecificCoinModel.marketData?.priceChangePercentage24H ?? 0 < 0 {
                                     HStack {
                                         Image(systemName: "arrowtriangle.down.fill")
                                             .foregroundColor(.red)
                                             .font(.system(size: 14))
                                         
-                                        Text("\(String(format: "%.2f", specificCoinViewModel.selectedSpecificCoinModel?.marketData?.priceChangePercentage24H ?? 0))%")
+                                        Text("\(String(format: "%.2f", specificCoinViewModel.selectedSpecificCoinModel.marketData?.priceChangePercentage24H ?? 0))%")
                                             .foregroundColor(.red)
                                             .font(.system(size: 14, weight: .bold, design: .rounded))
                                             .frame(alignment: .leading)
                                     }
                                 }
                                 
-                                if specificCoinViewModel.selectedSpecificCoinModel?.marketData?.priceChangePercentage24H ?? 0 == 0 {
+                                if specificCoinViewModel.selectedSpecificCoinModel.marketData?.priceChangePercentage24H ?? 0 == 0 {
                                     HStack {
                                         Image(systemName: "arrowtriangle.right.fill")
                                             .foregroundColor(.gray)
                                             .font(.system(size: 14))
                                         
-                                        Text("\(String(format: "%.2f", specificCoinViewModel.selectedSpecificCoinModel?.marketData?.priceChangePercentage24H ?? 0))%")
+                                        Text("\(String(format: "%.2f", specificCoinViewModel.selectedSpecificCoinModel.marketData?.priceChangePercentage24H ?? 0))%")
                                             .foregroundColor(.gray)
                                             .font(.system(size: 14, weight: .bold, design: .rounded))
                                             .frame(alignment: .leading)
@@ -168,6 +172,7 @@ struct SpecificAssetView: View {
                         }
                     }
                     
+                    // MARK: - Line chart
                     VStack {
                         ChartView(coin: coin)
                             .offset(x: isListVisible ? 0 : -100, y: isListVisible ? 0 : 0)
@@ -177,6 +182,8 @@ struct SpecificAssetView: View {
                     }
                     .padding(5)
                     
+                    
+                    // MARK: - Asset description
                     VStack(alignment: .leading) {
                         Text("About \(self.name.capitalizingFirstLetter()): ")
                             .font(.system(size: 12, design: .rounded))
@@ -225,6 +232,8 @@ struct SpecificAssetView: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.horizontal, 10)
                     
+                    
+                    // MARK: - AssetInformation
                     VStack {
                         VStack {
                             Text("Asset information")
@@ -241,7 +250,7 @@ struct SpecificAssetView: View {
                                 .foregroundColor(.gray)
                                 .font(.system(size: 9))
                             Spacer()
-                            Text("$\((specificCoinViewModel.selectedSpecificCoinModel?.marketData?.marketCap["usd"] ?? 0).formatted())")
+                            Text("$\((specificCoinViewModel.selectedSpecificCoinModel.marketData?.marketCap["usd"] ?? 0).formatted())")
                                 .offset(x: isListVisible ? 0 : 200, y: 0)
                                 .foregroundColor(.white)
                                 .font(.system(size: 9))
@@ -257,7 +266,7 @@ struct SpecificAssetView: View {
                                 .foregroundColor(.gray)
                                 .font(.system(size: 9))
                             Spacer()
-                            Text("$\(Int(specificCoinViewModel.selectedSpecificCoinModel?.marketData?.totalVolume["usd"] ?? 0))")
+                            Text("$\(Int(specificCoinViewModel.selectedSpecificCoinModel.marketData?.totalVolume["usd"] ?? 0))")
                                 .offset(x: isListVisible ? 0 : 500, y: 0)
                                 .foregroundColor(.white)
                                 .font(.system(size: 9))
@@ -274,7 +283,7 @@ struct SpecificAssetView: View {
                                     .foregroundColor(.gray)
                                     .font(.system(size: 9))
                                 Spacer()
-                                Text("$\((specificCoinViewModel.selectedSpecificCoinModel?.marketData?.high24H["usd"] ?? 0).formatted())")
+                                Text("$\((specificCoinViewModel.selectedSpecificCoinModel.marketData?.high24H["usd"] ?? 0).formatted())")
                                     .offset(x: isListVisible ? 0 : 800, y: 0)
                                     .foregroundColor(.white)
                                     .font(.system(size: 9))
@@ -290,7 +299,7 @@ struct SpecificAssetView: View {
                                     .foregroundColor(.gray)
                                     .font(.system(size: 9))
                                 Spacer()
-                                Text("$\((specificCoinViewModel.selectedSpecificCoinModel?.marketData?.low24H["usd"] ?? 0).formatted())")
+                                Text("$\((specificCoinViewModel.selectedSpecificCoinModel.marketData?.low24H["usd"] ?? 0).formatted())")
                                     .offset(x: isListVisible ? 0 : 1100, y: 0)
                                     .foregroundColor(.white)
                                     .font(.system(size: 9))
@@ -308,7 +317,7 @@ struct SpecificAssetView: View {
                                     .foregroundColor(.gray)
                                     .font(.system(size: 9))
                                 Spacer()
-                                Text("\(Int(specificCoinViewModel.selectedSpecificCoinModel?.marketData?.maxSupply ?? 0))")
+                                Text("\(Int(specificCoinViewModel.selectedSpecificCoinModel.marketData?.maxSupply ?? 0))")
                                     .offset(x: isListVisible ? 0 : 1400, y: 0)
                                     .foregroundColor(.white)
                                     .font(.system(size: 9))
@@ -324,7 +333,7 @@ struct SpecificAssetView: View {
                                     .foregroundColor(.gray)
                                     .font(.system(size: 9))
                                 Spacer()
-                                Text("\(Int(specificCoinViewModel.selectedSpecificCoinModel?.marketData?.totalSupply ?? 0))")
+                                Text("\(Int(specificCoinViewModel.selectedSpecificCoinModel.marketData?.totalSupply ?? 0))")
                                     .offset(x: isListVisible ? 0 : 1700, y: 0)
                                     .foregroundColor(.white)
                                     .font(.system(size: 9))
@@ -340,7 +349,7 @@ struct SpecificAssetView: View {
                                     .foregroundColor(.gray)
                                     .font(.system(size: 9))
                                 Spacer()
-                                Text("\(Int(specificCoinViewModel.selectedSpecificCoinModel?.marketData?.circulatingSupply ?? 0))")
+                                Text("\(Int(specificCoinViewModel.selectedSpecificCoinModel.marketData?.circulatingSupply ?? 0))")
                                     .offset(x: isListVisible ? 0 : 2000, y: 0)
                                     .foregroundColor(.white)
                                     .font(.system(size: 9))
@@ -358,7 +367,7 @@ struct SpecificAssetView: View {
                                     .foregroundColor(.white)
                                     .font(.system(size: 9))
                                 Spacer()
-                                Text("$\((specificCoinViewModel.selectedSpecificCoinModel?.marketData?.ath["usd"] ?? 0).formatted())")
+                                Text("$\((specificCoinViewModel.selectedSpecificCoinModel.marketData?.ath["usd"] ?? 0).formatted())")
                                     .offset(x: isListVisible ? 0 : 2300, y: 0)
                                     .foregroundColor(.white)
                                     .font(.system(size: 9))
@@ -374,7 +383,7 @@ struct SpecificAssetView: View {
                                     .foregroundColor(.gray)
                                     .font(.system(size: 9))
                                 Spacer()
-                                Text("$\((specificCoinViewModel.selectedSpecificCoinModel?.marketData?.atl["usd"] ?? 0).formatted())")
+                                Text("$\((specificCoinViewModel.selectedSpecificCoinModel.marketData?.atl["usd"] ?? 0).formatted())")
                                     .offset(x: isListVisible ? 0 : 2600, y: 0)
                                     .foregroundColor(.white)
                                     .font(.system(size: 9))
@@ -386,14 +395,14 @@ struct SpecificAssetView: View {
                 }
                 .padding(.vertical, 10)
                 .background(
-                    RoundedRectangle(cornerRadius: 10, style: .continuous)
+                    RoundedRectangle(cornerRadius: 15, style: .continuous)
                         .fill(.ultraThinMaterial)
                         .blur(radius: 0)
                         .opacity(0.9)
                         .matchedGeometryEffect(id: "background", in: animation)
                 )
                 .mask(
-                    RoundedRectangle(cornerRadius: 10, style: .continuous)
+                    RoundedRectangle(cornerRadius: 15, style: .continuous)
                         .matchedGeometryEffect(id: "mask", in: animation)
                 )
                 .onAppear {

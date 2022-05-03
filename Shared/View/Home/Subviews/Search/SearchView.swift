@@ -11,6 +11,7 @@ struct SearchView: View {
     
     @StateObject var searchCoinViewModel: SearchCoinViewModel = SearchCoinViewModel()
     @StateObject var specificCoinViewModel: SpecificCoinViewModel = SpecificCoinViewModel()
+    @StateObject var coinViewModel: CoinInfoViewModel = CoinInfoViewModel()
     @State var text: String = ""
     @State var isTouched: Bool = false
     @State var isMoreInfoClicked: Bool = false
@@ -25,7 +26,7 @@ struct SearchView: View {
     @State var name: String = ""
     @State var marketCapRank: Int = 0
     @State var symbol: String = ""
-    @State var coin: SpecificCoinModel?
+    @State var coin = SpecificCoinModel()
     
     let gridForm = [GridItem(.flexible())]
     
@@ -173,7 +174,7 @@ struct SearchView: View {
             
             if isTouched {
                 ZStack(alignment: .topTrailing) {
-                    SpecificAssetView(favouriteAssetViewModel: FavouriteAssetViewModel(), imgURL: self.$imgURL, name: self.$name, marketCapRank: self.$marketCapRank, symbol: self.$symbol, coin: CoinsModel.init(), id: self.$id, isMoreInfoClicked: self.$isMoreInfoClicked, isAddedToPorfolio: self.isAddedToPorfolio, isTouched: self.$isTouched, isListVisible: self.$isListVisible, animation: animation)
+                    CompleteAssetInfoCardView(favouriteAssetViewModel: FavouriteAssetViewModel(), imgURL: self.$imgURL, name: self.$name, marketCapRank: self.$marketCapRank, symbol: self.$symbol, id: self.$id, isMoreInfoClicked: self.$isMoreInfoClicked, isAddedToPorfolio: self.isAddedToPorfolio, isTouched: self.$isTouched, isListVisible: self.$isListVisible, animation: animation)
                         .padding(.horizontal, 10)
                         .padding(.top, 30)
                         .padding(.bottom, 45)

@@ -151,7 +151,7 @@ struct AddAssetView: View {
                 }
                 .padding(10)
                 .background(
-                    RoundedRectangle(cornerRadius: 20, style: .continuous)
+                    RoundedRectangle(cornerRadius: 15, style: .continuous)
                         .fill(.ultraThinMaterial)
                 )
                 .padding(10)

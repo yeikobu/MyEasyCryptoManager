@@ -9,7 +9,7 @@ import Foundation
 
 final class SpecificCoinViewModel: ObservableObject {
     
-    @Published var selectedSpecificCoinModel: SpecificCoinModel?
+    @Published var selectedSpecificCoinModel = SpecificCoinModel()
     @Published var currentPrice: [String : Double] = [ : ]
     @Published var selectedCoinCurrentPrice: Double?
     @Published var selectedCoinDescription: String?
@@ -22,10 +22,10 @@ final class SpecificCoinViewModel: ObservableObject {
     @MainActor
     func getCurrentPrice(selectedCoin: String) async throws -> Double {
         self.selectedSpecificCoinModel = try await specificCoinRepository.getCurrentPrice(selectedCoin: selectedCoin)
-        self.selectedCoinCurrentPrice = self.selectedSpecificCoinModel?.marketData?.currentPrice["usd"] ?? 0
-        self.currentPrice[selectedCoin] = self.selectedSpecificCoinModel?.marketData?.currentPrice["usd"] ?? 0
+        self.selectedCoinCurrentPrice = self.selectedSpecificCoinModel.marketData?.currentPrice["usd"] ?? 0
+        self.currentPrice[selectedCoin] = self.selectedSpecificCoinModel.marketData?.currentPrice["usd"] ?? 0
         
-        return self.selectedSpecificCoinModel?.marketData?.currentPrice["usd"] ?? 0
+        return self.selectedSpecificCoinModel.marketData?.currentPrice["usd"] ?? 0
     }
     
     
@@ -34,6 +34,7 @@ final class SpecificCoinViewModel: ObservableObject {
             switch result {
             case .success(let specificCoinModel):
                 self.selectedSpecificCoinModel = specificCoinModel
+//                print(self.selectedSpecificCoinModel?.marketData?.sparkline7D)
                 if let selectedCoinCurrentPrice = specificCoinModel.marketData?.currentPrice["usd"] {
                     self.selectedCoinCurrentPrice = selectedCoinCurrentPrice
                 }
@@ -50,5 +51,31 @@ final class SpecificCoinViewModel: ObservableObject {
             }
         }
     }
+    
+    @MainActor
+    func getCoinAndReturnTheModel(selectedCoin: String) async throws -> SpecificCoinModel {
+        let specificCoinModel = try await specificCoinRepository.getCurrentPrice(selectedCoin: selectedCoin)
+        return specificCoinModel
+    }
+    
+//    func getCoinAndReturnTheModel(selectedCoin: String) {
+//
+//        var coinModel = SpecificCoinModel()
+//
+//        specificCoinRepository.getSpecificCoin(selectedCoin: selectedCoin) { result in
+//            switch result {
+//            case .success(let specificCoinModel):
+//                self.selectedSpecificCoinModel = specificCoinModel
+////                print(coinModel.marketData?.sparkline7D) Can print the data
+////                completionBlock(coinModel)
+////                completionBlock(self.selectedSpecificCoinModel)
+//
+//            case .failure(let error):
+//                print(error)
+//            }
+//        }
+//
+////        completionBlock(coinModel)
+//    }
     
 }
