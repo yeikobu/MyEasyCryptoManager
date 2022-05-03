@@ -17,6 +17,8 @@ final class SearchCoinViewModel: ObservableObject {
     }
     
     
+    /// This method gets the most basic data about a coin when it is searched in a view.
+    /// - Returns: ()
     func getCoins(searchedCoin: String)  {
         searchCoinRepository.getCoins(searchCoin: searchedCoin) { result in
             switch result {
