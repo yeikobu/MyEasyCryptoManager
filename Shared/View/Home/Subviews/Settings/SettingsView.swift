@@ -9,7 +9,9 @@ import SwiftUI
 
 struct SettingsView: View {
     
+    @State var appSettings = SettingsModel.AppSettings.accountSettings
     @State var isLogoutActive: Bool = false
+    @State var isButtonSelected: Bool = false
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -34,53 +36,63 @@ struct SettingsView: View {
                         .frame(maxWidth: .infinity, alignment: .leading)
                     
                     VStack(alignment: .leading) {
-                        HStack {
-                            Text("Account")
-                                .font(.system(size: 14, design: .rounded))
-                            
-                            Spacer()
-                            
-                            Image(systemName: "chevron.right")
-                                .font(.system(size: 14, design: .rounded))
+                        
+                        Button {
+                            self.isButtonSelected = true
+                            self.appSettings = .accountSettings
+                        } label: {
+                            HStack {
+                                Text("Account")
+                                    .font(.system(size: 14, design: .rounded))
+                                
+                                Spacer()
+                                
+                                Image(systemName: "chevron.right")
+                                    .font(.system(size: 14, design: .rounded))
+                            }
+                            .padding(.vertical, 5)
                         }
-                        .padding(.vertical, 5)
-                        .onTapGesture {
-                            //
-                        }
+                        .foregroundColor(.white)
                         
                         Divider()
                             .background(.gray)
                         
-                        HStack {
-                            Text("Launch Screen")
-                                .font(.system(size: 14, design: .rounded))
-                            
-                            Spacer()
-                            
-                            Image(systemName: "chevron.right")
-                                .font(.system(size: 14, design: .rounded))
+                        Button {
+                            self.isButtonSelected = true
+                            self.appSettings = .defaultLaunchScreen
+                        } label: {
+                            HStack {
+                                Text("Launch Screen")
+                                    .font(.system(size: 14, design: .rounded))
+                                
+                                Spacer()
+                                
+                                Image(systemName: "chevron.right")
+                                    .font(.system(size: 14, design: .rounded))
+                            }
+                            .padding(.vertical, 5)
                         }
-                        .padding(.vertical, 5)
-                        .onTapGesture {
-                            //
-                        }
+                        .foregroundColor(.white)
                         
                         Divider()
                             .background(.gray)
                         
-                        HStack {
-                            Text("Default Currency")
-                                .font(.system(size: 14, design: .rounded))
-                            
-                            Spacer()
-                            
-                            Image(systemName: "chevron.right")
-                                .font(.system(size: 14, design: .rounded))
+                        Button {
+                            self.isButtonSelected = true
+                            self.appSettings = .defaultCurrency
+                        } label: {
+                            HStack {
+                                Text("Default Currency")
+                                    .font(.system(size: 14, design: .rounded))
+                                
+                                Spacer()
+                                
+                                Image(systemName: "chevron.right")
+                                    .font(.system(size: 14, design: .rounded))
+                            }
+                            .padding(.vertical, 5)
                         }
-                        .padding(.vertical, 5)
-                        .onTapGesture {
-                            //
-                        }
+                        .foregroundColor(.white)
                     }
                     .padding(10)
                     .background(
@@ -89,10 +101,10 @@ struct SettingsView: View {
                             .blur(radius: 0)
                             .opacity(0.8)
                     )
+                    .shadow(color: .black.opacity(0.4), radius: 5, x: 3, y: 3)
+                    .shadow(color: .black.opacity(0.4), radius: 5, x: -3, y: -3)
                 }
                 .padding(.horizontal, 5)
-                .shadow(color: .black.opacity(0.4), radius: 5, x: 3, y: 3)
-                .shadow(color: .black.opacity(0.4), radius: 5, x: -3, y: -3)
                 
                 // MARK: - About this app
                 VStack(alignment: .leading) {
@@ -319,14 +331,38 @@ struct SettingsView: View {
             }
             .cornerRadius(15)
             .padding(.horizontal, 5)
+            .fullScreenCover(isPresented: $isButtonSelected) {
+                switch appSettings {
+                case .accountSettings:
+                    AccountSettingsView()
+                case .defaultLaunchScreen:
+                    LaunchScreenSettingsView()
+                case .defaultCurrency:
+                    DefaultCurrencyView()
+                }
+            }
             
             NavigationLink(isActive: $isLogoutActive) {
                 SigninSignupView()
             } label: {
                 EmptyView()
             }
+            
+//            NavigationLink(isActive: $isButtonSelected) {
+//                switch appSettings {
+//                case .accountSettings:
+//                    AccountSettingsView()
+//                case .defaultLaunchScreen:
+//                    LaunchScreenSettingsView()
+//                case .defaultCurrency:
+//                    DefaultCurrencyView()
+//                }
+//            } label: {
+//                EmptyView()
+//            }
         }
         .preferredColorScheme(.dark)
+        
     }
 }
 

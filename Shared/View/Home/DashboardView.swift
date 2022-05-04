@@ -22,13 +22,6 @@ struct DashboardView: View {
                 .navigationBarHidden(true)
                 .navigationBarBackButtonHidden(true)
                 .preferredColorScheme(.dark)
-                .background(
-                    RoundedRectangle(cornerRadius: 1, style: .continuous)
-                        .fill(.ultraThinMaterial)
-                        .ignoresSafeArea()
-                        .blur(radius: 20)
-                        .opacity(0.8)
-                )
                 .padding(.bottom, 25)
         }
         .ignoresSafeArea()
@@ -37,7 +30,7 @@ struct DashboardView: View {
                 .resizable()
                 .aspectRatio(contentMode: .fill)
                 .ignoresSafeArea()
-                .opacity(0.4)
+                .opacity(0.35)
         )
        
     }

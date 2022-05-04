@@ -43,6 +43,11 @@
 		1671E70D27EE8BD40090FD28 /* FirebaseFirestoreSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = 1671E70C27EE8BD40090FD28 /* FirebaseFirestoreSwift-Beta */; };
 		1671E70F27EE8D360090FD28 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1671E70E27EE8D360090FD28 /* GoogleService-Info.plist */; };
 		1671E71027EE8D360090FD28 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1671E70E27EE8D360090FD28 /* GoogleService-Info.plist */; };
+		16BE53182821C9910056FE3E /* AccountSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16BE53172821C9910056FE3E /* AccountSettingsView.swift */; };
+		16BE531A2821CDC40056FE3E /* SettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16BE53192821CDC40056FE3E /* SettingsModel.swift */; };
+		16BE531D2821D1880056FE3E /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16BE531C2821D1880056FE3E /* SettingsViewModel.swift */; };
+		16BE531F2821D4320056FE3E /* LaunchScreenSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16BE531E2821D4320056FE3E /* LaunchScreenSettingsView.swift */; };
+		16BE53212821D4640056FE3E /* DefaultCurrencyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16BE53202821D4640056FE3E /* DefaultCurrencyView.swift */; };
 		16C24BDC27EFF09400B70B24 /* SigninSignupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C24BDB27EFF09400B70B24 /* SigninSignupView.swift */; };
 		16C24BDD27EFF09400B70B24 /* SigninSignupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C24BDB27EFF09400B70B24 /* SigninSignupView.swift */; };
 		16C24BDF27F0BCBE00B70B24 /* SigninFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C24BDE27F0BCBE00B70B24 /* SigninFormView.swift */; };
@@ -103,6 +108,11 @@
 		166BEED727E279E100072115 /* CoinsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinsListView.swift; sourceTree = "<group>"; };
 		166BEEDA27E38B8600072115 /* CoinInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinInfoViewModel.swift; sourceTree = "<group>"; };
 		1671E70E27EE8D360090FD28 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		16BE53172821C9910056FE3E /* AccountSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSettingsView.swift; sourceTree = "<group>"; };
+		16BE53192821CDC40056FE3E /* SettingsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsModel.swift; sourceTree = "<group>"; };
+		16BE531C2821D1880056FE3E /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
+		16BE531E2821D4320056FE3E /* LaunchScreenSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenSettingsView.swift; sourceTree = "<group>"; };
+		16BE53202821D4640056FE3E /* DefaultCurrencyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultCurrencyView.swift; sourceTree = "<group>"; };
 		16C24BDB27EFF09400B70B24 /* SigninSignupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SigninSignupView.swift; sourceTree = "<group>"; };
 		16C24BDE27F0BCBE00B70B24 /* SigninFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SigninFormView.swift; sourceTree = "<group>"; };
 		16C24BE127F0BE4C00B70B24 /* SignupFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupFormView.swift; sourceTree = "<group>"; };
@@ -310,6 +320,7 @@
 				1603780327FB5A02006ADDA1 /* FavouriteCoinModel.swift */,
 				16CC89E927FCF05B00E194A7 /* SpecificCoinModel.swift */,
 				16D889632818990E00DB1BEC /* SearchCoinModel.swift */,
+				16BE53192821CDC40056FE3E /* SettingsModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -317,6 +328,7 @@
 		166BEED327D93A0400072115 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				16BE531B2821D1700056FE3E /* SettingsViewModels */,
 				16D8896728189C0200DB1BEC /* SearchCoinViewModel */,
 				1603780D27FBDFAA006ADDA1 /* AssetViewModels */,
 				1603780227F91F33006ADDA1 /* PortfolioViewModels */,
@@ -324,6 +336,24 @@
 				1603780027F64476006ADDA1 /* SigninSignupViewModels */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		16BE53162821C9030056FE3E /* AppSettings */ = {
+			isa = PBXGroup;
+			children = (
+				16BE53172821C9910056FE3E /* AccountSettingsView.swift */,
+				16BE531E2821D4320056FE3E /* LaunchScreenSettingsView.swift */,
+				16BE53202821D4640056FE3E /* DefaultCurrencyView.swift */,
+			);
+			path = AppSettings;
+			sourceTree = "<group>";
+		};
+		16BE531B2821D1700056FE3E /* SettingsViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				16BE531C2821D1880056FE3E /* SettingsViewModel.swift */,
+			);
+			path = SettingsViewModels;
 			sourceTree = "<group>";
 		};
 		16C24BE427F1148300B70B24 /* API Service */ = {
@@ -423,6 +453,7 @@
 		16C24C0527F3DE2D00B70B24 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				16BE53162821C9030056FE3E /* AppSettings */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -592,6 +623,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				16BE531A2821CDC40056FE3E /* SettingsModel.swift in Sources */,
 				163A399827E90BCE00F8D6F5 /* PreviewProvider.swift in Sources */,
 				16C24BF327F20ABE00B70B24 /* SettingsView.swift in Sources */,
 				16D889642818990E00DB1BEC /* SearchCoinModel.swift in Sources */,
@@ -609,6 +641,7 @@
 				166BEECF27D9331F00072115 /* CoinsModel.swift in Sources */,
 				1603780827FB63E8006ADDA1 /* FavouriteAssetsRepository.swift in Sources */,
 				16F3110E27F4B5BC002A2844 /* CurrentBalanceView.swift in Sources */,
+				16BE531F2821D4320056FE3E /* LaunchScreenSettingsView.swift in Sources */,
 				16F3111627F4F9AD002A2844 /* Haptics.swift in Sources */,
 				1603780627FB5B53006ADDA1 /* FavouriteAssetsDataSource.swift in Sources */,
 				16C24BDC27EFF09400B70B24 /* SigninSignupView.swift in Sources */,
@@ -616,7 +649,9 @@
 				16F3111027F4BB61002A2844 /* PortfolioVIew.swift in Sources */,
 				163A398F27E561A900F8D6F5 /* CompleteAssetInfoCardView.swift in Sources */,
 				16D821D327EE500400528869 /* AddAssetView.swift in Sources */,
+				16BE53182821C9910056FE3E /* AccountSettingsView.swift in Sources */,
 				166BEEC027D6E5DF00072115 /* MyEasyCryptoManagerApp.swift in Sources */,
+				16BE531D2821D1880056FE3E /* SettingsViewModel.swift in Sources */,
 				16D8896B28189D9500DB1BEC /* SearchCoinViewModel.swift in Sources */,
 				161864E8280DE775008F1CF4 /* String.swift in Sources */,
 				16C24BEB27F1158200B70B24 /* AuthenticationVIewModel.swift in Sources */,
@@ -632,6 +667,7 @@
 				163A399A27E917EB00F8D6F5 /* Date.swift in Sources */,
 				16CC89F727FE728A00E194A7 /* SpecificCoinRepository.swift in Sources */,
 				16321ECA281E318200C54CF2 /* Sequence.swift in Sources */,
+				16BE53212821D4640056FE3E /* DefaultCurrencyView.swift in Sources */,
 				16CC89F527FE6B1300E194A7 /* SpecificCoinDataSource.swift in Sources */,
 				16CC89EA27FCF05B00E194A7 /* SpecificCoinModel.swift in Sources */,
 				16D8896928189C5100DB1BEC /* SearchCoinRepository.swift in Sources */,

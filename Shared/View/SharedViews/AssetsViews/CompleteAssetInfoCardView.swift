@@ -406,6 +406,9 @@ struct CompleteAssetInfoCardView: View {
                     RoundedRectangle(cornerRadius: 10, style: .continuous)
                         .matchedGeometryEffect(id: "mask", in: animation)
                 )
+                .shadow(color: .black.opacity(0.4), radius: 5, x: 3, y: 3)
+                .shadow(color: .black.opacity(0.4), radius: 5, x: -3, y: -3)
+                .padding(.horizontal, 5)
                 .onAppear {
                     Task {
                         await specificCoinViewModel.getSpecificCoin(selectedCoin: self.id)

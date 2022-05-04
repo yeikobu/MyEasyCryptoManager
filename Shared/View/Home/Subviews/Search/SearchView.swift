@@ -167,7 +167,9 @@ struct SearchView: View {
                                 }
                             }
                         }
-                        .padding(.horizontal, 10)
+                        .cornerRadius(20)
+                        .padding(.horizontal, 5)
+                        
                     }
                 }
             }
@@ -187,13 +189,21 @@ struct SearchView: View {
                             self.isListVisible.toggle()
                         }
                     } label: {
-                        Image(systemName: "x.circle")
+                        Image(systemName: "xmark")
+                            .font(.system(size: 16, weight: .bold, design: .rounded))
+                            .padding(4)
                             .foregroundColor(Color("Buttons"))
-                            .font(.system(size: 22))
-                            .shadow(color: .black.opacity(0.4), radius: 5, x: 3, y: 3)
-                            .shadow(color: .black.opacity(0.4), radius: 5, x: -3, y: -3)
+                            .background(
+                                Circle()
+                                    .fill(.ultraThinMaterial)
+                                    .blur(radius: 0)
+                                    .opacity(0.8)
+                            )
                     }
+                    .shadow(color: .black.opacity(0.4), radius: 5, x: 3, y: 3)
+                    .shadow(color: .black.opacity(0.4), radius: 5, x: -3, y: -3)
                     .padding(.trailing, 10)
+                    .padding(.bottom, 10)
                     
                 }
                 .matchedGeometryEffect(id: "\(self.id)", in: animation)
