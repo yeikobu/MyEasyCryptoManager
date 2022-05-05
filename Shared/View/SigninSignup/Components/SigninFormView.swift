@@ -160,10 +160,10 @@ struct SigninFormView: View {
                         .frame(maxWidth: .infinity, alignment: .trailing)
                         .padding(.top, 20)
                     }
-                    .matchedGeometryEffect(id: "signinform", in: animation)
                     .padding(.horizontal, 10)
                     .padding(.vertical, 40)
                 }
+                .matchedGeometryEffect(id: "signinform", in: animation)
                 .background(
                     RoundedRectangle(cornerRadius: 20, style: .continuous)
                         .fill(.ultraThinMaterial)

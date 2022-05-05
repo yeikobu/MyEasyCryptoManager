@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-let tabs = ["gearshape.fill", "chart.bar.xaxis", "house.fill", "magnifyingglass"]
+let tabs = ["gearshape.fill", "chart.bar.xaxis", "latch.2.case.fill", "magnifyingglass"]
 
 struct DashboardView: View {
     
@@ -76,7 +76,7 @@ struct CustomTabView: View {
                     .tag("chart.bar.xaxis")
                 
                 PortfolioView(isAddedToPorfolio: false, isTouched: .constant(false), name: "", id: "", symbol: "", currentPrice: 0)
-                    .tag("house.fill")
+                    .tag("latch.2.case.fill")
                 
                 SearchView()
                     .tag("magnifyingglass")

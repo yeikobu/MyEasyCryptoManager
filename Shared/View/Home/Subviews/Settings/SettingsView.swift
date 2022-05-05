@@ -117,7 +117,7 @@ struct SettingsView: View {
                     
                     VStack(alignment: .leading) {
                         HStack {
-                            Text("Terms of service")
+                            Text("Terms of Service")
                                 .font(.system(size: 14, design: .rounded))
                             
                             Spacer()
@@ -134,7 +134,7 @@ struct SettingsView: View {
                             .background(.gray)
                         
                         HStack {
-                            Text("Privacy police")
+                            Text("Privacy Police")
                                 .font(.system(size: 14, design: .rounded))
                             
                             Spacer()
@@ -153,6 +153,24 @@ struct SettingsView: View {
                         
                         HStack {
                             Text("Crypto Glossary")
+                                .font(.system(size: 14, design: .rounded))
+                            
+                            Spacer()
+                            
+                            Image(systemName: "chevron.right")
+                                .font(.system(size: 14, design: .rounded))
+                        }
+                        .padding(.vertical, 5)
+                        .onTapGesture {
+                            //
+                        }
+                        
+                        Divider()
+                            .background(.gray)
+                        
+                        
+                        HStack {
+                            Text("Donate")
                                 .font(.system(size: 14, design: .rounded))
                             
                             Spacer()
