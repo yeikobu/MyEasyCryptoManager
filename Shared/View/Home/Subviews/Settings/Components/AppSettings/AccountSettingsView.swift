@@ -9,9 +9,13 @@ import SwiftUI
 
 struct AccountSettingsView: View {
     
+    @StateObject var authenticationViewModel: AuthenticationViewModel = AuthenticationViewModel()
     @Environment(\.presentationMode) var presentationMode
     @State var isButtonSelected: Bool = false
+    @State var isChangePasswordButtonSelected: Bool = false
     @State var accountSettings = SettingsModel.AccountSettings.email
+    @State var message: String = ""
+    @State var email: String = ""
     @Namespace var animation
     
     var body: some View {
@@ -55,6 +59,10 @@ struct AccountSettingsView: View {
                                     
                                     Spacer()
                                     
+                                    Text(authenticationViewModel.user?.email ?? self.email)
+                                        .foregroundColor(.gray)
+                                        .font(.system(size: 12, design: .rounded))
+                                    
                                     Image(systemName: "chevron.right")
                                         .font(.system(size: 14, design: .rounded))
                                 }
@@ -70,8 +78,10 @@ struct AccountSettingsView: View {
                         
                         VStack {
                             Button {
-//                                self.isButtonSelected = true
-//                                self.accountSettings = .password
+                                authenticationViewModel.recoverPass { resultMessage in
+                                    self.message = resultMessage
+                                }
+                                self.isChangePasswordButtonSelected = true
                             } label: {
                                 HStack {
                                     Text("Change Password")
@@ -100,12 +110,15 @@ struct AccountSettingsView: View {
                     .shadow(color: .black.opacity(0.4), radius: 5, x: 3, y: 3)
                     .shadow(color: .black.opacity(0.4), radius: 5, x: -3, y: -3)
                     .foregroundColor(.white)
+                    .alert(isPresented: $isChangePasswordButtonSelected) {
+                        Alert(title: Text("ALERT!"), message: Text("\(self.message)"), dismissButton: .default(Text("Okay")))
+                    }
                    
                     
                 }
                 
                 if self.isButtonSelected && self.accountSettings == .email {
-                    ChangeEmailView(isButtonSelected: self.$isButtonSelected ,animation: animation)
+                    ChangeEmailView(email: $email, isButtonSelected: self.$isButtonSelected ,animation: animation)
                 }
                 
                 Spacer()
@@ -142,6 +155,8 @@ struct AccountSettingsView: View {
                     withAnimation(.spring(response: 0.5, dampingFraction: 0.8)){
                         self.isButtonSelected = false
                     }
+                    
+                    authenticationViewModel.getCurrentUser()
                 } label: {
                     Image(systemName: "xmark")
                         .font(.system(size: 16, weight: .bold, design: .rounded))
@@ -157,7 +172,7 @@ struct AccountSettingsView: View {
                 .matchedGeometryEffect(id: "xbutton", in: animation)
                 .shadow(color: .black.opacity(0.4), radius: 5, x: 3, y: 3)
                 .shadow(color: .black.opacity(0.4), radius: 5, x: -3, y: -3)
-                .padding(.top, 300)
+                .padding(.top, 350)
                 .padding(.trailing, 10)
             }
            
