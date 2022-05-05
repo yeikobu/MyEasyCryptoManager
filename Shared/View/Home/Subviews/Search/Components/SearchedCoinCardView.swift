@@ -56,9 +56,6 @@ struct SearchedCoinCardView: View {
             .mask(
                 RoundedRectangle(cornerRadius: 15, style: .continuous)
             )
-            .shadow(color: .black.opacity(0.3), radius: 3, x: 3, y: 3)
-            .shadow(color: .black.opacity(0.3), radius: 3, x: -3, y: -3)
-            .padding(.horizontal, 5)
             .padding(.vertical, 2)
             .preferredColorScheme(.dark)
             

@@ -150,22 +150,6 @@ struct SettingsView: View {
                         Divider()
                             .background(.gray)
                         
-                        HStack {
-                            Text("Contact")
-                                .font(.system(size: 14, design: .rounded))
-                            
-                            Spacer()
-                            
-                            Image(systemName: "chevron.right")
-                                .font(.system(size: 14, design: .rounded))
-                        }
-                        .padding(.vertical, 5)
-                        .onTapGesture {
-                            //
-                        }
-                        
-                        Divider()
-                            .background(.gray)
                         
                         HStack {
                             Text("Crypto Glossary")
@@ -335,10 +319,21 @@ struct SettingsView: View {
                 switch appSettings {
                 case .accountSettings:
                     AccountSettingsView()
+                    
                 case .defaultLaunchScreen:
                     LaunchScreenSettingsView()
+                    
                 case .defaultCurrency:
                     DefaultCurrencyView()
+                    
+                case .termsOfService:
+                    TermsOfServiceView()
+                    
+                case .privacyPolice:
+                    PrivacyPoliceView()
+                    
+                case .cryptoGlossary:
+                    CryptoGlossaryView()
                 }
             }
             
@@ -347,19 +342,7 @@ struct SettingsView: View {
             } label: {
                 EmptyView()
             }
-            
-//            NavigationLink(isActive: $isButtonSelected) {
-//                switch appSettings {
-//                case .accountSettings:
-//                    AccountSettingsView()
-//                case .defaultLaunchScreen:
-//                    LaunchScreenSettingsView()
-//                case .defaultCurrency:
-//                    DefaultCurrencyView()
-//                }
-//            } label: {
-//                EmptyView()
-//            }
+        
         }
         .preferredColorScheme(.dark)
         

@@ -147,9 +147,6 @@ struct BasicAssetInfoCardView: View {
             RoundedRectangle(cornerRadius: 15, style: .continuous)
         )
         .preferredColorScheme(.dark)
-        .shadow(color: .black.opacity(0.3), radius: 3, x: 3, y: 3)
-        .shadow(color: .black.opacity(0.3), radius: 3, x: -3, y: -3)
-        .padding(.horizontal, 5)
         
     }
 }

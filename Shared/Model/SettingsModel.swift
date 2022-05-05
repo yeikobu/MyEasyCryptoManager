@@ -13,7 +13,19 @@ struct SettingsModel {
         case accountSettings
         case defaultLaunchScreen
         case defaultCurrency
+        case termsOfService
+        case privacyPolice
+        case cryptoGlossary
     }
     
+    enum AccountSettings {
+        case email
+        case password
+    }
     
+//    enum AboutTheApp {
+//        case termsOfService
+//        case privacyPolice
+//        case cryptoGlossary
+//    }
 }

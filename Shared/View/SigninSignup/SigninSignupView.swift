@@ -13,13 +13,13 @@ struct SigninSignupView: View {
             ZStack {
                 SignInSignUpButtonsView()
                     .frame(maxHeight: .infinity)
-                    .background(
-                        RoundedRectangle(cornerRadius: 1, style: .continuous)
-                            .fill(.ultraThinMaterial)
-                            .ignoresSafeArea()
-                            .blur(radius: 1)
-                            .opacity(0.8)
-                    )
+//                    .background(
+//                        RoundedRectangle(cornerRadius: 1, style: .continuous)
+//                            .fill(.ultraThinMaterial)
+//                            .ignoresSafeArea()
+//                            .blur(radius: 1)
+//                            .opacity(0.8)
+//                    )
             }
             .frame(maxHeight: .infinity)
             .background(

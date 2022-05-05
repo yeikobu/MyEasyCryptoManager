@@ -14,6 +14,10 @@
 		161864E62808D8DD008F1CF4 /* SpecificAssetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 161864E52808D8DD008F1CF4 /* SpecificAssetView.swift */; };
 		161864E8280DE775008F1CF4 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 161864E7280DE775008F1CF4 /* String.swift */; };
 		16321ECA281E318200C54CF2 /* Sequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16321EC9281E318100C54CF2 /* Sequence.swift */; };
+		16387DE928231E1B00516BBA /* TermsOfServiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16387DE828231E1B00516BBA /* TermsOfServiceView.swift */; };
+		16387DEB28231E3100516BBA /* PrivacyPoliceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16387DEA28231E3100516BBA /* PrivacyPoliceView.swift */; };
+		16387DED28231E4700516BBA /* CryptoGlossaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16387DEC28231E4700516BBA /* CryptoGlossaryView.swift */; };
+		16387DF02823218300516BBA /* ChangeEmailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16387DEF2823218300516BBA /* ChangeEmailView.swift */; };
 		163A398A27E4039000F8D6F5 /* RefreshableScrollView in Frameworks */ = {isa = PBXBuildFile; productRef = 163A398927E4039000F8D6F5 /* RefreshableScrollView */; };
 		163A398D27E543E200F8D6F5 /* BasicAssetInfoCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 163A398C27E543E200F8D6F5 /* BasicAssetInfoCardView.swift */; };
 		163A398F27E561A900F8D6F5 /* CompleteAssetInfoCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 163A398E27E561A900F8D6F5 /* CompleteAssetInfoCardView.swift */; };
@@ -90,6 +94,10 @@
 		161864E52808D8DD008F1CF4 /* SpecificAssetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecificAssetView.swift; sourceTree = "<group>"; };
 		161864E7280DE775008F1CF4 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		16321EC9281E318100C54CF2 /* Sequence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sequence.swift; sourceTree = "<group>"; };
+		16387DE828231E1B00516BBA /* TermsOfServiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsOfServiceView.swift; sourceTree = "<group>"; };
+		16387DEA28231E3100516BBA /* PrivacyPoliceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPoliceView.swift; sourceTree = "<group>"; };
+		16387DEC28231E4700516BBA /* CryptoGlossaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoGlossaryView.swift; sourceTree = "<group>"; };
+		16387DEF2823218300516BBA /* ChangeEmailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeEmailView.swift; sourceTree = "<group>"; };
 		163A398C27E543E200F8D6F5 /* BasicAssetInfoCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicAssetInfoCardView.swift; sourceTree = "<group>"; };
 		163A398E27E561A900F8D6F5 /* CompleteAssetInfoCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteAssetInfoCardView.swift; sourceTree = "<group>"; };
 		163A399027E56AEB00F8D6F5 /* GlobalMarketModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalMarketModel.swift; sourceTree = "<group>"; };
@@ -220,6 +228,14 @@
 			path = AssetViewModels;
 			sourceTree = "<group>";
 		};
+		16387DEE2823215A00516BBA /* Account settings components */ = {
+			isa = PBXGroup;
+			children = (
+				16387DEF2823218300516BBA /* ChangeEmailView.swift */,
+			);
+			path = "Account settings components";
+			sourceTree = "<group>";
+		};
 		163A399627E90BB300F8D6F5 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -341,9 +357,13 @@
 		16BE53162821C9030056FE3E /* AppSettings */ = {
 			isa = PBXGroup;
 			children = (
+				16387DEE2823215A00516BBA /* Account settings components */,
 				16BE53172821C9910056FE3E /* AccountSettingsView.swift */,
 				16BE531E2821D4320056FE3E /* LaunchScreenSettingsView.swift */,
 				16BE53202821D4640056FE3E /* DefaultCurrencyView.swift */,
+				16387DE828231E1B00516BBA /* TermsOfServiceView.swift */,
+				16387DEA28231E3100516BBA /* PrivacyPoliceView.swift */,
+				16387DEC28231E4700516BBA /* CryptoGlossaryView.swift */,
 			);
 			path = AppSettings;
 			sourceTree = "<group>";
@@ -625,6 +645,7 @@
 			files = (
 				16BE531A2821CDC40056FE3E /* SettingsModel.swift in Sources */,
 				163A399827E90BCE00F8D6F5 /* PreviewProvider.swift in Sources */,
+				16387DEB28231E3100516BBA /* PrivacyPoliceView.swift in Sources */,
 				16C24BF327F20ABE00B70B24 /* SettingsView.swift in Sources */,
 				16D889642818990E00DB1BEC /* SearchCoinModel.swift in Sources */,
 				166BEEDB27E38B8600072115 /* CoinInfoViewModel.swift in Sources */,
@@ -637,11 +658,13 @@
 				16CC89F327FD1ADF00E194A7 /* SpecificCoinViewModel.swift in Sources */,
 				16D889622818970300DB1BEC /* SearchView.swift in Sources */,
 				166363AF281F829000B416AD /* ChartWithSpecificAssetModelView.swift in Sources */,
+				16387DED28231E4700516BBA /* CryptoGlossaryView.swift in Sources */,
 				16C24BF127F1572800B70B24 /* ValidationFormView.swift in Sources */,
 				166BEECF27D9331F00072115 /* CoinsModel.swift in Sources */,
 				1603780827FB63E8006ADDA1 /* FavouriteAssetsRepository.swift in Sources */,
 				16F3110E27F4B5BC002A2844 /* CurrentBalanceView.swift in Sources */,
 				16BE531F2821D4320056FE3E /* LaunchScreenSettingsView.swift in Sources */,
+				16387DE928231E1B00516BBA /* TermsOfServiceView.swift in Sources */,
 				16F3111627F4F9AD002A2844 /* Haptics.swift in Sources */,
 				1603780627FB5B53006ADDA1 /* FavouriteAssetsDataSource.swift in Sources */,
 				16C24BDC27EFF09400B70B24 /* SigninSignupView.swift in Sources */,
@@ -661,6 +684,7 @@
 				16C24BEF27F1237900B70B24 /* FieldValidationViewModel.swift in Sources */,
 				161864E62808D8DD008F1CF4 /* SpecificAssetView.swift in Sources */,
 				163A399527E9074100F8D6F5 /* ChartView.swift in Sources */,
+				16387DF02823218300516BBA /* ChangeEmailView.swift in Sources */,
 				163A398D27E543E200F8D6F5 /* BasicAssetInfoCardView.swift in Sources */,
 				163A399127E56AEB00F8D6F5 /* GlobalMarketModel.swift in Sources */,
 				16C24BFB27F22F2A00B70B24 /* LottieImage.swift in Sources */,

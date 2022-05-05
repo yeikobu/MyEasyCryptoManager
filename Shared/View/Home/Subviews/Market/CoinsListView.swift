@@ -231,7 +231,7 @@ struct CoinsMarketListView: View {
                             try? await Task.sleep(nanoseconds: 1000000000)
                         }
                         .cornerRadius(10)
-                        .padding(.horizontal, 5)
+                        .padding(.horizontal, 10)
                     }
                     .ignoresSafeArea()
                     .onAppear {
