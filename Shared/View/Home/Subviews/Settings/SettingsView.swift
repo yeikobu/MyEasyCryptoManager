@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SettingsView: View {
     
-    @State var appSettings = SettingsModel.AppSettings.accountSettings
+    @StateObject var settingsViewModel = SettingsViewModel()
     @State var isLogoutActive: Bool = false
     @State var isButtonSelected: Bool = false
     
@@ -39,7 +39,7 @@ struct SettingsView: View {
                         
                         Button {
                             self.isButtonSelected = true
-                            self.appSettings = .accountSettings
+                            self.settingsViewModel.appSettings = .accountSettings
                         } label: {
                             HStack {
                                 Text("Account")
@@ -59,7 +59,8 @@ struct SettingsView: View {
                         
                         Button {
                             self.isButtonSelected = true
-                            self.appSettings = .defaultLaunchScreen
+                            self.settingsViewModel.appSettings = .defaultLaunchScreen
+//                            print("option pressed: \(self.appSettings)")
                         } label: {
                             HStack {
                                 Text("Launch Screen")
@@ -79,7 +80,7 @@ struct SettingsView: View {
                         
                         Button {
                             self.isButtonSelected = true
-                            self.appSettings = .defaultCurrency
+//                            self.appSettings = .defaultCurrency
                         } label: {
                             HStack {
                                 Text("Default Currency")
@@ -334,7 +335,7 @@ struct SettingsView: View {
             .cornerRadius(15)
             .padding(.horizontal, 5)
             .fullScreenCover(isPresented: $isButtonSelected) {
-                switch appSettings {
+                switch self.settingsViewModel.appSettings {
                 case .accountSettings:
                     AccountSettingsView()
                     

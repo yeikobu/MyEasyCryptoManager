@@ -10,10 +10,10 @@ import SwiftUI
 struct AccountSettingsView: View {
     
     @StateObject var authenticationViewModel: AuthenticationViewModel = AuthenticationViewModel()
+    @StateObject var settingsViewModel = SettingsViewModel()
     @Environment(\.presentationMode) var presentationMode
     @State var isButtonSelected: Bool = false
     @State var isChangePasswordButtonSelected: Bool = false
-    @State var accountSettings = SettingsModel.AccountSettings.email
     @State var message: String = ""
     @State var email: String = ""
     @Namespace var animation
@@ -23,6 +23,7 @@ struct AccountSettingsView: View {
             VStack(alignment: .leading) {
                 HStack(alignment: .center) {
                     
+                    //If isButtonSelected is false shows in the title Account Settings, else Change Email
                     if !isButtonSelected {
                         Text("Account Settings")
                             .matchedGeometryEffect(id: "titles", in: animation)
@@ -42,6 +43,7 @@ struct AccountSettingsView: View {
                 
                 Spacer()
                 
+                //If isButtonSelected is false shows AccountSettingsView else
                 if !self.isButtonSelected {
                     VStack {
                         VStack {
@@ -50,11 +52,10 @@ struct AccountSettingsView: View {
                                     self.isButtonSelected = true
                                 }
                                 
-                                self.accountSettings = .email
+                                self.settingsViewModel.accountSettings = .email
                             } label: {
                                 HStack {
                                     Text("Email")
-//                                        .matchedGeometryEffect(id: "email", in: animation)
                                         .font(.system(size: 14, design: .rounded))
                                     
                                     Spacer()
@@ -117,7 +118,8 @@ struct AccountSettingsView: View {
                     
                 }
                 
-                if self.isButtonSelected && self.accountSettings == .email {
+                //If isButtonSelected is true and the selected option from the enum is email, it will show ChangeEmailView
+                if self.isButtonSelected && self.settingsViewModel.accountSettings == .email {
                     ChangeEmailView(email: $email, isButtonSelected: self.$isButtonSelected ,animation: animation)
                 }
                 
@@ -129,6 +131,8 @@ struct AccountSettingsView: View {
             .padding(.horizontal, 10)
             .padding(.top, 50)
             
+            
+            //If isButtonSelected is false shows the X button close to the view title
             if !isButtonSelected {
                 Button {
                     self.presentationMode.wrappedValue.dismiss()
@@ -149,6 +153,8 @@ struct AccountSettingsView: View {
                 .shadow(color: .black.opacity(0.4), radius: 5, x: -3, y: -3)
                 .padding(.top, 50)
                 .padding(.trailing, 10)
+                
+            //Else show the X button close to the ChangeEmailView
             } else {
                 
                 Button {

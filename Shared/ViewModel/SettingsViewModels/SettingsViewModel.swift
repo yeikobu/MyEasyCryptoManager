@@ -9,5 +9,20 @@ import Foundation
 
 final class SettingsViewModel: ObservableObject {
     
-    @Published var settingsModel = SettingsModel()
+    @Published var appSettings = AppSettings.accountSettings
+    @Published var accountSettings = AccountSettings.email
+    
+    enum AppSettings {
+        case accountSettings
+        case defaultLaunchScreen
+        case defaultCurrency
+        case termsOfService
+        case privacyPolice
+        case cryptoGlossary
+    }
+    
+    enum AccountSettings {
+        case email
+        case password
+    }
 }

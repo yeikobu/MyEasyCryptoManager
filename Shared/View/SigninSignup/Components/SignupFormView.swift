@@ -34,7 +34,6 @@ struct SignupFormView: View {
                         // MARK: - Email field
                         VStack(alignment: .leading) {
                             Text("Email")
-//                                .matchedGeometryEffect(id: "email", in: animation)
                                 .foregroundColor(.white)
                                 .font(.system(size: 18, weight: .bold, design: .rounded))
                                 .padding(.bottom, -1)
@@ -78,7 +77,6 @@ struct SignupFormView: View {
                         // MARK: - Password field
                         VStack(alignment: .leading) {
                             Text("Password")
-//                                .matchedGeometryEffect(id: "password", in: animation)
                                 .foregroundColor(.white)
                                 .font(.system(size: 18, weight: .bold, design: .rounded))
                                 .padding(.bottom, -1)
@@ -147,7 +145,6 @@ struct SignupFormView: View {
                         // MARK: - Confirm Password field
                         VStack(alignment: .leading) {
                             Text("Confirm password")
-//                                .matchedGeometryEffect(id: "comfirmpass", in: animation)
                                 .foregroundColor(.white)
                                 .font(.system(size: 18, weight: .bold, design: .rounded))
                                 .padding(.bottom, -1)
@@ -248,7 +245,7 @@ struct SignupFormView: View {
                 .matchedGeometryEffect(id: "signinbutton", in: animation)
                 .padding(.top, 320)
                 .alert(isPresented: $areFieldsIncomplete) {
-                    Alert(title: Text("ERROR"), message: Text(authenticationViewModel.errorMessage ?? "All fields must be completed correctly"), dismissButton: .default(Text("Okay")))
+                    Alert(title: Text("ERROR"), message: Text(authenticationViewModel.errorMessage.isEmpty ? "All fields must be completed correctly" :  authenticationViewModel.errorMessage), dismissButton: .default(Text("Okay")))
                 }
             }
             

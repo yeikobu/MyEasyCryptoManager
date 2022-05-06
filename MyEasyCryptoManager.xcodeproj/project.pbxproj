@@ -47,6 +47,10 @@
 		1671E70D27EE8BD40090FD28 /* FirebaseFirestoreSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = 1671E70C27EE8BD40090FD28 /* FirebaseFirestoreSwift-Beta */; };
 		1671E70F27EE8D360090FD28 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1671E70E27EE8D360090FD28 /* GoogleService-Info.plist */; };
 		1671E71027EE8D360090FD28 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1671E70E27EE8D360090FD28 /* GoogleService-Info.plist */; };
+		168CB872282487F400C23987 /* DefaultLaunchScreenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 168CB871282487F300C23987 /* DefaultLaunchScreenModel.swift */; };
+		168CB8742824886500C23987 /* DefaultLaunchScreenDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 168CB8732824886500C23987 /* DefaultLaunchScreenDataSource.swift */; };
+		168CB87628248BFE00C23987 /* DefaultLaunchScreenRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 168CB87528248BFE00C23987 /* DefaultLaunchScreenRepository.swift */; };
+		168CB87828248CBA00C23987 /* DefaultLauchScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 168CB87728248CBA00C23987 /* DefaultLauchScreenViewModel.swift */; };
 		16BE53182821C9910056FE3E /* AccountSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16BE53172821C9910056FE3E /* AccountSettingsView.swift */; };
 		16BE531A2821CDC40056FE3E /* SettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16BE53192821CDC40056FE3E /* SettingsModel.swift */; };
 		16BE531D2821D1880056FE3E /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16BE531C2821D1880056FE3E /* SettingsViewModel.swift */; };
@@ -116,6 +120,10 @@
 		166BEED727E279E100072115 /* CoinsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinsListView.swift; sourceTree = "<group>"; };
 		166BEEDA27E38B8600072115 /* CoinInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinInfoViewModel.swift; sourceTree = "<group>"; };
 		1671E70E27EE8D360090FD28 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		168CB871282487F300C23987 /* DefaultLaunchScreenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultLaunchScreenModel.swift; sourceTree = "<group>"; };
+		168CB8732824886500C23987 /* DefaultLaunchScreenDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultLaunchScreenDataSource.swift; sourceTree = "<group>"; };
+		168CB87528248BFE00C23987 /* DefaultLaunchScreenRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultLaunchScreenRepository.swift; sourceTree = "<group>"; };
+		168CB87728248CBA00C23987 /* DefaultLauchScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultLauchScreenViewModel.swift; sourceTree = "<group>"; };
 		16BE53172821C9910056FE3E /* AccountSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSettingsView.swift; sourceTree = "<group>"; };
 		16BE53192821CDC40056FE3E /* SettingsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsModel.swift; sourceTree = "<group>"; };
 		16BE531C2821D1880056FE3E /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
@@ -337,6 +345,7 @@
 				16CC89E927FCF05B00E194A7 /* SpecificCoinModel.swift */,
 				16D889632818990E00DB1BEC /* SearchCoinModel.swift */,
 				16BE53192821CDC40056FE3E /* SettingsModel.swift */,
+				168CB871282487F300C23987 /* DefaultLaunchScreenModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -372,6 +381,9 @@
 			isa = PBXGroup;
 			children = (
 				16BE531C2821D1880056FE3E /* SettingsViewModel.swift */,
+				168CB87728248CBA00C23987 /* DefaultLauchScreenViewModel.swift */,
+				168CB8732824886500C23987 /* DefaultLaunchScreenDataSource.swift */,
+				168CB87528248BFE00C23987 /* DefaultLaunchScreenRepository.swift */,
 			);
 			path = SettingsViewModels;
 			sourceTree = "<group>";
@@ -661,6 +673,7 @@
 				16387DED28231E4700516BBA /* CryptoGlossaryView.swift in Sources */,
 				16C24BF127F1572800B70B24 /* ValidationFormView.swift in Sources */,
 				166BEECF27D9331F00072115 /* CoinsModel.swift in Sources */,
+				168CB872282487F400C23987 /* DefaultLaunchScreenModel.swift in Sources */,
 				1603780827FB63E8006ADDA1 /* FavouriteAssetsRepository.swift in Sources */,
 				16F3110E27F4B5BC002A2844 /* CurrentBalanceView.swift in Sources */,
 				16BE531F2821D4320056FE3E /* LaunchScreenSettingsView.swift in Sources */,
@@ -683,8 +696,10 @@
 				16D8896E2818B1AE00DB1BEC /* SearchedCoinCardView.swift in Sources */,
 				16C24BEF27F1237900B70B24 /* FieldValidationViewModel.swift in Sources */,
 				161864E62808D8DD008F1CF4 /* SpecificAssetView.swift in Sources */,
+				168CB8742824886500C23987 /* DefaultLaunchScreenDataSource.swift in Sources */,
 				163A399527E9074100F8D6F5 /* ChartView.swift in Sources */,
 				16387DF02823218300516BBA /* ChangeEmailView.swift in Sources */,
+				168CB87628248BFE00C23987 /* DefaultLaunchScreenRepository.swift in Sources */,
 				163A398D27E543E200F8D6F5 /* BasicAssetInfoCardView.swift in Sources */,
 				163A399127E56AEB00F8D6F5 /* GlobalMarketModel.swift in Sources */,
 				16C24BFB27F22F2A00B70B24 /* LottieImage.swift in Sources */,
@@ -695,6 +710,7 @@
 				16CC89F527FE6B1300E194A7 /* SpecificCoinDataSource.swift in Sources */,
 				16CC89EA27FCF05B00E194A7 /* SpecificCoinModel.swift in Sources */,
 				16D8896928189C5100DB1BEC /* SearchCoinRepository.swift in Sources */,
+				168CB87828248CBA00C23987 /* DefaultLauchScreenViewModel.swift in Sources */,
 				16C24BED27F116A400B70B24 /* UserModel.swift in Sources */,
 				166BEED827E279E100072115 /* CoinsListView.swift in Sources */,
 				16C24BF827F22C8E00B70B24 /* SplashScreenView.swift in Sources */,
