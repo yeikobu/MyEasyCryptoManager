@@ -61,7 +61,7 @@ struct TabButtonview: View {
 struct CustomTabView: View {
     
     @StateObject var defaultLauchScreenViewModel = DefaultLauchScreenViewModel()
-    @State var selectedTab: String = ""
+    @State var selectedTab: String = "chart.bar.xaxis"
     @State var edge: CGFloat = 0.0
     
     var body: some View {
@@ -107,7 +107,9 @@ struct CustomTabView: View {
         }
         .ignoresSafeArea(.keyboard, edges: .bottom)
         .onAppear {
-            self.selectedTab = defaultLauchScreenViewModel.selectedLaunchScreen
+            defaultLauchScreenViewModel.getSelectedLaunchScreen { name in
+                self.selectedTab = name
+            }
         }
         
         

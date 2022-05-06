@@ -381,8 +381,8 @@
 			isa = PBXGroup;
 			children = (
 				16BE531C2821D1880056FE3E /* SettingsViewModel.swift */,
-				168CB87728248CBA00C23987 /* DefaultLauchScreenViewModel.swift */,
 				168CB8732824886500C23987 /* DefaultLaunchScreenDataSource.swift */,
+				168CB87728248CBA00C23987 /* DefaultLauchScreenViewModel.swift */,
 				168CB87528248BFE00C23987 /* DefaultLaunchScreenRepository.swift */,
 			);
 			path = SettingsViewModels;

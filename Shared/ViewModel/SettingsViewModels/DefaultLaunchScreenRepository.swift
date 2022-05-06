@@ -17,4 +17,8 @@ final class DefaultLauchScreenRepository {
     func setDefaultLainchScreen(homescreen: String, completionBlock: @escaping (Result<DefaultLaunchScreenModel, Error>) -> Void) {
         self.defaultLaunchScreenDataSource.setDefaultLainchScreen(homescreen: homescreen, completionBlock: completionBlock)
     }
+    
+    func getSelectedLaunchScreen(completionBlock: @escaping (Result<DefaultLaunchScreenModel, Error>) -> Void) {
+        self.defaultLaunchScreenDataSource.getSelectedLaunchScreen(completionBlock: completionBlock)
+    }
 }

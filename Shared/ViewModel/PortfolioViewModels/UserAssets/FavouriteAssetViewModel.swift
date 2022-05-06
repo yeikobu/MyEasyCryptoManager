@@ -21,6 +21,11 @@ final class FavouriteAssetViewModel: ObservableObject {
     
     init (favouriteAssetsRepository: FavouriteAssetsRepository = FavouriteAssetsRepository()) {
         self.favouriteAssetsRepository = favouriteAssetsRepository
+        
+        Task {
+            await getAllAssets()
+        }
+        
     }
     
     /// This method gets all the user assets from the database previously added to the portfolio.
@@ -122,7 +127,7 @@ final class FavouriteAssetViewModel: ObservableObject {
     
     
     /// This method checks if an asset was previously added to the portfolio.
-    /// - Returns: Void, but it uses a completion handler.
+    /// - Returns: Void, but it uses a completion handler a Bool escaping.
     func checkIsAssetLiked(id: String, completionBlock: @escaping (Bool) -> Void) {
         favouriteAssetsRepository.checkIsAssetLiked(id: id) { result in
             completionBlock(result)

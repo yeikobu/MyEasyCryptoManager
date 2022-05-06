@@ -9,7 +9,12 @@ import SwiftUI
 
 struct LaunchScreenSettingsView: View {
     
+    @StateObject var defaultLauchScreenViewModel = DefaultLauchScreenViewModel()
     @Environment(\.presentationMode) var presentationMode
+    @State var isMarketSelected: Bool = true
+    @Namespace var animation
+//    @State var isPortfolioSelected: Bool = false
+//    @State var selectedScreen = DefaultLauchScreenViewModel.DefaultLauchScreen.market
     
     var body: some View {
         ZStack(alignment: .topTrailing) {
@@ -24,7 +29,11 @@ struct LaunchScreenSettingsView: View {
                     VStack {
                         VStack {
                             Button {
-                                //
+                                withAnimation(.spring(response: 0.5, dampingFraction: 1)) {
+                                    self.isMarketSelected = true
+                                }
+                                
+                                self.defaultLauchScreenViewModel.setDefaultLainchScreen(homescreen: "chart.bar.xaxis")
                             } label: {
                                 HStack {
                                     Text("Market")
@@ -32,9 +41,13 @@ struct LaunchScreenSettingsView: View {
                                     
                                     Spacer()
                                     
-                                    Image(systemName: "checkmark.circle.fill")
-                                        .foregroundColor(.green)
-                                        .font(.system(size: 14, design: .rounded))
+                                    if isMarketSelected {
+                                        Image(systemName: "checkmark.circle.fill")
+                                            .matchedGeometryEffect(id: "checkMark", in: animation)
+                                            .foregroundColor(.green)
+                                            .font(.system(size: 14, design: .rounded))
+                                    }
+                                    
                                 }
                             }
                             
@@ -44,7 +57,10 @@ struct LaunchScreenSettingsView: View {
                         
                         VStack {
                             Button {
-                                //
+                                withAnimation(.spring(response: 0.5, dampingFraction: 1)) {
+                                    self.isMarketSelected = false
+                                }
+                                self.defaultLauchScreenViewModel.setDefaultLainchScreen(homescreen: "latch.2.case.fill")
                             } label: {
                                 HStack {
                                     Text("Portfolio")
@@ -52,6 +68,12 @@ struct LaunchScreenSettingsView: View {
                                     
                                     Spacer()
                                     
+                                    if !isMarketSelected {
+                                        Image(systemName: "checkmark.circle.fill")
+                                            .matchedGeometryEffect(id: "checkMark", in: animation)
+                                            .foregroundColor(.green)
+                                            .font(.system(size: 14, design: .rounded))
+                                    }
                                     
                                 }
                             }
@@ -108,6 +130,15 @@ struct LaunchScreenSettingsView: View {
         .preferredColorScheme(.dark)
         .navigationBarHidden(true)
         .navigationBarBackButtonHidden(true)
+        .task {
+            defaultLauchScreenViewModel.getSelectedLaunchScreen { selectedScreen in
+                if selectedScreen == "chart.bar.xaxis" {
+                    self.isMarketSelected = true
+                } else {
+                    self.isMarketSelected = false
+                }
+            }
+        }
     }
 }
 

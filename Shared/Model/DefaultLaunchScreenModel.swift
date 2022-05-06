@@ -7,6 +7,6 @@
 
 import Foundation
 
-struct DefaultLaunchScreenModel {
-    var launchScreen: String = ""
+struct DefaultLaunchScreenModel: Decodable, Hashable, Encodable {
+    var homescreen: String?
 }
