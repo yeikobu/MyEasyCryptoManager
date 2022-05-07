@@ -19,6 +19,7 @@ final class SettingsViewModel: ObservableObject {
         case termsOfService
         case privacyPolice
         case cryptoGlossary
+        case donate
     }
     
     enum AccountSettings {

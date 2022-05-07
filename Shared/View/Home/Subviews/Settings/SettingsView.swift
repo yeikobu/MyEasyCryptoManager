@@ -60,7 +60,6 @@ struct SettingsView: View {
                         Button {
                             self.isButtonSelected = true
                             self.settingsViewModel.appSettings = .defaultLaunchScreen
-//                            print("option pressed: \(self.appSettings)")
                         } label: {
                             HStack {
                                 Text("Launch Screen")
@@ -75,25 +74,6 @@ struct SettingsView: View {
                         }
                         .foregroundColor(.white)
                         
-                        Divider()
-                            .background(.gray)
-                        
-                        Button {
-                            self.isButtonSelected = true
-//                            self.appSettings = .defaultCurrency
-                        } label: {
-                            HStack {
-                                Text("Default Currency")
-                                    .font(.system(size: 14, design: .rounded))
-                                
-                                Spacer()
-                                
-                                Image(systemName: "chevron.right")
-                                    .font(.system(size: 14, design: .rounded))
-                            }
-                            .padding(.vertical, 5)
-                        }
-                        .foregroundColor(.white)
                     }
                     .padding(10)
                     .background(
@@ -170,19 +150,22 @@ struct SettingsView: View {
                             .background(.gray)
                         
                         
-                        HStack {
-                            Text("Donate")
-                                .font(.system(size: 14, design: .rounded))
-                            
-                            Spacer()
-                            
-                            Image(systemName: "chevron.right")
-                                .font(.system(size: 14, design: .rounded))
+                        Button {
+                            self.isButtonSelected = true
+                            self.settingsViewModel.appSettings = .donate
+                        } label: {
+                            HStack {
+                                Text("Donate")
+                                    .font(.system(size: 14, design: .rounded))
+                                
+                                Spacer()
+                                
+                                Image(systemName: "chevron.right")
+                                    .font(.system(size: 14, design: .rounded))
+                            }
+                            .padding(.vertical, 5)
                         }
-                        .padding(.vertical, 5)
-                        .onTapGesture {
-                            //
-                        }
+                        .foregroundColor(.white)
                         
                        
                     }
@@ -353,6 +336,9 @@ struct SettingsView: View {
                     
                 case .cryptoGlossary:
                     CryptoGlossaryView()
+                    
+                case .donate:
+                    DonateView()
                 }
             }
             
