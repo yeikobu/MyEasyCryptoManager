@@ -77,19 +77,25 @@ struct SpecificAssetView: View {
                         VStack(alignment: .center) {
                             Button {
 
-                                haptics.addFunctionVibration()
-                                addButtonAnimate = true
-                                
+                                self.haptics.addFunctionVibration()
+                                self.addButtonAnimate = true
+                               
                                 DispatchQueue.main.asyncAfter(deadline: .now() + buttonAnimationDuration) {
                                     withAnimation(.spring(response: buttonAnimationDuration, dampingFraction: 1)) {
-                                        addButtonAnimate = false
-                                        isAddedToPorfolio.toggle()
+                                        self.addButtonAnimate = false
+                                        self.isAddedToPorfolio.toggle()
                                     }
                                 }
                                 
-                                DispatchQueue.main.asyncAfter(deadline: .now()) {
-                                    favouriteAssetViewModel.addFavouriteAsset(id: self.id, name: self.name, symbol: self.symbol, imgURL: self.imgURL, purchasePrice: 0, purchaseQuantity: 0, currentPrice: specificCoinViewModel.selectedCoinCurrentPrice ?? 0, priceChangePercentage24h: 0)
+                                if !isAddedToPorfolio {
+                                    DispatchQueue.main.asyncAfter(deadline: .now()) {
+                                        self.favouriteAssetViewModel.addFavouriteAsset(id: self.id, name: self.name, symbol: self.symbol, imgURL: self.imgURL, purchasePrice: 0, purchaseQuantity: 0, currentPrice: self.specificCoinViewModel.selectedCoinCurrentPrice ?? 0, priceChangePercentage24h: 0)
+                                    }
+                                } else {
+                                    self.favouriteAssetViewModel.deleteAsset(id: self.id)
                                 }
+                                
+                                
                             } label: {
                                 VStack {
                                     Image(systemName: isAddedToPorfolio ? "plus.app.fill" : "plus.app")
