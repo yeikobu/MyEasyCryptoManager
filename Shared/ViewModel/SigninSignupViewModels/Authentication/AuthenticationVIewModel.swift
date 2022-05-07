@@ -10,12 +10,14 @@ import Foundation
 final class AuthenticationViewModel: ObservableObject {
     
     @Published var user: UserModel?
-    @Published var errorMessage: String?
+    @Published var errorMessage: String = ""
+    @Published var successMessage: String = ""
     private let authenticationRepository: AuthenticationRepository
     
     init(authenticationRepository: AuthenticationRepository = AuthenticationRepository()) {
         self.authenticationRepository = authenticationRepository
         getCurrentUser()
+        print(user?.email ?? "")
     }
     
     func getCurrentUser() {
@@ -45,13 +47,15 @@ final class AuthenticationViewModel: ObservableObject {
         }
     }
     
-    func recoverPass(email: String) {
-        authenticationRepository.recoverPass(email: email) { [weak self] result in
+    func recoverPass(completionBlock: @escaping(String) -> Void) {
+        authenticationRepository.recoverPass() { [weak self] result in
             switch result {
             case .success(let user):
                 self?.user = user
+                completionBlock("An email has been sent to your current email")
             case .failure(let error):
                 self?.errorMessage = error.localizedDescription
+                completionBlock(error.localizedDescription)
             }
         }
     }
@@ -73,6 +77,23 @@ final class AuthenticationViewModel: ObservableObject {
                 completionBlock(isUserExist)
             }
         }
-        
+    }
+    
+    func changeEmail(email: String, completionBlock: @escaping(Bool) -> Void) {
+        var isEmailChanged: Bool = false
+        authenticationRepository.changeEmail(email: email) { result in
+            switch result {
+            case .success( _):
+                self.successMessage = "Email has been updated"
+                isEmailChanged = true
+                completionBlock(isEmailChanged)
+                
+            case .failure(let error):
+                self.errorMessage = error.localizedDescription
+                print(error.localizedDescription)
+                isEmailChanged = false
+                completionBlock(isEmailChanged)
+            }
+        }
     }
 }

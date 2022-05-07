@@ -125,10 +125,7 @@ struct AddAssetView: View {
                     
                     Button {
                         
-//                        self.quantity = Double(self.amount) ?? 1
-//                        self.purcharsePrice = Double(self.purcharsePriceString) ?? self.currentPrice
-                        
-                        withAnimation(.spring(response: 0.4, dampingFraction: 1)) {
+                        withAnimation(.spring(response: 0.1, dampingFraction: 1)) {
                             isAddedToPorfolio = false
                         }
                         
@@ -164,29 +161,22 @@ struct AddAssetView: View {
                         self.isAddedToPorfolio = false
                     }
                 } label: {
-                    Image(systemName: "x.circle.fill")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 20)
+                    Image(systemName: "xmark")
+                        .font(.system(size: 16, weight: .bold, design: .rounded))
+                        .padding(6)
                         .foregroundColor(Color("Buttons"))
-                        .opacity(0.85)
-                        .font(.system(size: 18, weight: .black, design: .rounded))
-                        .shadow(color: .black.opacity(0.4), radius: 5, x: 3, y: 3)
-                        .shadow(color: .black.opacity(0.4), radius: 5, x: -3, y: -3)
-                    
+                        .background(
+                            Circle()
+                                .fill(.ultraThinMaterial)
+                                .blur(radius: 0)
+                                .opacity(0.8)
+                        )
                 }
+                .shadow(color: .black.opacity(0.4), radius: 5, x: 3, y: 3)
+                .shadow(color: .black.opacity(0.4), radius: 5, x: -3, y: -3)
                 .padding(20)
             }
             .frame(maxHeight: .infinity)
-            .background(
-                RoundedRectangle(cornerRadius: 1, style: .continuous)
-                    .fill(.ultraThinMaterial)
-                    .ignoresSafeArea()
-                    .blur(radius: 20)
-                    .opacity(0.8)
-            )
-            
-            
         }
         .ignoresSafeArea()
         .frame(maxHeight: .infinity)

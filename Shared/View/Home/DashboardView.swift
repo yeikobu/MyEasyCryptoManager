@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-let tabs = ["gearshape.fill", "chart.bar.xaxis", "house.fill", "magnifyingglass"]
+let tabs = ["gearshape.fill", "chart.bar.xaxis", "latch.2.case.fill", "magnifyingglass"]
 
 struct DashboardView: View {
     
@@ -22,13 +22,6 @@ struct DashboardView: View {
                 .navigationBarHidden(true)
                 .navigationBarBackButtonHidden(true)
                 .preferredColorScheme(.dark)
-                .background(
-                    RoundedRectangle(cornerRadius: 1, style: .continuous)
-                        .fill(.ultraThinMaterial)
-                        .ignoresSafeArea()
-                        .blur(radius: 20)
-                        .opacity(0.8)
-                )
                 .padding(.bottom, 25)
         }
         .ignoresSafeArea()
@@ -37,7 +30,7 @@ struct DashboardView: View {
                 .resizable()
                 .aspectRatio(contentMode: .fill)
                 .ignoresSafeArea()
-                .opacity(0.4)
+                .opacity(0.35)
         )
        
     }
@@ -67,6 +60,7 @@ struct TabButtonview: View {
 
 struct CustomTabView: View {
     
+    @StateObject var defaultLauchScreenViewModel = DefaultLauchScreenViewModel()
     @State var selectedTab: String = "chart.bar.xaxis"
     @State var edge: CGFloat = 0.0
     
@@ -83,7 +77,7 @@ struct CustomTabView: View {
                     .tag("chart.bar.xaxis")
                 
                 PortfolioView(isAddedToPorfolio: false, isTouched: .constant(false), name: "", id: "", symbol: "", currentPrice: 0)
-                    .tag("house.fill")
+                    .tag("latch.2.case.fill")
                 
                 SearchView()
                     .tag("magnifyingglass")
@@ -112,6 +106,11 @@ struct CustomTabView: View {
             .padding(.horizontal, 20)
         }
         .ignoresSafeArea(.keyboard, edges: .bottom)
+        .onAppear {
+            defaultLauchScreenViewModel.getSelectedLaunchScreen { name in
+                self.selectedTab = name
+            }
+        }
         
         
     }

@@ -144,13 +144,6 @@ struct PortfolioView: View {
                                                         .foregroundColor(.white)
                                                         .font(.system(size: 13, weight: .bold, design: .rounded))
                                                         .padding(.bottom, -3)
-//                                                        .task {
-//                                                            do {
-//                                                                self.currentPrice = try await specificCoinVM.getCurrentPrice(selectedCoin: asset.id ?? "")
-//                                                            } catch {
-//                                                                print(error)
-//                                                            }
-//                                                        }
                                                 }
                                                 .frame(maxWidth: 120, maxHeight: 40, alignment: .leading)
 
@@ -287,7 +280,6 @@ struct PortfolioView: View {
                         }
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .task {
-                            await favouriteAssetViewModel.getAllAssets()
                             if let last = favouriteAssetViewModel.favouriteCoins.last {
                                 self.lastItemID = last.id ?? ""
                             }
@@ -305,19 +297,6 @@ struct PortfolioView: View {
                 .cornerRadius(10)
                 .padding(.horizontal, 10)
                 .ignoresSafeArea()
-
-//            }
-            
-//            if favouriteAssetViewModel.favouriteCoins.count < 0 {
-//                Spacer()
-//
-//                Text("No assets added to portfolio yet")
-//                    .font(.system(size: 20, weight: .bold, design: .rounded))
-//                    .frame(maxWidth: .infinity, alignment: .center)
-//
-//                Spacer()
-//            }
-            
         }
         .frame(maxWidth: .infinity, alignment: .leading)
 

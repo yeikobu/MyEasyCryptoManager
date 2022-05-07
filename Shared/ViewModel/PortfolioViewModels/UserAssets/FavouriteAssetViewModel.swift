@@ -21,8 +21,16 @@ final class FavouriteAssetViewModel: ObservableObject {
     
     init (favouriteAssetsRepository: FavouriteAssetsRepository = FavouriteAssetsRepository()) {
         self.favouriteAssetsRepository = favouriteAssetsRepository
+        
+        Task {
+            await getAllAssets()
+        }
+        
     }
     
+    /// This method gets all the user assets from the database previously added to the portfolio.
+    /// Also, calculate the balance depending on the user holding coins.
+    /// - Returns: ()
     @MainActor
     func getAllAssets() async {
         favouriteAssetsRepository.getAllAssets { [weak self] result in
@@ -53,6 +61,8 @@ final class FavouriteAssetViewModel: ObservableObject {
     }
     
     
+    /// This method adds a coin to the portfolio and adds to database
+    /// - Returns: ()
     func addFavouriteAsset(id: String, name: String, symbol: String, imgURL: String, purchasePrice: Double, purchaseQuantity: Double, currentPrice: Double, priceChangePercentage24h: Double) {
         
         favouriteAssetsRepository.addFavouriteAsset(id: id, name: name, symbol: symbol, imgURL: imgURL, purchasePrice: purchasePrice, purchaseQuantity: purchaseQuantity, currentPrice: currentPrice, priceChangePercentage24h: priceChangePercentage24h) { result in
@@ -67,6 +77,8 @@ final class FavouriteAssetViewModel: ObservableObject {
     }
     
     
+    /// This method just updates the coin data, and it adds to the database.
+    /// - Returns: ()
     func updateAsset(id: String, name: String, symbol: String, imgURL: String, purchasePrice: Double, purchaseQuantity: Double, currentPrice: Double, priceChangePercentage24h: Double) {
         
         favouriteAssetsRepository.addFavouriteAsset(id: id, name: name, symbol: symbol, imgURL: imgURL, purchasePrice: purchasePrice, purchaseQuantity: purchaseQuantity, currentPrice: currentPrice, priceChangePercentage24h: priceChangePercentage24h) { result in
@@ -81,6 +93,8 @@ final class FavouriteAssetViewModel: ObservableObject {
     }
     
     
+    /// This method calculates the current balance, the profit/loss and the percentage of profit/loss.
+    /// - Returns: ()
     func calcCurrentBalance() {
         var currentBalanceUSD: Double = 0
         var profitLossUSD: Double = 0
@@ -112,6 +126,8 @@ final class FavouriteAssetViewModel: ObservableObject {
     }
     
     
+    /// This method checks if an asset was previously added to the portfolio.
+    /// - Returns: Void, but it uses a completion handler a Bool escaping.
     func checkIsAssetLiked(id: String, completionBlock: @escaping (Bool) -> Void) {
         favouriteAssetsRepository.checkIsAssetLiked(id: id) { result in
             completionBlock(result)
@@ -119,6 +135,8 @@ final class FavouriteAssetViewModel: ObservableObject {
     }
     
     
+    /// This method deletes an asset from the portfolio.
+    /// - Returns: ()
     func deleteAsset(id: String) {
         favouriteAssetsRepository.deleteAsset(id: id) { result in
             if result {

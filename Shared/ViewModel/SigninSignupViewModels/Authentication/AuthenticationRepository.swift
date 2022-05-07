@@ -27,8 +27,8 @@ final class AuthenticationRepository {
         authenticationFirebaseDatasource.signin(email: email, password: password, completionBlock: completionBlock)
     }
     
-    func recoverPass(email: String, completionBlock: @escaping (Result<UserModel, Error>) -> Void) {
-        authenticationFirebaseDatasource.recoverPass(email: email, completionBlock: completionBlock)
+    func recoverPass(completionBlock: @escaping (Result<UserModel, Error>) -> Void) {
+        authenticationFirebaseDatasource.recoverPass(completionBlock: completionBlock)
     }
     
     func logout() throws {
@@ -37,5 +37,9 @@ final class AuthenticationRepository {
     
     func checkIsUserExist(email: String, password: String, completionBlock: @escaping(Bool) -> Void) {
         authenticationFirebaseDatasource.checkIsUserExist(email: email, password: password, completionBlock: completionBlock) 
+    }
+    
+    func changeEmail(email: String, completionBlock: @escaping(Result<UserModel, Error>) -> Void) {
+        authenticationFirebaseDatasource.changeEmail(email: email, completionBlock: completionBlock)
     }
 }

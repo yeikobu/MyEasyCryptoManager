@@ -33,7 +33,7 @@ struct SearchedCoinCardView: View {
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 40, height: 40)
-
+                    
                     Text(name)
                         .foregroundColor(.white)
                         .font(.system(size: 15, weight: .bold, design: .rounded))
@@ -44,32 +44,33 @@ struct SearchedCoinCardView: View {
                         .font(.system(size: 12, weight: .regular, design: .rounded))
                         .padding(.bottom, -3)
                 }
-                .frame(maxWidth: 320, maxHeight: 50, alignment: .leading)
-        }
-        .padding(.vertical, 10)
-        .background(
-            RoundedRectangle(cornerRadius: 15, style: .continuous)
-                .fill(.ultraThinMaterial)
-                .blur(radius: 0)
-                .opacity(0.9)
-        )
-        .mask(
-            RoundedRectangle(cornerRadius: 15, style: .continuous)
-        )
-        .preferredColorScheme(.dark)
-        
+                .frame(maxWidth: 320, alignment: .leading)
+            }
+            .padding(.vertical, 10)
+            .background(
+                RoundedRectangle(cornerRadius: 15, style: .continuous)
+                    .fill(.ultraThinMaterial)
+                    .blur(radius: 0)
+                    .opacity(0.9)
+            )
+            .mask(
+                RoundedRectangle(cornerRadius: 15, style: .continuous)
+            )
+            .padding(.vertical, 2)
+            .preferredColorScheme(.dark)
+            
         }
         
     }
 }
 
 struct SearchedCoinCardView_Previews: PreviewProvider {
-
+    
     @Namespace static var animation
     @State static var name = ""
     @State static var marketCapRank = 2
     @State static var priceChangePercentage = 2.0
-
+    
     static var previews: some View {
         SearchedCoinCardView(name: dev.coin.name ?? "", marketCapRank: dev.coin.marketCapRank ?? 0, symbol: dev.coin.symbol ?? "", imgURL: dev.coin.image ?? "", isTouched: .constant(false), isListVisible: .constant(false), animation: animation)
     }

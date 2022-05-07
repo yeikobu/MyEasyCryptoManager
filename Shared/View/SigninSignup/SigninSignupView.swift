@@ -13,13 +13,6 @@ struct SigninSignupView: View {
             ZStack {
                 SignInSignUpButtonsView()
                     .frame(maxHeight: .infinity)
-                    .background(
-                        RoundedRectangle(cornerRadius: 1, style: .continuous)
-                            .fill(.ultraThinMaterial)
-                            .ignoresSafeArea()
-                            .blur(radius: 1)
-                            .opacity(0.8)
-                    )
             }
             .frame(maxHeight: .infinity)
             .background(
@@ -54,7 +47,6 @@ struct SignInSignUpButtonsView: View {
                     Text("Sign in")
                         .foregroundColor(isSigninActive ? .white : .gray)
                         .font(.system(size: 22, weight: .bold, design: .rounded))
-//                        .matchedGeometryEffect(id: "signin", in: animation)
                 }
                 
                 //Signup button
@@ -72,17 +64,14 @@ struct SignInSignUpButtonsView: View {
             }
             
             if isSigninActive {
-                SigninFormView(authenticationViewModel: AuthenticationViewModel(), isSigninActive: $isSigninActive)
-                    .matchedGeometryEffect(id: "form", in: animation)
-//                        .ignoresSafeArea(.keyboard, edges: .bottom)
+                SigninFormView(authenticationViewModel: AuthenticationViewModel(), isSigninActive: $isSigninActive, animation: animation)
             }
             
             if !isSigninActive {
-                SignupFormView(authenticationViewModel: AuthenticationViewModel(), isSigninActive: $isSigninActive)
-                    .matchedGeometryEffect(id: "form", in: animation)
-//                        .ignoresSafeArea(.keyboard, edges: .bottom)
+                SignupFormView(authenticationViewModel: AuthenticationViewModel(), isSigninActive: $isSigninActive, animation: animation)
             }
         }
+        .padding(.horizontal, 10)
     }
 }
 

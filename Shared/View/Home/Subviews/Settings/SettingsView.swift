@@ -9,7 +9,9 @@ import SwiftUI
 
 struct SettingsView: View {
     
+    @StateObject var settingsViewModel = SettingsViewModel()
     @State var isLogoutActive: Bool = false
+    @State var isButtonSelected: Bool = false
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -34,53 +36,44 @@ struct SettingsView: View {
                         .frame(maxWidth: .infinity, alignment: .leading)
                     
                     VStack(alignment: .leading) {
-                        HStack {
-                            Text("Account")
-                                .font(.system(size: 14, design: .rounded))
-                            
-                            Spacer()
-                            
-                            Image(systemName: "chevron.right")
-                                .font(.system(size: 14, design: .rounded))
+                        
+                        Button {
+                            self.isButtonSelected = true
+                            self.settingsViewModel.appSettings = .accountSettings
+                        } label: {
+                            HStack {
+                                Text("Account")
+                                    .font(.system(size: 14, design: .rounded))
+                                
+                                Spacer()
+                                
+                                Image(systemName: "chevron.right")
+                                    .font(.system(size: 14, design: .rounded))
+                            }
+                            .padding(.vertical, 5)
                         }
-                        .padding(.vertical, 5)
-                        .onTapGesture {
-                            //
-                        }
+                        .foregroundColor(.white)
                         
                         Divider()
                             .background(.gray)
                         
-                        HStack {
-                            Text("Launch Screen")
-                                .font(.system(size: 14, design: .rounded))
-                            
-                            Spacer()
-                            
-                            Image(systemName: "chevron.right")
-                                .font(.system(size: 14, design: .rounded))
+                        Button {
+                            self.isButtonSelected = true
+                            self.settingsViewModel.appSettings = .defaultLaunchScreen
+                        } label: {
+                            HStack {
+                                Text("Launch Screen")
+                                    .font(.system(size: 14, design: .rounded))
+                                
+                                Spacer()
+                                
+                                Image(systemName: "chevron.right")
+                                    .font(.system(size: 14, design: .rounded))
+                            }
+                            .padding(.vertical, 5)
                         }
-                        .padding(.vertical, 5)
-                        .onTapGesture {
-                            //
-                        }
+                        .foregroundColor(.white)
                         
-                        Divider()
-                            .background(.gray)
-                        
-                        HStack {
-                            Text("Default Currency")
-                                .font(.system(size: 14, design: .rounded))
-                            
-                            Spacer()
-                            
-                            Image(systemName: "chevron.right")
-                                .font(.system(size: 14, design: .rounded))
-                        }
-                        .padding(.vertical, 5)
-                        .onTapGesture {
-                            //
-                        }
                     }
                     .padding(10)
                     .background(
@@ -89,10 +82,10 @@ struct SettingsView: View {
                             .blur(radius: 0)
                             .opacity(0.8)
                     )
+                    .shadow(color: .black.opacity(0.4), radius: 5, x: 3, y: 3)
+                    .shadow(color: .black.opacity(0.4), radius: 5, x: -3, y: -3)
                 }
                 .padding(.horizontal, 5)
-                .shadow(color: .black.opacity(0.4), radius: 5, x: 3, y: 3)
-                .shadow(color: .black.opacity(0.4), radius: 5, x: -3, y: -3)
                 
                 // MARK: - About this app
                 VStack(alignment: .leading) {
@@ -105,7 +98,7 @@ struct SettingsView: View {
                     
                     VStack(alignment: .leading) {
                         HStack {
-                            Text("Terms of service")
+                            Text("Terms of Service")
                                 .font(.system(size: 14, design: .rounded))
                             
                             Spacer()
@@ -122,7 +115,7 @@ struct SettingsView: View {
                             .background(.gray)
                         
                         HStack {
-                            Text("Privacy police")
+                            Text("Privacy Police")
                                 .font(.system(size: 14, design: .rounded))
                             
                             Spacer()
@@ -138,22 +131,6 @@ struct SettingsView: View {
                         Divider()
                             .background(.gray)
                         
-                        HStack {
-                            Text("Contact")
-                                .font(.system(size: 14, design: .rounded))
-                            
-                            Spacer()
-                            
-                            Image(systemName: "chevron.right")
-                                .font(.system(size: 14, design: .rounded))
-                        }
-                        .padding(.vertical, 5)
-                        .onTapGesture {
-                            //
-                        }
-                        
-                        Divider()
-                            .background(.gray)
                         
                         HStack {
                             Text("Crypto Glossary")
@@ -168,6 +145,27 @@ struct SettingsView: View {
                         .onTapGesture {
                             //
                         }
+                        
+                        Divider()
+                            .background(.gray)
+                        
+                        
+                        Button {
+                            self.isButtonSelected = true
+                            self.settingsViewModel.appSettings = .donate
+                        } label: {
+                            HStack {
+                                Text("Donate")
+                                    .font(.system(size: 14, design: .rounded))
+                                
+                                Spacer()
+                                
+                                Image(systemName: "chevron.right")
+                                    .font(.system(size: 14, design: .rounded))
+                            }
+                            .padding(.vertical, 5)
+                        }
+                        .foregroundColor(.white)
                         
                        
                     }
@@ -319,14 +317,40 @@ struct SettingsView: View {
             }
             .cornerRadius(15)
             .padding(.horizontal, 5)
+            .fullScreenCover(isPresented: $isButtonSelected) {
+                switch self.settingsViewModel.appSettings {
+                case .accountSettings:
+                    AccountSettingsView()
+                    
+                case .defaultLaunchScreen:
+                    LaunchScreenSettingsView()
+                    
+                case .defaultCurrency:
+                    DefaultCurrencyView()
+                    
+                case .termsOfService:
+                    TermsOfServiceView()
+                    
+                case .privacyPolice:
+                    PrivacyPoliceView()
+                    
+                case .cryptoGlossary:
+                    CryptoGlossaryView()
+                    
+                case .donate:
+                    DonateView()
+                }
+            }
             
             NavigationLink(isActive: $isLogoutActive) {
                 SigninSignupView()
             } label: {
                 EmptyView()
             }
+        
         }
         .preferredColorScheme(.dark)
+        
     }
 }
 

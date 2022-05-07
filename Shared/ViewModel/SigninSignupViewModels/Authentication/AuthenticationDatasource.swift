@@ -44,13 +44,14 @@ final class AuthenticationFirebaseDatasource {
         }
     }
     
-    func recoverPass(email: String, completionBlock: @escaping (Result<UserModel, Error>) -> Void) {
-        Auth.auth().sendPasswordReset(withEmail: email) { error in
+    func recoverPass(completionBlock: @escaping (Result<UserModel, Error>) -> Void) {
+        let currentUser = getCurrentUser()
+        Auth.auth().sendPasswordReset(withEmail: currentUser?.email ?? "") { error in
             if let error = error {
                 completionBlock(.failure(error))
                 return
             }
-            completionBlock(.success(.init(email: email)))
+            completionBlock(.success(.init(email: currentUser?.email ?? "")))
         }
     }
     
@@ -70,6 +71,17 @@ final class AuthenticationFirebaseDatasource {
                 isUserCreated = true
                 completionBlock(isUserCreated)
             }
+        }
+    }
+    
+    func changeEmail(email: String, completionBlock: @escaping(Result<UserModel, Error>) -> Void) {
+        Auth.auth().currentUser?.updateEmail(to: email) { error in
+            if let error = error {
+                completionBlock(.failure(error))
+                return
+            }
+            print("Email has been updated")
+            
         }
     }
 }
