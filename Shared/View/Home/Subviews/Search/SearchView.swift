@@ -12,6 +12,7 @@ struct SearchView: View {
     @StateObject var searchCoinViewModel: SearchCoinViewModel = SearchCoinViewModel()
     @StateObject var specificCoinViewModel: SpecificCoinViewModel = SpecificCoinViewModel()
     @StateObject var coinViewModel: CoinInfoViewModel = CoinInfoViewModel()
+    @StateObject var haptics = Haptics()
     @State var text: String = ""
     @State var isTouched: Bool = false
     @State var isMoreInfoClicked: Bool = false
@@ -182,6 +183,9 @@ struct SearchView: View {
                         .padding(.bottom, 45)
                     
                     Button {
+                        
+                        self.haptics.dismissButtonPressed()
+                        
                         withAnimation(.spring(response: 0.4, dampingFraction: 0.8)) {
                             self.isTouched.toggle()
                         }

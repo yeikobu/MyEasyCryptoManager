@@ -250,6 +250,9 @@ struct CoinsMarketListView: View {
                             .padding(.bottom, 45)
                         
                         Button {
+                            
+                            self.haptics.dismissButtonPressed()
+                            
                             withAnimation(.spring(response: 0.4, dampingFraction: 0.8)) {
                                 self.isTouched.toggle()
                             }

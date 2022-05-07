@@ -11,6 +11,7 @@ struct AccountSettingsView: View {
     
     @StateObject var authenticationViewModel: AuthenticationViewModel = AuthenticationViewModel()
     @StateObject var settingsViewModel = SettingsViewModel()
+    @StateObject var haptics = Haptics()
     @Environment(\.presentationMode) var presentationMode
     @State var isButtonSelected: Bool = false
     @State var isChangePasswordButtonSelected: Bool = false
@@ -135,6 +136,7 @@ struct AccountSettingsView: View {
             //If isButtonSelected is false shows the X button close to the view title
             if !isButtonSelected {
                 Button {
+                    self.haptics.dismissButtonPressed()
                     self.presentationMode.wrappedValue.dismiss()
                 } label: {
                     Image(systemName: "xmark")
@@ -158,6 +160,7 @@ struct AccountSettingsView: View {
             } else {
                 
                 Button {
+                    self.haptics.dismissButtonPressed()
                     withAnimation(.spring(response: 0.5, dampingFraction: 0.8)){
                         self.isButtonSelected = false
                     }

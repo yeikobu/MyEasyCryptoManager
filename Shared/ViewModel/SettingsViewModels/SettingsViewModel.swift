@@ -11,6 +11,7 @@ final class SettingsViewModel: ObservableObject {
     
     @Published var appSettings = AppSettings.accountSettings
     @Published var accountSettings = AccountSettings.email
+    @Published var settingsModel = SettingsModel()
     
     enum AppSettings {
         case accountSettings
@@ -26,4 +27,5 @@ final class SettingsViewModel: ObservableObject {
         case email
         case password
     }
+    
 }
