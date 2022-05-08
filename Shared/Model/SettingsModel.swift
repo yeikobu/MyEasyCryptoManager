@@ -13,4 +13,7 @@ struct SettingsModel {
     let githubURL: String = "https://github.com/J-kobu/"
     let linkedInURL: String = "https://www.linkedin.com/in/jacob-aguilar-campos/"
     let portfolioURL: String = "https://j-kobu.github.io/portfolio/"
+    let termsAndService: String = "My Easy Crypto Manager app only uses the user email, which allows you to create a user account in Firebase Auth and synchronize your portfolio's data and your launch screen preference in Firebase Firestore Database, and in the case of forgetting the password, an email will be sent to your email address that will allow you to reset it. \n\nMy Easy Crypto Manager app doesn't read any private data from your device."
+    
+    let glossary: [String : String] = [ : ]
 }

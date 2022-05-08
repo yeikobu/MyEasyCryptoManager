@@ -17,8 +17,7 @@ final class SettingsViewModel: ObservableObject {
         case accountSettings
         case defaultLaunchScreen
         case defaultCurrency
-        case termsOfService
-        case privacyPolice
+        case termsAndPrivacy
         case cryptoGlossary
         case donate
     }
