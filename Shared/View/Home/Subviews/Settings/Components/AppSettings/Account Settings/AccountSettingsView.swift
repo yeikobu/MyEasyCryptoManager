@@ -125,9 +125,6 @@ struct AccountSettingsView: View {
                 }
                 
                 Spacer()
-                
-                
-                
             }
             .padding(.horizontal, 10)
             .padding(.top, 50)

@@ -98,33 +98,24 @@ struct SettingsView: View {
                         .frame(maxWidth: .infinity, alignment: .leading)
                     
                     VStack(alignment: .leading) {
-                        HStack {
-                            Text("Terms of Service")
-                                .font(.system(size: 14, design: .rounded))
-                            
-                            Spacer()
-                            
-                            Image(systemName: "chevron.right")
-                                .font(.system(size: 14, design: .rounded))
-                        }
-                        .padding(.vertical, 5)
-                        .onTapGesture {
-                            //
-                        }
                         
-                        Divider()
-                            .background(.gray)
-                        
-                        HStack {
-                            Text("Privacy Police")
-                                .font(.system(size: 14, design: .rounded))
-                            
-                            Spacer()
-                            
-                            Image(systemName: "chevron.right")
-                                .font(.system(size: 14, design: .rounded))
+                        Button {
+                            self.isButtonSelected = true
+                            self.settingsViewModel.appSettings = .termsAndPrivacy
+                        } label: {
+                            HStack {
+                                Text("Terms and Privacy")
+                                    .font(.system(size: 14, design: .rounded))
+                                
+                                Spacer()
+                                
+                                Image(systemName: "chevron.right")
+                                    .font(.system(size: 14, design: .rounded))
+                            }
+                            .padding(.vertical, 5)
                         }
-                        .padding(.vertical, 5)
+                        .foregroundColor(.white)
+                        
                         .onTapGesture {
                             //
                         }
@@ -339,11 +330,8 @@ struct SettingsView: View {
                 case .defaultCurrency:
                     DefaultCurrencyView()
                     
-                case .termsOfService:
-                    TermsOfServiceView()
-                    
-                case .privacyPolice:
-                    PrivacyPoliceView()
+                case .termsAndPrivacy:
+                    TermsAndPrivacyView()
                     
                 case .cryptoGlossary:
                     CryptoGlossaryView()
