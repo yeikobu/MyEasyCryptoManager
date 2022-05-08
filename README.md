@@ -4,17 +4,13 @@
 ![Firebase](https://img.shields.io/badge/-firebase-333333?style=flat&logo=firebase)&nbsp;
 
 # My Easy Crypto Manager
-<br />
 <p align="center">
   <p align="left">
     My Easy Crypto Manager is an app created in order to check cryptocurrency's prices, or some basic information about it. The user can add cryptocurrency to the portfolio to track his profit or loss, delete it, or modify his holdings.
   </p>
 </p>
 
-<p align="row">
-<img src= "https://media.giphy.com/media/HYOlBKJBqgAfe/giphy.gif" width="400" >
-<img src= "https://media.giphy.com/media/HYOlBKJBqgAfe/giphy.gif" width="400" >
-</p>
+https://user-images.githubusercontent.com/69016178/167313495-136230a0-7e5c-4d97-91ac-629ecb94397b.mp4
 
 ## Features
 
@@ -38,10 +34,13 @@ git clone https://github.com/J-kobu/MyEasyCryptoManager.git
 ```
 
 #### Manually
+```
 1. Go to `Code` button. 
 2. Click on `Download Zip`.
+```
 
 #### Open the project and run the app
+```
 1. Open XCode.
 2. Click on `Open a project or file`.
 3. Select the folder where you downloaded, or cloned the project.
@@ -49,6 +48,7 @@ git clone https://github.com/J-kobu/MyEasyCryptoManager.git
 5. Wait until the build is ready. 
 6. Select your emulator device. Ex: iPhone 8, iPhone SE, iPhone 13, etc.
 7. Run the app by clicking on the run button, or with `Command + R`.
+```
 
 #### Installation Video Example
 
