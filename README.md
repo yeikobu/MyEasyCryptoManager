@@ -52,5 +52,7 @@ git clone https://github.com/J-kobu/MyEasyCryptoManager.git
 
 #### Installation Video Example
 
+https://user-images.githubusercontent.com/69016178/167312980-a87bc154-fa9a-48c3-a1e7-af04020e12f9.mp4
+
 
 
