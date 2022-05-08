@@ -23,7 +23,7 @@ https://user-images.githubusercontent.com/69016178/167313495-136230a0-7e5c-4d97-
 ## Requirements
 
 - iOS 15.0+
-- Xcode 13.3
+- XCode 13.3
 
 ## Installation
 
