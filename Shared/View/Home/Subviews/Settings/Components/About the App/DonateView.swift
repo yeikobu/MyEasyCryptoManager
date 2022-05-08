@@ -10,6 +10,7 @@ import SwiftUI
 struct DonateView: View {
     
     @StateObject var donateViewModel = DonateViewModel()
+    @StateObject var haptics = Haptics()
     @Environment(\.presentationMode) var presentationMode
     @Namespace var animation
     @State var isWalletButtonPressed: Bool = false
@@ -69,6 +70,7 @@ struct DonateView: View {
                         //MARK: - Button with wallet direction
                         VStack(alignment: .leading) {
                             Button {
+                                self.haptics.buttonPressed()
                                 withAnimation(.spring()) {
                                     self.isWalletButtonPressed = true
                                     self.donateViewModel.copyToClipboard()
@@ -112,11 +114,6 @@ struct DonateView: View {
                             }
                         }
                         
-                        
-
-                    
-                        
-                        
                     }
                     .padding(10)
                     .background(
@@ -128,6 +125,7 @@ struct DonateView: View {
                     .shadow(color: .black.opacity(0.4), radius: 5, x: 3, y: 3)
                     .shadow(color: .black.opacity(0.4), radius: 5, x: -3, y: -3)
                     .foregroundColor(.white)
+                    .padding(.top, 10)
                 }
                 
                 
@@ -139,6 +137,7 @@ struct DonateView: View {
             
             Button {
                 self.presentationMode.wrappedValue.dismiss()
+                self.haptics.dismissButtonPressed()
             } label: {
                 Image(systemName: "xmark")
                     .font(.system(size: 16, weight: .bold, design: .rounded))

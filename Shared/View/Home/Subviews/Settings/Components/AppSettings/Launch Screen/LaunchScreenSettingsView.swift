@@ -10,6 +10,7 @@ import SwiftUI
 struct LaunchScreenSettingsView: View {
     
     @StateObject var defaultLauchScreenViewModel = DefaultLauchScreenViewModel()
+    @StateObject var haptics = Haptics()
     @Environment(\.presentationMode) var presentationMode
     @State var isMarketSelected: Bool = true
     @Namespace var animation
@@ -100,6 +101,7 @@ struct LaunchScreenSettingsView: View {
             .padding(.top, 50)
             
             Button {
+                self.haptics.dismissButtonPressed()
                 self.presentationMode.wrappedValue.dismiss()
             } label: {
                 Image(systemName: "xmark")

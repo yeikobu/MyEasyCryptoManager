@@ -20,7 +20,7 @@ struct SigninSignupView: View {
                     .resizable()
                     .aspectRatio(contentMode: .fill)
                     .ignoresSafeArea()
-                    .opacity(0.5)
+                    .opacity(0.4)
             )
             .preferredColorScheme(.dark)
         }

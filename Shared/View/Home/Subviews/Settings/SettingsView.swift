@@ -12,6 +12,7 @@ struct SettingsView: View {
     @StateObject var settingsViewModel = SettingsViewModel()
     @State var isLogoutActive: Bool = false
     @State var isButtonSelected: Bool = false
+    @Environment(\.openURL) var openURL
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -191,89 +192,99 @@ struct SettingsView: View {
                         .frame(maxWidth: .infinity, alignment: .leading)
                     
                     VStack(alignment: .leading) {
-                        HStack {
-                            Image("instagram-fill")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 14, height: 14)
-                            
-                            Text("Follow me on Twitter")
-                                .font(.system(size: 14, design: .rounded))
+                        
+                        Button {
+                            self.openURL(URL(string: self.settingsViewModel.settingsModel.twitterURL)!)
+                        } label: {
+                            HStack {
+                                Image("twitter-fill")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: 14, height: 14)
+                                
+                                Text("Follow me on Twitter")
+                                    .font(.system(size: 14, design: .rounded))
+                            }
+                            .padding(.vertical, 5)
                         }
-                        .padding(.vertical, 5)
-                        .onTapGesture {
-                            //
-                        }
+                        .foregroundColor(.white)
                         
                         Divider()
                             .background(.gray)
                         
-                        HStack {
-                            Image("twitter-fill")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 14, height: 14)
-                            
-                            Text("Follow me on Instagram")
-                                .font(.system(size: 14, design: .rounded))
+                        
+                        Button {
+                            self.openURL(URL(string: self.settingsViewModel.settingsModel.instagramURL)!)
+                        } label: {
+                            HStack {
+                                Image("instagram-fill")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: 14, height: 14)
+                                
+                                Text("Follow me on Instagram")
+                                    .font(.system(size: 14, design: .rounded))
+                            }
+                            .padding(.vertical, 5)
                         }
-                        .padding(.vertical, 5)
-                        .onTapGesture {
-                            //
-                        }
+                        .foregroundColor(.white)
                         
                         Divider()
                             .background(.gray)
                         
-                        HStack {
-                            Image("github")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 14, height: 14)
-                            
-                            Text("Check my Github")
-                                .font(.system(size: 14, design: .rounded))
+                        Button {
+                            self.openURL(URL(string: self.settingsViewModel.settingsModel.githubURL)!)
+                        } label: {
+                            HStack {
+                                Image("github")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: 14, height: 14)
+                                
+                                Text("Check my Github")
+                                    .font(.system(size: 14, design: .rounded))
+                            }
+                            .padding(.vertical, 5)
                         }
-                        .padding(.vertical, 5)
-                        .onTapGesture {
-                            //
-                        }
+                        .foregroundColor(.white)
                         
                         Divider()
                             .background(.gray)
                         
-                        HStack {
-                            Image("linkedin-fill")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 14, height: 14)
-                            
-                            Text("Contact me on LinkedIn")
-                                .font(.system(size: 14, design: .rounded))
+                        Button {
+                            self.openURL(URL(string: self.settingsViewModel.settingsModel.linkedInURL)!)
+                        } label: {
+                            HStack {
+                                Image("linkedin-fill")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: 14, height: 14)
+                                
+                                Text("Contact me on LinkedIn")
+                                    .font(.system(size: 14, design: .rounded))
+                            }
+                            .padding(.vertical, 5)
                         }
-                        .padding(.vertical, 5)
-                        .onTapGesture {
-                            //
-                        }
-                        
+                        .foregroundColor(.white)
+                       
                         Divider()
                             .background(.gray)
                         
-                        HStack {
-                            Image(systemName: "envelope.fill")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 14, height: 14)
-                            
-                            Text("Send me an email")
-                                .font(.system(size: 14, design: .rounded))
+                        Button {
+                            self.openURL(URL(string: self.settingsViewModel.settingsModel.portfolioURL)!)
+                        } label: {
+                            HStack {
+                                Image(systemName: "network")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: 14, height: 14)
+                                
+                                Text("Check my development portfolio")
+                                    .font(.system(size: 14, design: .rounded))
+                            }
+                            .padding(.vertical, 5)
                         }
-                        .padding(.vertical, 5)
-                        .onTapGesture {
-                            //
-                        }
-                        
-                        
+                        .foregroundColor(.white)
                     }
                     .padding(10)
                     .background(

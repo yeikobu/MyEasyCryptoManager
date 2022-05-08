@@ -42,4 +42,8 @@ final class AuthenticationRepository {
     func changeEmail(email: String, completionBlock: @escaping(Result<UserModel, Error>) -> Void) {
         authenticationFirebaseDatasource.changeEmail(email: email, completionBlock: completionBlock)
     }
+    
+    func forgotPass(email: String, completionBlock: @escaping(Bool) -> Void) {
+        authenticationFirebaseDatasource.forgotPass(email: email, completionBlock: completionBlock)
+    }
 }

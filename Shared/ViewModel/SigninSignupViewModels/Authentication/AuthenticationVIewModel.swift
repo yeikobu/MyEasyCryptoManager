@@ -96,4 +96,15 @@ final class AuthenticationViewModel: ObservableObject {
             }
         }
     }
+    
+    
+    func forgotPass(email: String, completionBlock: @escaping(String) -> Void) {
+        authenticationRepository.forgotPass(email: email) { isEmailSended in
+            if isEmailSended {
+                completionBlock("An email has been sent to your email")
+            } else {
+                completionBlock("Email incorrect")
+            }
+        }
+    }
 }
