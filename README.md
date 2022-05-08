@@ -35,13 +35,11 @@ git clone https://github.com/J-kobu/MyEasyCryptoManager.git
 ```
 
 #### Manually
-```
+
 1. Go to `Code` button. 
 2. Click on `Download Zip`.
-```
 
 #### Open the project and run the app
-```
 1. Open XCode.
 2. Click on `Open a project or file`.
 3. Select the folder where you downloaded, or cloned the project.
@@ -49,7 +47,7 @@ git clone https://github.com/J-kobu/MyEasyCryptoManager.git
 5. Wait until the build is ready. 
 6. Select your emulator device. Ex: iPhone 8, iPhone SE, iPhone 13, etc.
 7. Run the app by clicking on the run button, or with `Command + R`.
-```
+
 
 #### Installation Video Example
 
