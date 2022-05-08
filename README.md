@@ -28,7 +28,7 @@ https://user-images.githubusercontent.com/69016178/167313495-136230a0-7e5c-4d97-
 ## Installation
 
 #### Git Clone
-You can use `Git Clone` to clone the main repository and run the app.
+You can use `Git Clone` to clone the repository and run the app.
 
 ```
 git clone https://github.com/J-kobu/MyEasyCryptoManager.git
