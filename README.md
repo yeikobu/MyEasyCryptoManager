@@ -19,6 +19,7 @@ https://user-images.githubusercontent.com/69016178/167313495-136230a0-7e5c-4d97-
 - [x] Add your holdings to your portfolio and check your profit or loss.
 - [x] 100% data in the cloud.
 - [x] No private user data track.
+- [x] The haptic engine works only on real devices. 
 
 ## Requirements
 
