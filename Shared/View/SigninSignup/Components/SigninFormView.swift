@@ -197,6 +197,9 @@ struct SigninFormView: View {
                 .alert(isPresented: $showError) {
                     Alert(title: Text("ERROR"), message: Text("\(msgAlert)"), dismissButton: .default(Text("Okay")))
                 }
+                .fullScreenCover(isPresented: self.$isUserForgotPass) {
+                    ForgotPasswordView()
+                }
             }
             NavigationLink(isActive: $areSingInfieldsComplete) {
                 DashboardView()

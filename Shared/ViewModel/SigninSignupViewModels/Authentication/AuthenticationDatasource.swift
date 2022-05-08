@@ -84,5 +84,16 @@ final class AuthenticationFirebaseDatasource {
             
         }
     }
+    
+    func forgotPass(email: String, completionBlock: @escaping (Bool) -> Void) {
+        Auth.auth().sendPasswordReset(withEmail: email) { error in
+            if let error = error {
+                completionBlock(false)
+                print("Error: \(error.localizedDescription)")
+                return
+            }
+            completionBlock(true)
+        }
+    }
 }
 
