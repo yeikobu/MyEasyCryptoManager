@@ -11,9 +11,9 @@ import RefreshableScrollView
 
 struct PortfolioView: View {
     
-    @ObservedObject var specificCoinVM: SpecificCoinViewModel = SpecificCoinViewModel()
-    @ObservedObject var favouriteAssetViewModel: FavouriteAssetViewModel = FavouriteAssetViewModel()
-    @ObservedObject var haptics: Haptics = Haptics()
+    @StateObject var specificCoinVM: SpecificCoinViewModel = SpecificCoinViewModel()
+    @StateObject var favouriteAssetViewModel: FavouriteAssetViewModel = FavouriteAssetViewModel()
+    @StateObject var haptics: Haptics = Haptics()
     let gridForm = [GridItem(.flexible())]
     @State var isAddedToPorfolio: Bool
     @State var addButtonAnimate: Bool = false
