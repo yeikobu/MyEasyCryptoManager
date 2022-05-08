@@ -28,6 +28,10 @@ struct TermsAndPrivacyView: View {
                     Text("\(settingsViewModel.settingsModel.termsAndService)")
                         .foregroundColor(.white)
                         .font(.system(size: 13, design: .rounded))
+                    
+                    Text("\n\(settingsViewModel.settingsModel.coinGeckoAPIText)")
+                        .foregroundColor(.white)
+                        .font(.system(size: 13, design: .rounded))
                 }
                 .padding(10)
                 .background(
