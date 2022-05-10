@@ -8,7 +8,7 @@
 import Foundation
 
 struct DonateModel {
-    let whyDonate: String = "Why donate? \n"
+    let whyDonate: String = "Why donate?\n"
     let whyDonateParagraph: String = "Your donation will be used only to improve the user experience of this app. Because this app is free, it is the only way to finance it as an indie developer. \n\nThe first goal to improve the user experience is to pay for the Coin Gecko's 'Analyst Plan' API to improve the quantity of queries to do in order to get the coin prices in one minute. \n\nThe second goal to improve the user experience is to pay for the database. Because it is a free version, the app has a limit on reading and writing data into the database."
     let howToDonate: String = "How to donate? \n"
     let howToDonateImportant: String = "Important: "
